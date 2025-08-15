@@ -1,0 +1,221 @@
+BrainLift 3.0 - MarTech SMB Acquisition Playbook
+
+- **Owner**
+  - Brandon Pizzacalla
+- **Purpose**
+  - Establish an expert-backed playbook on how to acquire and operate lower left quadrant MarTech companies with SMB customers and monthly contracts, while maintaining vital aspects of the traditional ESW playbook:
+    - 75% net margin
+    - 100% customer success (not happiness)
+  - Instead of requiring aggressive price increases that are unlikely to work for low-stickiness monthly customers, we aim to establish an alternative pricing and packaging strategy that still achieves 90%+ net dollar retention ("NDR" or "NRR")
+- **Exec Summary**
+  - This playbook demonstrates how we can acquire SMB-centric MarTech businesses and, without relying on blunt price hikes, transform them into 75%-margin, 90%+ NRR performers. We layer in LLMO discovery and outcome-based AI features, run continuous pricing and packaging experiments, automate support and renewals, and bundle data-rich products for a single marketing buyer—preserving 100% customer success while unlocking durable expansion.
+- **DOK4 - SPOVs**
+  - **Even with SMB customers: Double prices and achieve 100%+ NDR by adding must-have AI value first. ** Interview customers, build the quickest high‑ROI features they beg for (ideally outcome‑priced AI), ship them, then raise prices. The extra value masks the hike and lifts ARPU 2x. Outcome‑metered AI keeps spend rising as usage (and value) climbs.
+    - DOK3: Increase prices by 2x by interviewing customers to determine the easiest high-value features to add, then add them right as you increase prices.
+    - DOK3: AI features must be value focused, where increasing usage increases customer value and therefore drives spending over time
+  - **The future of all marketing (i) exists at the intersection of humans and AI chat tools, and/or (ii) will be targeting AI Agents directly.** Soon everyone will use AI for informational and transactional search because it's a 10x better experience than Google. AI agents will become responsible for commercial investigation search, making autonomous purchasing decisions by the end of 2026. Every MarTech product therefore needs an LLM‑Optimization / AI‑SEO layer to stay findable and protect NRR.
+    - Support: [The entire LLMO BrainLift](https://workflowy.com/s/brainlift-30-llmo/WsVAonAyHvfWipvY)
+  - **Relentlessly pursue outcome-metered AI features to add 45+ pp to NRR.** Every MarTech acquisition should have a plan for continuous innovation on AI features that support billing for outcomes. It increases NRR short term, but also protects NRR long term if competitors bundle your older features into core tiers (because you release a new outcome-priced feature).
+    - DOK3: Monetize AI aggressively in the first 1‑2 years before AI features become standard and surcharges are untenable.
+    - DOK3: Hybrid embedded‑premium pricing is the safest way to raise prices without too much churn.
+  - **Pricing/Packaging updates can increase NRR in 100% of MarTech acquisitions with large SMB customer bases in under 2 quarters.** With 1000+ customers we can run perpetual A/B tests on pricing and packaging to drive a 14%+ NRR lift and convert monthly subs to annual.
+    - DOK3: Quarterly price experimentation is uniquely feasible in large SMB cohorts and reliably adds ~14 % NDR.
+    - DOK3: Hybrid embedded‑premium pricing is the safest way to raise prices without too much churn.
+  - **AI provides the path to "segment-of-one" GTM and product features. **AI can generate dynamic micro-content for every audience slice, which is valuable for GTM, customer success, and new MarTech product features. All of these provide high-margin paths to increased NRR.
+    - DOK3: AI customer success can be used as an upsell engine, surfacing expansion insights in real time and allowing automated growth.
+    - DOK2: AI can be used to create 1-1 content and experiences for people at near zero cost
+  - **100% of Customer Support and Renewals can be handled by AI Agents, removing all Support a nd Renewal Central Function costs. **AI agents will deliver a better customer experience than web portals or human agents, removing renewal fiction and driving upsells while never deviating from our playbook. This also frees up 3 points of margin to run pricing & packaging experiments.
+  - **Every legacy team member / role can be replaced by an AI-first hire that doesn't necessarily have previous experience or specialization in such role.** The best AI-first hires can quickly build expertise and automate meaningful portions of legacy roles, allowing the company to operate with a fraction of historical HC costs.
+    - Keep Eng for now. DOK3: Central engineering / Kanbans are still required
+- **DOK3 - Insights**
+  - We must monetize AI aggressively in the first 1-2 years before AI features become standard and surcharges for AI are untenable. Shifting to outcome based pricing reduces this potential transition.
+    - DOK2: Ibaaka blog - Outcome based pricing works for AI models where a company can deliver an outcome. A step further than usage based pricing and aligns closer to business value.
+  - AI features must be value focused, where increasing usage increases customer value and therefore drives spending over time
+    - DOK2: Increase NDR by aligning usage pricing to customer value
+  - Increase prices by 2x by interviewing customers to determine the easiest high-value features to add, then add them right as you increase prices.
+    - DOK2: Successfully increase prices on a monthly sub base by deeply interviewing the customer base and increasing product value first
+    - DOK2: Use AI features to focus pricing on value-based structures, charging a premium attached to business value
+  - Hybrid embedded-premium pricing is the safest way to raise prices without too much churn. Add AI to all existing tiers and implement a modest price increase (or usage cap, and charge for usage upside)
+    - DOK2: Investing in premium customer success (e.g. paid onboarding, consulting, support tiers) can significantly reduce churn
+    - DOK2: Increase NDR by aligning usage pricing to customer value
+  - Bundling + seat simplification (i.e. pricing and packages) is the most repeatable NRR lever in MarTech. Create easy to understand value dense packages with clear paths to frictionless upsell.
+    - DOK2: Hubspot / Mailchimp
+  - Prime is 10x more effective at protecting NRR when all products can be sold to the same marketing team, rather than across org silos.\*\* \*\*The business value of a MarTech product suite is measurable to a single team and likely to a single SVP, improving probability of renewal and ability to increase prices.
+    - DOK3: Bundling + seat simplification is the most repeatable NRR lever in MarTech.
+    - DOK3: Usage‑based components lift NRR ~1.5×, but only when the usage metric is tied to customer value and frictionless to grow.
+  - MarTech data exhaust is gold dust that can be productized. Aggregate passive telemetry from a bundle of MarTech products and package it as anonymized benchmarks and predictive insights. These unique insights can be upsold to drive NRR and create stickier products.
+    - DOK3: Data‑exhaust monetisation is the overlooked upsell for low‑stickiness SMB bases.
+    - DOK3: Margin & NRR are complementary, not competing goals when AI reduces COGS.
+  - Usage‑based components lift NRR ~1.5×, but only when the usage metric is tied to customer value and frictionless to grow.
+    - DOK2: McKinsey 1.5x, Snowflake 171% NRR hybird model
+  - Data‑exhaust monetisation is the overlooked upsell for low‑stickiness SMB bases.
+    - DOK2: Bessemer
+  - AI customer success can be used as an upsell engine, surfacing expansion insights in real time and allowing automated growth
+    - DOK2: Gainsight
+  - Quarterly price experimentation (at minimum) is uniquely feasible in large SMB cohorts and reliably adds ~14 % NDR.
+    - DOK2: Profitwell / paddle
+  - Margin & NRR are complementary, not competing goals when AI reduces COGS. Replace internal costs to fund usage-based upsell credits and hit 75%+ margin tarets
+  - Central engineering / Kanbans are still required to maintain the existing code base, including refactoring, stabilizing, cost savings, upgrades, and bug fixes. Monthly customers have zero patience for outages because they aren't stuck in a contract.
+  - Central CPM team could expand role and more actively participate in product management, including tier optimization, feature strategy, user base segmentation etc.
+  - In any low growth company, improving NRR is the biggest lever to drive revenue and IRR
+    - DOK2: Use Max MRR to predict future MRR / churn has the largest impact on Max MRR
+- **Experts**
+  - Patrick Campbell
+    - Description: Founder of ProfitWell (now part of Paddle) and creator of the Recur media network; has analysed pricing data from 20,000‑plus subscription companies. ([profitwell.com](https://www.profitwell.com/recur/all/author/patrick-campbell?utm_source=chatgpt.com))
+    - Why they are relevant: Publishes empirical studies showing how pricing changes and add‑ons boost NDR; often cited for his “14 % NDR lift from pricing work” benchmark. ([Business of Software](https://businessofsoftware.org/talks/pricing-retention-and-growth-strategies/?utm_source=chatgpt.com))
+    - Twitter: [@patticus](https://twitter.com/patticus)
+  - Elena Verna
+    - Description: Growth advisor/board member (Miro, Amplitude, MongoDB) and author of the Growth Scoop newsletter focused on retention economics. ([elenaverna.com](https://www.elenaverna.com/?utm_source=chatgpt.com), [LinkedIn](https://www.linkedin.com/in/elenaverna?utm_source=chatgpt.com))
+    - Why they are relevant: Thought‑leader on product‑led expansion; shares frameworks for pushing SMB NDR beyond 120 % through activation and value realisation. ([elenaverna.com](https://www.elenaverna.com/?utm_source=chatgpt.com))
+    - Twitter: [@ElenaVerna](https://twitter.com/elenaverna)
+  - Kyle Poyar
+    - Description: Partner at OpenView; writes the widely read Growth Unhinged newsletter and OpenView’s annual Usage‑Based Pricing report. ([revops.io](https://www.revops.io/blog/usage-based-pricing-with-kyle-poyar-of-openview?utm_source=chatgpt.com), [OpenView](https://openviewpartners.com/blog/usage-based-pricing-trends/?utm_source=chatgpt.com))
+    - Why they are relevant: Evangelises usage‑based / hybrid pricing models that correlate with 110 %+ NDR and publishes concrete benchmarks and playbooks. ([OpenView](https://openviewpartners.com/blog/usage-based-pricing-trends/?utm_source=chatgpt.com))
+    - [https://x.com/poyark](https://x.com/poyark)
+  - Hiten Shah
+    - Description: Serial SaaS founder (Kissmetrics, Crazy Egg, Nira) and long‑time commentator on pricing, freemium, and retention. ([Thread Reader App](https://threadreaderapp.com/user/hnshah?utm_source=chatgpt.com))
+    - Why they are relevant: Shares battle‑tested tactics for freemium/low‑touch monetisation that keep SMB churn low while enabling upsell. ([Thread Reader App](https://threadreaderapp.com/user/hnshah?utm_source=chatgpt.com))
+    - Twitter: [@hnshah](https://twitter.com/hnshah)
+  - David Skok
+    - Description: General Partner at Matrix Partners; coined the “negative churn” concept on his ForEntrepreneurs blog. ([For Entrepreneurs](https://www.forentrepreneurs.com/why-churn-is-critical-in-saas/?utm_source=chatgpt.com))
+    - Why they are relevant: His frameworks on expansion revenue (usage, up‑sell, cross‑sell) underpin most modern NDR strategies. ([For Entrepreneurs](https://www.forentrepreneurs.com/why-churn-is-critical-in-saas/?utm_source=chatgpt.com))
+    - Twitter: [@BostonVC](https://twitter.com/BostonVC)
+  - Ajit Ghuman
+    - Description: Founder of Monetizely and author of Price to Scale; advises SaaS teams on hybrid & AI feature pricing. ([Monetizely](https://www.getmonetizely.com/?utm_source=chatgpt.com))
+    - Why they are relevant: Publishes case studies (Mailchimp, HubSpot) and templates for monetising generative‑AI add‑ons through usage caps and embedded premiums. ([Monetizely](https://www.getmonetizely.com/?utm_source=chatgpt.com))
+    - Twitter: [@ajitghuman](https://twitter.com/ajitghuman)
+  - Nick Mehta
+    - Description: CEO of Gainsight, the category‑defining Customer Success platform. ([The Software Report](https://www.thesoftwarereport.com/how-second-time-ceo-nick-mehta-of-gainsight-is-leading-the-customer-success-platform-to-1-billion/?utm_source=chatgpt.com))
+    - Why they are relevant: Champion of AI‑powered Customer Success Qualified Leads (CSQLs) that surface upsell opportunities and improve NDR. ([Gainsight Inc.](https://support.gainsight.com/gainsight_nxt/Customer_Success_Qualified_Leads_%28CSQL%29/About/Overview_of_CSQL?utm_source=chatgpt.com))
+    - Twitter: [@nrmehta](https://twitter.com/nrmehta)
+  - Jason Lemkin
+    - Description: Founder of SaaStr; angel investor in many MarTech/SalesTech unicorns. ([SaaStr](https://www.saastr.com/author/jasonlkn/?utm_source=chatgpt.com))
+    - Why they are relevant: Writes frequently about the economics of the “AI upsell” (e.g., Atlassian bundling AI) and its impact on renewal and expansion. ([SaaStr](https://www.saastr.com/atlassian-were-not-going-to-charge-more-customers-extra-for-ai-anymore-the-beginning-of-the-end-of-the-ai-upsell/?utm_source=chatgpt.com))
+    - Twitter: [@jasonlk](https://twitter.com/jasonlk)
+  - Tomasz Tunguz
+    - Description: General Partner at Theory Ventures; prolific blogger on SaaS metrics. ([tomasztunguz.com](https://tomasztunguz.com/?utm_source=chatgpt.com))
+    - Why they are relevant: Breaks down advanced NDR analytics (e.g., Simpson’s Paradox, cohort expansion) and has benchmarked paths to 200 % NDR. ([tomasztunguz.com](https://tomasztunguz.com/net-dollar-retention-correlations/?utm_source=chatgpt.com))
+    - Twitter: [@ttunguz](https://twitter.com/ttunguz)
+  - Martin Casado
+    - Description: General Partner at Andreessen Horowitz leading infrastructure & AI investments; former founder of Nicira. ([Andreessen Horowitz](https://a16z.com/author/martin-casado/?utm_source=chatgpt.com))
+    - Why they are relevant: Publishes the economic playbooks for generative‑AI cost structures and outcome‑based pricing models that drive expansion revenue. ([Andreessen Horowitz](https://a16z.com/the-economic-case-for-generative-ai/?utm_source=chatgpt.com))
+    - Twitter: [@martin_casado](https://twitter.com/martin_casado)
+- **DOK2 - Knowledge Tree**
+  - **Customer Success**
+    - Source: [Monetizely hybrid pricing](https://www.getmonetizely.com/articles/hybrid-pricing-models-combining-subscription-usage-and-services-for-maximum-saas-revenue#:~:text=)
+      - **DOK2 Summary**: Investing in premium customer success (e.g. paid onboarding, consulting, support tiers) can significantly reduce churn – companies did ~26% better GRR by doing so.
+      - DOK1s
+        - Gainsight’s 2022 Customer Success Industry Report found that companies offering premium success services achieve 26% higher gross retention rates
+    - Source: Contently Personal Experience
+      - **DOK2 Summary: ** Use product data to improve bottoms up retention analysis
+      - DOK1:
+        - Analyze platform activity on a customer-by-customer basis and use findings in bottoms up retention analysis
+        - Identify pre-M&A if customers rely on company AMs or Support to get value out of the product (i.e. not actually self serve)
+  - **Product-Led Expansion**
+    - Source: [Klaviyo S1](https://www.meritechcapital.com/blog/klaviyo-ipo-s-1-breakdown)
+      - **DOK2 Summary: **Capture growing customer business value with usage pricing and new add-ons
+      - DOK1s:
+        - The company charges subscriptions based on tiers of consumer profiles stored, emails sent, and SMS messages sent.
+        - Land-and-expand is a critical component of the GTM as well.
+        - Customers see success with Klaviyo, grow their own business, and store more profiles, increasing Klaviyo usage while paying them more
+        - Revenue also grows with new channels or products, such as SMS, and use cases, such as their CDP
+    - Source: [Monetizely – 5 In-Depth SaaS Pricing Case Studies (2025)](https://www.getmonetizely.com/blogs/5-in-depth-pricing-transformation-case-studies#:~:text=The%20changes%20were%20massive,ads%2C%20automation)
+      - **DOK2 Summary:** Mailchimp used new features (adding value) + positioning to overhaul pricing and increased revenues by 20%
+      - DOK1s:
+        - “It introduced new tiered plans (Essentials, Standard, Premium) … changed the pricing metric from subscribed contacts to total contacts … including unsubscribed ones … eliminated unlimited email sends; each tier came with monthly send limits. Mailchimp grandfathered existing customers on legacy plans to ease the transition.”
+        - “Mailchimp’s revenue jumped to $800 million in 2020, up ~20% year-over-year. This suggests that the new multi-channel capabilities (and corresponding pricing) unlocked more spending from customers, offsetting those who left. By 2020, half of Mailchimp’s revenue came from non-email services … Mailchimp was acquired for $12B, with Intuit citing its expanded marketing functionality as a key asset.”
+        - “Mailchimp introduced CRM tools, websites, and AI features alongside new pricing. SaaS firms raising prices should showcase new benefits to justify the change.”
+    - Source: [Monetizely – 5 In-Depth SaaS Pricing Case Studies (2025)](https://www.getmonetizely.com/blogs/5-in-depth-pricing-transformation-case-studies#:~:text=The%20changes%20were%20massive,ads%2C%20automation)
+      - **DOK2 Summary:** Hubspot simplified pricing across entire product base and drove NRR from 90% to 110%
+      - DOK1s:
+        - By 2021, HubSpot’s NRR surpassed 110%, up from the mid-90s% in prior years. Analysts attributed this increase to multi-Hub adoption, which the pricing changes made more natural. HubSpot’s CFO expects NRR to remain above 110%, indicating the new model’s potential for long-term upsells.
+        - The SaaS industry praised HubSpot’s simplification, with one analyst noting, ‘110% NRR from SMBs – finally.’ The shift was seen as a long-overdue move that unlocks more revenue from SMBs without harming retention.
+        - HubSpot justified its pricing shift by emphasizing: … Access to all Hubs via core seats. … Inclusion of new AI features. … Lower costs for scaling businesses. By openly communicating the rationale, HubSpot avoided backlash and ensured the narrative remained positive.”
+  - **Retention**
+    - Source: [Smart Bear - Max MRR](https://longform.asmartbear.com/max-mrr/)
+      - **DOK2 Summary:** Use Max MRR to predict future MRR / churn has the largest impact on Max MRR
+      - DOK1s:
+        - Max MRR is a predictive / leading indicator of where real MRR will head
+        - Max MRR is driven by new MRR / mo (growth) and churn
+        - Churn has the largest impact on Max MRR since it exponential (based on the entire MRR base)
+  - **Pricing & Packaging**
+    - Source: [Lenny's Newsletter - scaling and pricing](https://www.lennysnewsletter.com/p/pricing-and-scaling-your-ai-product-madhavan-ramanujam)
+      - **DOK2 Summary: **Outcome based pricing requires high autonomy and high attribution
+      - DOK1s:
+        - 2x2 framework: attribution vs autonomy
+          -
+        - Ramanujam calls this “mastering monetization from day one,” says AI founders must avoid training customers to expect “$20/mo” prices, and highlights the outcome‑based quadrant (high attribution + high autonomy) as the “magic quadrant”.
+        - The 2×2 (Attribution × Autonomy) gives Brainlift a crisp diagnostic to decide whether to price per‑seat, hybrid usage, or outcomes, and shows practical migration paths between quadrants.
+        - concrete tactics for executing the hike: • Create a value audit as a “get” in negotiations; • Taper concessions; • Anchor high by presenting 3 options (good / better / best).
+        - only ~5 % of companies currently achieve true outcome pricing
+    - Source: [Bending Spoons Article (2024)](https://archive.is/20240801172242/https://sifted.eu/articles/bending-spoons-italy-startup-ipo) // [Evernote PR](https://evernote.com/blog/evernote-pricing-upcoming-features-update) (2023)
+      - **DOK2 Summary: **Successfully increase prices on a monthly sub base by deeply interviewing the customer base and increasing product value first
+      - DOK1s:
+        - Bending spoons raised prices ~2x on all customers
+        - Many customers were on monthly subsciptions
+        - Bending Spoons performed customer interviews and research to drive product improvements that would form the basis of the price increase rationale
+        - in May 2023 (within ~5 months of ownership) they announced roughly a 2× price hike on annual plan (Personal plan from ~$70 to $129.99/year, Professional to $169.99)
+        - This was the first increase in ~7 years and was justified by highlighting how the product had expanded in functionality and how new investment would “deliver greater value... faster.
+    - Source: July 16th, 2025 email from Joe "Fwd: Selling to Men vs. Women"
+      - **DOK2 Summary:** AI can be used to create 1-1 content and experiences for people at near zero cost
+      - DOK1s:
+        - One of the powers of vibe marketing is having AI dynamically generate content for the prospect.
+        - here are lots of dimensions that segment buyers (I care about academics, no I care about sports, etc) and we can have a dynamic AI powered website that generates content specifically for them.
+        - Just as we hate chatbots for academics - adding a chatbot to a website is lame.  We generate dynamic content for super personalized for students, we should generate dynamic content for parents coming to our website.
+    - Source: [L.E.K. Consulting – The Future Role of GenAI in SaaS Pricing (2025)](https://www.lek.com/insights/tmt/us/ei/future-role-generative-ai-saas-pricing#:~:text=outcome,fees%20with%20variable%20AI%20components)
+      - **DOK2 Summary: **Use AI features to focus pricing on value-based structures, charging a premium attached to business value
+      - DOK1s:
+        - Generative AI (GenAI) fundamentally shifts SaaS pricing from seat-based to outcome-/value-driven models… Emerging pricing models are either outcome-based (pay per result), consumption-based (pay per usage) or hybrid subscription models combining fixed fees with variable AI components.
+        - Companies are charging premiums for Microsoft Copilot-style AI features, with value created through both productivity enhancement and complete task automation
+    - Source: [PSG Equity – Pricing Generative AI Features in SaaS](https://www.psgequity.com/news/pricing-generative-ai-features-for-saas-products-finding-the-right-path/#:~:text=2,revenue%20baseline%20for%20that%20customer)
+      - **DOK2 Summary: **First, try to attach AI to customer value. If that's not possible, you can use an "embedded AI premium" (i.e. not a separate line item). This creates a route for upsell / increasing NRR.
+      - DOK1s:
+        - Where GenAI variable cost is in play but is not directly correlated with customer value, ‘capped packages’ or ‘embedded AI premium’ are two suggested approaches… In the ‘embedded AI premium’ approach…the vendor will increase the price point, reflecting the enhanced value brought by GenAI – … GenAI is not a separate entity on the price list but an integral part of the improved offering.
+        - Lever for upsell: By providing additional GenAI usage at a premium cost, SaaS companies can create opportunities to upsell customers who require additional consumption… Assuming that additional usage…provides incremental value, it may become the new recurring revenue baseline for that customer.
+    - Source: [Ibbaka Blog – Intercom’s Fin AI Agent Value & Pricing (2025)](https://www.ibbaka.com/ibbaka-market-blog/comparing-the-value-model-and-pricing-model-of-intercoms-fin-ai-agent#:~:text=,agents%20when%20necessary)
+      - **DOK2 Summary: **Outcome based pricing works for AI models where a company can deliver an outcome. A step further than usage based pricing and aligns closer to business value.
+      - DOK1s:
+        - The pricing model for Fin is straightforward: $0.99 per resolved conversation, billed annually.
+        - This pay-per-resolution model is layered on top of Intercom’s subscription plans (Essential, Advanced, and Expert) … While simple and transparent, this pricing structure raises questions about whether it fully reflects the broader value Fin delivers. Since being introduced Fin AI has become the poster child for outcome-based pricing.
+    - Source: [The State of B2B SaaS Pricing in 2024](https://sbigrowth.com/hubfs/1-Research%20Reports/11.2024%20State%20of%20B2B%20SaaS%20Pricing%20Price%20Intelligently/SBI_StateofB2BSaaSPricing2024.pdf)
+      - **DOK2 Summary:** Pricing and packaging is a first-class growth lever that should be reviewed every 3-12 months. It is always relative to customer value and likely has usage-based aspects. Optimize for NDR, but always consider margins when making decisions.
+        - DOK1s
+          - pricing has the greatest impact on revenue, reducing acquisition costs and improving retention
+          - Update it annually
+          - companies connecting their product to user value will always outperform their peers -> anchor every change to customer value, not cost or competitors
+          - Customer value could be usage based pricing, or grouping my core use cases
+            - Surface in app / in email ROI calculators so customers self-justify the upgrade
+          - Focus on NRR (NDR), but model LTV by cohort to figure out high-support customers stand out
+          - Reverse trials (paid team features for 14 days, then freemium or turn off) can improve conversion
+          - Design any freemium plans for margin (gate any expensive features behind paywall)
+          - With high customer counts you can run meaningful split tests on pricing changes
+    - Source: [SaaS Success by Paddle](https://www.linkedin.com/posts/patrickccampbell_great-video-on-saas-success-from-the-crew-activity-7227456056052908033-xv3Z/)
+      - **DOK2 Summary: **Focus immediately on a pricing & packaging analysis, including true localization, to drive 14%+ NRR
+      - DOK1s:
+        - Pricing **and** packaging is one of the fastest and cheapest way to impact revenue growth, driving 14% increase in NDR
+        - True pricing localization accounts for willingness to pay and can increase overall revenue and NDR
+        - Localized payment methods impact conversions
+    - Source: [Hybrid Pricing Models](https://www.getmonetizely.com/articles/hybrid-pricing-models-combining-subscription-usage-and-services-for-maximum-saas-revenue)
+      - **DOK2 Summary: **Increase NDR by aligning usage pricing to customer value
+      - DOK1s:
+        - Combining Subscription, Usage, and Services for Maximum SaaS Revenue
+        - Subscription is the foundation - predictable recurring revenue
+        - Incorporating usage-based elements allows companies to capture additional revenue from power users while offering lower entry points for new or smaller customers.
+        - McKinsey research shows that companies implementing usage-based components see a 1.5x higher net dollar retention rate compared to subscription-only businesses.
+          - Aligns revenue directly with customer value realization
+          - Enables monetization of increased adoption
+          - Creates natural upsell opportunities without sales intervention
+        - CASE: Snowflake's Consumption-Subscription Hybrid
+          - Snowflake combines a reserved capacity subscription model with consumption-based pricing. Customers commit to minimum spending levels (subscription) while having the flexibility to use more (consumption) during peak periods. This approach has helped Snowflake maintain a remarkable 171% net revenue retention rate as of Q2 2023.
+    - Source: [The founder’s roadmap to $100 million ARR.](https://www.bvp.com/assets/uploads/2024/04/From-Start-to-Centaur-The-founders-roadmap-to-100-million-ARR-Bessemer-Books-Edition-040924.pdf)
+      - **DOK2 Summary:** Two pricing tweaks – usage-based add-ons and tier/anchor strategies – can unlock more expansion revenue per customer. Make sure to commercialize all aspects of the product, like data exhaust.
+      - DOK1s:
+        - Add a volumetric or consumption-based component to your pricing. Adopt a tiered pricing model (good/better/best) and use ‘price anchoring’ in your highest tier to maximize revenue from your middle tier.
+        - Pricing is “the biggest missed opportunity in vertical software.” Small “tiger-team” experiments (10-100 % list-price lifts, annual CPI uplifts, moving popular add-ons from opt-in to opt-out, usage tiers) require zero incremental R&D or GTM spend — every extra dollar lands in gross profit
+        - Monetize the data exhaust: Data products (benchmarking, predictive insights, industry datasets) are “one of the biggest under-served opportunities” for vertical software
+  - **Cost To Serve**
+    - Source: [Gainsight digital CS](https://www.insided.com/blog/outlining-your-digital-customer-success-journey/#:~:text=,article%20found%20in%20the%20community)
+      - **DOK2 Summary:** Automate as many customer touchpoints as possible with AI and create the feeling of a large team with zero people
+      - DOK1s:
+        - Small business: Automate as much as possible. This is a true Digital-Led approach. Every engagement should encourage customers back to the community. Create repetition for customers to self-serve and find answers via the community.
+        - Using Gainsight automation, GoTo implemented a Pooled CSM model that revamped their CTA processes and email campaigns, delivering a personalized customer experience to thousands of small business customers — with just eight CSMs.

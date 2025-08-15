@@ -1,0 +1,82 @@
+KMS Cost Optimization
+
+- Ephor Projects
+  - [https://ephor.ai/project/44d03df3-1665-4db7-b770-e1141c3cb6d6](https://ephor.ai/project/44d03df3-1665-4db7-b770-e1141c3cb6d6)
+- Owner
+  - Krystian Lieber [krystian.lieber@trilogy.com](mailto:krystian.lieber@trilogy.com)
+- Purpose
+  - The purpose of this BrainLift is to gather all the information to guide the cost optimization of the AWS Key Management Service.
+  - In-scope: Optimization of AWS Key Management Service
+  - out of scope: any other type of cost optimization
+- DOK4 - SPOV
+  - **You think it is one dollar, but it might be thousands.** Each single custom key costs you a dollar a month, but if you rack up unused keys over the years, you will waste thousands.
+- DOK3 - Insights
+  - We need to be absolutely sure that the key is unused to delete it, as if the key is deleted all the related data is also locked.
+  - CloudTrail is either too slow (for direct queries) or too complex to configure at scale (for data lake/Athena) to provide us with usage information.
+  - AWS Cloudwatch Metric AWS/KMS/SuccessfulRequest for selected events is the best idea to get the usage
+  - Supplemental connected resource analysis helps with boosting confidence.
+  - The Key can be locked out out usage with key policy that bars it is usage, it might be a first step in deletion process. Lock out the key for 30 days, and tag it. If the key lockout date passes then we can safely remove it, if not then we remove the policy and the key returns to use.
+- Experts
+  - Krystian Lieber
+    - Description: VP of Software Engineering, CloudFix
+    - Why follow: One of the first CloudFix developers, implemented and designed 100+ finders, leader of the ESW Cost Optimization efforts
+    - Where to follow: Twitter - [https://x.com/KrystianLieber](https://x.com/KrystianLieber)
+- Knowledge Tree
+  - AWS KMS
+    - AWS KMS Metrics
+      - DOK1 - facts
+        - Metrics pamaters
+          - Namespace="AWS/KMS",
+          - MetricName="SuccessfulRequest",
+          - Dimensions
+            - {"Name": "KeyArn", "Value": key_arn}
+            - {"Name": "Operation", "Value": operation}
+        - Operations considered key used:
+          - Decrypt
+          - Encrypt
+          - GenerateDataKey
+          - GenerateDataKeyWithoutPlaintext
+          - ReEncrypt
+          - CreateGrant
+          - RetireGrant
+          - RotateKey
+      - DOK2 - summary
+        - Clouwatch metrics per operation allow to make a decision if the key is used
+      - [https://aws.amazon.com/blogs/security/aws-kms-cloudwatch-metrics-help-you-better-track-and-understand-how-your-kms-keys-are-being-used/](https://aws.amazon.com/blogs/security/aws-kms-cloudwatch-metrics-help-you-better-track-and-understand-how-your-kms-keys-are-being-used/)
+    - Finding the KMS key resources
+      - DOK1 - facts
+        - As of June 2025, AWS does not expose an API to find all the resources encrypted with a particular key
+        - The only way to find that information is via querying the list APIs of particular resources
+        - Services to inspect for KSM usage
+          - Glue
+          - S3 (Simple Storage Service)
+          - EC2/EBS (Elastic Block Store)
+          - QLDB (Quantum Ledger Database)
+          - Keyspaces (Amazon Keyspaces for Apache Cassandra)
+          - Timestream
+          - DynamoDB
+          - Neptune
+          - Secrets Manager
+          - SSM (Systems Manager Parameter Store)
+          - Redshift
+          - Redshift Serverless
+          - EFS (Elastic File System)
+          - ElastiCache
+          - DocumentDB
+          - RDS (Relational Database Service)
+          - RDS Aurora
+          - SQS (Simple Queue Service)
+          - SNS (Simple Notification Service)
+          - FSx
+          - MQ (Amazon MQ)
+      - DOK2 - summary
+      - [https://github.com/FogSecurity/finders-keypers/blob/main/modules/service_key_finder.py](https://github.com/FogSecurity/finders-keypers/blob/main/modules/service_key_finder.py)
+    - Cost impact
+      - DOK 1 - facts
+        - A single custom key is just $1/month, but the charges stack up if the unused keys are not deleted.
+        - $35000 annual savings found for Tivian
+      - Source [https://docs.google.com/spreadsheets/d/1NEztyzmMqbWWBxdU9tY4X28uOzDUxkycu-3HjR01ISA/edit?gid=1270139335#gid=1270139335](https://docs.google.com/spreadsheets/d/1NEztyzmMqbWWBxdU9tY4X28uOzDUxkycu-3HjR01ISA/edit?gid=1270139335#gid=1270139335)
+    - Key policy
+      - DOK 1 - facts
+        - Key policy allows to limit the key usage to specific services an even resources
+        - This means that a key can be locked out completely

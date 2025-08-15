@@ -1,0 +1,159 @@
+Product BrainLift - Khoros Communities
+
+- Owner
+  - Khoros TPM Team:
+    - Ben New [ben.new@devfactory.com](mailto:ben.new@devfactory.com)
+    - Pablo Fernandez [pablo.fernandez@trilogy.com](mailto:pablo.fernandez@trilogy.com)
+- Purpose
+  - To understand the Khoros Communities product and the Central TPM approach to it.
+  - This is not a technically focused document, it begins with the customer, and covers technical solutions only where it is important and to provide basic orientation.
+- _----------- Depth of Knowledge / DOK starts here ----------_
+- DOK4 - SPOV
+  - SPOV - We should complete the Aurora migration, even if it means churning some customers.
+  - SPOV - Once the Aurora migration is completed and no customers are using the legacy user interface, we should remove it completely.
+  - SPOV - We should containerize the backend, following the pattern established with Jive Unity, allowing us to run many customers in a single container with flexible compute.
+  - SPOV - We should integrate Khoros Communities with Khoros One to provide a full cycle in the customer journey, from an initial AI conversation that searches the knowledge base, through escalation to a human agent, to an asynchronous AI generating a new article in the knowledge base, based on the eventual solution.
+  - SPOV - LLMs should do 99% of content moderation, with only objections and corner cases being escalated to humans.
+- DOK3 - Insights
+  - Khoros Communities, unlike (almost) every other Trilogy product (including Jive), is public-facing, which leads to some very different requirements:
+    - Khoros Communities is a publicly visible component of an organization's public branding.
+      - It can be seen and accessed by anyone, not behind authentication and/or VPN or other network restrictions.
+      - It is typically positioned as the "front door" for any customer service requirements.
+      - This leads to a much higher risk surface area, because the target is so much more appealing to potential attackers - not merely disruptive, but potentially damaging to the organization's reputation.
+    - Khoros Communities instances for large enterprises such as Microsoft could potentially be visited by literally anyone at any time, or all at the same time.
+      - Reliability is extremely important to Khoros Communities.
+      - Khoros Communities instances are truly 24/7, operationally.
+        - In contrast, typical software used internally within customer organizations tends to follow very predictable usage patterns.
+      - The fluctuations in activity can be extreme, depending on many different external events:
+        - Customer events such as sales or major milestones.
+        - External influences - political, financial or other trends and outcomes.
+        - Even the random fluctuations are much greater, given the huge numbers involved.
+    - Khoros Communities provides SEO features, to ensure end users can find the community support they are looking for, within the brand's own portal.
+      - In comparison, any internally-used enterprise software requires authentication and is therefore not even available for search engines to crawl.
+  - Customization is a very important feature for Khoros Communities, because the community can be an important element of the customer's branding, and because different customers require different integrations.
+    - These integrations are implemented very differently between legacy Communities and Aurora.
+    - Legacy Communities requires code that is added to the instance as a plugin, and interacts with the web application directly (internally). This can be problematic for upgrades, since internal changes can affect plugins, and because it requires customers to write custom code against poorly documented internal Java APIs (or engage PS).
+    - Aurora provides a well-documented SDK, which is included in external applications and provides an idiomatic bridge.
+  - Khoros Communities is in the middle of a major transition from legacy Communities to Aurora, which means it is volatile, and customers could leave when forced by the BU to consider migrating. On the other hand, the legacy product represents significant technical debt and requires significantly higher ongoing investment and PS work.
+  - Another similarity with Jive is that Khoros Communities has a single-tenant architecture (for the main web application), so every customer instance requires its own compute, storage and networking infrastructure. This has both advantages and disadvantages:
+    - Better isolation - There is much less chance of data contaminating from one instance to another if they are independent VMs with separate databases.
+    - Smaller blast radius for incidents - Since each instance is isolated, any outage or incident affecting one instance does not inherently affect any others.
+    - Higher infrastructure costs - Each instance has its own usage spikes, busy periods, etc, which on shared infrastructure would be somewhat balanced by other instances with different usage patterns.
+    - More complex management - For example, finding the compute resources that relate to a specific customer instance requires either up front tagging, external inventories, or (if there is no such record) investigation by looking at log files etc.
+- _---------- BRIGHT LINE. Above this is based on the owner's opinion and expertise. Below this is based on the external flow of information ----------_
+- Experts (Khoros team members)
+  - Ryan Studer
+    - Role: CPTO
+  - Nick Hill
+    - Role: Product Development - Khoros Communities
+  - Paul Raisanen
+    - Role: Product Shared Services
+  - Joe Hart
+    - Role: Engineering VP - Khoros Communities
+  - Brian Schuweiler
+    - Role: Architecture
+  - Adam Ayres
+    - Role: Principal Engineer - Aurora
+  - Dolan Halbrook
+    - Role: Principal Engineer - Khoros Communities Middleware
+  - Doug Schroeder
+    - Role: Principal Engineer - Customization
+  - Manish Shrestha
+    - Role: Principal Engineer - Administration
+  - Deepak Kumar
+    - Role: Lead Engineer - Integrations
+  - Vikas Kumar Jha
+    - Role: Lead Engineer - Analytics
+  - Corey Mclaurin
+    - Role: Release Manager
+  - Yuri Kapulkin
+    - Role: Head of Technical Operations
+  - Karan Shah
+    - Role: Lead SRE US / Argentina
+  - Preeti Kumar
+    - Role: Lead SRE Bangalore
+  - Abdul Badruddin
+    - Role: CISO
+- Knowledge Tree
+  - Product functionality
+    - DOK1 Facts:
+      - Khoros Communities is an online customer community management application, which supports creating and collaborating on discussions, videos, polls, documents, blog posts and other forms of content.
+      - Content can be organized into structures relevant to the customer and use case, e.g. regional, demographic, product-oriented, goal-oriented (projects).
+      - Content can be created by employees or end users, depending on access control settings.
+      - Community users can interact via commenting, liking, sharing (internally and externally), bookmarking content, and direct messaging.
+      - Content can be moderated.
+      - Activity and news streams allow users to easily see latest updates.
+      - Search functionality makes content discoverable.
+      - Gamification features incite end users to participate in the community by providing points and badges.
+      - Analytics allow organizations to measure community interactions and usage.
+      - Administration tools include user and access management, community structure management, site design configuration, integration configuration, etc.
+      - Various forms of customization can be added.
+    - DOK2 Summary:
+      - Khoros Communities allows organizations and their customers and end users to create a community space to discuss, help with and inform about the organization's products, services and projects. It provides many ways for users to interact with content and with each other in a configurable structure.
+  - Customer Value:
+    - DOK1 Facts:
+      - Reduced support costs through reduced tickets, by providing a self-service knowledge base and community-sourced support.
+      - Increased brand loyalty and customer value, by supporting and fostering community interactions and growth in a way that is controlled by the brand (compared to external forums like Reddit or Google Reviews).
+      - Increased brand awareness through SEO.
+  - Customer definition:
+    - DOK1 Facts:
+      - Customers of Khoros Communities range from SMBs to large enterprises.
+      - Any organization with broadly used and publicly discussed products can be Khoros Communities customers.
+      - Biggest customers include Microsoft, Amazon, Google and Electronic Arts.
+  - Jive and Khoros Communities:
+    - DOK1 Facts:
+      - Jive (another IgniteTech product) and Khoros Communities have a shared history.
+      - Jive was originally sold in two varieties: Jive-N (iNtranet) and Jive-X (eXtranet)
+        - These were essentially the same product, with the same features and the same codebase, but packaged differently and with a different target audience.
+        - Jive-N was focused on an organization's employees and contractors, providing content such as CEO internal memos, project updates, social groups, regional blogs, and internal polls.
+        - Jive-X was focused on an organization's customers and end users, providing content such as product documentation for consumers, how-to guides, problem solving forums for users to help each other, and community polls.
+      - Jive was eventually split into two separate commercial concerns:
+        - Jive-N became Jive, which has been owned by Trilogy companies for many years now.
+        - Jive-X became Lithium, which was then acquired by Khoros and became Khoros Communities.
+      - Jive and Khoros Communities are very similar:
+        - Jive and Khoros Communities have very similar functionality.
+        - Both Jive and Khoros Communities are monolithic, single-tenant web applications (deployed per customer), supported by many, multi-tenant microservices.
+        - Both Jive and Khoros Communities are primarily Java based.
+  - Khoros Communities has two "versions":
+    - DOK1 Facts:
+      - Khoros Communities is a long-running product that has had a recently-completed major upgrade, codenamed Aurora.
+      - Legacy Khoros Communities:
+        - The legacy user interface consists of server-generated web pages, with JavaScript used to provide additional interactive features.
+        - Integrations and customization are made primarily via code, written either by the customer or via professional services engagement.
+        - These integrations are deployed into the Khoros Communities instance itself, as custom components running in the web application monolith.
+        - There is a REST API that can support external integrations.
+      - Aurora:
+        - This is a new user interface built using React, which renders in the web browser and retrieves data from a GraphQL API added to the backend.
+        - The backend is the same as the legacy backend. Changes have been made to support Aurora (e.g. addition of the GraphQL API), but the backend codebase is the same whether using the legacy UI or the Aurora UI.
+        - The UI is highly customizable via configuration, resulting in much less custom code.
+        - Customization is via JSON configuration files stored in a git repository, which provides history tracking and rollback capability.
+        - There is a UI to customize the theme and widgets, and the JSON files can also be modified by hand to support more powerful customizations.
+        - Integrations and custom behavior can be implemented using the Aurora SDK, which provides direct access to the data and functionality in the Khoros Communities instance, via an idiomatic programming interface.
+        - These integrations run externally to Khoros Communities itself, and the Aurora SDK provides interaction between the two.
+      - Aurora is feature complete and in production, but not all customers are using it:
+        - Several very large (high ARR) customers are using Aurora already in production.
+        - The majority of customers (by number) are using the legacy version.
+      - There is an effort per-customer to re-apply any theming, customization and integrations, to maintain feature parity when migrating each customer:
+        - The effort varies by customer, depending on their level of customization.
+        - Khoros legacy team has been using a professional services approach to migrate customers to Aurora.
+        - There is no data migration required for content when moving a customer to Aurora, since the backend does not change.
+    - DOK2 Summary:
+      - Khoros Communities is in the middle of a major upgrade, replacing the legacy frontend with a new React app, and providing an SDK to support integrations. However, there is an effort required to migrate each customer's specific configuration, customization and integrations.
+  - There is no mobile application:
+    - DOK2 Summary: Khoros Communities does not provide a native mobile application. Instead the user interface uses responsive design to be mobile compatible.
+      - This applies to both the legacy Communities platform and the Aurora UI.
+  - Security and compliance are important considerations:
+    - DOK1 Facts:
+      - The Community platform is compliant with various standards including:
+        - ISO/IEC 27001 - Information Security Management System (ISMS)
+        - ISO/IEC 27701 - Privacy Information Management System (PIMS)
+        - SOC 2 Type 2 - Service Organization Controls
+        - PCI DSS 4.0 (Secure Forms component only)
+        - GDPR (for EU-hosted customers)
+        - WCAG 2.1, Level AA
+      - Compliance information and audit reports are available to all customers by download, via a security reporting portal.
+      - There is a 16 person Information Security team headed by the CISO.
+        - This team covers Khoros Communities and other Khoros products, however Communities is the primary security concern given its public-facing nature. The other Khoros products are internal enterprise products.
+- _---------- BRIGHT LINE. Above this is the BrainLift, the user creates this without AI. Below this is not the BrainLift, it is however the user gets sources from the flow of external information ----------_
+- See also:
+  - IgniteTech BrainLift, covering both Khoros Communities and other Khoros products: [https://workflowy.com/s/khoros-brainlift/GPtFSR7NNyeQ0FQs#/b9e31c1e4b2f](https://workflowy.com/s/khoros-brainlift/GPtFSR7NNyeQ0FQs#/b9e31c1e4b2f)

@@ -1,0 +1,112 @@
+Core Principles of Production Database Design & Operation [WIP]
+
+- Owners
+  - Yashar Heidarnezhad ﻿Yashar Heidarnezhad
+  - Sergio Tomas ﻿Sergio Tomas
+- Purpose
+  - The purpose of this BrainLift is to define the core principles for designing, deploying, and operating relational databases in our production environment. Its goal is to ensure that any new system using a relational database can meet its target SLOs for performance and reliability. This BrainLift is bounded to initial schema design, indexing strategy, and core operational monitoring; it is not a guide for advanced query optimization or database-specific tuning.
+- DOK4: Spiky Points of View
+  - **We don't add unnecessary preemptive indexes**
+    - Indexes are great for making certain operations faster, but they come at a price. Indexes should be added when they are really needed, and not as a rule of thumb, "just-in-case".
+  - **We don't duplicate information**
+    - Duplicating information causes consistency issues where the concept of SSoT is diluted. A specific piece of information should only be in the db once.
+  - **We calculate derived data on the fly**
+    - When we want to extrapolate or calculate data based on our current db data, this should either be a query or a view (materialized or not), not a separate table, as that can lead to inconsistencies. Note that this doesn't mean other parties of services can not store calculated values on their side that stem from the data in the root db, but in this case the ownership and SoT is clear.
+  - **We model similar-but-different objects with different tables**
+    - We don't use a single table approach where a large amount of the columns are nullable to cater to different non-overlapping (or partially overlapping) scenarios, as this weakens our constraints due to nullability.
+  - **We don't query schemaless data**
+    - We can use json/blob columns to store arbitrary data without a fixed schema, but we won't perform direct database queries on top of this data. Filtering should happen as part of the business logic or the relevant piece of data can be extracted as a column and properly indexed.
+  - **We use the most restrictive join type possible**
+    - Joins are a common source of inefficiencies in queries when developed wrong. Using the most restrictive join possible ensures that the surface affected by the query is reduced to the minimum necessary.
+  - **We order joins by impact**
+    - When several joins are involved in a query, this can affect performance depending on the order. The query analyzer will do a best effort to order the joins and inner joins in the most performant way in some engines but even then this won't always yield the best results.
+  - **We separate reads and writes**
+    - Write operations are more limiting while read operations are generally more frequent. Pure read operations can be easily transferred to read replicas while the writing can be focused on the primary replica on single-writer approaches. This ensures that a heavy amount of reads won't impact our writing capabilities which tend to be the bottleneck.
+- DOK3: Insights
+  - Adding too many indexes can significantly impact write speeds, which is especially bad if the table being indexed has a high write ratio.
+- Knowledge Tree
+  - Defining Database SLOs
+    - DOK1: Facts
+      - The four golden signals for monitoring a user-facing system are latency, traffic, errors, and saturation.
+      - Amazon RDS Performance Insights uses a `db.load` metric, which counts the number of active sessions waiting on a resource (e.g., CPU, I/O), to provide a single, understandable indicator of database load and potential bottlenecks.
+        - A `db.load` consistently above the vCPU count indicates performance degradation.
+      - User-perceived performance is often best measured at the 95th or 99th percentile (p95/p99) latency, as average latency hides the impact of slow outliers that disproportionately affect user experience.
+    - DOK2: Summaries
+      - A practical approach to defining database SLOs involves applying the four golden signals framework (latency, traffic, errors, saturation) and implementing them with specific, measurable SLIs. For managed services like RDS, high-level metrics such as db.load can effectively summarize saturation and latency issues, providing a clear basis for an SLO.
+      - Effective SLOs for database performance must prioritize the user experience by moving beyond simple averages. By defining latency targets based on 95th or 99th percentile measurements, engineering teams can focus on mitigating the outlier queries that have the most significant negative impact on users, leading to more meaningful reliability work.
+      - The primary function of a database SLO is to create an objective, data-driven contract for reliability. By tracking key indicators for errors, latency (p99), and saturation (db.load), teams can replace subjective arguments about performance with clear, measurable targets and make informed decisions on when to prioritize stability over new feature development.
+  - Production Schema Design
+  - Indexing and Query Performance
+    - DOK1: Facts
+      - Indexes make related query lookups faster
+      - Indexes are supported by any major DB engine
+      - Indexes take a penalty in the form of write speed degradation
+      - Joins are powerful tools
+      - Joins can easily lead to performance issues
+      - Joins can make the query result size grow exponentially
+      - Joins can be restricted in numerous ways
+    - DOK2: Summaries
+      - Indexes are a trade-off where we earn performance on specific queries at the cost of making related writes slower.
+      - Cartesian products are one of the most common query performance issues
+  - Managed Database Operations
+- Experts
+  - Martin Kleppmann
+    - Credentials: Associate Professor at University of Cambridge; author of Designing Data-Intensive Applications; former LinkedIn engineer.
+    - Main Viewpoints: Emphasizes the trade-offs between consistency, scalability, and fault tolerance rather than simplistic SQL vs. NoSQL debates. Advocates for deep, principled understanding of distributed systems.
+    - Why Follow: Unrivaled clarity in explaining system architecture; bridges theory and practice.
+    - Find Work:
+      - Website/Blog: [https://martin.kleppmann.com/](https://martin.kleppmann.com/)
+      - Twitter: [@martinkl](https://twitter.com/martinkl)
+      - Book: [Designing Data-Intensive Applications](https://dataintensive.net/)
+      - Starter Content:
+        - [Turning the database inside-out with Apache Samza (YouTube)](https://www.youtube.com/watch?v=fU9hR3kiOK0)
+        - [Please stop calling databases CP or AP (blog)](https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html)
+  - Andy Pavlo
+    - Credentials: Associate Professor at Carnegie Mellon University; CEO of OtterTune; leader in empirical database research.
+    - Main Viewpoints: Strong advocate for empirical testing and cutting through marketing hype; pioneering work on “self-driving” ML-based database systems.
+    - Why Follow: Both cutting-edge and grounded in reality; engaging and insightful lectures and analyses.
+    - Find Work:
+      - YouTube: [CMU Database Group](https://www.youtube.com/c/cmudatabasegroup)
+      - Twitter: [@andy_pavlo](https://twitter.com/andy_pavlo)
+      - Blog: [OtterTune Blog](https://ottertune.com/blog/)
+      - Starter Content:
+        - [CMU 15-445 Intro to Database Systems (YouTube series)](https://www.youtube.com/playlist?list=PLSE8OD_iM-u_pQh_OKs_2z1mC3O0iO5y4)
+        - [The Databaseology Lectures - Ep. #1 (YouTube)](https://www.youtube.com/watch?v=e_pGz_dKxV4)
+        - [The Great 2024 Database Kerfuffle (blog)](https://ottertune.com/blog/the-great-2024-database-kerfuffle/)
+  - Markus Winand
+    - Credentials: Independent SQL performance consultant, author of SQL Performance Explained.
+    - Main Viewpoints: Believes most database performance issues come from developer misunderstanding; champions deep understanding of indexing, modern SQL, and relational abuse by ORMs.
+    - Why Follow: Practical, instantly actionable tips presented with clarity; focuses on making SQL performance accessible.
+    - Find Work:
+      - Website: [Use The Index, Luke!](https://use-the-index-luke.com/)
+      - Twitter: [@MarkusWinand](https://twitter.com/MarkusWinand)
+      - Book: [SQL Performance Explained](https://sql-performance-explained.com/)
+      - Extra Resource: [Modern SQL](https://modern-sql.com/)
+      - Starter Content:
+        - [Read Use The Index, Luke! core chapters](https://use-the-index-luke.com/)
+        - [Modern SQL Reference](https://modern-sql.com/)
+        - [SQL Performance Explained (book)](https://sql-performance-explained.com/)
+  - Gwen Shapira
+    - Credentials: Co-founder and CPO at Nile; former Product Manager at Confluent; co-author of Kafka: The Definitive Guide.
+    - Main Viewpoints: Bridges event streams and databases; stresses importance of schemas and contracts in event-driven architectures.
+    - Why Follow: Authority on integrating relational databases with big data and streaming; practitioner insight into evolving architectures.
+    - Find Work:
+      - Twitter: [@gwenshap](https://twitter.com/gwenshap)
+      - Book: [Kafka: The Definitive Guide](https://www.confluent.io/resources/kafka-the-definitive-guide/)
+      - Conference Talks: [YouTube search for Gwen Shapira](https://www.youtube.com/results?search_query=gwen+shapira)
+      - Starter Content:
+        - [No More Silos: How to Integrate Databases and Event Streams (YouTube)](https://www.youtube.com/watch?v=UE2MIGa_64s)
+        - [Events, schemas, and trust: A story of a data-driven company (blog)](https://www.confluent.io/blog/events-schemas-trust-story-data-driven-company/)
+        - [Building a Data-Driven Company Culture (YouTube)](https://www.youtube.com/watch?v=FjIuSdfD9VA)
+  - Joe Celko
+    - Credentials: ANSI SQL committee veteran; author of “SQL for Smarties”; columnist and pioneer of SQL programming standards.
+    - Main Viewpoints: Fights SQL and database anti-patterns; advocates for set-based thinking, rigorous normalization, and practical relational theory.
+    - Why Follow: Witty, no-nonsense teacher; resource for foundational and advanced SQL modeling; prolific writer of industry standards and best practices.
+    - Find Work:
+      - Author Page (Amazon Books): [Joe Celko’s Books](https://www.amazon.com/Joe-Celko/e/B001H6UZD6)
+      - Articles: [Simple Talk Archive](https://www.red-gate.com/simple-talk/author/joe-celko/)
+      - Interview: [Big Data and NoSQL: Interview with Joe Celko](https://www.simple-talk.com/opinion/opinion-pieces/big-data-and-nosql-an-interview-with-joe-celko/)
+      - Starter Content:
+        - [SQL for Smarties: Advanced SQL Programming (book)](https://www.elsevier.com/books/sql-for-smarties/celko/978-0-12-800761-7)
+        - [Data and Databases: Concepts in Practice (book)](https://www.elsevier.com/books/data-and-databases/celko/978-0-12-800830-0)
+        - [Big Data and NoSQL: Interview with Joe Celko](https://www.simple-talk.com/opinion/opinion-pieces/big-data-and-nosql-an-interview-with-joe-celko/)

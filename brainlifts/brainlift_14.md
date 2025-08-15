@@ -1,0 +1,54 @@
+BL: HM Interview Feedback Collection - Learning from rejections to improve candidate selection ﻿Kevin Norchi﻿ ⬅️ 🟢
+
+> initial source: [https://workflowy.com/s/brainlift-collecting/DDLOKXs9q2L7ALzA#/52031b45c69e](https://workflowy.com/s/brainlift-collecting/DDLOKXs9q2L7ALzA#/52031b45c69e)
+
+- Organization: Crossover
+- Owner(s): Kevin Norchi
+- Purpose: Develop deep expertise in designing and implementing fast, structured, R2-aligned feedback collection from hiring managers after interviews — with the goal of identifying which R2 criteria are missing in rejected candidates and diagnosing how those gaps were missed earlier in the hiring process in order to improve overall hire quality.
+- DOK4 - SPOV / New Knowledge
+  - Our final goal is not a data collection repository, it's a self-learning, self-correcting system that relies on high-quality data to operate autonomously.
+  - When feedback references criteria outside the R2, the response shouldn’t be to “fix” the feedback — it should be to pressure-test the R2. This keeps the spec dynamic and aligned with hiring manager expectations.
+  - When feedback references criteria outside the R2 and the hiring manager doesn't want to add it to the R2, then the feedback is useless and demands action (either coaching or replacing the interviewer).
+  - Negative feedback is positive. This is the basis on which we can improve pipelines. Positive feedback is also positive because it tells us what we're doing right.
+  - Hiring managers do not understand XO well. Their view of XO is often characterized by common misconceptions (summarized in DOK3), so part of our feedback collection mechanism need to be educational and explain the "why".
+  - Hiring managers are not always incentivized to give feedback (other than avoiding lowering their LinkedIn ad exposure), so XO needs to sell the advantages of grading thoroughly and punctually.
+  - When feedback is vague, direct 1:1 follow-up with hiring managers is often still the most reliable way to get clarity — especially if you treat it as a coaching opportunity, not a correction.
+  - Make sure to avoid overreacting. Often, one interview will reject a candidate for not having a certain skill that another interviewer believes they have. Therefore, if certain interviewers are known to be extra tough or have ulterior motives for rejecting a candidate, or if our sample size is too small, then we shouldn't invest time and resources into creating whole new assessments.
+- DOK3 - Insights
+  - Post-interview feedback reveals the precise gaps between our automated selection process and real hiring needs, enabling surgical improvements rather than system overhauls
+    - If a skill is identified that is already in the R2 but lacking in the candidate, the fix may be to add an assessment to the pipeline, increase an existing assessment's pass threshold, clarify the need for that skill in a job description, add a requirement to the basic fit AI interview, or do nothing (if it appears to be an edge case).
+    - If a skill is identified that's not in the R2, then either add it to the R2 (if the hiring manager agrees) or push back on the interviewer if it turns out the skill is still not required.
+    - If it's something we can't filter for, such as a personality trait, that can mostly be ignored. This is one reason we still have human interviews.
+  - Misconception #1: Most hiring managers believe XO is comprised of headhunter-like people who review resumes and select the best candidates for interview. XO's people do not select candidates. XO's system selects candidates, and XO's people fix the system. If hiring managers do not provide adequate feedback, the system will continue to operate as is and produce the same types of candidates until something changes.
+  - Misconception #2: Most hiring managers feel that giving feedback is a burden or a waste of time. However, while XO is an expert in recruiting, we are not experts in functional domains (e.g., engineering, DevOps, etc.) because that would be an unscalable model. Our automated, self-improving hiring machine relies on the feedback from the hiring managers, who function as our subject matter experts.
+  - Misconception #3: Most hiring managers do not understand that pipeline creation is an iterative process. They often expect perfection right out of the gate and become discouraged when the first batch of candidates is bad, so they find the feedback process useless, and thus begins a catch-22. XO needs to manage expectations from the beginning of a pipeline's existence.
+  - The main reason hiring managers don't like grading interviews is that the AI grading bot asks redundant or superfluous questions. Hiring is not always on the top of a hiring manager's list of priorities, so it's important to cut straight to the requirements in the R2. The feedback collection mechanism must be thorough but also efficient.
+  - There’s a sweet spot between too accepting and too interrogative. A great interview feedback bot should behave like a sharp recruiter: it nudges for specificity when answers are vague, pushes back when criteria don’t match the R2, and gracefully stops when useful signal has been captured — respecting the hiring manager’s time without compromising on quality.
+  - Hiring managers often intentionally grade incorrectly. For certain reasons, including the role already being filled or the candidate failing subjective criteria that are not in the R2, hiring managers will write something like "does not meet job requirements" when clearly this is not true. A great interview feedback bot will push back on this and offer evidence from the candidate's resume or candidate summary.
+- Experts
+  - Hung Lee (@HungLee): The CEO of [WorkShape.io](http://workshape.io/) and curator of the Recruiting Brainfood newsletter, Hung Lee is known for sharing insights on recruiting innovation and technology. His perspective may shed light on how Crossover's approach fits into the broader landscape of recruiting practices.
+  - Josh Bersin (@Josh_Bersin): A global HR analyst and founder of Bersin by Deloitte, Josh Bersin often shares insights on HR trends. He may find interest in the combination of skill assessments and retention-focused quality metrics.
+  - Liz Ryan (@humanworkplace): CEO and founder of Human Workplace, Liz Ryan is an advocate for human-centric approaches to work and hiring. She might have thoughts on the balance between efficiency and a candidate-centered process.
+  - Kevin Wheeler (@kwheeler): A thought leader in talent management and future workforce trends, Kevin Wheeler might find the tech-driven and skill-focused aspects of Crossover's process intriguing.
+- DOK1 and DOK2 - Knowledge Tree and Sources
+  - Knowledge Area 1: Coaching or Convincing Hiring Managers to Give Actionable, R2-Aligned Feedback (i.e., fulfilling the HM's side of the collaboration)
+    - Description: Build expertise in guiding and influencing hiring managers to provide clear, detailed feedback tied directly to R2 criteria — especially when rejecting candidates. This includes understanding common failure modes (e.g. vagueness, subjectivity), providing examples of strong feedback, and reinforcing the downstream impact of their input on hiring quality.
+    - Bad feedback examples:
+      - Useless: "Not a good fit" or "Rejected"
+      - Vague: "Lacks AI skills"
+      - Subjective: "Just joined a new company 2 months ago, and I find it unprofessional that they would leave it so soon"
+      - Discriminatory: "Has a strong accent" or "Recently gave birth, won't have much time for work"
+      - Making assumptions about candidates' life choices: "This candidate is overqualified. I'm afraid that if I hire them, they will leave for something better."
+    - Good feedback examples:
+      - “Lacked the structured thinking expected for our ‘system architect’ competency in the R2; couldn’t break down a scaling problem into modular components.”
+      - "The R2 requires previous experience in B2B software sales, but this candidate has only ever sold cars, so the learning curve would be too steep"
+      - "The R2 requires 4+ years of experience in software development, but this candidate only has 2 years of experience; they lack the seniority required to handle our workload"
+  - Knowledge Area 2: Designing an AI-Led Feedback Collection System (i.e., fulfilling XO's side of the collaboration)
+    - Description: Learn how to design tools (e.g., bots, forms, prompts) that elicit high-quality feedback from managers by guiding their thinking, reducing friction, and surfacing relevant R2 criteria. This knowledge area focuses on our systems and UX decisions to shape better input, without relying solely on manager initiative.
+  - Knowledge Area 3: Translating Feedback into Hiring Funnel Insights and Process Fixes
+    - Description: Develop repeatable processes for converting interview feedback — especially rejection reasons — into insights about sourcing, screening, and interview design. This includes tagging missed R2 criteria, identifying root causes, and using these insights to refine upstream hiring mechanics for better future outcomes.
+- Key terms:
+  - R2: The R2 is the recruitment spec that is meant to contain all the information necessary to target, attract, and filter the best candidates. Each pipeline's R2 is considered its Bible.
+  - Hiring pipeline: This is the sequence of assessments that forms a natural funnel shape regarding candidate volume. Interview feedback is the best input we have to improve how hiring pipelines filter out bad candidates and produce good ones.
+  - Interview bot: Hiring managers interact with an AI bot to provide feedback. We used to have a simple SurveyMonkey form, but we found that many hiring managers were giving vague, subjective, or no feedback.
+  - Throttling: When an interview goes ungraded for more than a week, we will automatically exclude that pipeline from that week's LinkedIn publishing. The assumption is if the hiring manager is too busy to grade, then they are too busy to interview new candidates.

@@ -1,0 +1,237 @@
+## Math Fluency Brainlift
+
+- **Owner**
+  - Serban Petrescu (﻿Serban Petrescu﻿)
+- **Purpose**
+  - This document encapsulates all the educational science knowledge around math fluency that will drive the product development of the AI-First game dev project.
+  - This document is NOT execution oriented. It does not represent a milestone plan or a roadmap for the project.
+- **DOK4: Spiky Points of View**
+  - Every game follows the same arc: (untimed) mastery → (timed) fluency → (spaced) reinforcement.
+    - Initial mastery building with implicit placement.
+      - When new facts or concepts are introduced, the overwhelming focus is on accurate understanding, without the pressure of a restrictive timer. Response timing might be very generous or effectively absent.
+      - The system observes performance (primarily accuracy) during these interactions to identify "fragile fact categories" and to confirm foundational mastery of individual facts. This is the placement process (understanding the student's current state with the new material).
+      - The "auto-size every drill" mechanism adapts the cognitive load by adjusting the number of active facts based primarily on accuracy trends during this mastery-building phase.
+    - Transition to fluency building (introducing time pressure):
+      - Once a student consistently demonstrates high accuracy (e.g., hitting the 95% accuracy threshold of our mastery gate) with a set of facts in the stress-free setting, the system gradually switches mode for those specific facts.
+      - Timed components are introduced or intensified. The "auto-size every drill" mechanism will now also use latency data more critically (alongside continued accuracy monitoring) to adapt pace and fact load, pushing towards target Correct Questions Per Minute (CQPMs).
+    - Reinforcement and sustained fluency via spaced repetition.
+      - To ensure long-term retention and maintain peak fluent recall (speed and accuracy), previously mastered facts are actively and continuously woven back into ongoing practice sessions.
+      - This core reinforcement mechanic is reintroducing these already fluent facts alongside current target facts that are still being worked on for fluency, promoting robust, interleaved learning.
+      - We will probably also need rare, dedicated "refresher" sessions on fully mastered sets to focus on reaffirming high CQPM performance across the entire known fact base for that game/concept.
+  - Sessions must be designed for 10–15 minute bursts.
+    - Fluency builds with short, regular sessions, not long marathons.
+    - Weekly target: 60–80 minutes.
+  - Gates are hard: 95% accuracy for mastery + 40 CQPM for fluency.
+    > The typical gate is 90% with 30, I gather that Alpha specifically targets 95% with 40.
+    - Students don’t unlock the next stage until they hit both thresholds.
+    - No soft gates. Retry is allowed, but shaky fluency isn’t rewarded.
+    - This ensures students don’t advance with gaps.
+  - Auto-size every drill from real-time accuracy and speed; not via a dedicated test.
+    - For each batch of five answers, we check two numbers: error rate (> 20% = overload) and median latency (> 3 s = overload).
+    - If either fails, we cut the active fact set by 25% (rounded down) and slow the pace; if both stay green for two checks, we add two new facts.
+    - The game keeps this loop running, so task load always hovers under the student’s working-memory ceiling, without a separate probe, labels, or raw-score storage.
+  - Enforce high-fidelity practice with auto-pauses, corrections, and data hygiene.
+    - Any tap under 250 ms counts as a rapid guess; three in a row trigger an auto-pause and a quick focus tip.
+    - Missed items lock the screen for 2 seconds, show the correct answer, then require an immediate redo before moving on.
+    - If ≥ 30 % of a session over 20 facts is flagged, the data is ignored for mastery decisions, protecting the hard gate.
+    - Analytics surface a Fidelity Score (clean sessions / total) and % rapid guesses to spot abuse easily.
+- **DOK3: Insights**
+  - Targeting each student's weakest facts is more efficient than blanket coverage.
+    - Error-analysis algorithms that pick the next 3–5 fragile facts cut total time-to-mastery by up to 40%.
+    - In-game, this feels like personalised missions that change once a weakness disappears.
+    - This insight maps to DOK1-2 “Error-analysis algorithms” under Practice Techniques.
+  - Unlocking new fact families only after students hit accuracy and speed targets prevents gaps from forming.
+    - A clearly defined gate explains exactly what “ready” means and prevents learners from racing ahead with shaky facts.
+    - Typical speed target for math facts = 40 correct questions per minute.
+    - Typical accuracy target for math facts = 90% correct questions.
+    - This insight reflects DOK1-2 “Mastery criteria” under Core Instructional Models
+  - Pairing a quick strategy reminder with the drill is better than drilling alone.
+    - A ten-second worked example before a practice burst cuts error rates on near-transfer tasks by about one-third.
+    - Games can surface these micro-tips contextually, then fade them once response times drop below two seconds.
+    - This insight references DOK1-2 “Strategy cues” under Core Instructional Models.
+  - Immediate, explanatory feedback stops mistakes from hard-wiring.
+    - Showing the correct answer and a brief “why” within two seconds prevents error consolidation and lowers cognitive load.
+    - Games should avoid deferring feedback to the end of a session.
+    - This insight links to DOK1-2 “Corrective feedback” under Practice Techniques.
+  - Spaced repetition plus interleaving turns short practice into long-term memory.
+    - Re-surfacing each fact three times a week, mixed with other skills, cuts the usual 15% post-term fluency drop to under 5%.
+    - Scheduling mini-games that revisit mastered sets at widening intervals bakes this spacing automatically.
+    - This insight corresponds to DOK1-2 “Spaced repetition” and “Interleaving” under Cognitive Science Principles.
+  - Gradually removing visual aids with unlimited retries builds persistence and recall.
+    - Early rounds show hints; as answers speed up, hints fade, so memory takes over.
+    - Low-penalty mistakes keep effort high and nurture a growth mindset.
+    - This insight is based on DOK1-2 “Visual Supports” in Multiplication Facts
+  - Total practice dosage, not session length, drives big gains.
+    - Hitting a weekly minute quota explains about 25 % of the variance in growth, so the games should track and nudge until that quota is met.
+    - Typical quota for math facts = between 60 and 80 minutes per week.
+    - This insight is grounded in DOK1-2 “Practice dosage” under Practice Techniques.
+  - Adaptive load directly translate to faster gains.
+    - When tasks stay inside a learner’s working-memory limit (measured once per term with a 1-min digit-span + Corsi probe), error rates drop ≈ 20 % and CQPM climbs ≈ 0.3 SD faster.
+    - Learning apps should cap on-screen elements and new-fact count using the WMC score and dial pace up/down based on real-time latency.
+    - This insight aligns with DOK1-2 “Adaptive pacing” under Practice Techniques and Cognitive Science Principles.
+- **DOK1-2: Facts**
+  - Aligned
+    - General Concepts & Definitions of Fluency
+      - Math fluency generally involves solving problems accurately, efficiently, and flexibly.
+      - Automaticity specifically refers to the fast, effortless recall of basic facts (e.g., answering in ≤ 2 seconds) without conscious thought or computation.
+      - While sometimes used interchangeably, fluency is broader than automaticity; automaticity is a key component required to achieve true fluency, especially for complex tasks.
+      - Achieving automaticity with basic facts is crucial because it frees up working memory, allowing students to focus cognitive resources on understanding procedures and solving more complex problems.
+      - Strong math fact fluency contributes significantly to students' confidence in mathematics.
+      - Difficulties with basic fact retrieval are often linked to broader math learning difficulties or disabilities.
+      - Developing fluency typically involves stages: initial counting strategies, using reasoning strategies, and finally achieving direct, automatic recall from memory.
+      - For multi-digit computations (like adding within 1000 or multiplying multi-digit numbers), fluency means efficiently and accurately executing learned algorithms or strategies, supported by automatic recall of basic facts. It's not memorizing all possible outcomes.
+      - Explicitly teaching concepts and efficient strategies/algorithms before intensive practice for speed aligns with how students build lasting understanding within a structured approach.
+      - Fluency is foundational for success in higher-level mathematics; lack of it can hinder progress in areas like fractions and algebra.
+      - Meaningful memorization (connecting facts to concepts and strategies) is more effective for building adaptive expertise than purely rote memorization without understanding.
+      - Fluency expectations build systematically across grades (per Common Core):
+        - K: Fluently add and subtract within 5.
+        - 1: Fluently add and subtract within 10.
+        - 2: Fluently add and subtract within 20 (mental); know sums from memory; fluently add/subtract within 100 (paper/pencil).
+        - 3: Fluently multiply and divide within 100 (know products from memory); fluently add/subtract within 1000.
+        - 4: Fluently add and subtract multi-digit whole numbers.
+        - 5: Fluently multiply multi-digit whole numbers.
+        - 6: Fluently divide multi-digit numbers; fluently operate with multi-digit decimals.
+        - 7: Fluently solve specific forms of linear equations.
+    - Learning Goals & Benchmarks
+      - A common benchmark for automaticity with basic facts is achieving 30–40 correct questions per minute (CQPM) with very high accuracy (95%+).
+      - Research confirms that achieving rates of 30–40 CQPM predicts better performance on more complex math tasks.
+      - Digits Correct Per Minute (DCPM) is another valid measure; research provides benchmarks (e.g., Mastery ≥ 31 DCPM Gr 2-3, ≥ 49 Gr 4; Frustration < 14 Gr 2-3, < 24 Gr 4).
+      - An end-of-year Grade 1 minimum CBM benchmark is 20 correct digits in 2 minutes (around 10 DCPM).
+      - Common Core State Standards define specific grade-level fluency endpoints (e.g., Gr 1: +/- within 10; Gr 3: x/÷ within 100; Gr 6: multi-digit division, decimal operations).
+      - Timed assessments are considered necessary tools for measuring automaticity and progress toward speed goals.
+      - Major US standardized tests (NAEP, SBAC, PARCC) utilize non-calculator sections to assess computational fluency directly (e.g., ~65% of NAEP math items are non-calculator).
+      - Longitudinal studies confirm that early calculation skills strongly predict later math achievement, including state test scores and Algebra I success (e.g., r ≈ 0.53 fact retrieval to Algebra).
+      - Fluency benchmarks require both speed and high accuracy (≥90-95%).
+      - Reaching these benchmarks requires consistent, timed practice and applying principles like spaced repetition.
+      - Fluency benchmarks can be adjusted based on student handwriting speed, using formulas aiming for ≈ 67%-80% of their max writing rate, especially for setting individual goals.
+      - Cognitive processing speed is a predictor of math fluency; deficits may require accommodations or adjusted expectations.
+      - Curriculum-Based Measurement (CBM) provides expected weekly growth rates (ROI) in DCPM, useful for data-driven goal setting and progress monitoring.
+      - Standardized digital tools exist (e.g., FAST CBMmath) for assessing and monitoring fluency systematically.
+    - Core Instructional Models
+      - Direct Instruction (DI) is a highly effective method for teaching foundational math skills, with research showing large average effect sizes (ES ≈ 1.0 or higher) compared to typical instruction.
+      - Specific DI programs, like Connecting Math Concepts, demonstrate significant, lasting math achievement gains versus national norms, starting from kindergarten.
+        - Combining explicit strategy instruction with timed practice improves fluency, transfer, and maintenance compared to timed drills alone.
+        - DI reduces cognitive load by providing structured, explicit instruction for basic skills.
+      - Mastery Learning, requiring high proficiency (e.g., 90%+) before advancement, builds a solid foundation without knowledge gaps.
+      - Mastery Learning yields moderate-to-large improvements in math achievement (average ES ≈ 0.6) compared to standard classroom pacing.
+        - Mastery learning models that include speed benchmarks (e.g., CQPM/DCPM) improve automaticity more than models focused only on accuracy.
+      - Students typically need less corrective time as they progress through sequential units in a Mastery Learning system.
+      - Precision Teaching (PT) uses brief, daily timed practice (1 minute) and charting (Standard Celeration Chart) to rapidly accelerate fluency, often aiming for or achieving growth rates of x1.25 weekly or higher.
+      - PT programs setting ambitious rate goals (e.g., 70-90 correct digits per minute) and requiring consistent progress achieve substantial, durable gains on standardized tests.
+        - DI, Mastery Learning, and Precision Teaching all incorporate spaced repetition and retrieval practice as core components.
+      - High implementation fidelity (following the program's procedures closely, e.g., 90%+) is crucial for achieving the strong results associated with these structured models.
+        - DI and PT models use short daily practice sessions (e.g., 10 minutes for DI, 1–5 minutes for PT) to build fluency.
+        - DI and Mastery Learning programs result in significantly better long-term retention of math skills compared to conventional methods.
+      - Technology-based practice using these principles effectively improves fluency (average effect size g ≈ 0.43 overall, and g ≈ 0.54 compared to typical instruction).
+      - For tech-based fact practice, the _total dosage_ (interaction between number of sessions and number of weeks) significantly predicts effectiveness, accounting for about 23% of the variance in outcomes, while frequency or session length alone do not.
+      - While total dosage is key, studies show effective tech-based practice parameters vary: sessions often range from brief 10-15 minutes (e.g., DI, XtraMath) to moderate 15-25 minutes (e.g., Reflex), with frequencies from 2-3 times per week up to daily, over intervention periods typically lasting 8-15 weeks or more.
+      - Computer-based fact retrieval programs can produce fluency gains retained for at least four months post-intervention.
+    - Cognitive Science Principles
+      - Human working memory is limited; when students must calculate simple facts instead of recalling them, working memory overload slows learning and makes complex tasks harder.
+      - Automatic fact recall (effortless retrieval, often cited as ≤ 2 seconds) frees up working memory and reduces cognitive load, enabling focus on higher-order reasoning.
+      - Presenting material that exceeds a student's working memory capacity leads to unproductive struggle; adapting task difficulty based on assessed capacity can accelerate learning.
+      - Visual-spatial working memory (measured by tasks like Corsi Blocks) is a significant predictor of early elementary math achievement, though its predictive power may decrease relative to verbal working memory in later grades (approx. grades 5-6).
+      - Verbal working memory (measured by tasks like Digit Span) becomes increasingly predictive of math performance as students progress through elementary grades.
+      - Retrieval practice and spaced repetition—whether across days or within the same day—are highly effective for developing long-term retention and automaticity. Feedback during these sessions should be immediate and explanatory to optimize learning efficiency.
+      - Interleaving (mixing different types of problems or concepts within a practice session) improves students' ability to discriminate between problem types and enhances long-term retention and transfer compared to blocked practice (practicing one skill type at a time).
+      - Interleaved math practice shows large benefits on delayed tests (d ≈ 0.8 after 30 days) compared to blocked practice, without requiring additional practice time.
+      - Memory reconsolidation, triggered when information is retrieved after a delay during spaced practice, is a key mechanism for strengthening long-term memory traces.
+      - Reducing split-attention (e.g., integrating related text and diagrams) improves learning efficiency and transfer compared to formats requiring learners to integrate separate information sources mentally.
+      - Faded worked examples (gradually removing steps, especially backward fading) can reduce cognitive load and lead to fewer errors during initial skill acquisition compared to starting immediately with full problem-solving.
+      - Combining explicit strategy instruction with timed practice leads to better transfer and maintenance of multiplication facts than timed practice alone.
+      - Personalizing the number of new facts introduced per session based on individual acquisition rates (e.g., Incremental Rehearsal with ~4 facts) can optimize retention per minute of practice time.
+      - Meta-analysis: WMC correlates r ≈ 0.37 with word-problem success and moderates intervention effects.
+      - Cognitive-load papers show intrinsic + extraneous load must stay below total WMC for learning to proceed.
+    - Practice Techniques
+      - Retrieval practice (active recall), especially when spaced over time, strengthens long-term retention and builds automaticity more effectively than re-studying or massed practice (effect size g ≈ 0.60).
+      - Four 10-minute retrieval sessions on consecutive days improve fact retention in K–5 students (d = 0.38–1.41).
+      - Embedding a 1-week gap before revisiting prior skills enhances long-term retention of multi-digit computation in elementary grades.
+      - In grades 6–8, distributing 12 problems over 3 weekly sessions significantly boosts retention (effect size ≈ 0.61).
+      - Distributing practice sessions either across days or within the same day (with 2–3 hour intervals) enhances fluency growth more than cramming or brief back-to-back practice.
+      - A schedule of daily 10-minute retrieval plus a weekly 20-minute mixed review is well-supported by research for maintaining skills.
+      - Interleaving (mixing problem types) improves discrimination, long-term retention, and transfer compared to blocked practice (large delayed-test effect ~0.8).
+      - Combining interleaving and spacing yields significant benefits (e.g., ≈ 30% higher geometry scores) and reduces repetitions needed for mastery in middle grades.
+      - Timed practice, introduced after accuracy is established, increases CQPM and supports automaticity (< 2s recall).
+      - Daily 1-minute charted timings (Precision Teaching) can drive rapid weekly fluency growth (e.g., ×1.25 correct/minute rate), aligning with accelerated learning goals.
+      - Immediate, explanatory feedback during practice reduces cognitive load, prevents error consolidation, and supports more efficient and accurate learning.
+      - Targeting practice on specific weak facts (identified via error analysis or assessment data) is more efficient than practicing all facts equally.
+      - Combining explicit strategy instruction with timed retrieval practice (e.g., a 25–50% split) improves fact transfer, maintenance, and CQPM gains compared to timed practice alone.
+      - Pure timed drills produce the fastest CQPM gains in the early stages of fluency training.
+      - Daily 10–15 minute sessions combining retrieval and feedback are sufficient for fluency improvement.
+      - Reaching 30–40 CQPM in elementary grades typically requires 40–100 total hours of focused practice per year.
+      - Technology-based adaptive practice improves fluency with average effect sizes of g ≈ 0.43 overall and g ≈ 0.54 compared to typical instruction.
+      - Total practice dosage (sessions × frequency × duration) is a stronger predictor of fluency growth in tech-based systems than frequency or length alone, explaining ≈ 23% of variance.
+    - Assessment & Progress Monitoring
+      - Timed assessments (e.g., 1–3 minute probes) are used to measure automaticity in basic fact fluency, including speed and accuracy.
+      - CBM provides standardized probes with norms for weekly DCPM growth.
+      - Tools like AIMSweb and FAST CBMmath offer standardized probes and dashboards for monitoring fluency in K–5.
+      - Standardized tests like NAEP and SBAC include non-calculator sections to assess timed computational fluency.
+      - Precision Teaching uses daily 1-minute timings with Standard Celeration Charts for monitoring and instructional adjustment.
+      - In Mastery Learning, students must meet accuracy (≥90%) and speed benchmarks (e.g., CQPM/DCPM) to advance.
+      - Tools like Reflex and XtraMath provide real-time dashboards tracking response time, accuracy, and mastery status.
+      - Digital adaptive tools (e.g., i-Ready, MAP Growth) adjust difficulty to measure fluent computation levels.
+      - CBM probes provide curriculum-aligned fluency scores with moderate reliability (α ≈ 0.41–0.62).
+      - Weekly or bi-weekly CBM checks help maintain fluency and serve as spaced retrieval.
+      - Without maintenance practice, fluency declines by ≈15% CQPM after 3 months.
+      - CBM fluency benchmarks can be adjusted to ≈67–80% of a student’s max handwriting rate.
+      - Dashboards showing specific error patterns support targeted fluency remediation.
+      - Using CBM data with high fidelity for instructional decisions predicts better math test performance.
+      - No U.S. studies currently compare the validity of stealth assessments vs. traditional CBM probes for math fluency.
+      - National DCPM norms for multiplication/division (grades 2–5) after 2018 are lacking; benchmarks often rely on older or small-sample data.
+      - Typical weekly DCPM growth targets: ≈5 for class-wide, ≈1.5 for Tier 2/3, ≈0.4 baseline.
+      - Tablet-based RPM metrics explain ≈36% of variance in later math achievement.
+      - One-minute dashboard samples show ≈92% reliability for identifying at-risk students.
+      - High-fidelity DI implementations outscore low-fidelity ones by ≈ 0.4 SD on standardized math tests.
+    - Implementation Pitfalls
+      - Insufficient total practice dosage and irregular schedules (vs. daily sessions) significantly reduce fluency gains (e.g., 31 → 6–7 DCPM).
+      - Low fidelity implementation (e.g., misdiagnosis, shortened sessions) is linked to reduced student achievement gains.
+      - Digital tools without evidence of sustained fluency gains are ineffective for implementation.
+      - Poor UI/UX in digital tools (e.g., friction, unclear progress) leads to student frustration, disengagement, and reduced practice.
+      - Wide setting variability (e.g., 3–20s wait times) in platforms creates inconsistent conditions that hinder fluency.
+      - Delayed or passive feedback leads to error consolidation and higher cognitive load; active recall or correction is more effective for retention.
+      - Student behaviors like rapid guessing, hint abuse, or refreshing to erase errors degrade data quality and obscure understanding gaps.
+      - Practice material that is too hard causes frustration and disengagement; too easy leads to boredom and inefficient practice.
+      - Lack of spaced review after mastery results in ≈15% CQPM fluency decline over 3 months.
+      - Self-reported strategy data without validation from process data is unreliable and may hide ineffective learning behaviors.
+      - Student anti-patterns like mouse input, trial skipping, refreshing to avoid errors, or delay in task start reduce fluency gains.
+      - Technical issues (e.g., latency, crashes, network drops) likely distort real-time fluency metrics like RPM and CQPM.
+  - Counter
+    - Alternative fluency definitions emphasize flexibility and strategy choice over speed and automaticity.
+    - McGee et al. (2017) found that mandated daily drills did not improve scores over voluntary practice in one district-wide study.
+    - Timed tests may increase math anxiety, potentially affecting confidence and performance.
+    - Some models prioritize strategy exploration and number sense before timed practice.
+    - Learning science perspectives often follow a sequence: concept → strategy → timed practice → reflection.
+    - Delayed feedback may reduce anxiety but slows initial CQPM gains compared to immediate feedback.
+    - Alternative assessments (e.g., strategy interviews, qualitative observations) prioritize process over speed/accuracy.
+    - Leaderboards may increase anxiety or reduce motivation for lower-ranked students (e.g., β = -0.18).
+    - Research on the isolated effects of individual game mechanics (e.g., level progression) is limited due to bundled designs.
+- **Sources**
+  - Siegfried Engelmann: Connecting Math Concepts (Direct Instruction series, SRA, 1992/1997 rev.) ([Link](https://openlibrary.org/books/OL10643583M/Connecting_Math_Concepts?utm_source=chatgpt.com))
+  - Ogden R. Lindsley: “Precision Teaching: Discoveries and Effects,” Journal of Applied Behavior Analysis, 25(1), 51-57, 1992. ([Link](https://pmc.ncbi.nlm.nih.gov/articles/PMC1279649/pdf/jaba00015-0053.pdf))
+  - Carl Binder: “Behavioral Fluency: Evolution of a New Paradigm,” The Behavior Analyst, 19(2), 163-197, 1996. ([Link](https://www.drcarlbinder.org/Evolution_Binder1996.pdf?utm_source=chatgpt.com))
+  - Kaydee L. Owen (2021): “Implementation Support Improves Outcomes of a Fluency-Based Mathematics Strategy: A Cluster-Randomized Controlled Trial,” Journal of Research on Educational Effectiveness 14(3), 523-542. ([Link](https://www.tandfonline.com/doi/pdf/10.1080/19345747.2021.1875526))
+  - Corinne Gist & Andrew J. Bulla (2022): A Systematic Review of Frequency Building and Precision Teaching with School-Aged Children ([Link](https://link.springer.com/article/10.1007/s10864-020-09404-3?utm_source=chatgpt.com))
+- **Experts**
+  - Sara VanDer Werf
+    - Blog: [https://www.saravanderwerf.com/](https://www.saravanderwerf.com/)
+    - Twitter: [@saravdwerf](https://twitter.com/saravdwerf)
+    - Provides immediately actionable, research-backed guidance on CBM, spaced practice, and implementation fidelity.
+  - Greg Tang
+    - Site & blog: [https://tangmath.com/](https://tangmath.com/)
+    - Twitter: [@gregtangmath](https://twitter.com/gregtangmath)
+    - Develops concise, visually driven games and activities that reliably boost automatic fact recall.
+  - Jennifer Bay-Williams
+    - Twitter: [@JBayWilliams](https://twitter.com/JBayWilliams)
+    - Corwin blog & podcast guest (e.g. “Figuring Out Fluency”) ([Make Math Moments](https://makemathmoments.com/episode197/?utm_source=chatgpt.com))
+    - Combines explicit strategy instruction with timed practice in accessible blog posts and podcast episodes.
+  - Siegfried “Zig” Engelmann
+    - Wikipedia bio: [Wikipedia](https://en.wikipedia.org/wiki/Siegfried_Engelmann?utm_source=chatgpt.com)
+    - Originator of Direct Instruction, whose mastery-based, scripted approach underpins our fluency gates.
+  - Kurt Engelmann (son of Siegfried Engelmann; President of NIFDI)
+    - Google Books (Direct Instruction handbook): [Google Books](https://books.google.com/books/about/Direct_Instruction_A_practitioner_s_hand.html?id=INn9EAAAQBAJ)
+    - NIFDI profile: [nifdi.org](https://www.nifdi.org/15/?id=2%3Akurt-engelmann-phd...larger&option=com_contact&view=contact&utm_source=chatgpt.com)
+    - As NIFDI president, he adapts and proliferates his father’s DI methods for modern classrooms.
+  - Ogden R. Lindsley
+    - Wikipedia bio: [Wikipedia](https://en.wikipedia.org/wiki/Ogden_Lindsley?utm_source=chatgpt.com)
+    - ABAI profile (Behavior Analysis history): [abainternational.org](https://www.abainternational.org/constituents/bios/ogdenlindsley.aspx?utm_source=chatgpt.com)
+    - Pioneer of Precision Teaching and Standard Celeration Charting, the bedrock of our auto-sizing, data-driven loops.

@@ -1,0 +1,240 @@
+RCA Brainlift @ SaaS @ Trilogy - v1
+
+- Owners
+  - David Schwartz ([david.schwartz@devfactory.com](mailto:david.schwartz@devfactory.com))
+- Purpose
+  - Why This Brainlift Exists
+    - Current RCA process at SaaS is painful, time-consuming, and quite often misses the real issues
+    - DevOps engineers spend hours writing RCAs that don't prevent future incidents
+    - We're consistently behind SLAs in delivering RCAs because people don't believe in their value
+  - Problem We're Solving
+    - RCAs take multiple iterations with back-and-forth between VPs/TPMs and DevOps
+    - Engineers lack product knowledge to write meaningful RCAs
+    - Current template forces linear thinking in a non-linear failure space
+    - 70% of action items never get implemented
+    - Same incidents repeat because we're not learning effectively
+  - How This Will Be Used
+    - Immediate: Guide for engineers and TPMs writing better RCAs today
+    - Q3 2025: Training data for LLMs to assist with RCA generation
+    - Q4 2025 Target: Fully automated RCA generation where operators input observations and LLMs produce complete analysis
+    - Ongoing: Convert RCA insights into product brain lifts for preventive improvements
+  - In Scope
+    - SaaS product failures and outages
+    - Customer-impacting incidents
+    - Near-misses that could have been major incidents
+    - Patterns across multiple products/incidents
+    - Modern distributed system thinking
+    - Blameless analysis focused on system improvement
+  - Out of Scope
+    - Hardware failures (different failure modes)
+    - Security incidents (require different framework)
+    - Individual performance issues
+    - Legacy monolithic application thinking
+    - Blame assignment or punishment
+    - Compliance-only documentation
+  - Success Metrics
+    - Time to complete RCA reduces from days to hours
+    - Action item completion rate increases from 30% to 70%
+    - Repeat incident rate drops by 50%
+    - Engineers voluntarily write RCAs because they see value
+    - RCAs become source of competitive advantage through system learning
+- DOK 4 - SPOV (Spiky Points of View)
+  - The term "RCA" (root cause analysis) is fundamentally wrong (from insights: "Most incidents have 10 near-misses" + "Complex systems create complex failures")
+    - Complex systems fail through multiple interacting factors, not single root causes
+    - Real failures emerge from the convergence of "normal" system behaviors
+    - Forcing a single-root narrative obscures systemic issues
+  - The closer you are to the code, the worse your RCA will be (from insight: "Engineers consistently misattribute system failures to recent changes")
+    - Engineers who built the system have blind spots about their assumptions
+    - The best RCAs come from fresh eyes asking "naive" questions
+    - Expertise in systems thinking beats expertise in the specific codebase
+  - Every "human error" is a system design failure (from insight: "Operator actions during incidents are rational given their information")
+    - If one wrong command can break production, the failure already happened at design time
+    - Stop writing "DevOps misconfigured X" - write "System allowed dangerous configuration without validation"
+    - Humans are not the root cause; they're the victims of poor system design
+  - Time-to-detection matters more than root cause (from insights: "Detection failures kill more businesses than outages" + "Customer impact should drive depth")
+    - If it took 4 hours to notice the outage, the real failure is in observability
+    - Every RCA should start with: "Why didn't we know immediately?"
+    - You can't fix what you can't see
+    - Even if resolution takes 2 weeks - without detection, resolution never starts. An 8-hour detection delay means 8 hours of unmitigated impact PLUS delayed resolution
+    - Fast detection enables immediate mitigation (customer comms, workarounds, traffic rerouting) even before root cause is found
+    - The math is simple: Total impact = Detection time + Resolution time. You can't reduce the second without minimizing the first
+  - The root cause should always look into the future, not the past (from insight: "Good RCAs reveal uncomfortable truths about technical debt")
+    - We obsess over what went wrong, but the real question is: "What will go wrong next time in this same way?"
+    - Write RCAs for the incident that hasn't happened yet but could
+    - Past-focused RCAs create patches; future-focused RCAs create resilience
+  - Real-time automated capture beats post-incident RCAs (from insight: "Automated analysis beats human documentation")
+    - The best RCA happens during the incident, not after
+    - Automated systems should capture everything as engineers work - no going back to reconstruct
+    - Memory is lossy; logs are not - retrospective documentation always loses critical context
+    - Target: Continuous incident recording that generates RCA drafts without human input
+    - Engineers should validate and enhance automated findings, not start from scratch
+    - When the incident ends, your RCA should already be 80% complete
+  - An RCA is as important as a brain lift (from insight: "Good RCAs reveal uncomfortable truths about technical debt")
+    - Well-written RCAs spread knowledge across teams
+    - Can be converted to DOK 3 insights for product brain lifts
+    - The best RCAs teach people who weren't involved in the incident
+- DOK 3 - Insights
+  - Good RCAs reveal uncomfortable truths about technical debt (based on: Normalization of Deviance pattern + average action item completion <30%)
+    - If your RCA doesn't make executives uncomfortable about resource allocation, you haven't dug deep enough
+    - Real root causes often trace back to decisions made years ago
+    - The most valuable RCAs challenge organizational priorities
+  - Customer impact should drive depth, not severity labels (based on: Customer Impact Score metric + P1/P3 severity mismatches)
+    - A P1 that affected zero customers needs less analysis than a P3 that confused 1000 users
+    - Measure RCA quality by "insights per customer affected"
+    - Severity classifications often mask the true business impact
+  - Most incidents have 10 near-misses you didn't notice (based on: Swiss Cheese Model + Timeline Analysis gaps)
+    - Every major failure was preceded by warning signs
+    - Ask: "When has this almost happened before?"
+    - The luckiest thing about most incidents is they didn't happen sooner
+  - wMost incidents already happened in the past.
+    - They happen again and again because our RCAs are poor or because we failed to act
+    - RCA are currently a checkbox, not a part of our DNA
+  - Engineers consistently misattribute system failures to recent changes (based on: Configuration Drift Analysis + 90-day change windows)
+    - The triggering event is rarely the root cause
+    - Long-term drift creates fragility that any change can expose
+    - "What changed?" is the wrong first question; "What made us fragile?" is better
+  - Detection failures kill more businesses than outages (based on: TTD metrics + Silent Failure pattern)
+    - Companies survive bad code but die from invisible failures
+    - Every undetected hour multiplies customer loss exponentially
+    - Investment in observability has higher ROI than prevention
+  - Operator actions during incidents are rational given their information (based on: "What knowledge did operator need?" prompt + human error reframing)
+    - "Mistakes" are usually correct decisions with incomplete data
+    - System design should assume operators have 30% of needed context
+    - Better dashboards prevent more incidents than better training
+    - But operators must live in a great environment, where all information (aka KB articles/Runbooks) are readily available via AI
+  - Complex systems create complex failures (based on: Dependency Chain Check + Cascade failure pattern)
+    - Linear RCA thinking fails in distributed systems
+    - The more services involved, the less useful "root cause" becomes
+    - Focus should shift from "what broke" to "what connections allowed propagation"
+  - Automated analysis beats human documentation (based on: 30% action item completion + repeat incident rates)
+    - Humans write RCAs for compliance, not learning
+    - Machines can find patterns across incidents humans miss
+    - Time spent writing could be spent fixing
+    - Machines excel at pattern detection across thousands of incidents; humans excel at understanding context and implications
+    - Best model: AI generates comprehensive analysis, humans add strategic judgment = 10x better outcomes than either alone
+- DOK 2/1 - Knowledge, Methodologies & Facts
+  - Mental Models for Better RCAs
+    - Swiss Cheese Model
+      - Incidents pass through multiple layers of defense like holes in swiss cheese
+      - No single layer should be able to cause catastrophic failure
+      - Focus on why multiple defenses failed, not which one failed "most"
+    - The Four Whats (before Five Whys)
+      - What were we trying to do?
+      - What actually happened?
+      - What should have happened?
+      - What's the gap between intention and reality?
+    - STAMP (Systems-Theoretic Accident Model)
+      - Treats accidents as control problems, not component failures
+      - Asks: "What constraints should have prevented this?"
+      - Better for distributed systems than traditional RCA
+    - Normalization of Deviance
+      - Look for "we've always done it this way" or "usually works fine"
+      - These phrases indicate accepted risks that finally materialized
+      - Today's workaround is tomorrow's root cause
+    - The "Missing Defense" Framework
+      - For every step in the incident chain, ask: "What defense should have existed here but didn't?"
+      - Good RCAs identify 3-5 missing defenses, not just the final trigger
+      - Each missing defense is an opportunity for systemic improvement
+    - The "Blast Radius" Analysis
+      - Don't just ask why it failed - ask why it failed this badly
+      - What should have contained the failure but didn't?
+      - Often reveals missing circuit breakers, bulkheads, or isolation
+    - Timeline Analysis
+      - Map every event with timestamps
+      - Look for gaps, delays, and race conditions
+      - Essential for distributed systems where clock drift matters
+    - Fault Tree Analysis (FTA)
+      - Visual representation using AND/OR gates
+      - Start with failure and work backwards
+      - Helps identify all possible failure paths
+  - SaaS-Specific Investigation Patterns
+    - The Dependency Chain Check
+      - List every service involved (often the cause is 3+ services away)
+      - Check health of each at incident time
+      - Look for circular dependencies and timeout cascades
+    - Configuration Drift Analysis
+      - What changed in the last 7/30/90 days?
+      - Include: deployments, configs, traffic patterns, data growth
+      - Most SaaS incidents trace to gradual drift, not sudden breaks
+    - Common Failure Patterns
+      - Thundering Herd: All instances retry simultaneously
+      - Poison Pill: One bad request crashes all workers
+      - Silent Failure: Service degrades but returns 200 OK
+      - Cascade: Timeout in A → overload in B → crash in C
+  - Prompts for LLMs doing RCA Analysis
+    - "What would have to be true about our system for this to be impossible?"
+    - "If this exact sequence happened tomorrow, where would it fail?"
+    - "What are we optimizing for that made this incident more likely?"
+    - "Which of our 'best practices' contributed to this failure?"
+    - "What knowledge did the operator need that wasn't available at decision time?"
+  - Required Data for Every RCA
+    - Time to Detection (TTD)
+    - Time to Resolution (TTR)
+    - Customer Impact Score (# affected × duration × severity)
+    - Number of people involved in resolution
+    - Whether this pattern has occurred before
+    - What prevented this from being worse
+  - RCA Quality Metrics
+    - Average "why" depth (should be >5)
+    - Action items per RCA (sweet spot: 3-7)
+    - % of action items completed within 30 days
+    - Repeat incident rate (same pattern within 6 months)
+  - Key Questions by Incident Type
+    - Performance Degradation
+      - When did degradation actually start (not when noticed)?
+      - What grew faster: traffic, data, or complexity?
+    - Data Corruption
+      - When was the last known-good state?
+      - How many backup/validation layers failed?
+    - Integration Failure
+      - What changed on either side?
+      - Were contracts/APIs properly versioned?
+    - All Types: What assumption was violated?
+  - Template Fields That Actually Matter
+    - The "Surprise Factor": What assumption was violated?
+    - The "Lucky Break": What prevented this from being worse?
+    - The "Next Time": How will this fail differently next time?
+    - The "Uncomfortable Truth": What does this reveal about our technical debt?
+    - The "Knowledge gap": what information should I add to help identify, redirect or solve the problem quickly?
+  - Anti-Patterns to Avoid
+    - Blaming individuals → Reframe as system failures
+    - Stopping at proximate causes → Push for systemic issues
+    - Generic action items → Demand specific, measurable changes
+    - Ignoring detection time → Every incident is a monitoring failure first
+    - Action items that are all reactive (patches) not preventive
+  - Key Resources
+    - Learning From Incidents (LFI) community: [https://www.learningfromincidents.io/](https://www.learningfromincidents.io/)
+    - STELLA Report (SNAFUcatchers consortium): https://snafucatchers.github.io/
+    - Resilience Engineering Association: https://www.resilience-engineering-association.org/
+- Experts
+  - Dr. Richard Cook - [@ri_cook](https://twitter.com/ri_cook)
+    - "How Complex Systems Fail" - https://how.complexsystems.fail/
+    - Pioneer in resilience engineering and systems safety
+  - John Allspaw - [@allspaw](https://twitter.com/allspaw) | [LinkedIn](https://www.linkedin.com/in/jallspaw/)
+    - Coined "blameless postmortems" at Etsy
+    - Founder of Adaptive Capacity Labs
+    - Blog: https://www.kitchensoap.com/
+  - Dr. Sidney Dekker - [LinkedIn](https://www.linkedin.com/in/sidney-dekker-7b01/)
+    - Author of "The Field Guide to Understanding Human Error"
+    - Leading voice in Just Culture and human factors
+    - https://sidneydekker.com/
+  - Charity Majors - [@mipsytipsy](https://twitter.com/mipsytipsy) | [LinkedIn](https://www.linkedin.com/in/charity-majors/)
+    - CTO of Honeycomb, observability expert
+    - Writes extensively on debugging distributed systems
+    - Blog: https://charity.wtf/
+  - Nora Jones - [@nora_js](https://twitter.com/nora_js) | [LinkedIn](https://www.linkedin.com/in/norajones1/)
+    - Founder of [Jeli.io](http://jeli.io/) (incident analysis platform)
+    - Former Netflix chaos engineering
+    - Blog: https://www.norajones.com/
+  - Dr. David Woods - [@ddwoods2](https://twitter.com/ddwoods2)
+    - Ohio State professor, resilience engineering pioneer
+    - Co-author of "Behind Human Error"
+    - https://snafucatchers.github.io/
+  - J. Paul Reed - [@jpaulreed](https://twitter.com/jpaulreed) | [LinkedIn](https://www.linkedin.com/in/jpaulreed/)
+    - Created "The PostMortem Pledge"
+    - Senior Applied Resilience Engineer
+    - Blog: https://jpaulreed.com/
+  - Lorin Hochstein - [@lhochstein](https://twitter.com/lhochstein) | [LinkedIn](https://www.linkedin.com/in/lorin-hochstein/)
+    - Netflix senior software engineer
+    - Writes on complex systems failures
+    - Blog: [https://surfingcomplexity.blog/](https://surfingcomplexity.blog/)

@@ -1,0 +1,171 @@
+Crossover Hire BrainLift v2
+
+- Owner(s)
+  - Andrew Allen, Dragos Nuta, Heather Lother, Kevin Norchi, Tamas Szabo
+- Purpose
+  - To distill expertise in global remote recruiting into actionable rules for identifying, assessing, and hiring the top 1% of global talent through scalable, objective, and AI-enhanced processes.
+  - Expertise in specific domains is not necessarily in scope as Crossover works with SMEs to build accurate, objective hiring mechanisms
+  - Out of scope:
+    - Compensation policy/levels - these are inputs for customers, but we may advise customers in some cases
+- _----------- Depth of Knowledge / DOK starts here ----------_
+- DOK4/SPOV
+  - Traditional geographic hiring constraints artificially limit companies to mediocre talent; only borderless recruiting accesses the true top 1%.
+  - Objective skills assessment through real work tests is the only reliable predictor of job performance, not resumes or credentials.
+  - Cognitive ability (measured by CCAT) is a non-negotiable filter for all knowledge work positions.
+  - Companies that make AI adoption optional are actively sabotaging their workforce's competitiveness. Furthermore, we are past the point where want to coach for AI; new hires must be already all in on AI
+  - Hiring managers should be calibrated against objective assessment data, not allowed to rely on subjective interview impressions.
+  - The future of recruiting belongs to Organization Builders who can reverse-engineer roles into objective skill requirements, not traditional recruiters.
+  - Community building KPIs should prioritize engagement over follower count to reflect genuine audience connection.
+  - Hiring top 1% global talent requires sourcing at scale backed up by algorithms and analytics rather than traditional recruiter-driven approaches.
+  - Generic job posts are terrible. Persona-targeted content strategies that demonstrate thought leadership, as these generate 3X better qualified candidate rates
+  - Programmatic job advertising must prioritize end-of-funnel conversion quality. Optimizing for early stage metrics (like apply or basic-fit metrics) leads to waste of money and time.
+- DOK3 - Insights
+  - Global remote recruiting creates a 1000x larger candidate pool, requiring fundamentally different filtering mechanisms than traditional recruiting.
+  - When candidates can come from anywhere, application volumes of 1,000-2,000 per hire become normal, making automated screening essential.
+  - Drop out rates are huge without a high touch process (which is anyway not feasible to us) - 50% of the candidates don't put in the time in taking all tests.
+  - Real-work assessments that mirror actual job tasks provide stronger hiring signals than traditional interviews or credentials.
+  - Calibrating assessments against existing team performance creates an objective quality bar that continuously improves team capability.
+  - The combination of cognitive testing, skills assessment, and real-work performance creates a more reliable prediction of success than traditional hiring methods.
+  - Remote work introduces unique challenges in candidate evaluation, requiring specialized tools and processes to prevent fraud and ensure quality.
+  - AI is transforming both the recruiting process itself and the skills candidates need to demonstrate for success.
+  - Featuring real employees as the face of company content dramatically increases audience trust and engagement.
+  - Platforms with lower in-market buyer ratios require significantly more sophisticated marketing strategies.
+  - Consistent publishing cadence builds compounding audience growth that outperforms sporadic viral hits.
+  - Traditional programmatic job advertising platforms optimize for local hiring patterns, creating structural disadvantages for global remote hiring models.
+  - The effectiveness of sourcing channels varies dramatically by role seniority, with leadership positions showing the greatest platform sensitivity.
+  - Candidate conversion quality from LinkedIn consistently outperforms all alternative channels by a range of 2-5x.
+  - Global remote roles demand fundamentally different advertising strategies than location-specific roles, requiring separate algorithmic approaches.
+  - Platforms with fixed-cost models (LinkedIn) require fundamentally different optimization strategies than CPC models (Indeed).
+  - Strong and long-standing body of research demonstrates that cognitive aptitude is one of the most accurate predictors of job success.
+  - AI functions as a powerful skill leveler, disproportionately boosting lower-performing workers and compressing performance distributions.
+  - AI outputs tend toward homogeneity, creating both quality floors and creativity ceilings. This means that human expertise is what will make the difference between a good work unit and a great work unit.
+  - Unstructured interviews (not focused on Job-Relevant Skills and Competencies, with a clear rubric) should be banned entirely from hiring processes - they're no better than random selection and perpetuate unconscious bias regardless of interviewer training
+  - Thought leadership metrics must measure audience impact, not just reach, to drive true business value.
+  - Non-job platforms require specialized marketing expertise to become viable sourcing channels.
+  - Gauntlet program is proof of successful influencer-led recruiting. Austen managed to build a class of 300 hundreds of talented students of which 100 turned into great hires in a short amount of time, without a huge ad budget, leveraging his captive personal audience of 400K followers on X
+- _---------- BRIGHT LINE. Above this is based on the owner's opinion and expertise. Below this is based on the external flow of information ----------_
+- Experts
+  - Josh Bersin: HR technology analyst; followed for workforce trends and HR tech stack insights; find at [joshbersin.com](http://joshbersin.com/).
+  - Laszlo Bock (@LaszloBock): Former SVP of People Operations at Google, Bock is known for his insights on HR and people management. He may appreciate the emphasis on efficiency and intelligence testing in the hiring process.
+  - Josh Bersin (@Josh_Bersin): A global HR analyst and founder of Bersin by Deloitte, Josh Bersin often shares insights on HR trends. He may find interest in the combination of skill assessments and retention-focused quality metrics.
+  - Liz Ryan (@humanworkplace): CEO and founder of Human Workplace, Liz Ryan is an advocate for human-centric approaches to work and hiring. She might have thoughts on the balance between efficiency and a candidate-centered process.
+  - Dr. John Sullivan (@DrJohnSullivan): A leading HR thought leader, Dr. Sullivan often discusses innovative talent practices. His perspective on data-driven hiring might align with aspects of Crossover's approach.
+  - Kevin Wheeler (@kwheeler): A thought leader in talent management and future workforce trends, Kevin Wheeler might find the tech-driven and skill-focused aspects of Crossover's process intriguing.
+  - Glen Cathey (@GlenCathey): Known as the "Boolean Black Belt," Glen Cathey is an expert in talent acquisition and sourcing. He often shares insights on leveraging technology and data in recruiting, making his perspective valuable for assessing Crossover's tech-driven approach.
+  - Mervyn Dinnen (@MervynDinnen): HR and talent acquisition thought leader, Mervyn Dinnen focuses on the future of work and recruitment trends. His insights may offer a broader perspective on how Crossover's approach aligns with evolving industry practices.
+  - Meghan M. Biro (@MeghanMBiro): Meghan is the CEO of TalentCulture and a prominent HR tech influencer. Her expertise in HR technology and workforce trends may provide a valuable perspective on the efficiency and technology aspects of Crossover's hiring process.
+  - William Tincup (@williamtincup): William is the President of RecruitingDaily and an HR technology expert. His views on leveraging technology for recruitment and HR processes could align with the tech-driven elements of Crossover's approach.
+  - Hung Lee (@HungLee): The CEO of [WorkShape.io](http://workshape.io/) and curator of the Recruiting Brainfood newsletter, Hung Lee is known for sharing insights on recruiting innovation and technology. His perspective may shed light on how Crossover's approach fits into the broader landscape of recruiting practices.
+  - Ethan Mollick: Researcher studying AI's impact on work; advocates for practical AI adoption; followed for insights on AI implementation; find at @emollick.
+- ==Crossover Recruiting Platform Fundamentals==
+  - DOK1 Fact: Crossover's recruiting platform combines technology, sales/recruiters, and job function domain experts to identify and recruit the top 1% of talent globally.
+  - DOK1 Fact: Crossover's model is different from traditional HR/recruiting because it believes geography shouldn't artificially limit the talent pool.
+  - DOK1 Fact: Crossover recruiting pipelines can cover roles from entry-level ($10/hour) up to executive positions ($800/hour).
+  - DOK2 Summary: Crossover has created a global talent acquisition platform that removes geographical constraints to access a vastly larger talent pool, requiring specialized technology and processes to manage the resulting scale.
+- ==Global Recruiting Challenges==
+  - DOK1 Fact: Global sourcing requires different approaches for different countries/regions and different job platforms.
+  - DOK1 Fact: Processing 1,000-5,000 applications per hire requires automated screening before human involvement.
+  - DOK1 Fact: Remote assessment creates challenges including cross-timezone scheduling, designing better evaluation methods than in-person interviews, and preventing cheating.
+  - DOK2 Summary: Global remote recruiting introduces unique challenges in sourcing, filtering, and assessment that require specialized solutions beyond traditional recruiting approaches.
+- ==Pipeline Structure and Process==
+  - DOK1 Fact: Opening a pipeline requires a Pipeline Manager who is responsible for job definition, selling content, test/assessment content, and daily task assignments.
+  - DOK1 Fact: The candidate journey includes Basic Fit Questions, CCAT cognitive testing, English assessment, Subject Matter Questions, RealWork assessments, interviews, and offers.
+  - DOK1 Fact: The cost to open a pipeline is 15% of the annual compensation of a hire, with the same fee for subsequent hires.
+  - DOK2 Summary: Crossover's pipeline structure creates a standardized, repeatable process for evaluating candidates at scale while maintaining quality through specialized roles and clear responsibilities.
+  - DOK1 Fact: Crossover uses a minimum CCAT score of 35 (85th percentile) as a company-wide requirement.
+  - DOK1 Fact: RealWork Assessments (RWAs) are designed to be as close as possible to actual work units performed on the job.
+  - DOK1 Fact: Assessments are calibrated by testing existing team members and setting the passing threshold above the median performance.
+  - DOK2 Summary: Crossover's assessment methodology focuses on objective measurement of both cognitive ability and job-specific skills, with calibration against existing teams to ensure continuous quality improvement.
+  - DOK1 Fact: AI-led matching interviews are more efficient than static BFQs, generate better hiring signal, have less bias and save hiring manager time allowing them to go straight to the points of most interest
+- ==Organization Builder Role==
+  - DOK1 Fact: Organization Builders operate the Crossover "hiring pipelines" that produce new hires better than 50% of the existing teams.
+  - DOK1 Fact: Organization Builders create R2 specifications that focus on the work performed rather than attributes of qualified people.
+  - DOK1 Fact: Great R2s are simply written, focused on important work, and bold/edgy rather than vague or bland.
+  - DOK2 Summary: The Organization Builder role represents a fundamental shift from traditional recruiting to a work-focused approach that continuously improves team quality through objective assessment and clear work definitions.
+- ==Badges==
+  - DOK1 Fact: cognitive aptitude is one of the most accurate predictors of job success: 1.6x as predictive as unstructured interviews, 4x as predictive as experience.
+    > [https://www.criteriacorp.com/files/Criteria-InfoBrief-CCAT.pdf](https://www.criteriacorp.com/files/Criteria-InfoBrief-CCAT.pdf)
+  - DOK1 Fact: Cognitive aptitude is a critical underlying factor for almost every job, since all jobs require people to process information, solve problems and learn new information
+  - DOK1 Fact: adding even a small amount of structure to the interview process can enhance its predictive validity from 0.20 to 0.35, with fully structured interviews achieving a validity of 0.57
+  - DOK1 Fact: structured interviews have the highest variability in validity (i.e., .42 +/− .24) among top predictors (Sackett et al., Reference Sackett, Zhang, Berry and Lievens2023; Table 1). Such a level of inconsistency is concerning and warrants closer examination
+  - DOK1 Fact: 78 percent of HR professionals say the quality of their organization’s hires has improved due to their use of assessments
+  - Links:
+    - [https://www.cambridge.org/core/journals/industrial-and-organizational-psychology/article/structured-interviews-moving-beyond-mean-validity/7CB1F7C86CB0D15328B3F07AD5F964E2](https://www.cambridge.org/core/journals/industrial-and-organizational-psychology/article/structured-interviews-moving-beyond-mean-validity/7CB1F7C86CB0D15328B3F07AD5F964E2)
+    - [https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3322748](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3322748)
+    - [https://www.researchgate.net/publication/308753199_Do_structured_interviews_eliminate_bias_A_meta-analytic_comparison_of_structured_and_unstructured_interviews](https://www.researchgate.net/publication/308753199_Do_structured_interviews_eliminate_bias_A_meta-analytic_comparison_of_structured_and_unstructured_interviews)
+    - [https://www.staffingadvisors.com/blog/how-work-sample-tests-help-you-hire-better/](https://www.staffingadvisors.com/blog/how-work-sample-tests-help-you-hire-better/)
+- ==AI in the Knowledge Work Space==
+  - DOK1 Fact: Consultants using AI completed 12.2% more tasks on average than those without AI.
+  - DOK1 Fact: AI-assisted consultants completed tasks 25.1% more quickly than non-AI users.
+  - DOK1 Fact: AI-assisted work was rated 40% higher quality by both human and AI evaluators.
+  - DOK1 Fact: The lowest-performing consultants saw a 43% improvement in performance when using AI.
+  - DOK1 Fact: Top-performing consultants still benefited from AI but saw smaller relative gains.
+  - DOK2 Summary: AI acts as a powerful skill equalizer, compressing performance distributions by disproportionately benefiting lower-skilled workers.
+  - DOK2 Summary: AI assistance significantly improves knowledge worker productivity across multiple dimensions, with consistent quality improvements regardless of evaluation method.
+  - Links:
+    - [https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged](https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged)
+- ==AI Integration==
+  - DOK1 Fact: Crossover currently uses AI for role descriptions, job descriptions, cohort analysis, assessment creation, and candidate support.
+  - DOK1 Fact: Crossover has automated GenAI prompt writing assessment, AI-Beginner Mind Badge for solving business problems with A
+  - DOK1 Fact: Crossover has AI-led matching interviews designed to dig deep into a candidate's past experience objectively and patiently.
+  - DOK1 Fact: FRQs grading is done though AI based on grading rules and quality bars
+- ==Thought Leadership==
+  - DOK1 Fact: Crossover's "Out of Office" video series and "Radically Remote" newsletter have reached over 50 million and 10 million people respectively.
+  - DOK1 Fact: Radically Remote is the 11th most popular newsletter on LinkedIn with over 2.5 million subscribers.
+  - DOK1 Fact: Newsletter average views per edition increased to 470,449 in Q4 2024, a 22.99% QoQ improvement.
+  - DOK2 Summary: Crossover has established itself as a leading remote work thought leader through consistent, high-quality content series that significantly outperform competitors, using an infotainment style and featuring real employees to humanize the brand.
+  - DOK2 Summary: Brand and reputation investment serves as a force multiplier for all sourcing channels, creating pre-qualified interest and improving conversion rates throughout the funnel.
+- ==Community Building==
+  - DOK1 Fact: Crossover tripled social media engagements after bringing management in-house, despite reducing budget by 50%.
+  - DOK1 Fact: Crossover has over 8 million followers across social channels, more than 10X larger than any other remote work community.
+  - DOK1 Fact: Engagement metrics are prioritized over follower count as the primary KPI for community building.
+  - DOK2 Summary: Effective community building requires optimizing for engagement through high-performing content types, utilizing AI to improve efficiency, and strategically leveraging social media algorithms, with success measured by meaningful interactions rather than audience size.
+- ==Brand & Reputation==
+  - DOK1 Fact: Crossover's Glassdoor rating has steadily increased to 4.0, up from 1-2 a few years ago.
+  - DOK1 Fact: 74% of recent hires report that testimonials influenced their decision to join, compared to 56% for Glassdoor reviews.
+  - DOK1 Fact: Crossover responds to every review using AI to decrease time required while maintaining quality.
+  - DOK2 Summary: Reputation management requires a multi-faceted approach including transparent communication, high-quality "unfakeable" content, proactive solicitation of honest reviews, comprehensive responses, and improved user experience, with quantifiable metrics like Glassdoor ratings serving as proxies for reputation improvement.
+- ==SEO==
+  - DOK1 Fact: Crossover's SEO strategy focuses on building domain authority for high-priority keywords like "AI coding jobs" and "USD remote jobs."
+  - DOK1 Fact: Google's EEAT score is used to measure content quality, helping Crossover avoid penalties during algorithm updates.
+  - DOK1 Fact: Two most popular articles received 440K search impressions but only 19K clicks in Q2 2024.
+  - DOK1 Fact: Crossover achieved top 10 rankings for priority keywords, outranking competitors like Turing and Toptal in many cases.
+  - DOK2 Summary: Effective SEO requires dominating specific high-value keywords through quality content creation, maintaining high EEAT scores, and building domain authority, with success measured by organic traffic growth and search ranking improvements rather than publishing volume.
+- ==Indeed Performance==
+  - DOK1 Fact: Geo - Indeed works in the US, Canada, and India. Last resort, could be used in UK/IE but it is more expensive
+  - DOK1 Fact: Comp/Seniority - In India, it is not a top job board - we do not assume it can source leadership positions.
+  - DOK1 Fact: Comp/Seniority - In US, lower comp levels (<$50) are simply unlikely to work due to the local market conditions
+  - DOK1 Fact: Comp/Seniority - In Canada, lower comp levels (<$30) are unlikely to work due to the local market conditions
+  - DOK1 Fact: Budget: US and Canada are cost/volume efficient at $160-300/ad/month ($40-80/ad/week)
+  - DOK1 Fact: Budget: India is cost/volume efficient at $60-120/ad/month ($15-30/ad/week)
+  - DOK1 Fact: Budget: Below this range, we are likely going to target lower quality applicants
+  - DOK1 Fact: Budget: Being above this range puts us >70%, which means traffic will become expensive
+  - DOK1 Fact: Budget: Observations:
+  - DOK1 Fact: Quality - While we see reasonably pre-interview per-stage conversations for some pipelines/geos, the number of hires from Indeed is disproportionally worse than LinkedIn (3x higher budget, 4x fewer hires, or similar).
+  - DOK2 Summary: Indeed serves as a secondary but significantly less efficient channel with geographic and role-specific limitations that prevent it from fully replacing LinkedIn.
+- ==Search and Social Advertising==
+  - DOK1 Fact: Google Ads require high complexity and resource-intensive management with low volumes and high cost.
+  - DOK1 Fact: Traditional job advertising on Meta performed worse than Google Ads.
+  - DOK1 Fact: Meta showed 3X better cost per qualified candidate when using hyper-targeted, persona-based content strategy.
+  - DOK1 Fact: Twitter/X performed poorly using job-advertising strategy.
+  - DOK2 Summary: General search and social advertising platforms deliver poor results with traditional job advertising approaches but show promise when pivoting to content-rich, persona-targeted strategies.
+- ==Ad Campaign Effectiveness==
+  - DOK1 Fact: Managing effective ad campaigns requires long-term iterative experimentation rather than "set and forget" approaches.
+  - DOK1 Fact: Converting candidates from job ads on job sites is 100X easier than from digital advertising on non-job platforms.
+  - DOK1 Fact: Successful campaigns require marketing expertise with strong creative skills and significant capacity.
+  - DOK2 Summary: Ad campaigns on non-job platforms require specialized expertise, creative testing, audience segmentation, and systematic feedback loops between stakeholders to optimize for conversion, with success dependent on both strategic direction and tactical execution.
+- ==AI-Based Retargeting==
+  - DOK1 Fact: Retargeting generates 50-60% of the hires that can be attributed to a channel
+  - DOK1 Fact: Retargeting uses AI for personalized job matching, customized outreach, and improved candidate engagement.
+  - DOK1 Fact: Retargeting is particularly effective when leveraging the existing candidate database of 440K+ CCAT-passers.
+  - DOK2 Summary: AI-powered retargeting emerges as the highest ROI strategy by efficiently re-engaging qualified candidates without wasting ad dollars, leveraging existing assets rather than pursuing costly new acquisition.
+- ==Programmatic & Alternative Channels==
+  - DOK1 Fact: Pilots with programmatic advertisers (Recruitics, AppCast, Joveo, [Advantage.ai](http://advantage.ai/)) were unsuccessful.
+  - DOK1 Fact: Programmatic platforms are optimized for local hiring, not global remote positions.
+  - DOK2 Summary: Programmatic job advertising platforms fundamentally misalign with global remote hiring models, creating structural inefficiencies that prevent successful implementation despite their effectiveness in local hiring contexts.
+- ==Influencer content recruiting strategy==
+  - DOK1 Fact: Austen used X to attract hundreds of applications on Gauntlet, selected 300 students to enter the hiring program and ended up hiring 100.
+  - DOK1 Fact: Hiring 30% of all applicants is clear evidence that a high quality, engaged audience can be easily be converted into top hires.
+  - DOK1 Fact: [flockity.com](http://flockity.com/) is a hiring platform that offer influencers reach for job advertising
+- _---------- BRIGHT LINE. Above this is the BrainLift, the user creates this without AI. Below this is not the BrainLift, it is however the user gets sources from the flow of external information ----------_
+- BrainMaxxing, other feeds, etc.

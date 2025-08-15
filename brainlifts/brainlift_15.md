@@ -1,0 +1,75 @@
+Mastering Digital Learning Effectiveness[BrainLift]
+
+- Owners:
+  - Kshama Tikmani
+- Purpose Statement:
+  - Become the global expert on how students use learning apps to achieve 2x academic growth, establishing thought leadership that revolutionizes digital education for millions of students worldwide.
+  - **Out of scope:** Traditional classroom methods without digital technology.
+- Knowledge Tree: The organized hierarchy of your expertise, built from:
+  - DOK4 - SPOV
+    - **SPOV 1**: Learning apps must intervene BEFORE students reach their frustration threshold, not after - the magic number appears to be 2-3 consecutive wrong answers based on observed behavior
+    - **SPOV2:** When students fail repeatedly, the problem isn't always comprehension difficulty - it's often the teaching method. Smart apps should automatically pivot to different instructional approaches for the same content
+  - DOK3 - Insights
+    - **Insight1**: Score invalidation as a consequence creates accountability that mere warnings cannot achieve - students learn that gaming the system has real costs especially where it matters to them.
+    - **Insight2:** Current learning apps lack effective behavioral interventions to address the three most common failure patterns: test abandonment, explanation skipping, and answer guessing
+    - **Insight3:** Test abandonment can be prevented through two mechanisms: accountability metrics (showing students their 'wasted time') and preemptive intervention (re-teaching the same lesson content through alternative methods after X wrong answers)
+  - Expert Sources: The thought leaders and references that inform your perspective.
+    - Justin Skycak
+      - **Who:** Chief Quant and Director of Analytics at Math Academy, optimizing learning efficiency in students' brains
+      - **Experience: **Developed Math Academy's AI system from scratch, author of "The Math Academy Way"
+      - **Main views:** Focuses on solving Bloom's two-sigma problem through evidence-based cognitive learning strategies including spaced repetition, interleaving, and automaticity development.
+      - **Why follow:** He shares cutting-edge thinking on how to build learning environments, practical insights on implementing learning science principles in app design.
+      - **Where to find:** [X profile](https://x.com/justinskycak), [Website](https://www.justinmath.com/)
+    - Dr. Ryan Baker
+      - **Who: **Professor at University of Pennsylvania, Director of the Penn Center for Learning Analytics, and founding president of the International Educational Data Mining Society
+      - **Experience: **Ph.D. in Human-Computer Interaction from Carnegie Mellon, creator of the first automated detector of student disengagement
+      - **Main views:** "Gaming the system" behaviors where students exploit system properties rather than learning are associated with poor learning outcomes. Advocates for using data mining to detect and intervene when students disengage.
+      - **Why follow:** Leading expert on detecting learning app anti-patterns and student engagement behaviors through data
+      - **Where to find: **[Website](https://learninganalytics.upenn.edu/ryanbaker/)
+    - Steven Anderson
+      - **Who: **Educational evangelist recognized by Huffington Post, co-creator of #edchat, and former teacher/Director of Instructional Technology
+      - **Experience: **Former classroom teacher and Director of Instructional Technology with hands-on experience implementing educational technology in schools. Currently CEO and Chief Learning Officer at Web20Classroom LLC, where he consults with schools and districts on technology integration and instructional strategies. Regular presenter and keynote speaker at national and international educational technology conferences.Author of three books on educational technology implementation.
+      - **Main views:** Advocates for meaningful technology integration rather than technology for its own sake, emphasizes putting students in the driver seat with authentic creation, differentiation, and exploration. Believes in "making decisions based on the best needs of kids, remembering this is their world, not ours"
+      - **Why follow: **Brings practical classroom experience combined with leadership perspective on technology integration, hosts weekly #edchat discussions that often bring in 500+ participants.
+      - **Where to find: **[Twitter](https://x.com/web20classroom), [Blog](https://blog.web20classroom.org/), [Steven W. Anderson (@web20classroom) • Instagram photos and videos](https://www.instagram.com/web20classroom/), Books: "The Relevant Educator," "The Tech-Savvy Administrator," "Content Curation: How To Avoid Information Overload"
+    - Dr. Sidney D'Mello
+      - **Who:** Professor researching affective computing and learning analytics, collaborator with Ryan Baker
+      - **Experience: **Sidney D’Mello is a Professor at the Institute of Cognitive Science and the Department of Computer Science at the University of Colorado Boulder (since 2017).
+      - **Main views:** Student emotions during learning (confusion, frustration, boredom) are predictable and can be automatically detected. Apps should respond to emotional states, not just correctness
+      - **Why follow:** Pioneer in detecting the emotional precursors to app abandonment and disengagement
+      - **Where to find:** [Google Scholar](https://sites.google.com/site/sidneydmello/home), @SidneyDMello on Twitter
+    - Andrew Olney
+      - **Who:** Professor at Institute for Intelligent Systems, expert in natural language tutoring
+      - **Experience: **Andrew M. Olney presently serves as Professor in both the Institute for Intelligent Systems and Department of Psychology at the University of Memphis.
+      - **Main views:** Conversational AI tutors that use Socratic questioning outperform direct instruction. Student-generated questions are powerful learning tools
+      - **Why follow:** Practical implementer of advanced AI tutoring techniques with proven results
+      - **Where to find:** [Website](https://olney.ai/), [Google Scholar](https://scholar.google.com/citations?hl=en&user=uJZP6RQAAAAJ&view_op=list_works&sortby=pubdate)
+  - Knowledge Tree
+    - **Knowledge Area 1**: Digital Learning Mastery Behaviors: The intersection between student behaviors and app features that creates optimal learning conditions. This includes understanding which student actions within apps correlate with academic success, how to coach students to use apps effectively, and the behavioral interventions that maximize learning efficiency and outcome achievement.
+      - DOK2 - Summaries
+        - **Summary 1: The Hierarchy of Harmful Learning Behaviors -** The research reveals a clear hierarchy of harmful behaviors in learning apps: boredom is the most persistently damaging state, followed by gaming the system behaviors, then extended confusion/frustration. Brief confusion and frustration can actually benefit learning if resolved quickly. This hierarchy suggests apps should prioritize keeping students engaged (even if struggling) over allowing disengagement, and must include mechanisms to resolve confusion before it becomes extended frustration.
+        - **Summary 2: The Critical Role of Duration and Resolution -** Duration fundamentally determines whether confusion and frustration help or harm learning. Brief episodes that are resolved lead to better learning outcomes, while extended unresolved episodes lead to poorer outcomes. The "confrustion constellation" framework shows that the distinction between confusion and frustration matters less than whether these states are brief/resolved or extended/unresolved, suggesting intervention design should focus on timing and resolution support rather than emotion type.
+        - **Summary 3: Behavioral Markers Enable Early Detection - **Successful intervention depends on early detection of problematic behaviors. Gaming behaviors can be detected through specific patterns (rapid answers under 3 seconds, instant hint requests, 5x error rates), while affective states show predictable transition patterns. These concrete behavioral markers enable apps to intervene before behaviors become entrenched or cascade into more harmful states.
+        - **Summary 4: Engagement Trumps Correctness - **The research consistently shows that maintaining engagement, even with some struggle, produces better outcomes than disengagement. Students who remain confused or frustrated but engaged ultimately learn more than those who become bored or game the system. This "better to be frustrated than bored" principle suggests apps should maintain appropriate challenge levels and prevent disengagement rather than eliminating all difficulty.
+        - **Summary 5: Context and Persistence Shape Impact - **The impact of any affective state or behavior depends heavily on context and persistence. Gaming behaviors, boredom, and extended confusion show high persistence and consistently negative impacts across different learning environments. However, the same affective states can have positive impacts when they occur briefly within supportive contexts that enable resolution. This suggests interventions must consider not just the presence of a state but its duration, context, and likelihood of resolution.
+      - DOK1 - Knowledge Tree and Sources
+        - **Fact1**: NWEA-MAP implements a three-strike rushing detection system that warns students and ultimately invalidates scores if rushing continues
+        - **Fact2**: In observed in recorded sessions, students abandon tests after receiving 2-3 consecutive wrong answers
+        - **Fact3**: In observed in recorded sessions, students consistently skip explanations after incorrect answers, eliminating learning opportunities
+        - **Fact4: Gaming the System Prevalence and Impact: **Gaming the system was associated with substantially lower learning, correlating -0.36 to learning gains in the Scatterplot Tutor study, and students who gamed the system knew only 2/3 as much as non-gaming students at the end of curriculum
+          - Source: Baker et al. (2010) - "[Better to Be Frustrated than Bored](https://learninganalytics.upenn.edu/ryanbaker/BDRG-IJHCS-Final.pdf)" (BDRG-IJHCS) paper.
+          - Relevance: This quantifies the severe negative impact of gaming behaviors on learning outcomes, demonstrating that this anti-pattern can reduce learning by approximately one-third - critical for understanding which behaviors must be detected and prevented.
+        - **Fact5:** **Optimal Affect Duration for Learning: **Sequences of confusion and frustration were beneficial for learning, but only when they both occurred in brief periods of time. Learning was negatively impacted when sequences of confusion and frustration persisted for longer periods of time.
+          - Source: Liu et al. (2013), referenced in "[The Confrustion Constellation](https://learninganalytics.upenn.edu/ryanbaker/CogSci%20Confrustion.pdf)" and "[Stupid Tutoring Systems, Intelligent Humans](https://learninganalytics.upenn.edu/ryanbaker/STS-Baker-IJAIED-v15.pdf)" paper:
+          - Relevance: This provides specific guidance on intervention timing - apps must detect and intervene before confusion/frustration becomes extended, establishing that duration is more critical than the specific emotion experienced.
+        - **Fact6: Boredom as the Most Harmful State:** Boredom was very persistent across learning environments (occurring 0.303 of the time in ASSISTments) and was the most consistent negative predictor of learning outcomes across all three learning environments studied.
+          - Source: Baker et al. (2010) - "[Better to Be Frustrated than Bored](https://learninganalytics.upenn.edu/ryanbaker/BDRG-IJHCS-Final.pdf)" (BDRG-IJHCS) paper.
+          - Relevance: Identifies boredom as potentially more harmful than frustration for learning outcomes, suggesting that keeping students engaged (even if confused or frustrated) is preferable to allowing boredom - crucial for app design priorities.
+        - **Fact7: Affect Transition Patterns: **Unresolved confusion leads to frustration, which can transition into anger or hopelessness that are detrimental to learning outcomes. However, when confusion is resolved, students are able to transition back into positive affective states.
+          - Source: D'Mello and Graesser (2012), referenced in the "[The Confrustion Constellation](https://learninganalytics.upenn.edu/ryanbaker/CogSci%20Confrustion.pdf)" paper
+          - Relevance: Maps the critical pathways between affective states, showing that intervention opportunities exist to prevent negative cascades - apps can guide students from confusion back to engagement rather than allowing progression to frustration and disengagement.
+        - **Fact8: Gaming Behavior Patterns: **In ASSISTments, gaming behavior involved rapid-fire answering (answering in less than 3 seconds) and help abuse (requesting hints in under 1 second), with gaming students making 5 times as many errors per problem as non-gaming students
+          - Source: Baker et al. (2010) -"[Better to Be Frustrated than Bored](https://learninganalytics.upenn.edu/ryanbaker/BDRG-IJHCS-Final.pdf)" (BDRG-IJHCS) paper.
+          - Relevance: Provides specific behavioral markers (3-second answers, 1-second hint requests) that apps can use to detect gaming behaviors in real-time, enabling immediate intervention before learning damage occurs.
+    - **Knowledge Area 2**:Learning App Design for Academic Acceleration: The features, functionalities, and design principles of learning apps that enable 2x faster academic achievement. This covers adaptive algorithms, content sequencing, feedback mechanisms, assessment integration, and the technological architecture that supports rapid measurable learning gains in test scores and grades.
+    - **Knowledge Area 3**:Digital Coaching and AI Tutoring Systems: The role of AI coaches/tutors in guiding students to achieve 2x growth through learning apps. This includes coaching methodologies, AI tutor design, personalized intervention strategies, motivation techniques, and how to scale personalized support across thousands of students.

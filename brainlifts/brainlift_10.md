@@ -1,0 +1,38 @@
+Import/Integration
+
+- Purpose
+  - Codify best practices on technical import/integration of companies ESW acquires. Scope is focus on executing the import as a coordinate workstream across TPM, Eng, SaaS.
+  - The goal is to import the software products in one quarter without breaking it (defined as generating customer churn) and moving it into a state where it can be operated with minimal capacity
+  - Out of scope:
+    - specific focused competencies such as:
+      > [https://docs.google.com/document/d/1Yw69zsHCMsWaw7ubgeTXiZZlwedXNWsGf_iMbF0JbVk/edit?tab=t.0#heading=h.o1r6nl0yedn](https://docs.google.com/document/d/1Yw69zsHCMsWaw7ubgeTXiZZlwedXNWsGf_iMbF0JbVk/edit?tab=t.0#heading=h.o1r6nl0yedn)
+    - IT Ops activities
+    - Professional Services- customer specific customizations
+- SPOVs
+  - The best acquisition integrations extract knowledge brutally fast - one quarter to learn everything worth knowing, accepting some knowledge loss because code, deployments, and customer data tell the real story anyway.
+  - Post-acquisition value creation comes from killing feature development entirely: maintain only what prevents customer defection, slash infrastructure costs by 50%, and build AI value through external APIs, not product integration
+  - The greatest value in software acquisitions comes from immediately stopping all feature development and redirecting resources to building AI interfaces that make the legacy product obsolete. We know we have done that if the first thing a customer talks about in term of value they get from the product is not the legacy features, but the AI use-cases.
+  - The 'swan song' principle: every unshipped feature in an acquired company is a liability, not an asset - terminate it immediately regardless of sunk costs.
+- Insights
+  - An import can be seen as making the following outcomes happen:
+    - 1. gain the product expertise to own the product and artifacts
+    - 2. take over access (hosting platforms, code, vendors, stores, etc)
+    - 3. releasing the product, including the ability to develop, build, test
+    - 4. switch operations to the Trilogy standard processes (way of doing product management, coding, tracking issues, access, escalations, etc)
+    - 5. improv production system - proper monitoring, validation, certs renewal, rollbacks, DR, etc.
+  - TPM's role is to drive simplicity and clarity: define the team objectives and focus teams on this core mission (usually completing the import)
+  - Reset internal communications - Shut down the legacy communication system (slack, etc) and switch over to GChat where we control that has clear channels for the important themes (e.g., outages, certificate renewals) as well as catch-all channels. Also, stop 1-1 comms - all comms go in the channel
+  - Actively manage in-flight/new projects we become aware of during integration but make thoughtful decisions on which one to spend time on. We own the decision and our choices are one these: 1) halt project/ignore problem, 2) defer post integration, 3) deliver with Trilogy (BU or central) ownership and legacy team execution, 4) delivery with Trilogy teams (BU or central)
+  - Take over the RCA process fast: we need to both own and learn, and handling failures is good way to be thrown into the pool to swim
+  - The first release can be simple - deploy a text/logo change, redeploy a previous release are all valid ways to understand the release steps and exercise the process
+- Experts
+  - Satya Nadella (Microsoft CEO) - Known for successful technical integrations of GitHub, LinkedIn, and numerous AI companies while transforming their capabilities
+  - Andy Jassy (Amazon CEO) - Expert in maintaining operational excellence during technical integrations while building AI capabilities
+  - Pat Gelsinger (Intel CEO) - Specializes in technical integration with minimal disruption and infrastructure optimization
+  - Sam Altman (OpenAI CEO) - Expert in AI transformation and integration of AI capabilities into existing products
+- DOK1/2
+  - Risks of acquisitions
+    - DOK1 Fact: When Broadcom acquired CA Technologies for $18.9B in 2018, their aggressive 90-day integration timeline led to a 23% customer churn rate precisely because they believed "the code would tell them everything
+    - DOK1 Fact: When Oracle rushed its PeopleSoft integration in 2005, they lost 30% of enterprise customers not because the product broke, but because key account managers who understood decade-long relationship histories were dismissed too quickly. Those relationships represented $2B in annual recurring revenue
+  - Early days post acquisition
+    - DOK1 Fact: The legacy team will innertially continue working on what they have been doing. This will lead to work done by people who are not motivated, partial changes in code/scripts/docs, unfinished work, unclear quality.
