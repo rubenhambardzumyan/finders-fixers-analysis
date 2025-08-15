@@ -17,8 +17,6 @@
 ### Feedback
 Your facts lack proper source attribution making them unverifiable for decision-making.
 
-### Relevant Lesson
-Link to lesson on fact verification and source documentation
 
 ### Coaching
 Add clear citations and links to your DOK1 facts, especially for technical specifications and compliance details.
@@ -49,8 +47,6 @@ Add clear citations and links to your DOK1 facts, especially for technical speci
 ### Feedback
 Your insights describe what's happening but don't create rules for when and how to act.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert your Aurora migration insight into a specific rule: "When customer customization complexity exceeds X threshold, migrate to Aurora SDK approach first."
@@ -69,8 +65,6 @@ Convert your Aurora migration insight into a specific rule: "When customer custo
 ### Feedback
 Your expert list lacks their actual perspectives and positions on key technical decisions.
 
-### Relevant Lesson
-Link to lesson on capturing expert viewpoints and stances
 
 ### Coaching
 Add what each expert believes about Aurora vs legacy architecture to capture their decision-making perspectives.
@@ -89,8 +83,6 @@ Add what each expert believes about Aurora vs legacy architecture to capture the
 ### Feedback
 Your expert list only includes internal Khoros team members - you're missing external critics and alternative viewpoints.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 external experts who would challenge your Aurora migration strategy or public-facing architecture decisions.
@@ -101,8 +93,6 @@ Add 2-3 external experts who would challenge your Aurora migration strategy or p
 ### Feedback
 You're missing critical decision areas like pricing strategy, competitive positioning, and customer retention tactics.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add knowledge areas covering go-to-market strategy, competitive differentiation, and customer success patterns.
@@ -113,8 +103,6 @@ Add knowledge areas covering go-to-market strategy, competitive differentiation,
 ### Feedback
 Your insights stay within the enterprise software bubble instead of learning from consumer platforms or other industries.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how consumer social platforms handle public-facing communities and apply those patterns to enterprise contexts.
@@ -129,8 +117,6 @@ Study how consumer social platforms handle public-facing communities and apply t
 ### Feedback
 Your purpose statement tries to cover both product understanding and technical approach without clear prioritization.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Choose one primary objective: either deep product expertise OR Central TPM implementation - then structure everything else to support that choice.
@@ -141,8 +127,6 @@ Choose one primary objective: either deep product expertise OR Central TPM imple
 ### Feedback
 You're missing critical decision areas that TPMs face when managing product transitions and customer migrations.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for migration sequencing, customer communication, and rollback criteria.
@@ -153,8 +137,6 @@ Add decision frameworks for migration sequencing, customer communication, and ro
 ### Feedback
 Your purpose lacks specific success metrics and decision authority boundaries.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific TPM problem, clear scope boundaries, measurable success criteria, and your decision authority level.
@@ -173,8 +155,6 @@ Restructure with: specific TPM problem, clear scope boundaries, measurable succe
 ### Feedback
 You have strong technical positions but missing stances on equally important business and operational areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on customer communication strategy, pricing during transitions, and team resource allocation approaches.
@@ -185,8 +165,6 @@ Add clear positions on customer communication strategy, pricing during transitio
 ### Feedback
 Your SPOVs state technical beliefs but don't provide decision frameworks for competing priorities.
 
-### Relevant Lesson
-Link to lesson on actionable SPOV development
 
 ### Coaching
 Transform your Aurora SPOV into a decision tree that guides choices when migration timelines conflict with customer needs.
@@ -197,8 +175,6 @@ Transform your Aurora SPOV into a decision tree that guides choices when migrati
 ### Feedback
 You're not leveraging your expert team knowledge to develop distinctive technical positions.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take your team's container architecture expertise and develop a contrarian position about when NOT to containerize enterprise software.

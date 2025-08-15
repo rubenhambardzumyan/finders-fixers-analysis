@@ -41,8 +41,6 @@
 ### Feedback
 Your insights are research-based but don't create specific rules for when and how to implement interventions.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert your "2-3 consecutive wrong answers" insight into a specific rule: "When students get 3 wrong answers in sequence, automatically trigger alternative teaching method X."
@@ -53,8 +51,6 @@ Convert your "2-3 consecutive wrong answers" insight into a specific rule: "When
 ### Feedback
 You only have 5 experts when your domain spans learning science, educational technology, AI tutoring, and behavioral psychology.
 
-### Relevant Lesson
-Link to lesson on building comprehensive expert networks
 
 ### Coaching
 Add 5-7 more experts covering game-based learning, adaptive algorithms, and educational neuroscience.
@@ -81,8 +77,6 @@ Add 5-7 more experts covering game-based learning, adaptive algorithms, and educ
 ### Feedback
 Your expert list lacks critics who would challenge technology-first approaches to education or question digital learning effectiveness.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add experts who advocate for traditional teaching methods or who question the effectiveness of AI-driven personalization in education.
@@ -93,8 +87,6 @@ Add experts who advocate for traditional teaching methods or who question the ef
 ### Feedback
 You're missing critical decision areas like curriculum design, assessment validity, and teacher training for digital learning integration.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add knowledge areas covering learning content creation, assessment design, and educator support systems.
@@ -105,8 +97,6 @@ Add knowledge areas covering learning content creation, assessment design, and e
 ### Feedback
 Your insights stay within the educational technology domain instead of learning from gaming, behavioral economics, or consumer app engagement.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how mobile games prevent abandonment and social media platforms maintain engagement to improve your learning app design.
@@ -125,8 +115,6 @@ Study how mobile games prevent abandonment and social media platforms maintain e
 ### Feedback
 You're missing critical decision areas like when to intervene versus when to let students struggle productively.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for intervention timing, difficulty progression, and personalization vs standardization choices.
@@ -137,8 +125,6 @@ Add decision frameworks for intervention timing, difficulty progression, and per
 ### Feedback
 Your purpose lacks specific success metrics beyond "2x growth" and clear boundaries about which types of learning you'll focus on.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Add measurable outcomes: "Reduce test abandonment by X%, increase completion rates by Y%, achieve Z% of students reaching 2x growth targets."
@@ -157,8 +143,6 @@ Add measurable outcomes: "Reduce test abandonment by X%, increase completion rat
 ### Feedback
 You have strong behavioral intervention positions but missing stances on equally important areas like content design and assessment strategies.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on adaptive vs fixed content sequences, individual vs social learning experiences, and assessment frequency approaches.
@@ -169,8 +153,6 @@ Add clear positions on adaptive vs fixed content sequences, individual vs social
 ### Feedback
 Your SPOVs state intervention principles but don't provide decision frameworks for competing educational priorities.
 
-### Relevant Lesson
-Link to lesson on actionable SPOV development
 
 ### Coaching
 Transform your "pivot teaching methods" SPOV into a decision tree that guides which alternative approach to use based on specific failure patterns.
@@ -181,8 +163,6 @@ Transform your "pivot teaching methods" SPOV into a decision tree that guides wh
 ### Feedback
 You're not fully leveraging your expert research knowledge to challenge conventional educational technology assumptions.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Use your gaming behavior research to develop a contrarian position about when educational "friction" helps versus hurts learning outcomes.

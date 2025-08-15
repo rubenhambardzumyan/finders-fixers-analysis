@@ -17,8 +17,6 @@
 ### Feedback
 Many of your facts lack proper source attribution, making verification difficult for decision-making.
 
-### Relevant Lesson
-Link to lesson on fact verification and source documentation
 
 ### Coaching
 Add clear citations for your architectural details, pricing data, and compliance requirements.
@@ -49,8 +47,6 @@ Add clear citations for your architectural details, pricing data, and compliance
 ### Feedback
 Your insights are strategic but don't provide specific rules for when and how to make operational decisions.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert your "fragmentation penalty" insight into a specific pricing rule: "When customers use >2 external platforms, increase pricing by X% for each additional integration."
@@ -61,8 +57,6 @@ Convert your "fragmentation penalty" insight into a specific pricing rule: "When
 ### Feedback
 You only have one expert listed when your domain requires diverse perspectives from industry leaders.
 
-### Relevant Lesson
-Link to lesson on building comprehensive expert networks
 
 ### Coaching
 Add 8-10 experts covering social media management, customer experience, and SaaS platform strategy.
@@ -77,8 +71,6 @@ Add 8-10 experts covering social media management, customer experience, and SaaS
 ### Feedback
 Your single expert lacks detailed perspectives and positions on key platform decisions.
 
-### Relevant Lesson
-Link to lesson on capturing expert viewpoints and stances
 
 ### Coaching
 Add specific viewpoints from James Dodkins on customer experience strategy and AI-human workflow orchestration.
@@ -93,8 +85,6 @@ Add specific viewpoints from James Dodkins on customer experience strategy and A
 ### Feedback
 With only one expert, you can't demonstrate diversity of perspectives across your complex domain.
 
-### Relevant Lesson
-Link to lesson on expert perspective diversity
 
 ### Coaching
 Add experts covering different aspects: technical architecture, pricing strategy, competitive analysis, and customer success.
@@ -105,8 +95,6 @@ Add experts covering different aspects: technical architecture, pricing strategy
 ### Feedback
 Your expert list lacks critics who would challenge your AI-first and unified platform approaches.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add experts who advocate for specialized tools over unified platforms, or who question AI workflow orchestration effectiveness.
@@ -117,8 +105,6 @@ Add experts who advocate for specialized tools over unified platforms, or who qu
 ### Feedback
 You're missing critical decision areas like competitive response strategies, market expansion, and technology investment priorities.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add knowledge areas covering competitive positioning, market expansion strategy, and technology roadmap decisions.
@@ -145,8 +131,6 @@ Add knowledge areas covering competitive positioning, market expansion strategy,
 ### Feedback
 Your purpose lacks specific success metrics and clear scope boundaries for what's in versus out of scope.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Add measurable outcomes: "Enable decisions that improve customer retention by X% while reducing infrastructure costs by Y%."
@@ -173,8 +157,6 @@ Add measurable outcomes: "Enable decisions that improve customer retention by X%
 ### Feedback
 You're not fully leveraging your deep platform knowledge to challenge conventional SaaS wisdom.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Use your bot economy insights to develop a contrarian position about when platforms should charge AI systems versus when they should pay them.

@@ -29,8 +29,6 @@
 ### Feedback
 Your DOK2 summaries are too brief and don't demonstrate sufficient synthesis of the underlying technical facts.
 
-### Relevant Lesson
-Link to lesson on comprehensive DOK2 development
 
 ### Coaching
 Expand your summaries to show deeper connections between CloudWatch metrics, usage patterns, and cost optimization strategies.
@@ -41,8 +39,6 @@ Expand your summaries to show deeper connections between CloudWatch metrics, usa
 ### Feedback
 Your DOK2 summaries lack the analytical depth needed for strategic cost optimization decisions.
 
-### Relevant Lesson
-Link to lesson on strategic analysis in DOK2 summaries
 
 ### Coaching
 Connect your metrics facts to broader implications about enterprise key management and explain how they influence deletion strategies.
@@ -57,8 +53,6 @@ Connect your metrics facts to broader implications about enterprise key manageme
 ### Feedback
 Your insights describe problems but don't translate into specific operational decisions.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert "CloudTrail is too slow" into "If key shows zero CloudWatch usage for 90 days, implement 30-day lockout policy before deletion."
@@ -69,8 +63,6 @@ Convert "CloudTrail is too slow" into "If key shows zero CloudWatch usage for 90
 ### Feedback
 Your expert section only contains 1 expert, which is severely insufficient for domain credibility.
 
-### Relevant Lesson
-Link to lesson on expert identification and selection
 
 ### Coaching
 Add 6-8 more experts covering AWS cost optimization, security, compliance, and enterprise key management.
@@ -85,8 +77,6 @@ Add 6-8 more experts covering AWS cost optimization, security, compliance, and e
 ### Feedback
 Your single expert lacks sufficient detail about their specific perspectives and methodologies.
 
-### Relevant Lesson
-Link to lesson on expert perspective articulation
 
 ### Coaching
 Expand Krystian's profile to include specific cost optimization frameworks, tools, and methodologies he advocates.
@@ -101,8 +91,6 @@ Expand Krystian's profile to include specific cost optimization frameworks, tool
 ### Feedback
 With only one expert, you cannot demonstrate diversity of perspectives across the domain.
 
-### Relevant Lesson
-Link to lesson on diverse expert perspective inclusion
 
 ### Coaching
 Add experts covering security architecture, compliance requirements, enterprise encryption, and financial optimization.
@@ -113,8 +101,6 @@ Add experts covering security architecture, compliance requirements, enterprise 
 ### Feedback
 Your single expert only supports your cost optimization approach without any contrarian voices.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add experts who advocate for security-first approaches that might challenge aggressive key deletion strategies.
@@ -125,8 +111,6 @@ Add experts who advocate for security-first approaches that might challenge aggr
 ### Feedback
 You're missing critical areas that KMS optimization teams encounter beyond usage monitoring.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add sections covering compliance requirements, security audit considerations, and cross-account key management.
@@ -137,8 +121,6 @@ Add sections covering compliance requirements, security audit considerations, an
 ### Feedback
 Your insights stay within AWS KMS instead of learning from other resource optimization approaches.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how other cloud cost optimization areas handle unused resources and apply those patterns to key management.
@@ -153,8 +135,6 @@ Study how other cloud cost optimization areas handle unused resources and apply 
 ### Feedback
 Your purpose statement is too narrow and lacks strategic depth for organizational decision-making.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Expand to include the balance between cost optimization and security requirements rather than focusing solely on cost reduction.
@@ -165,8 +145,6 @@ Expand to include the balance between cost optimization and security requirement
 ### Feedback
 You're missing critical decision areas that KMS teams face beyond identifying unused keys.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for risk assessment, compliance validation, and cross-team coordination during key lifecycle management.
@@ -177,8 +155,6 @@ Add decision frameworks for risk assessment, compliance validation, and cross-te
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem (KMS cost waste), clear boundaries (AWS only), success metrics (cost reduction %), and decision authority.
@@ -193,8 +169,6 @@ Restructure with: specific problem (KMS cost waste), clear boundaries (AWS only)
 ### Feedback
 Your single SPOV addresses cost but misses equally consequential topics like security and compliance.
 
-### Relevant Lesson
-Link to lesson on consequential SPOV development
 
 ### Coaching
 Add SPOVs about balancing security requirements with cost optimization and the role of automation in key lifecycle management.
@@ -205,8 +179,6 @@ Add SPOVs about balancing security requirements with cost optimization and the r
 ### Feedback
 You have one cost-focused position but missing stances on security, compliance, and operational areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on security vs cost trade-offs, automation strategies, and cross-team collaboration approaches.
@@ -217,8 +189,6 @@ Add clear positions on security vs cost trade-offs, automation strategies, and c
 ### Feedback
 Your SPOV states a problem but doesn't provide decision frameworks for complex cost-security situations.
 
-### Relevant Lesson
-Link to lesson on actionable SPOV development
 
 ### Coaching
 Transform your cost observation into a decision tree that guides choices when security teams resist key deletion efforts.
@@ -229,8 +199,6 @@ Transform your cost observation into a decision tree that guides choices when se
 ### Feedback
 You're not leveraging broader expertise to develop distinctive positions beyond basic cost awareness.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Research enterprise key management experts and develop unique stances on automation, compliance integration, and organizational change management.

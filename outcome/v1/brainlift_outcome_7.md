@@ -65,8 +65,6 @@
 ### Feedback
 Your expert list focuses heavily on supporters of structured instruction approaches but lacks contrarian voices from progressive education perspectives.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 experts who advocate for discovery-based or unstructured math learning to strengthen your position through contrast.
@@ -81,8 +79,6 @@ Add 2-3 experts who advocate for discovery-based or unstructured math learning t
 ### Feedback
 Your insights stay within the education research bubble instead of learning from other skill acquisition domains.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how musicians, athletes, or language learners achieve automaticity to enrich your educational approach.
@@ -97,8 +93,6 @@ Study how musicians, athletes, or language learners achieve automaticity to enri
 ### Feedback
 Your purpose mixes product development guidance with educational research documentation, creating unclear objectives.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Choose one primary objective: either documenting educational science OR guiding game development - then build everything else to support that choice.
@@ -109,8 +103,6 @@ Choose one primary objective: either documenting educational science OR guiding 
 ### Feedback
 You're missing critical decision areas that game developers face when implementing educational content.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for content sequencing, difficulty adaptation, and player motivation systems.
@@ -121,8 +113,6 @@ Add decision frameworks for content sequencing, difficulty adaptation, and playe
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem, clear boundaries, success metrics, and decision authority.
@@ -141,8 +131,6 @@ Restructure with: specific problem, clear boundaries, success metrics, and decis
 ### Feedback
 You have strong instructional design positions but missing stances on equally important technical implementation areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on user interface design, data privacy, and platform compatibility approaches.
@@ -157,8 +145,6 @@ Add clear positions on user interface design, data privacy, and platform compati
 ### Feedback
 You're not leveraging your expert knowledge to develop distinctive positions that challenge conventional wisdom.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take Sara VanDer Werf's CBM approach and develop your own modification based on AI-driven assessment capabilities.

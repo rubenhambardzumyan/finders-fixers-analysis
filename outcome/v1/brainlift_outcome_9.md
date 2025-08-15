@@ -73,8 +73,6 @@
 ### Feedback
 Your insights stay within the employee engagement software bubble instead of learning from other community platform domains.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how social media platforms, online forums, or gaming communities drive engagement to enrich your platform approach.
@@ -97,8 +95,6 @@ Study how social media platforms, online forums, or gaming communities drive eng
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem, clear boundaries, success metrics, and decision authority.
@@ -125,8 +121,6 @@ Restructure with: specific problem, clear boundaries, success metrics, and decis
 ### Feedback
 You're not leveraging your expert knowledge to develop distinctive positions that challenge employee engagement conventional wisdom.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take Adam Grant's motivation research and develop your own modification based on enterprise software engagement patterns.

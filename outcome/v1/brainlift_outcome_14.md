@@ -17,8 +17,6 @@
 ### Feedback
 Your facts lack proper source attribution making them unverifiable for replication at scale.
 
-### Relevant Lesson
-Link to lesson on fact verification and source documentation
 
 ### Coaching
 Add citations for your feedback examples, research on interview effectiveness, and XO process documentation.
@@ -33,8 +31,6 @@ Add citations for your feedback examples, research on interview effectiveness, a
 ### Feedback
 You have knowledge areas but lack comprehensive DOK2 summaries that synthesize information within each area.
 
-### Relevant Lesson
-Link to lesson on creating effective knowledge synthesis
 
 ### Coaching
 Add DOK2 summaries for each of your three knowledge areas that synthesize the key patterns and relationships.
@@ -45,8 +41,6 @@ Add DOK2 summaries for each of your three knowledge areas that synthesize the ke
 ### Feedback
 Your knowledge areas lack the synthesis that demonstrates how different pieces of information connect and inform each other.
 
-### Relevant Lesson
-Link to lesson on information synthesis and analysis
 
 ### Coaching
 Create summaries showing how feedback quality connects to pipeline improvements and system fixes.
@@ -57,8 +51,6 @@ Create summaries showing how feedback quality connects to pipeline improvements 
 ### Feedback
 Without proper DOK2 summaries, you can't demonstrate analytical depth beyond listing facts.
 
-### Relevant Lesson
-Link to lesson on analytical thinking development
 
 ### Coaching
 Write analytical summaries that show how hiring manager misconceptions create feedback patterns that impact pipeline effectiveness.
@@ -73,8 +65,6 @@ Write analytical summaries that show how hiring manager misconceptions create fe
 ### Feedback
 Your insights describe problems but don't create specific rules for when and how to intervene.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert your "sweet spot" insight into a specific rule: "When feedback is vague after 2 follow-ups, escalate to 1:1 coaching session."
@@ -85,8 +75,6 @@ Convert your "sweet spot" insight into a specific rule: "When feedback is vague 
 ### Feedback
 You only have 4 experts when your domain spans recruiting technology, HR analytics, and workforce psychology.
 
-### Relevant Lesson
-Link to lesson on building comprehensive expert networks
 
 ### Coaching
 Add 6-8 more experts covering AI in hiring, feedback psychology, and automated assessment technologies.
@@ -101,8 +89,6 @@ Add 6-8 more experts covering AI in hiring, feedback psychology, and automated a
 ### Feedback
 Your expert descriptions focus on credentials but lack their specific perspectives on feedback collection and hiring improvement.
 
-### Relevant Lesson
-Link to lesson on capturing expert viewpoints and stances
 
 ### Coaching
 Add what each expert believes about automated vs human feedback collection and their positions on hiring bias elimination.
@@ -121,8 +107,6 @@ Add what each expert believes about automated vs human feedback collection and t
 ### Feedback
 Your expert list lacks critics who would challenge automated feedback collection or structured hiring approaches.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add experts who advocate for human-centric hiring processes or who question the effectiveness of structured feedback systems.
@@ -133,8 +117,6 @@ Add experts who advocate for human-centric hiring processes or who question the 
 ### Feedback
 You're missing critical decision areas like legal compliance, candidate experience, and technology implementation.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add knowledge areas covering bias prevention, candidate communication, and feedback system implementation strategies.
@@ -145,8 +127,6 @@ Add knowledge areas covering bias prevention, candidate communication, and feedb
 ### Feedback
 Your insights stay within the recruiting domain instead of learning from customer feedback systems in other industries.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how product teams collect user feedback or how sales teams gather prospect insights to improve your hiring feedback systems.
@@ -161,8 +141,6 @@ Study how product teams collect user feedback or how sales teams gather prospect
 ### Feedback
 Your purpose statement tries to cover both feedback collection and system diagnosis without clear prioritization.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Choose one primary objective: either perfect feedback collection OR rapid system improvement - then build everything else to support that choice.
@@ -173,8 +151,6 @@ Choose one primary objective: either perfect feedback collection OR rapid system
 ### Feedback
 You're missing critical decision areas like when to replace hiring managers versus when to coach them.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for intervention timing, feedback quality thresholds, and system modification triggers.
@@ -185,8 +161,6 @@ Add decision frameworks for intervention timing, feedback quality thresholds, an
 ### Feedback
 Your purpose lacks specific success metrics and clear boundaries about what types of feedback improvements you'll focus on.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Add measurable outcomes: "Reduce vague feedback by X% and increase R2-aligned rejections by Y% within Z timeframe."
@@ -205,8 +179,6 @@ Add measurable outcomes: "Reduce vague feedback by X% and increase R2-aligned re
 ### Feedback
 You have strong feedback collection positions but missing stances on equally important system implementation and change management areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on technology adoption speed, hiring manager training approaches, and system rollback criteria.
@@ -217,8 +189,6 @@ Add clear positions on technology adoption speed, hiring manager training approa
 ### Feedback
 Your SPOVs state beliefs but don't provide decision frameworks for competing priorities and edge cases.
 
-### Relevant Lesson
-Link to lesson on actionable SPOV development
 
 ### Coaching
 Transform your "avoid overreacting" SPOV into a decision tree that guides responses when feedback conflicts across interviewers.
@@ -229,8 +199,6 @@ Transform your "avoid overreacting" SPOV into a decision tree that guides respon
 ### Feedback
 You're not leveraging your expert knowledge to develop distinctive positions that challenge conventional recruiting wisdom.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Use your insight about hiring manager misconceptions to develop a contrarian position about when feedback should be ignored versus when systems should be changed.

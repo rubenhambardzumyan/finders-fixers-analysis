@@ -65,8 +65,6 @@
 ### Feedback
 Your expert list only includes supporters of cloud migration and 5G adoption - you're missing the skeptics and traditionalists.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 experts who advocate for on-premise solutions or question aggressive cloud migration to strengthen your position.
@@ -77,8 +75,6 @@ Add 2-3 experts who advocate for on-premise solutions or question aggressive clo
 ### Feedback
 You're missing critical decision areas that CTOs face when managing legacy telecommunications infrastructure.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add sections covering vendor lock-in risks, compliance requirements, and operational continuity during transitions.
@@ -89,8 +85,6 @@ Add sections covering vendor lock-in risks, compliance requirements, and operati
 ### Feedback
 Your insights stay within the telecommunications bubble instead of learning from other infrastructure domains.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how financial services, healthcare, or manufacturing handle legacy system modernization challenges.
@@ -105,8 +99,6 @@ Study how financial services, healthcare, or manufacturing handle legacy system 
 ### Feedback
 Your purpose statement has competing objectives between technical understanding and strategic planning that will confuse decision-making.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Choose one primary objective: either technical documentation OR strategic planning - then build everything else to support that choice.
@@ -117,8 +109,6 @@ Choose one primary objective: either technical documentation OR strategic planni
 ### Feedback
 You're missing critical decision areas that product teams face when managing telecommunications platforms.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for feature prioritization, customer migration strategies, and technology sunset planning.
@@ -129,8 +119,6 @@ Add decision frameworks for feature prioritization, customer migration strategie
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem, clear boundaries, success metrics, and decision authority.
@@ -149,8 +137,6 @@ Restructure with: specific problem, clear boundaries, success metrics, and decis
 ### Feedback
 You have strong technical architecture positions but missing stances on equally important business strategy areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on pricing strategy, competitive response, and customer communication approaches.
@@ -165,8 +151,6 @@ Add clear positions on pricing strategy, competitive response, and customer comm
 ### Feedback
 You're not leveraging your expert knowledge to develop distinctive positions that challenge telecommunications conventional wisdom.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take Danielle Rios's cloud transformation stance and develop your own modification based on SMS-specific infrastructure requirements.

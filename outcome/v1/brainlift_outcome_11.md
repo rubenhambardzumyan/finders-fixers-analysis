@@ -73,8 +73,6 @@
 ### Feedback
 Your insights stay within the software monitoring bubble instead of learning from other reliability domains.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how aviation, nuclear power, or medical device industries handle safety monitoring to enrich your approach.
@@ -97,8 +95,6 @@ Study how aviation, nuclear power, or medical device industries handle safety mo
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem, clear boundaries, success metrics, and decision authority.
@@ -125,8 +121,6 @@ Restructure with: specific problem, clear boundaries, success metrics, and decis
 ### Feedback
 You're not leveraging monitoring expert knowledge to develop distinctive positions that challenge observability conventional wisdom.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take John Allspaw's sociotechnical monitoring approach and develop your own modification based on legacy system constraints.

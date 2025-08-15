@@ -65,8 +65,6 @@
 ### Feedback
 Your expert list includes only Cursor team members without external critics or alternative tool advocates.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 experts who advocate for traditional IDEs like VSCode or criticize AI-assisted development approaches.
@@ -77,8 +75,6 @@ Add 2-3 experts who advocate for traditional IDEs like VSCode or criticize AI-as
 ### Feedback
 You're missing critical areas that development teams encounter beyond core IDE features.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add sections covering team onboarding processes, cost management strategies, and integration with existing development workflows.
@@ -89,8 +85,6 @@ Add sections covering team onboarding processes, cost management strategies, and
 ### Feedback
 Your insights stay within the Cursor/AI-IDE domain instead of learning from other productivity tools.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how other productivity tools like Notion, Figma, or design systems handle AI integration and collaborative workflows.
@@ -109,8 +103,6 @@ Study how other productivity tools like Notion, Figma, or design systems handle 
 ### Feedback
 You're missing critical decision areas that teams face when adopting AI development tools.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for tool migration strategies, team training approaches, and ROI measurement methods.
@@ -121,8 +113,6 @@ Add decision frameworks for tool migration strategies, team training approaches,
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem (AI-IDE complexity), clear boundaries (Cursor only), success metrics (productivity gains), and decision authority.
@@ -141,8 +131,6 @@ Restructure with: specific problem (AI-IDE complexity), clear boundaries (Cursor
 ### Feedback
 You have strong AI interaction positions but missing stances on equally important areas like team management and cost optimization.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on team training approaches, tool adoption strategies, and performance measurement methods.
@@ -157,8 +145,6 @@ Add clear positions on team training approaches, tool adoption strategies, and p
 ### Feedback
 You're not leveraging broader expert knowledge to develop distinctive positions beyond current Cursor practices.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take insights from traditional IDE experts and develop your own stance on when AI assistance becomes counterproductive for learning.

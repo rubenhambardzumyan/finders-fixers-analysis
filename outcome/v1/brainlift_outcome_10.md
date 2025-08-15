@@ -13,8 +13,6 @@
 ### Feedback
 Your BrainLift contains very limited DOK1 facts - only a few basic statistics about acquisition outcomes.
 
-### Relevant Lesson
-Link to lesson on extracting DOK1 facts and DOK2 summaries
 
 ### Coaching
 Add 15-20 specific, verifiable facts about acquisition integration processes, timelines, success rates, and cost impacts.
@@ -25,8 +23,6 @@ Add 15-20 specific, verifiable facts about acquisition integration processes, ti
 ### Feedback
 The few facts present lack proper source attribution and external verification.
 
-### Relevant Lesson
-Link to lesson on source attribution for credibility
 
 ### Coaching
 Add clear citations to acquisition case studies, industry reports, and research papers for each factual claim.
@@ -41,8 +37,6 @@ Add clear citations to acquisition case studies, industry reports, and research 
 ### Feedback
 Your BrainLift lacks proper DOK2 summaries that synthesize multiple sources into coherent patterns.
 
-### Relevant Lesson
-Link to lesson on creating effective DOK2 summaries
 
 ### Coaching
 Develop section summaries that connect multiple acquisition examples into broader integration patterns and principles.
@@ -53,8 +47,6 @@ Develop section summaries that connect multiple acquisition examples into broade
 ### Feedback
 No clear synthesis of information from multiple sources is demonstrated in your content structure.
 
-### Relevant Lesson
-Link to lesson on information synthesis techniques
 
 ### Coaching
 Create summaries that weave together insights from multiple acquisition case studies and industry analyses.
@@ -65,8 +57,6 @@ Create summaries that weave together insights from multiple acquisition case stu
 ### Feedback
 The limited content lacks analytical depth and strategic thinking about acquisition integration patterns.
 
-### Relevant Lesson
-Link to lesson on developing analytical depth
 
 ### Coaching
 Add analytical framework that explains why certain integration approaches succeed while others fail.
@@ -85,8 +75,6 @@ Add analytical framework that explains why certain integration approaches succee
 ### Feedback
 Your experts section only lists a few technology leaders without comprehensive coverage of acquisition integration expertise.
 
-### Relevant Lesson
-Link to lesson on identifying and describing relevant experts
 
 ### Coaching
 Add 6-8 more experts covering M&A strategy, change management, and integration specialization areas.
@@ -97,8 +85,6 @@ Add 6-8 more experts covering M&A strategy, change management, and integration s
 ### Feedback
 Expert entries lack detailed professional descriptions and complete contact information.
 
-### Relevant Lesson
-Link to lesson on expert profiling best practices
 
 ### Coaching
 Expand each expert entry with specific credentials, notable achievements, and multiple contact methods.
@@ -109,8 +95,6 @@ Expand each expert entry with specific credentials, notable achievements, and mu
 ### Feedback
 Expert perspectives and unique contributions are not clearly articulated or differentiated.
 
-### Relevant Lesson
-Link to lesson on capturing expert perspectives
 
 ### Coaching
 Describe each expert's specific approach, methodology, or unique insights about acquisition integration.
@@ -121,8 +105,6 @@ Describe each expert's specific approach, methodology, or unique insights about 
 ### Feedback
 The relevance of each expert to acquisition integration purpose is not explicitly explained.
 
-### Relevant Lesson
-Link to lesson on expert relevance mapping
 
 ### Coaching
 Add clear explanations of how each expert's experience directly applies to software acquisition challenges.
@@ -133,8 +115,6 @@ Add clear explanations of how each expert's experience directly applies to softw
 ### Feedback
 Expert perspectives lack diversity across different aspects of acquisition integration processes.
 
-### Relevant Lesson
-Link to lesson on expert diversity strategy
 
 ### Coaching
 Include experts covering technical integration, organizational change, financial optimization, and customer retention.
@@ -145,8 +125,6 @@ Include experts covering technical integration, organizational change, financial
 ### Feedback
 Your expert list only includes supporters of aggressive integration approaches - you're missing the cautious voices.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 experts who advocate for slower, more careful integration approaches to strengthen your position.
@@ -157,8 +135,6 @@ Add 2-3 experts who advocate for slower, more careful integration approaches to 
 ### Feedback
 You're missing critical decision areas that acquisition teams face during software integration.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add sections covering team transition, technology assessment, and customer communication strategies.
@@ -169,8 +145,6 @@ Add sections covering team transition, technology assessment, and customer commu
 ### Feedback
 Your insights stay within the software acquisition bubble instead of learning from other integration domains.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how pharmaceutical, manufacturing, or retail companies handle acquisition integration challenges.
@@ -189,8 +163,6 @@ Study how pharmaceutical, manufacturing, or retail companies handle acquisition 
 ### Feedback
 You're missing critical decision areas that acquisition integration teams face during software transitions.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for technology stack evaluation, team retention, and integration sequencing.
@@ -201,8 +173,6 @@ Add decision frameworks for technology stack evaluation, team retention, and int
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem, clear boundaries, success metrics, and decision authority.
@@ -221,8 +191,6 @@ Restructure with: specific problem, clear boundaries, success metrics, and decis
 ### Feedback
 You have strong operational positions but missing stances on equally important strategic and cultural areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on talent retention, brand integration, and customer relationship management approaches.
@@ -237,8 +205,6 @@ Add clear positions on talent retention, brand integration, and customer relatio
 ### Feedback
 You're not leveraging acquisition expert knowledge to develop distinctive positions that challenge integration conventional wisdom.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take insights from successful tech acquisitions and develop your own modification based on software-specific integration challenges.

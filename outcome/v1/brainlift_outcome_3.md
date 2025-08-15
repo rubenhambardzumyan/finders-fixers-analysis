@@ -41,8 +41,6 @@
 ### Feedback
 Your insights describe architectural patterns but don't translate into specific development decisions.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert "Cold starts cause real bugs" into "If message fails within 100ms of extension startup, implement handshake retry with 200ms backoff."
@@ -53,8 +51,6 @@ Convert "Cold starts cause real bugs" into "If message fails within 100ms of ext
 ### Feedback
 Your expert section only contains 4 experts, which is insufficient for comprehensive domain coverage.
 
-### Relevant Lesson
-Link to lesson on expert identification and selection
 
 ### Coaching
 Add 3-5 more experts covering areas like browser security, performance optimization, and cross-platform compatibility.
@@ -77,8 +73,6 @@ Add 3-5 more experts covering areas like browser security, performance optimizat
 ### Feedback
 Your expert perspectives focus too narrowly on technical implementation without covering UX or business aspects.
 
-### Relevant Lesson
-Link to lesson on diverse expert perspective inclusion
 
 ### Coaching
 Add experts covering extension store optimization, user experience design, and monetization strategies.
@@ -89,8 +83,6 @@ Add experts covering extension store optimization, user experience design, and m
 ### Feedback
 Your expert list includes only supporters of modern frameworks without traditional extension developers.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 experts who advocate for vanilla JavaScript approaches or criticize framework overhead in extensions.
@@ -101,8 +93,6 @@ Add 2-3 experts who advocate for vanilla JavaScript approaches or criticize fram
 ### Feedback
 You're missing critical areas that extension developers encounter beyond technical implementation.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add sections covering store submission processes, user privacy considerations, and monetization strategies.
@@ -113,8 +103,6 @@ Add sections covering store submission processes, user privacy considerations, a
 ### Feedback
 Your insights stay within the web extension bubble instead of learning from other software distribution models.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how mobile app development, desktop software, or SaaS handles similar distribution and update challenges.
@@ -129,8 +117,6 @@ Study how mobile app development, desktop software, or SaaS handles similar dist
 ### Feedback
 Your purpose statement lacks a clear primary objective that would guide decision-making.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Choose one primary objective: either establishing best practices OR creating reusable baselines - then build everything else to support that choice.
@@ -141,8 +127,6 @@ Choose one primary objective: either establishing best practices OR creating reu
 ### Feedback
 You're missing critical decision areas that extension teams face beyond technical architecture.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for browser compatibility choices, user privacy boundaries, and performance trade-offs.
@@ -153,8 +137,6 @@ Add decision frameworks for browser compatibility choices, user privacy boundari
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem (extension complexity), clear boundaries (web extensions only), success metrics (reusability), and decision authority.
@@ -173,8 +155,6 @@ Restructure with: specific problem (extension complexity), clear boundaries (web
 ### Feedback
 You have strong technical architecture positions but missing stances on equally important areas like user experience and privacy.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on user onboarding flows, data collection practices, and performance monitoring approaches.
@@ -189,8 +169,6 @@ Add clear positions on user onboarding flows, data collection practices, and per
 ### Feedback
 You're not leveraging your expert knowledge to develop distinctive positions that extend beyond current practices.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take Rob Wu's security expertise and develop your own extension on browser privacy boundaries based on your specific use cases.

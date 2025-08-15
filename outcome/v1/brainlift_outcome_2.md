@@ -41,8 +41,6 @@
 ### Feedback
 Your insights describe patterns but don't translate into specific operational decisions.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert "Engineers consistently misattribute system failures" into "If incident occurred within 48 hours of deployment, check drift patterns first, then recent changes."
@@ -73,8 +71,6 @@ Convert "Engineers consistently misattribute system failures" into "If incident 
 ### Feedback
 Your expert list focuses entirely on systems thinking advocates without including traditional RCA practitioners.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 experts who defend traditional root cause analysis approaches to balance your systems thinking perspective.
@@ -85,8 +81,6 @@ Add 2-3 experts who defend traditional root cause analysis approaches to balance
 ### Feedback
 You're missing critical operational areas that RCA teams encounter daily.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add sections covering incident communication protocols, stakeholder management, and legal/compliance documentation requirements.
@@ -97,8 +91,6 @@ Add sections covering incident communication protocols, stakeholder management, 
 ### Feedback
 Your insights stay within the tech incident analysis bubble instead of learning from other safety-critical industries.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how aviation, healthcare, or nuclear industries handle failure analysis and incorporate their proven methodologies.
@@ -113,8 +105,6 @@ Study how aviation, healthcare, or nuclear industries handle failure analysis an
 ### Feedback
 Your purpose statement has competing timelines that will confuse implementation priorities.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Choose one primary timeline: either immediate engineering guidance OR future automation - then align all other objectives to support that choice.
@@ -125,8 +115,6 @@ Choose one primary timeline: either immediate engineering guidance OR future aut
 ### Feedback
 You're missing critical decision areas that RCA teams face beyond technical analysis.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for incident severity classification, communication timing, and resource allocation during analysis.
@@ -137,8 +125,6 @@ Add decision frameworks for incident severity classification, communication timi
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem (RCA ineffectiveness), clear boundaries (SaaS incidents only), success metrics (completion time), and decision authority.
@@ -157,8 +143,6 @@ Restructure with: specific problem (RCA ineffectiveness), clear boundaries (SaaS
 ### Feedback
 You have strong systems thinking positions but missing stances on equally important operational areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on incident communication strategy, team training approaches, and tool selection criteria.

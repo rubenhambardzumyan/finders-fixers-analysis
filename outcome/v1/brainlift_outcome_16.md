@@ -41,8 +41,6 @@
 ### Feedback
 Your insights are strategic but don't create specific rules for when and how to make operational recruiting decisions.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert your "1000x larger candidate pool" insight into a specific rule: "When application volume exceeds X candidates, automatically trigger enhanced screening tier Y."
@@ -73,8 +71,6 @@ Convert your "1000x larger candidate pool" insight into a specific rule: "When a
 ### Feedback
 Your expert list lacks critics who would challenge objective-only hiring or question the effectiveness of cognitive testing for all roles.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add experts who advocate for cultural fit interviews, diverse hiring approaches, or who question the universal applicability of cognitive assessments.
@@ -125,8 +121,6 @@ Add experts who advocate for cultural fit interviews, diverse hiring approaches,
 ### Feedback
 While your positions are strong, you could push further against conventional recruiting wisdom using your deep platform knowledge.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Use your data on AI skill leveling to develop a more contrarian position about when traditional experience requirements should be completely eliminated versus adjusted.

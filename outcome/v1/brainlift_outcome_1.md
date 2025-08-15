@@ -41,9 +41,6 @@
 ### Feedback
 Your insights read like strategic observations but lack the specificity needed for daily operations.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
-
 ### Coaching
 Convert each insight into an "if-then" rule that tells someone exactly when and how to act.
 
@@ -73,9 +70,6 @@ Convert each insight into an "if-then" rule that tells someone exactly when and 
 ### Feedback
 Your expert list only includes supporters of your approach - you're missing the critics.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
-
 ### Coaching
 Add 2-3 experts who would disagree with your pricing or AI strategies to strengthen your position.
 
@@ -85,9 +79,6 @@ Add 2-3 experts who would disagree with your pricing or AI strategies to strengt
 ### Feedback
 You're missing critical decision areas that will determine acquisition success or failure.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
-
 ### Coaching
 Add sections covering due diligence criteria, integration timeline, and cultural alignment factors.
 
@@ -96,9 +87,6 @@ Add sections covering due diligence criteria, integration timeline, and cultural
 
 ### Feedback
 Your insights stay within the MarTech bubble instead of learning from other industries.
-
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how subscription businesses in media, fitness, or software handle similar retention challenges.
@@ -113,9 +101,6 @@ Study how subscription businesses in media, fitness, or software handle similar 
 ### Feedback
 Your purpose statement has competing objectives that will confuse decision-making.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
-
 ### Coaching
 Choose one primary objective: either maximize margins OR maximize retention - then build everything else to support that choice.
 
@@ -125,9 +110,6 @@ Choose one primary objective: either maximize margins OR maximize retention - th
 ### Feedback
 You're missing critical decision areas that acquisition teams face every day.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
-
 ### Coaching
 Add decision frameworks for target identification, valuation limits, and integration sequencing.
 
@@ -136,9 +118,6 @@ Add decision frameworks for target identification, valuation limits, and integra
 
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
-
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem, clear boundaries, success metrics, and decision authority.
@@ -157,9 +136,6 @@ Restructure with: specific problem, clear boundaries, success metrics, and decis
 ### Feedback
 You have strong pricing positions but missing stances on equally important areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
-
 ### Coaching
 Add clear positions on talent strategy, competitive response, and technology integration approaches.
 
@@ -169,9 +145,6 @@ Add clear positions on talent strategy, competitive response, and technology int
 ### Feedback
 Your SPOVs state beliefs but don't provide decision frameworks for complex situations.
 
-### Relevant Lesson
-Link to lesson on actionable SPOV development
-
 ### Coaching
 Transform each SPOV into a decision tree that guides choices when faced with conflicting priorities.
 
@@ -180,9 +153,6 @@ Transform each SPOV into a decision tree that guides choices when faced with con
 
 ### Feedback
 You're not leveraging your expert knowledge to develop distinctive positions.
-
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take Kyle Poyar's usage-based pricing stance and develop your own modification or contradiction based on SMB specifics.

@@ -17,8 +17,6 @@
 ### Feedback
 Many of your technical facts lack proper source attribution and documentation links.
 
-### Relevant Lesson
-Link to lesson on proper fact sourcing and attribution
 
 ### Coaching
 Add specific sources for claims like "95th percentile latency" and "db.load metric" with links to AWS documentation.
@@ -37,8 +35,6 @@ Add specific sources for claims like "95th percentile latency" and "db.load metr
 ### Feedback
 Your DOK2 summaries are too brief and don't demonstrate sufficient synthesis of the underlying facts.
 
-### Relevant Lesson
-Link to lesson on comprehensive DOK2 development
 
 ### Coaching
 Expand your summaries to show deeper connections between monitoring metrics, performance trade-offs, and operational decisions.
@@ -49,8 +45,6 @@ Expand your summaries to show deeper connections between monitoring metrics, per
 ### Feedback
 Your DOK2 summaries lack the analytical depth needed for strategic database decision-making.
 
-### Relevant Lesson
-Link to lesson on strategic analysis in DOK2 summaries
 
 ### Coaching
 Connect your indexing facts to broader performance implications and explain how they influence system architecture choices.
@@ -65,8 +59,6 @@ Connect your indexing facts to broader performance implications and explain how 
 ### Feedback
 Your single insight about indexing doesn't translate into specific operational decisions.
 
-### Relevant Lesson
-Link to lesson on creating trigger-based operational rules
 
 ### Coaching
 Convert "Adding too many indexes impacts write speeds" into "If write latency exceeds 50ms, audit indexes with usage < 10% and remove unused ones."
@@ -97,8 +89,6 @@ Convert "Adding too many indexes impacts write speeds" into "If write latency ex
 ### Feedback
 Your expert list includes only database theory advocates without practitioners who challenge academic approaches.
 
-### Relevant Lesson
-Link to lesson on incorporating contrarian expert perspectives
 
 ### Coaching
 Add 2-3 experts who advocate for NoSQL solutions or criticize traditional relational database approaches.
@@ -109,8 +99,6 @@ Add 2-3 experts who advocate for NoSQL solutions or criticize traditional relati
 ### Feedback
 You're missing critical operational areas that database teams encounter beyond initial design.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add sections covering backup strategies, disaster recovery, security configurations, and capacity planning.
@@ -121,8 +109,6 @@ Add sections covering backup strategies, disaster recovery, security configurati
 ### Feedback
 Your insights stay within the relational database domain instead of learning from other data storage approaches.
 
-### Relevant Lesson
-Link to lesson on cross-domain insight development
 
 ### Coaching
 Study how distributed systems, time-series databases, or graph databases handle similar performance and consistency challenges.
@@ -137,8 +123,6 @@ Study how distributed systems, time-series databases, or graph databases handle 
 ### Feedback
 Your purpose statement has unclear boundaries that will confuse scope decisions.
 
-### Relevant Lesson
-Link to lesson on purpose clarity and focus
 
 ### Coaching
 Choose one primary objective: either initial schema design OR operational monitoring - then clearly separate these distinct concerns.
@@ -149,8 +133,6 @@ Choose one primary objective: either initial schema design OR operational monito
 ### Feedback
 You're missing critical decision areas that database teams face beyond schema design and indexing.
 
-### Relevant Lesson
-Link to lesson on comprehensive domain coverage
 
 ### Coaching
 Add decision frameworks for technology selection, scaling strategies, and incident response procedures.
@@ -161,8 +143,6 @@ Add decision frameworks for technology selection, scaling strategies, and incide
 ### Feedback
 Your purpose lacks the four-component structure needed for AI and human clarity.
 
-### Relevant Lesson
-Link to lesson on purpose statement structure
 
 ### Coaching
 Restructure with: specific problem (database reliability), clear boundaries (relational only), success metrics (SLO achievement), and decision authority.
@@ -181,8 +161,6 @@ Restructure with: specific problem (database reliability), clear boundaries (rel
 ### Feedback
 You have strong schema design positions but missing stances on equally important operational areas.
 
-### Relevant Lesson
-Link to lesson on comprehensive SPOV coverage
 
 ### Coaching
 Add clear positions on backup strategies, performance monitoring approaches, and technology selection criteria.
@@ -193,8 +171,6 @@ Add clear positions on backup strategies, performance monitoring approaches, and
 ### Feedback
 Your SPOVs state principles but don't provide decision frameworks for complex database situations.
 
-### Relevant Lesson
-Link to lesson on actionable SPOV development
 
 ### Coaching
 Transform "We separate reads and writes" into a decision tree that guides choices about when to implement read replicas vs other scaling approaches.
@@ -205,8 +181,6 @@ Transform "We separate reads and writes" into a decision tree that guides choice
 ### Feedback
 You're not leveraging your expert knowledge to develop distinctive positions beyond standard best practices.
 
-### Relevant Lesson
-Link to lesson on expert-derived SPOV development
 
 ### Coaching
 Take Martin Kleppmann's distributed systems insights and develop your own stance on consistency vs availability trade-offs for specific use cases.
