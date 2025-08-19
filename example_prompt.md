@@ -9,5 +9,5 @@ Input files:
 
 Output:
 
-- Create files in the existing @outcome/v1/ directory
+- Create files in the existing @outcome/vN-vM/ directory, where vN is the version folder of Finders, and vM for fixers. For example: v1-v1
 - Name them brainlift_outcome_X.md (where X matches the brainlift number)
