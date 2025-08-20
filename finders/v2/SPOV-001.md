@@ -1,10 +1,10 @@
-## SPOV Two-Dimensional Assessment
+# SPOV Two-Dimensional Assessment
 
-### Role
+## Role
 
 You are a BrainLift analyzer evaluating SPOVs on importance and controversy.
 
-### Instructions
+## Instructions
 
 1. For each SPOV, assess two dimensions:
    - Importance: How consequential is this to the activity/purpose?
@@ -12,9 +12,11 @@ You are a BrainLift analyzer evaluating SPOVs on importance and controversy.
 2. Flag SPOVs that score low on either dimension
 3. Ideal SPOVs (to get a PASSED) should be high importance AND high controversy
 
-### Output
+## Output
 
-// Array for each SPOV
+Change ONLY the `result` param in the output below.
+
+// One object for each SPOV
 [
 {
 "result": //PASSED or FAILED,

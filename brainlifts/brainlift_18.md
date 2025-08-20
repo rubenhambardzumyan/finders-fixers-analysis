@@ -1,0 +1,21 @@
+Trilogy's take on running acquired enterprise software companies
+
+- Owner
+- Purpose
+  - Capture our - Trilogy specific - point of view on how to run legacy enterprise software we are acquiring
+- _----------- Depth of Knowledge / DOK starts here ----------_
+- DOK4 - SPOV
+  - With AWS, vendor lock-in is big advantage - allows us to run lean organizations, and rely heavy on Amazon's innovation and leadership in this space
+- DOK3 - Insights
+  - DOK3 - Blueprints
+    - may have links to systems or docs
+- _---------- BRIGHT LINE. Above this is based on the owner's opinion and expertise. Below this is based on the external flow of information ----------_
+- Experts
+- DOK2 - Knowledge Tree
+  - DOK2 -summaries
+  - DOK1 - factsn
+    - Move everything to AWS. We are AWS first and always prefer AWS over other clouds or co-location. This is a fact driven by a top-down decision, not an insight.
+    - We frequently buy bad companies: poorly managed or bankrupt. We believe we can turn them around by applying standard processes
+    - AWS does not fail. Period. HA is a thing only if contractually required
+  - links to original sources
+- _---------- BRIGHT LINE. Above this is the BrainLift, the user creates this without AI. Below this is not the BrainLift, it is however the user gets sources from the flow of external information ----------_
