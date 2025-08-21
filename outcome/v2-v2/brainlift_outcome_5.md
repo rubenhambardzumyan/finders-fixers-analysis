@@ -1,82 +1,32 @@
 # BrainLift Outcome 5 - Analysis Results
 
 **BrainLift**: KMS Cost Optimization  
-**Analysis Date**: 2025-08-20  
-**Total Assessments**: 9  
-**Passed**: 4 | **Failed**: 5
+**Analysis Date**: 2025-08-21  
+**Total Assessments**: 8  
+**Passed**: 4 | **Failed**: 4
 
 ---
-
-## EXP-001 Assessment
-
-**Status**: ❌ FAILED
-
-### Feedback
-
-Your BrainLift has minimal expert coverage with only 1 expert (the owner), missing representation from different approaches to AWS cost optimization and key management.
-
-### Coaching
-
-**School of Thought 1: Automation-First Optimization**
-- **Expert**: Corey Quinn (@QuinnyPig) - Chief Cloud Economist at The Duckbill Group
-- **Main Views**: AWS cost optimization should be heavily automated with continuous monitoring and alerting systems
-- **Where to Find**: @QuinnyPig on Twitter
-
-**School of Thought 2: Policy-Driven Cost Control**  
-- **Expert**: Andreas Wittig (@andreaswittig) - AWS consultant and author of "Amazon Web Services in Action"
-- **Main Views**: Cost optimization should focus on preventive policies and governance rather than reactive cleanup
-- **Where to Find**: @andreaswittig on Twitter
-
-**School of Thought 3: FinOps Integration**
-- **Expert**: J.R. Storment (@jrstorment) - Co-founder of FinOps Foundation
-- **Main Views**: Cloud cost optimization requires cross-functional collaboration between finance, engineering, and operations
-- **Where to Find**: @jrstorment on Twitter
-
-## GEN-001 Assessment
-
-**Status**: ❌ FAILED
-
-### Feedback
-
-Your BrainLift accepts conventional AWS cost optimization approaches without challenging widely accepted practices in cloud cost management.
-
-### Coaching
-
-Challenge assumptions like "unused resources should be deleted immediately" - explore graduated cost reduction strategies, question whether AWS billing models are optimal for your usage patterns, and examine why organizations accept cloud vendor pricing without negotiation strategies.
-
-## GEN-002 Assessment
-
-**Status**: ❌ FAILED
-
-### Feedback
-
-Your insights stay within the AWS ecosystem instead of learning from other cloud providers and cost optimization approaches.
-
-### Coaching
-
-Study how Google Cloud approaches key management pricing, examine Microsoft Azure's cost optimization tools, and learn from on-premises security key management systems. Also explore how other industries handle asset lifecycle management and unused resource identification.
-
-## KTR-001 Assessment
-
-**Status**: ❌ FAILED
-
-### Feedback
-
-Your knowledge foundation is quite limited with minimal DOK1 facts and insufficient coverage of KMS cost optimization strategies.
-
-### Coaching
-
-Expand your Knowledge Tree with comprehensive coverage of: (1) KMS pricing models and cost drivers beyond key storage, (2) Alternative key management approaches and their cost implications, (3) Automated monitoring and alerting strategies, and (4) Integration patterns with other AWS services that affect KMS costs.
 
 ## PUR-001 Assessment
 
 **Status**: ✅ PASSED  
-**Result**: Clear problem definition exists - guiding cost optimization of AWS Key Management Service with explicit scope boundaries.
+**Result**: All Finder criteria passed: The purpose statement clearly defines the problem - gathering information to guide cost optimization of AWS Key Management Service.
 
 ## PUR-002 Assessment
 
-**Status**: ✅ PASSED  
-**Result**: Purpose is narrowly focused on KMS cost optimization with clear scope boundaries. No competing objectives identified.
+**Status**: ❌ FAILED
+
+### Feedback
+
+Your purpose statement lacks user-specific context about constraints, operational environment, and important variables to optimize in KMS cost management.
+
+### Relevant Lesson
+
+[BrainLift 110: Pick the BrainLift You Need to Create](https://coach.crossover.com/curriculum)
+
+### Coaching
+
+Add context about your AWS environment: multi-account setup vs single account, compliance requirements (SOX, HIPAA), existing automation capabilities, team size managing KMS. Specify what to optimize (cost reduction vs. security vs. operational overhead) and constraints (can't delete encryption in regulated environments, automated vs. manual processes). This helps readers apply your optimization patterns safely.
 
 ## PUR-003 Assessment
 
@@ -84,25 +34,55 @@ Expand your Knowledge Tree with comprehensive coverage of: (1) KMS pricing model
 
 ### Feedback
 
-Your purpose focuses on identifying unused keys but misses critical decision areas around cost optimization strategy and risk management.
+Your purpose statement lacks clear measurable outcomes and doesn't specify target users or specific use cases for KMS optimization knowledge.
+
+### Relevant Lesson
+
+[BrainLift 110: Pick the BrainLift You Need to Create](https://coach.crossover.com/curriculum)
 
 ### Coaching
 
-Add decision frameworks for: (1) Risk tolerance levels - how to balance cost savings against data recovery risks, (2) Automation boundaries - when to automate key deletion vs. requiring manual approval, and (3) Cross-account and cross-service impact assessment before key modifications.
+Define success metrics: cost reduction percentage targets, number of unused keys identified, time savings in key management. Specify who will use this (DevOps engineers, cloud architects, FinOps teams) and for what scenarios (regular audits, pre-acquisition assessments, compliance reviews). Quantifiable outcomes make the optimization strategy's value clear.
 
-## SPOV-001 Assessment
-
-**Status**: ✅ PASSED  
-**Result**: Clear SPOV exists about the hidden cost impact of unused keys accumulating over time.
-
-## SPOV-002 Assessment
+## EXP-002 Assessment
 
 **Status**: ❌ FAILED
 
 ### Feedback
 
-You have one cost-awareness stance but missing positions on equally critical risk management and operational decision areas.
+Your BrainLift has domain expertise but lacks a comprehensive experts section to position your insights within competing schools of thought.
+
+### Relevant Lesson
+
+[BrainLift 110: Pick the BrainLift You Need to Create](https://coach.crossover.com/curriculum)
 
 ### Coaching
 
-Add clear positions on: (1) Risk-cost trade-offs - acceptable data recovery risk levels for cost savings, (2) Automation philosophy - level of human oversight required for destructive cost optimization actions, and (3) Vendor relationship - whether to accept AWS pricing models or actively negotiate enterprise discounts.
+Research schools of thought in cloud cost optimization: **Security-First School** (prioritizes key retention for compliance), **Automation-First School** (emphasizes tooling over manual processes), **Risk-Averse School** (prefers gradual key deprecation). For each expert, provide: name, main cost optimization philosophy, specific AWS expertise, and contact information. This positions your aggressive deletion approach as one valid strategy among several.
+
+## GEN-001 Assessment
+
+**Status**: ✅ PASSED  
+**Result**: All Finder criteria passed: The BrainLift challenges conventional KMS management assumptions, particularly around key deletion safety and the use of CloudWatch metrics over CloudTrail for usage detection.
+
+## GEN-002 Assessment
+
+**Status**: ❌ FAILED
+
+### Feedback
+
+Your KMS optimization insights focus purely on AWS-specific techniques without exploring how other domains handle similar resource optimization challenges.
+
+### Coaching
+
+Import frameworks from IT asset management, data center operations, and financial portfolio optimization: 1) ITIL asset lifecycle management for systematic key retirement processes, 2) Data center capacity planning techniques for predicting future encryption needs, 3) Financial portfolio rebalancing strategies for key usage optimization. These domains have solved similar problems of managing large inventories of resources with varying utilization.
+
+## GEN-003 Assessment
+
+**Status**: ✅ PASSED  
+**Result**: All Finder criteria passed: Knowledge Tree contains structured information about KMS metrics, resource finding, cost impact, and key policy management.
+
+## SPOV-002 Assessment
+
+**Status**: ✅ PASSED  
+**Result**: All Finder criteria passed: Strong SPOV about cost assumptions ("You think it is one dollar, but it might be thousands") demonstrates high importance and controversy in cloud cost management.
