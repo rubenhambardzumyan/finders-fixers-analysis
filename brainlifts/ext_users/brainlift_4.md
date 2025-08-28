@@ -1,0 +1,29 @@
+BrainLift: AI-Powered Codebase Onboarding for Maximum Productivity
+
+- Owner(s): ﻿Bach Ly
+- Purpose: To evaluate AI-driven developer tools that streamline the code-base onboarding phase at Trilogy, with the aim of cutting at least 50 % of the toil involved in parsing legacy documentation, grasping project architecture, and mapping business domains to source modules—so new engineers can progress from clone to first productive commit dramatically faster.
+- DOK4 - SPOV / New Knowledge
+- DOK3 - Insights
+  - Most of grunt tasks can be reduce upto 50% completion time due to the help of LLM
+- Experts:
+  - McKinsey (company): [https://www.mckinsey.com](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai?utm_source=chatgpt.com)
+  - **LLM-Powered Codebase Exploration**
+    - Sourcegraph (company):
+      - Source: [https://webflow.sourcegraph.com/blog](https://webflow.sourcegraph.com/blog)
+      - Publishes deep dives on embedding-based code search and rigorous evals of LLM tooling; teaches “AI Product Evals” workshops.
+    - Hamel Husai
+      - Source: [https://hamel.dev/](https://hamel.dev/)
+      - Publishes deep dives on embedding-based code search and rigorous evals of LLM tooling; teaches “AI Product Evals” workshops.
+    - Shawn @swyx Wang
+      - Source: [https://www.swyx.io/](https://www.swyx.io/)
+      - Frames “AI Engineer” as a new craft; shares contrarian takes on prompt design and multi-agent orchestration inside codebases.
+- DOK1 and DOK2 - Knowledge Tree and Sources
+  - Source: Unleashing developer productivity with generative AI
+    - Link: [https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai?utm_source=chatgpt.com](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai?utm_source=chatgpt.com)
+    - DOK2: Summary
+      - AI helps reduce a lot of time in simple task
+    - DOK1: Facts
+      - Documenting code functionality for maintainability (which considers how easily code can be improved) can be completed in half the time
+      - Writing new code in nearly half the time
+      - Optimizing existing code (called code refactoring) in nearly two-thirds the time
+  - LLM-Powered Codebase Exploration: Master the use of AI tools (like GitHub Copilot, Cody, Cursor, etc.) to semantically search, summarize, and navigate large unfamiliar codebases. This knowledge area includes techniques for prompt engineering, embedding-based search, and code-aware querying. It directly reduces onboarding time and makes architecture/domain mapping much faster.

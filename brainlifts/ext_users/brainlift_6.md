@@ -1,0 +1,75 @@
+BrainLift: **Kerio Connect - Building a domain based Calendar Invite Filtering**
+
+>
+
+- BrainLift
+  - Key terms:
+    - BrainMaxxing: Building a domain based Calendar Invite Filtering System in Kerio Connect
+  - DOK constructs and BrainLift invariants
+    - BrainLift structure and organization
+      - High Level organization
+        - Owner: Chima Nnoromele
+        - Purpose: Build expertise in Kerio Connect's calendar architecture to implement a domain-based filtering system without disrupting existing functionality, specifically understanding data flows, optimal insertion points for filtering logic, component dependencies, and API contracts that must be maintained.
+        - Knowledge Areas:
+          - Calendar Data Flow: This covers how calendar data and events move through Kerio Connect's system - from creation/modification through storage, synchronization, and delivery to clients. Understanding this flow is essential for identifying optimal insertion points the filtering logic without breaking any existing functionality.
+          - Calendar identification and API Contracts: This covers how Calendar data is identified and separated from regular mails, packaged and transmitted through the system and ensure that calendar invites and regular mails doesn't collide or distort each other.
+        - DOK4 - SPOV
+          - Init.cpp: Three important database tables are initialized here
+            - calendar_filter_config: This table stores the calendar filter configurations as configured by the Admin.
+            - calendar_whitelist_domains**:** This table stores the whitelisted domains.
+            - calendar_filter_logs: This table stores the filter operations, however these operations are also logged and can be seen where other Kerio Connect logs are stored.
+          - CalendarFilter.cpp:
+            - This file interacts directly with the database.
+            - The main lower level filtering is implemented here.
+            - It receives the sending domain and verifies if is an internal domain or a whitelisted one and returns accordingly.
+          - CalendarFilterProcessor.cpp:
+            - This file forms the bridge between the CalendarFilter.cpp and the mail processing pipeline.
+            - The higher level filtering is implemented here.
+            - It analyzes an incoming mail and confirms if it's a calendar invite or a regular mail.
+          - mail_queue.cpp:
+            - This is the mail processing pipeline where the calendar filtering system is hooked in.
+            - Once an incoming mail passes the SPAM test it calls the CalendarFilterProcessor.cpp
+          - ContentManFacade.cpp:
+            - This file handles the API conversion.
+            - It transforms the data that flows through it into a format the receiving end expects.
+          - CalendarFilterManService.cpp:
+            - This is the actual file that handles data sending.
+          - spamFilter.js: This is the actual UI, that the users interact with. It contains the below form fields.
+            - Enable calendar invite filtering checkbox: For enabling the calendar filtering logic.
+            - Allow calendar invites from internal domains checkbox: For auto allowing or disallowing calendar invites from internal domains.
+            - Whitelisted External Domains text area: This is the text area where whitelisted domains are entered. It contains four buttons, `Add Domain` `Remove Domain` `Import` and `Export` buttons
+            - Quarantine calendar invites from non-whitelisted domains checkbox: This checkbox when unchecked allows calendar invites from non whitelisted domains to go through.
+            - Notify users about blocked calendar invites: This checkbox when checked notifies users about a blocked invite.
+            - Log all calendar filter actions: This checkbox when checked, logs every detail of the calendar filter operations from start to finish
+            - Quarantine Folder form field: This is the folder where filtered invites will be sent to. Currently is the Spam folder.
+            - Retention days: This is the number of days, filtered invites will stay in the quarantine folder before being deleted.
+        - DOK3 - Insights
+          - Content.idl: Kerio connect makes use of JSON-RPC model to transport data from the UI to the backend. And this model needs an Adapter that can properly serve as a bridge between the two interfaces. This is where `.idl` files come in. These files automatically generates the adapter files during build time, that is necessary for this connection, without them no data can be passed unto the backend from the frontend. Content.idl is the particular `.idl` file that generates the Content Adapter that is responsible for the Spam and Calendar Filter operations.
+          - Right Directory: Placing files in the appropriate directory is key in Kerio Connect System. For example if you place a file like the CalendarFilterProcessor.cpp that interacts with mail envelopes and the mail system directly, in the dataSwitch directory and alter the CMakelists.txt to accommodate the additional include directories, you will run into a lot of runtime errors. It is safer to alter the higher level CmakeLists than to alter a lower level counterpart.
+        - Experts
+          - Aadit Sheth
+            - @aaditsh
+            - Calendar Data Flow
+            - Aadit is the CEO of NeatPrompts. His companies helps enterprises adopt AI so they don’t go extinct. He writes to millions about the future, Changing their lives one tool at a time.
+          - Shubham Saboo:
+            - @Saboo*Shubham*
+            - Calendar Identification and API Contracts
+            - Shubham gives out daily tips and tutorials on LLMs, RAG and AI Agents. He is the Author of books on GPT-3 & Neural Search in Production.
+        - DOK2 - Knowledge Tree
+          - Sources
+            - Data Layer
+              - [Init.cpp](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/dataSwitch/Init.cpp#L1363-L1388)
+              - [CalendarFilter.cpp](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/dataSwitch/CalendarFilter.cpp)
+            - Processing Layer
+              - [CalendarFilterProcessor.cpp](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/CalendarFilterProcessor.cpp)
+            - Facade Layer
+              - [ContentManFacade.cpp](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/facades/ContentManFacade.cpp#L281-L401)
+              - [CalendarFilterConvertor.cpp](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/facades/CalendarFilterConvertor.cpp)
+              - [jsonapiAdminRegistrations.cpp](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/facades/jsonapiAdminRegistrations.cpp#L126-L130)
+              - [Content.idl](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/idl/wam_public/Content.idl#L316-L355)
+            - Service Layer
+              - [CalendarFilterManServicce.cpp](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/wrmail/services/calendarFilterManager/CalendarFilterManService.cpp)
+            - Frontend Layer
+              - [spamFilter.js](https://github.com/trilogy-group/kerio-connect-connect/blob/feature/calendar-filter/web/admin/spamFilter.js#L1819-L2603)
+      - Owner(s)
+        - Chima Nnoromele

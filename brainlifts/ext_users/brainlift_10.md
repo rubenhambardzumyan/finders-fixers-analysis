@@ -1,0 +1,103 @@
+CI/CD practices for legacy systems | Brainlift
+
+- **Owner**
+  - Andre D. L. Zanchetta ([andre.zanchetta@devfactory.com](mailto:andre.zanchetta@devfactory.com))
+- **Purpose**
+  - To examine the differences between the practical approaches for managing legacy products with limited budget (specially in terms of CI/CD) in contrast with the regular recommendations of state-of-the-art best practices, which usually assume that the target product under development/maintenance are based on cutting-edge technologies.
+  - Impact:
+    - Optimize the use of time and resources for the maintenance of legacy products.
+    - Reduce the interval between releases of products like ObjectStore.
+  - Out of scope:
+    - Business approaches for increasing the number of customers
+    - Discussions about customer management
+- **DOK4 - Strategic Points of View (SPOVs)**
+  - When implementing automated tests for multiplatform (Windows and Linux) products, it does not worth the time implementing one pipeline for each environment trying to explore the best native commands in PowerShell (for newer Windows systems), in Command Prompt (for older Windows systems), and in bash (for Linux systems): just ensuring that the production Windows systems have Cygwin installed and implementing a single pipeline in bash optimizes the development and maintenance time. This benefit outweighs the potential lack of optimization in performance.
+  - Cumulative lack of disciple on managing resources by previous developers recurrently results in cumulative expenses related to spare resources. If there is interest in reducing operational costs at related to infrastructure, it worth's prioritizing stopping/removing spare resources like virtual machines and storage volumes then modernizing the existing (yet imperfect and outdated) infrastructure.
+  - With proper documentation, it is faster and safer to set up a new permanent virtual machine from scratch to replace one that is not totally functional than trying to debug issues in a complex environment. Just don't forget to stop/terminate the machine being replaced.
+- **DOK3 - Strategic Insights**
+  - When working with legacy systems, we may need to set up tests for scenarios that reflect from up-to-date to a-decade-or-more-old scenarios, which often include a significant number of intermediate scenarios. While it is good to have as many scenarios tested as possible, given the constraint in resources available, focus should be given to the "extreme" cases. If the tests present good outcomes in the most-outdated and in the most-up-to-date but some failures in the intermediate scenarios, it is likely an issue with the configuration of the intermediate environments rather then with the product itself.
+  - Despite of the benefits of using "dependent" Linux distribution with their often bigger popularity and additional features, for the sake of maintainability, it is often better to focus the support of a product on the "independent" Linux distros given their usually reduced chance of being discontinued. This way, when a today's high-budget cutting-edge product becomes the tomorrow's limited-budget legacy product, the eventual headaches of migrating support for Linux distributions that were discontinued is reduced.
+  - If the CI/CD pipelines of a legacy product already have a functional network that is based on "traditional" Active Directory, you would need a very strong motivation for making efforts to include into its structure towards ephemeral, on-demand machines (like Docker containers): or there is a full structural migration to Azure Active Directories and use the ephemeral machines, or stick with the current "traditional" Active Directories.
+  - Reduction of operational costs probably is NOT be a good argument for attempting to include ephemeral, on-demand machines into "traditional" Active Directory CI/CD networks of legacy products. Because new versions tend to take a significant time to be released, and because legacy products tend to be supported in a limited amount of environments, it is usually more reasonable to just manually start/stop permanent virtual machines "on demand" once or twice a year for the release of a new version of a legacy product.
+  - When a legacy product relies on permanent machines on the cloud and multiple developers have contributed to its maintenance in the past, probably they have left a good amount of unused resources behind from their tests/development activities - and unused allocated resources in the cloud era means unnecessary expenses.
+  - EC2 instances in AWS accounts are examples of cloud resources that tend to be left up and running by former collaborators of a project. It is as simple to create a new Virtual Machine as it is to terminate it. The challenge is to keep the order. In that sense, it is worth spend some time not producing and allocating new resources, but ensuring that there is not overprovisions.
+  - The oldest the product, the most ROI a team gets from documentation: not only the number of collaborators tend to be big though the lifetime of a legacy product, but also AI assistants for coding are usually trained to suggest the use the most recent versions of languages and libraries - which is likely not an option to be adopted out-of-the-box.
+- **Experts**
+  - Damien Duportal
+    - Current role: Staff Software Engineer - Jenkins Community Team chez CloudBees
+    - Why Follow:
+      - As the current (as of August 2025) Jenkins Infrastructure officer, he is one of the voices communicating the new features and changes to the upcoming versions of the platform.
+      - Has more then 10 years of experience in the Jenkins and CI/CD automation, which provides a wide perspective on the need of legacy and up-to-dated automation systems
+    - Key Views:
+      - Promotion of new features of upcoming versions of Jenkins
+      - Discussion about changes required in CI/CD pipelines with update of platforms
+    - Social network presence:
+      - LinkedIn: [https://www.linkedin.com/in/damien-duportal-ab70b524/](https://www.linkedin.com/in/damien-duportal-ab70b524/)
+      - Github: [https://github.com/dduportal](https://github.com/dduportal)
+  - Jan Faracik
+    - Current role: Lead Software Engineer for Financial Conduct Authority
+    - Why Follow:
+      - Jan is a developer, and a long time Jenkins contributor.
+      - Jan is a member of the [Jenkins UI/UX SIG](https://www.jenkins.io/sigs/ux/).
+    - Key Views:
+      - Discussion about how to handle changes in different Jenkins versions
+      - Reflection about compatibility issues of legacy technologies in CI/CD pipelines
+    - Social network presence:
+      - Github: [https://github.com/janfaracik](https://github.com/janfaracik)
+      - Jenkins blog: [https://jenkins.io/blog/authors/janfaracik/](https://jenkins.io/blog/authors/janfaracik/)
+      - Twitter: [https://x.com/janfaracik](https://x.com/janfaracik)
+  - Darin Pope
+    - Current role: Developer Advocate at CloudBees
+    - Why Follow:
+      - Provides interesting insights when interviewing different specialists in his podcast
+      - Multiple years of experience and in a position of easy access to privileged information that is shared first-hand
+    - Key Views:
+      - Focus on simplifying large and complex systems
+      - Production on educational material concerning new and old technologies
+    - Social network presence:
+      - Podcast: [https://www.devopsparadox.com/](https://www.devopsparadox.com/)
+      - LinkedIn: [https://www.linkedin.com/in/darinpope/](https://www.linkedin.com/in/darinpope/)
+- **DOK 2 - Knowledge Tree**
+  - Dilemma of the "Active Directory" systems and cloud environments
+    - Trying to adopt strategies idealized for cloud environments, such as having ephemeral agents in the form of Docker containers (for example) in network environments that rely on "Traditional" Active Directory structure may be challenging and even incompatible as they are rooted in different assumptions regarding network organization.
+  - Complexity of legacy and heterogeneous systems
+    - A product implemented several years ago may be distributed for different platforms and architectures, each of which having its own versioning cycle.
+    - It is not uncommon to have a product that must be functional both on the latest version of Windows and on a Linux distribution that was already discontinued several years back.
+    - Independent Linux distributions like RedHat, Debian and Arch are less prone to be discontinued when compared to the distributions derived from them. One reason for that is the fact that the independent distributions are upstream source and gravitational force for their derived ones, receiving contributions from different stakeholders and tending to focus on stability and reliability. The dependent distributions, on the other hand, tend to focus on innovation and experimentation, exploring opportunities at the same time that they expose themselves to the risks related to the adoption of cutting-edge technologies.
+  - Strategies for reducing complexity of heterogenous systems
+    - Because both the controller and the agents in a Jenkins environment only require a Java application installed and running to be integrated, it is relatively straightforward to integrate machines based on different operational systems in a single network.
+    - [Cygwin](https://www.cygwin.com/) is a popular Windows application that provides Unix-like functionalities on Windows. Among others, it offers a shell environment with popular bash commands.
+    - Windows platform, specially the Windows Server operational systems, are know for their conservatorium in terms of preserving functionalities across versions.
+  - Life-time of a product x retention time of a developer
+    - When a product becomes a "legacy product", almost certainly most of their original developers are not involved anymore in the project, and many developers already have contributed to it.
+    - In cloud environments in which production build/testing pipelines are hosted in virtual machines that are part of Windows domains, it is common for developers to create development virtual machines as part of these domains for a better integration (and then to leave them up and running after they have finished their activities). This is probably one of the sources of the 70% of cloud costs that a recent [Gartner report](https://zesty.co/blog/maximize-cloud-cost-optimization/) estimated in general that can be reduced due to idle resources wasting.
+    - In mid 2025, the monthly operational costs of the **RAM-AWS-ObjectstoreDev-Admin** AWS federated user was reduced from approximately US 3,300 to around U$ 1,400.00 just with the removal of idle EC2 instances created for development and testing by previous collaborators.
+- **DOK 1 - Facts**
+  - CI/CD platforms
+    - Jenkins is one of the platforms for automation with longest time on the market. Its origins relate to the Hudson project, released on 2005. It follows a "traditional" structure, not exactly cloud-native. While it is currently (as of August 2025) widely used in production (market share of around 44% in 2023, source: [CD Foundation](https://cd.foundation/announcement/2023/08/29/jenkins-project-growth/)), mainly to support legacy systems, there is an overall trend of the industry towards automation pipelines embedded in Cloud platforms such as AWS, GCP and Azure.
+    - Jenkins systems are composed by 2 basic types of core components (a.k.a. "nodes"): the controller (formerly "master") and the agents (former "slaves"). What turns a computer (or a Virtual Machine) into a Jenkins controller/agent is the presence of a service that serves a specific Java-base application (implemented and provided by the own CDF).
+    - Most of the modern cloud environments rely on ephemeral machines based on Linux distros (90% of the cloud infrastructure, according to [Enterprise Apps Today, 2024](https://www.enterpriseappstoday.com/stats/linux-statistics.html)), while many legacy products, specially the on-premise ones, are based on Windows environments.
+  - Two types of "Active Directory" systems
+    - The "Traditional" Active Directory was designed before the prevalence of cloud computing. It assumes a network environment with stable topology (i.e., with long-standing machines). It is currently focused on Kerberos authentication system.
+    - The Azure Active Directory (a.k.a. Azure AD) is the modern, cloud-native system for managing networks. It supports ephemeral Virtual Machines natively and adopts authentication protocols and federation services better suited for dynamic topologies common to cloud environments.
+    - In "Traditional" Active Directory networks, one of the machines assumes the role of Domain Controller, centralizing the management of the other machines that are part of the network. Each machine must have an unique machine name and often a permanent internal IP.
+  - Complexity of architectures
+    - Legacy applications may have been implemented having in mind the architectures and libraries prevalent at their creation time.
+    - Different families of operational systems tend to use distinct native terminal systems. In Windows environments, for example, we have the coexistence of Command Prompt and PowerShell since 2007. In Linux environments, however, the default shell environment vary by the distribution.
+    - Applications implemented in Java are expected to be system-agnostic: any machine that has the appropriate JRE version should be able to execute the Java application, regardless of the underlying operational system.
+  - Windows environments
+    - Windows Servers, as a stream of products, are considered "conservative" in terms of technological changes with the objective of maintaining a high and consistent degree of backward compatibility ([source](https://windowsforum.com/threads/why-windows-legacy-compatibility-is-its-greatest-strength.372511/)).
+    - Each version of Windows Server has approximately 5 years of "regular" support windows and 10 years of "extended" support window ([source](https://learn.microsoft.com/en-us/windows/release-health/release-information)).
+  - Linux environments
+    - Linux is not as centralized as Windows and there is a large variety of distributions out there, each with their particularities.
+    - [Data](https://itsfoss.com/linux-market-share/) shows that most of Linux (physical or virtual) machines uses either one of the following independent distributions: Debian, RedHat, Arch, SUSE or Gentoo, or a distribution derived of them.
+    - Independent Linux distributions (mainly after the establishment of dependent distributions) tend to have long life time. Examples: Debian Linux and RedHat Enterprise Linux (RHEL) were released in 1993 and 2002, respectively, and they are still actively being maintained as of mid 2025.
+    - Several Linux distributions derived from independent distributions had limited life time or where significantly restructured/repurposed, even when they were backed by established organizations. Examples: CentOS (managed by Red Hat Foundation) was discontinued and "replaced" by CentOS Stream; the official Ubuntu GNOME was discontinued once the Unity graphical interface was adopted as the default one for Ubuntu, etc.
+  - Life-time of a product x retention time of a developer
+    - In the software industry, more than 50% of the employees hired by a company tend to be retained for no more than 2 years according to [Invene.com](https://www.invene.com/blog/limiting-developer-turnoverhttps://www.invene.com/blog/limiting-developer-turnover).
+    - Software products, in the other hand, may kept being used for decades by customers, specially if they are included into core components of their industries ([source](https://modlogix.com/blog/who-still-uses-legacy-software-and-why/)).
+  - Acronyms
+    - CDF: Continuous Delivery Foundation
+    - CI/CD: Continuous Integration / Continuous Development
+    - JRE: Java Runtime Environment
+    - RHEL: Red Hat Enterprise Linux

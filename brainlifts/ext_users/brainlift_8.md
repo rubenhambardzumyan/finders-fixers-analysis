@@ -1,0 +1,1234 @@
+Khoros Care Components & Architecture
+
+- Meta
+  - Owner: [pankaj.menariya@trilogy.com](mailto:pankaj.menariya@trilogy.com)
+- Purpose
+  - This brainlift explains how each Care microservices is built, what it needs, and what it produces.
+  - Its goal is to give engineers a single, fast reference for the exact commands, environment vairables, secrets, and external resources required to run a successful CI/CD pipeline for every component.
+  - By consolidating multiple runbooks, it eliminates guesswork, speeds up onboarding, and reduces build failures across the platform.
+  - Build a comprehensive understanding of the Khoros care product development to enable AI driven development decisions and ensure seamless integration with existing systems.
+- Sources
+  - Core Components Runbooks
+    - [https://www.notion.so/trilogy-enterprises/Care-Core-Component-Specific-Runbooks-23185e927d3180b28eccfa9fb0fe74b0](https://www.notion.so/trilogy-enterprises/Care-Core-Component-Specific-Runbooks-23185e927d3180b28eccfa9fb0fe74b0)
+  - Core Components Spreadsheet
+    - [https://docs.google.com/spreadsheets/d/1qxJh78QFb0ur9tV9I6R0GIp8s_EHm2XY_0OD2fB4jOE/edit?gid=0#gid=0](https://docs.google.com/spreadsheets/d/1qxJh78QFb0ur9tV9I6R0GIp8s_EHm2XY_0OD2fB4jOE/edit?gid=0#gid=0)
+  - Khoros Architecture Brainlift
+    - Owner: [zoltan.szalontai@trilogy.com](mailto:zoltan.szalontai@trilogy.com)
+    - [https://workflowy.com/s/N7cW.Q1nts16Y4A#/f5ea3c2003c5](https://workflowy.com/s/N7cW.Q1nts16Y4A#/f5ea3c2003c5)
+- Experts
+  - **Zoltan Szalontai**
+    - **Current Role:** Manager, Trilogy
+    - **Key Areas of Expertise:** Khoros care architecture
+    - **Key Views:** Believes AI will augment rather than replace software engineers, emphasizing the need for human-AI collaboration in development workflows.
+    - **LinkedIn: **[https://www.linkedin.com/in/zoltan-szalontai-49478a203/](https://www.linkedin.com/in/zoltan-szalontai-49478a203/)
+    - **Contact**: [zoltan.szalontai@trilogy.com](mailto:zoltan.szalontai@trilogy.com)
+    - **Source**: ([https://workflowy.com/s/N7cW.Q1nts16Y4A#/f5ea3c2003c5](https://workflowy.com/s/N7cW.Q1nts16Y4A#/f5ea3c2003c5))
+  - **Carlos Costa**
+    - **Current Role:** Senior Software Engineer, Trilogy
+    - **Key Areas of Expertise:** Khoros care architecture
+    - **Key Views:** Believes AI will augment rather than replace software engineers, emphasizing the need for human-AI collaboration in development workflows.
+    - **Twitter**: @carloscosta
+    - **Contact**: [carlos.costa@trilogy.com](mailto:carlos.costa@trilogy.com)
+    - **Source: **([https://workflowy.com/s/N7cW.Q1nts16Y4A#/f5ea3c2003c5](https://workflowy.com/s/N7cW.Q1nts16Y4A#/f5ea3c2003c5))
+- DOK4 - SPOV
+  - IC-Backend (Routing & Orchestration)
+    - Summary
+      - A single misconfigured persona in IC-backend can silently short-circuit your entire routing graph. Always test routing in pre-prod with live payloads, not mocks.
+    - Persona and SLA logic reside here.
+    - Routing rules are evaluated in real-time and may conflict subtly with [Flow.ai](http://flow.ai/) triggers.
+    - Tracing failures requires full message state traversal from Switchboard → IC-backend → Flow/Agent UI
+  - Mailman (Channel Adapter Layer)
+    - Summary
+      - Every 3rd-party API contract is a liability—Mailman is your firewall. Without schema normalization and observability at this layer, you're flying blind.
+    - Abstraction of platform-specific payloads (e.g., Twitter, WhatsApp).
+    - Uses AWS Parameter Store to toggle channel-level flags dynamically.
+    - Channel failures often manifest as malformed events downstream
+  - Switchboard (Queue and Message Router)
+    - Summary
+      - Your SLA is only as strong as Switchboard's queue behavior. Delay tuning and deduplication aren't engineering afterthoughts—they are the product.
+    - Critical for high-throughput routing.
+    - Message loss or retry storms originate here.
+    - Logging deduplication failures is the only reliable way to catch silent message drops during high traffic.
+  - Analytics (Kafka + ClickHouse Pipeline)
+    - Summary:
+      - Metrics without traceable instrumentation are a mirage. Every dropped tag or renamed label is an analytics incident waiting to happen.”
+    - Depends on consistent schema propagation.
+    - Traceable only if source services emit labeled telemetry.
+    - Stream schema drift = silent metric degradation
+- DOK3 - Insights
+  - Care Component
+    - The Care components has issues with local setup instructions and deployment process.
+    - Adding a proper documentation for local setup and proper instructions for development lifecycle.
+  - Team & Process
+    - Code reviews remain a critical safeguard for catching architectural issues, edge cases, and unintended side effects—especially where automated checks may not fully cover business logic or integration behavior.
+    - Discipline around JIRA (or other ticketing tools) and commit linkage is inconsistent — missing ticket references, ambiguous descriptions, and lack of traceability reduce the effectiveness of change tracking and auditability.
+  - Components
+    - IC-Backend (Core routing & orchestration logic)
+      - Insight: This is the "brain" of Care, handling routing, persona logic, priority assignment, and system-wide orchestration. Any changes here affect conversation routing, persona behavior, and flowbot orchestration triggers.
+      - Operates under heavy constraints: prioritization latency < 500ms.
+      - Communicates with Flow via bot orchestration APIs; prone to breakage if Flow automation contracts change.
+      - Deep integrations with agent shift logic and SLA timers.
+      - DOK3 Challenge: Debugging misrouted conversations requires tracing message state transitions across Mailman → Switchboard → IC-Backend, and correlating with persona config.
+    - Mailman (Channel abstraction layer)
+      - Insight: Serves as the ingest and dispatch gateway for all third-party platforms—social, brand messenger, email.
+      - Interprets inbound events, transforms them into a Care-standard schema.
+      - For Twitter/X, Facebook, WhatsApp: critical for API contract resiliency and fault-tolerant ingest.
+      - Uses AWS Parameter Store for runtime flags (e.g., Twitter disable).
+      - DOK3 Challenge: Diagnosing channel-specific ingest failures often requires replaying payloads with correct auth and verifying normalization mappings.
+    - SwitchBoard (Message queuing and traffic splitter)
+      - Insight: Think of it as the conversation traffic controller between Mailman and IC-Backend, managing deduplication and source normalization.
+      - High fan-in, fan-out messaging hub.
+      - Has deduplication rules and custom delays per channel.
+      - Crucial for channel failover logic during API downtime.
+      - DOK3 Challenge: Message loss or out-of-order behavior during burst traffic often traces back to Switchboard bottlenecks or misaligned retry policies.
+    - Analytics & Dashboards
+      - Insight: Pulls from Kafka + ClickHouse pipeline. Instrumentation must be explicitly declared by engineering teams.
+      - Metric consistency depends on correct tagging and pipeline schema alignment.
+      - Lag or missing data often traces back to stream schema drift or Kafka topic saturation.
+      - DOK3 Challenge: Changing a tag name in source code without updating analytics dashboards causes silent drops in visibility.
+- Care
+  - Overall Architecture Philosophy
+    - The System is designed to ingest content from various social networks, process it, and then make it available for agents to handle as cases within the "IC-Backned".
+    - There's a significant focus on data flow through a series of microservices using AWS kinesis streams (KCL - Kinesis Client Library) and SQS.
+    - The core of the architecture is a monolithic "IC-Backend" with specific functionalities (like network listening and responding) separated into dedicated services for better scalability and maintainability.
+    - Multi-tenancy is handled at different levels: IC-Backend uses a POD/Container structure, while many upstream services (Lake, Roybean) are regional.
+    - Monitoring is crucial, with Datadog and PagerDuty playing key roiles in operations.
+- Components
+  - **IC-Backend & IC-Backend-UI**
+    - `ic-backend`
+      - Architecture
+        - Function: Receives processed data from Roybean and creates conversations/cases that agents can claim and work on.
+        - Also sends data to the Analytics component.
+        - Tech Stack: Java, Play Framework, Maven.
+        - REST APIs: Yes. Provides the main REST API for the platform.
+        - How APIs Work:
+          - User, session, content, and integration management endpoints.
+          - Example: GET /api/users, POST /api/content, PUT /api/integrations.
+          - Secured via authentication, supports both internal and external clients.
+      - Build Commands
+        - Local developer build
+          - `./bin/icb/compile`
+          - Compiles and runs tests using Java 8 & Play.
+        - Jenkins build
+          - `bin/jenkins/[build.sh](http://build.sh/) <developer|master|sonar> [MEH|PEWPEW] [BUILD_NUMBER]`
+          - developer: compile+tests (No artifacts) master: compile, package RPM, tests, upload to s3 sonar: compile, tests, SonarQube analysis.
+      - Environment variables
+        - `SONAR_URL` , `SONAR_DB`
+          - Required in: `[build.sh](http://build.sh/) sonar`
+          - Written to `build.local.properties` so Maven can push analysis
+        - `AWS_ACCESS_KEY_ID` , `AWS_SECRET_ACCESS_KEY` , `AWS_DEFAULT_REGION`
+          - Required in: `[build.sh](http://build.sh/) master`
+          - `bin/[upload.sh](http://upload.sh/)` uploads RPM to s3 and logs in to ECR.
+        - `JIRA_USER_NAME` , `JIRA_PASSWORD`
+          - Required in: Jenkins stage marking Jira issues
+          - `[updatejirawithversions.sh](http://updatejirawithversions.sh/)` updates linked Jira issues.
+        - `USER_ROLODEX` (optional)
+          - Required in: Local development
+          - Spins up Rolodex/Redis/DynamoDB containers for integration tests.
+        - `FINGER_GUNS_MODE` (optional)
+          - Required in: All build modes
+          - `PEWPEW` skips test-dependency containers to speed up build; default `MEH` .
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Jenkins credential `17663382-39d5-4ec0-b767-ebd21040d59a` (username/password)
+          - Supplies `JIRA_USER_NAME` & `JIRA_PASSWORD`
+          - Consumed by: `withCredentials` in JenkinsFile
+        - AWS access keys for IAM user icb-build
+          - Upload RPM to S3, pull Rolodex image form ECR.
+          - Consumed by: `aws ecr get-login` , `bin/[upload.sh](http://upload.sh/)`
+      - Expected inputs and outputs
+        - Build (developer)
+          - Input: Source branch
+          - Outputs: Compiled classes, test reports.
+        - Build (release)
+          - Inputs: Source branch + AWS & Jira credentials
+          - Outputs: RPM `ic-backend-<version>.noarch.rpm` , test reports. `jarlist` , build logs, artifacts archived in Jenkins.
+      - Jenkins jobs / Github actions
+        - main folder: [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/ic-backend/job/ic-backend/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/ic-backend/job/ic-backend/)
+        - `ic-backend-deploy-qa-container`
+          - Parameterised job: builds & deploy ic-backend, ic-backend-ui & shared projects to a chosen QA container/branch.
+        - `ic-backend-master-pipeline`
+          - Triggered on every commit to `master` ; builds `ic-backend` , runs tests, then auto-deploys to QA c01.
+    - `ic-backend-ui`
+      - Architecture
+        - IC-Backend-UI is the legacy GWT-based frontend UI for Khoros Care. It's primarily used by agents and admins who haven't yet transitioned to the modern React-based crmv2-ui.
+        - Core Functionality
+          - Provides complex workflows, legacy widgets, and direct integration with the ic-backend system
+          - Serves as the user interface for Khoros Care platform
+          - Supports agent and admin interfaces for social media management
+        - Tech Stack: Java, GWT, React, Maven
+        - Development Environment
+          - Requires setting up symlinks to ic-backend project
+          - Supports GWT superdev mode for development
+          - Has NPM/React environment for modern UI components
+          - Requires significant memory for GWT compilation (recommended 6GB)
+        - Build & Deployment
+          - CI/CD managed through Jenkins pipelines
+          - Built as an RPM package: ic-backend-ui-<version>.noarch.rpm
+          - Deployed to Amazon EC2 instances
+          - Distribution via a private yum repository hosted in AWS S3
+          - Not containerized (no ECS/EKS)
+        - Integration
+          - Tightly integrated with ic-backend
+          - Requires specific versions of ic-backend-shared to avoid serialization errors
+      - Build Commands
+        - Local developer build
+          - `cd response && npm ci && npm start`
+          - Webpack dev server on port 8080 for react live development.
+        - Jenkins Build
+          - `cd response && npm ci && npm run build` for React webpack production build (outputs to `public/release/`)
+          - `mvn clean package -P debugOutput -DskipTests` for GWT compilation with debug output
+          - `mvn clean install -P minimal` for minimal GWT compilation (ConsoleDev and AuthorDev modules only)
+      - Environment variables
+        - `SPREDFAST_NPM_TOKEN`
+          - Required in: Jenkins builds
+          - Authenticates to private npm registry for dependency installation.
+        - `NODE_OPTIONS`
+          - Required in: Webpack builds
+          - Set to `--max_old_space_size=8192` for handling large memory requirements during builds.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Private npm registry access for Spredfast packages
+        - Docker image `spredfast/node-mvn:node.12.18.4-mvn.3.6.3-v4` for consistent build environment
+        - Node.js 12.18.4 and Maven 3.6.3 for build toolchain
+      - Expected inputs and outputs
+        - Build (developer)
+          - Input: Source branch, Node.js 12.18.4 environment
+          - Outputs: Webpack dev server, GWT superdev mode for incremental recompiles.
+        - Build (release)
+          - Inputs: Source branch + npm registry credentials
+          - Outputs: React production build in `public/release/`, GWT compiled modules, debug output artifacts.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/ic-backend/job/ic-backend/view/ui/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/ic-backend/job/ic-backend/view/ui/)
+        - Production build pipeline using Docker container for consistent environment
+        - React webpack production builds with output to `public/release/`
+        - GWT compilation pipeline with debug output and minimal build options
+        - Integration with private npm registry for dependency management
+  - CRMV2 (ui & connector & backend)
+    - `crmv2-backend`
+      - Architecture
+        - CRMV2-Backend is a microservice for CRM automation event processing and Salesforce API integration. It's built using Java and follows a modern microservices architecture.
+        - Core Functionality
+          - Consumes real-time CRM events from Kinesis streams
+          - Orchestrates and persists events in DynamoDB
+          - Triggers downstream automation (case updates, workflow transitions, etc.)
+          - Exposes REST APIs for Salesforce metadata/config management
+          - Handles OAuth tokens and maps object schemas
+          - Enables bidirectional communication between Khoros Care and Salesforce
+        - Tech Stack: Java 11, Maven, AWS Lambda, AWS DynamoDB, AWS Kinesis, Restfull API interfaces
+        - Data Stores
+          - DynamoDB Tables:
+            - <STAGE>-live-crmv2-Events - For tracking, managing, and orchestrating events
+            - crm-connector-<stage>-integrations - For storing integration configurations
+        - Deployment & Infrastructure
+          - Deployed as AWS Lambda functions
+          - Multi-region deployment: US West (us-west-2), EU West (eu-west-1), AP Southeast (ap-southeast-2)
+          - CI/CD managed through Jenkins pipelines
+          - Artifacts published to Nexus Repository
+        - REST APIs
+          - The service exposes a comprehensive REST API, documented via Swagger. Major endpoint groups include:
+          - Case Management APIs
+            - POST /api/case/{integrationId}/{targetObjectType}: Creates a new CRM case
+            - GET /api/caseFeeds/integration/{integrationId}/conversation/{convId}: Retrieves case feeds for a conversation
+            - GET /api/caseFeeds/integration/{integrationId}: Gets case feeds by case IDs
+          - Integration Configuration APIs
+            - GET /api/integration/{integrationId}: Retrieves integration configuration
+            - PUT /api/integration/{integrationId}/rules: Updates integration rules
+            - GET /api/v2/integration/{integrationId}/crm/mappings/{objectName}: Gets field mappings for CRM objects
+          - Automation Event APIs
+            - GET /api/events/caseId/{caseId}: Retrieves automation events by case ID
+            - Multiple endpoints for event management and processing
+          - Search APIs
+            - POST /api/search/{integrationId}/{objectName}: Searches CRM objects based on criteria
+          - Autofill APIs
+            - GET /api/autofill/{integrationId}/{targetObjectType}: Retrieves autofill data for CRM objects
+          - Link Management APIs
+            - GET /api/link/{integrationId}/{targetObjectType}/source/{sourceObjectType}/{sourceObjectId}: Gets linked objects
+      - Build commands
+        - Local developer build
+          - `mvn -U -fn clean verify`
+          - Compiles, tests, and packages all modules using Maven.
+        - Jenkins build
+          - `mvn deploy -DskipTests` for snapshot publishing to Nexus
+          - `mvn release:clean -DpreparationGoals=clean release:prepare && mvn release:perform --batch-mode -DignoreSnapshots -DskipTests` for stage releases
+          - `npx sls deploy` for Lambda function deployment via Serverless Framework
+      - Environment variables
+        - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`
+          - Required in: All deployment scenarios
+          - AWS authentication for Lambda deployments and service access.
+        - `VERSION`
+          - Required in: Lambda deployment
+          - Application version for Lambda function deployment.
+        - `REGION`
+          - Required in: Multi-region deployments
+          - AWS deployment region (us-west-2, eu-west-1, ap-southeast-2).
+        - `UNIVERSE`
+          - Required in: Environment-specific deployments
+          - Environment identifier (qa, stage, prod).
+        - `CONTINENT`
+          - Required in: Deployment configuration
+          - Deployment continent identifier (live).
+        - `EDGAR_ENDPOINT`
+          - Required in: Service integration
+          - Edgar service endpoint for external service communication.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - AWS credentials for Lambda deployment and service access
+        - Nexus repository access for Maven artifact publishing
+        - JIRA credentials for release issue updates
+        - Multi-region AWS access for production deployments
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch
+          - Outputs: Compiled JAR files, test reports, Maven artifacts.
+        - Build (release)
+          - Inputs: Source branch + AWS credentials + Maven release configuration
+          - Outputs: Released JAR artifacts in Nexus, Lambda functions deployed to AWS, JIRA issues updated, version tags created.
+      - Jenkins jobs / Github actions
+        - QA Pipeline: `[crmv2-backend-build-deploy-qa](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/CRM/job/CRM_QA/job/crmv2-backend-build-deploy-qa/)`
+          - Maven build, snapshot publish, Lambda deploy to QA environment
+        - Stage Pipeline: `[crmv2-backend-build-deploy-stage](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/CRM/job/CRM_STAGE/job/crmv2-backend-build-deploy-stage/)`
+          - Maven release, JIRA updates, Lambda deploy to Stage environment
+        - Production: `[CRM_PROD backend jobs](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/CRM/job/CRM_PROD/view/All/)`
+          - Production Lambda deployments across multiple AWS regions
+    - `crmv2-ui`
+      - Architecture
+        - CRMV2-UI is the primary React-based frontend for Khoros Care. It serves as the central UI entry point for the Care product family and is designed for modular, package-based consumption by downstream platforms.
+        - Core Functionality
+          - Powers both Agent and Admin user interfaces for Khoros Care
+          - Manages routing, queue management, and real-time message threading
+          - Provides workflow management interfaces
+          - Replaces the legacy GWT-based UI (ic-backend-ui) with modern React components
+        - Tech Stack: React, TypeScript, SCSS, Jest
+        - Development Workflow
+          - Local development server: npm start (port 5001)
+          - Build for production: npm run build
+          - Testing: npm test or npm run test-coverage
+          - Type checking: npm run check-types
+          - Linting: npm run lint
+        - Design System
+          - Uses color palette from @spredfast/shared-ui package
+          - Follows DLS (Design Language System) guidelines
+          - Avoids hardcoded colors in favor of theme variables
+        - Deployment & Distribution
+          - Published as an NPM package: @spredfast/crmv2-ui
+          - CI/CD managed through Jenkins pipeline
+          - Output distributed via the public NPM registry
+          - Consumed by downstream applications (including ic-backend-ui)
+        - Integration
+          - Can be symlinked for local cross-project development
+          - Designed to be used as a dependency in other applications
+          - Feature branch deployment process available for testing
+      - Build commands
+        - Local developer build
+          - `npm install`
+          - `npm run build`
+          - Installs dependencies and builds the UI component package.
+        - Jenkins build
+          - `npm run lint` for code quality checks
+          - `npm run build` for production build
+          - `npm publish` for package publishing to npm registry
+      - Environment variables
+        - `NPM_TOKEN`
+          - Required in: Package publishing
+          - Authentication token for npm registry publishing.
+        - `NODE_AUTH_TOKEN`
+          - Required in: CI/CD pipelines
+          - Alternative npm authentication for automated workflows.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins and GitHub Actions.
+        - NPM registry access for @spredfast scoped packages
+        - GitHub Actions workflows for automated version bumping
+        - Jenkins credentials for production builds and publishing
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Node.js environment
+          - Outputs: Built UI components, linting reports.
+        - Build (release)
+          - Inputs: Source branch + npm credentials
+          - Outputs: Published npm package @spredfast/crmv2-ui, version bumped in repository.
+      - Jenkins jobs / Github actions
+        - GitHub Actions: Main version bump workflow
+          - Automated version bumping using `version_bump.sh`
+          - Lint, build, and publish to npm registry
+        - Jenkins: Production build and publish pipeline
+          - Manual or triggered builds for stable releases
+    - `crmv2-connector`
+      - Architecture
+        - CRMV2-Connector is a Care-to-Salesforce CRM integration gateway that acts as a serverless, API-based bridge between Khoros Care and Salesforce (SFDC). It enables secure bi-directional data exchange between these platforms.
+        - Core Functionality
+          - Registers CRM integrations
+          - Manages tokens and configuration metadata in DynamoDB
+          - Facilitates Salesforce API calls via Lambda functions
+          - Handles asynchronous callbacks
+          - Abstracts authentication, message routing, and lifecycle management for integrations
+          - Acts as middleware for Khoros Care integrations with CRM platforms
+        - Tech Stack: Node, TypeScript, AWS Lambda, AWS DynamoDB, Jest for testing
+        - Deployment & Infrastructure
+          - Deployed as AWS Lambda functions
+          - Multi-region deployment: US West (us-west-2), EU West (eu-west-1), AP Southeast (ap-southeast-2)
+          - CI/CD managed through Jenkins pipelines
+          - Environment-specific configurations via YAML files (integrationsCRM.yml, integrationsCare.yml)
+      - Build commands
+        - Local developer build
+          - `npm ci`
+          - `npm test`
+          - Installs dependencies and runs tests using Node.js 16.
+        - Jenkins build
+          - `npm version patch` for version bumping (develop branch only)
+          - `serverless deploy --stage qa --region us-west-2 --config integrationsCare.yml` for Care integrations
+          - `serverless deploy --stage qa --region us-west-2 --config integrationsCRM.yml` for CRM integrations
+      - Environment variables
+        - `VERSION`
+          - Required in: Deployment stages
+          - Application version for serverless deployment configuration.
+        - `NODE_ENV`
+          - Required in: All deployment modes
+          - Environment setting (qa, stage, prod) for configuration selection.
+        - `SLS_DEBUG`
+          - Required in: Deployment debugging
+          - Serverless framework debug output control.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - AWS credentials for serverless deployment
+        - Git credentials for version tagging and pushing
+        - JIRA credentials for stage deployment issue updates
+        - Environment-specific configuration files (qa.env, stage.env, prod.env)
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Node.js 16 environment
+          - Outputs: Test reports, compiled Lambda functions.
+        - Build (release)
+          - Inputs: Source branch + AWS credentials + environment configs
+          - Outputs: Deployed Lambda functions to AWS, version tags pushed to Git, JIRA issues updated.
+      - Jenkins jobs / Github actions
+        - QA Pipeline: `[crmv2-connector-build-deploy-qa](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/CRM_QA/job/crmv2-connector-build-deploy-qa/)`
+          - Build, test, version bump (develop only), deploy to QA
+        - Stage Pipeline: `[crmv2-connector-build-deploy-stage](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/CRM_STAGE/job/crmv2-connector-build-deploy-stage/)`
+          - Build, version bump, JIRA integration, deploy to Stage
+        - Production: `[CRM_PROD Connector Jobs](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/view/CRM/job/CRM_PROD/view/Connector/)`
+          - Deploy tagged versions to Production regions
+  - Microservices
+    - `mailman`
+      - Architecture
+        - Function: Receives data from social networks. Acts like a post office, deciding where to route the post based on company keys and the source webhook.
+        - Output: Sends data via SQS queues or a Kinesis stream (KCL).
+        - Tech Stack: Java 8, Maven 3.6+, Dropwizard.
+        - Key Structure: Integrations for Facebook, Twitter, Instagram, WhatsApp, etc.; Lambda support.
+        - Notes: Unified interface for social integrations; supports both legacy EC2 and EKS deployments.
+        - REST APIs: Yes. Exposes endpoints for managing subscriptions, posting, and status checks.
+        - How APIs Work:
+          - POST /subscribe – Subscribe to a social stream.
+          - POST /post – Distribute a post to consumers.
+          - GET /status – Service health/status.
+      - Build commands
+        - Local developer build
+          - `maven clean verify`
+          - `./core-local/start.sh`
+          - Full build with tests, starts service locally on ports 8080/8081.
+        - Jenkins build
+          - `mvn clean verify` for continuous builds with Docker Compose setup
+          - `mvn -U -fn -P code-coverage clean verify` for release builds with code coverage
+          - `mvn release:clean release:prepare release:perform --batch-mode -P create-rpm` for Maven release with RPM creation.
+      - Environment variables
+        - `JAVA_HOME`
+          - Required in: All build scenerios
+          - Java 8 installation path for compilation
+        - Docker environment variables for Redis 3 and DynamoDB containers
+      - Required secret / External resources
+        - All secrets stored in Jenkins.
+        - Docker environment with Redis 3 and DynamoDB containers
+        - Maven repository access for dependency resolution and publishing
+        - RPM packaging tools for release artifacts
+        - Python pip for Jenkins pipeline dependencies
+      - Expected inputs and outputs
+        - Build (developer)
+          - Input: Source branch, Java 8, Maven 3, Docker environment
+          - Outputs: Service running on ports 8080/8081, test reports.
+        - Build (release)
+          - Inputs: Source branch + Maven credentials + Docker access
+          - Outputs: Maven artifacts, RPM packages, Docker images, code coverage reports.
+      - Jenkins jobs / Github actions
+        - [https://care-jenkins.prod.care.usw2.khorostech.com/job/Mailman/](https://care-jenkins.prod.care.usw2.khorostech.com/job/Mailman/)
+        - [https://care-jenkins.qa.care.usw2.khorostech.com/job/Care_Dev/job/mailman/](https://care-jenkins.qa.care.usw2.khorostech.com/job/Care_Dev/job/mailman/)
+        - Continuous Build: `Jenkinsfile-continuous`
+          - Docker Compose setup with Redis and DynamoDB, Maven verify, cleanup
+        - Release + Docker Build: `Jenkins/Jenkinsfile-ecr-docker`
+          - Code coverage builds, Maven release with RPM creation, Docker image publishing
+        - Local development support with `./core-local/[start.sh](http://start.sh/)` script
+    - `Gopher`
+      - Architecture
+        - Function: Named "Gopher" because it "goes for things." It receives minimal data from Mailman and fetches more detailed information about the post from the respective social network. This includes author details, profile pictures, attached files.
+        - Gopher uses Omega (scheduler) to schedule polling tasks as a backup if streaming connections (like Gnip) or webhooks fail. Omega serves as Gopher's to-do list for polling tasks. Gopher queries Omega periodically.
+        - Output: Sends enriched data via a Kinesis stream (KCL) to the Lake.
+        - Tech Stack: Java 11, Maven 3.6.3, Python 2.7 (test client), Docker.
+        - Firefighting: Can be configured at runtime to filter out non-actionable content from massively viral posts (e.g., "don't send this content any further if it's a child of this post").
+        - REST APIs: Yes. Typically exposes endpoints for triggering fetch jobs, checking status, and retrieving fetched data.
+        - How APIs Work:
+          - POST /fetch – Start a new fetch job.
+          - GET /status/{jobId} – Check status of a fetch job.
+          - GET /data/{jobId} – Retrieve results.
+        - Notes: Commit message conventions enforced for deployments.
+      - Build Commands
+        - Local developer build
+          - `mvn clean package`
+          - Compiled and runs unit tests using maven
+        - Jenkins build
+          - `mvn -P code-coverage clean verify` for builds with JaCoCo XML coverage for Sonar
+          - `mvn release:clean release:prepare -DdevelopmentVersion=${NEW_VERSION}` for Maven release preparation
+          - `mvn release:perform -P docker-build` for release execution and Docker image build
+          - `docker build -f core/src/main/docker/app/Dockerfile -t [642760139656.dkr.ecr.us-west-2.amazonaws.com/care/gopher:](http://642760139656.dkr.ecr.us-west-2.amazonaws.com/care/gopher:)<tag> .` for manual Docker builds
+      - Environment variables
+        - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`
+          - Required in: Docker login & ECR push operations
+          - AWS authentication for ECR operations and image publishing.
+        - `EKS_ECR_REPO`
+          - Required in: ecr-docker pipeline
+          - Target ECR repository (`642760139656.dkr.ecr.us-west-2.amazonaws.com/care/gopher`).
+        - `BRANCH_NAME`
+          - Required in: All pipelines
+          - Determines hotfix vs master logic & image tag strategy.
+        - `APP_VERSION`, `NEW_VERSION`
+          - Required in: ecr-docker pipeline
+          - Version calculation for Maven release plugin operations.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Jenkins SSH key `khr-care-jenkins` for Git operations (clone, push tags, release branch)
+        - Jenkins credential `nexus-credentials` (username/password) for Maven Release plugin to publish artifacts to Nexus
+        - AWS IAM permissions on Jenkins node profile for ECR login and Docker image push operations
+        - Jenkins credential `gopher` (configr password) for ConfigR/SSM authentication for runtime config
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source code
+          - Outputs: `gopher-core-<ver>.jar`, `gopher-client-<ver>.jar`, test reports.
+        - Build (release)
+          - Inputs: Source branch + Nexus credentials + AWS credentials
+          - Outputs: JARs published to Nexus, Docker image pushed to ECR, updated ECS service in target environment.
+      - Jenkins jobs / Github actions
+        - Main folder: `[Jenkins - Gopher](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/gopher/)`
+        - [https://care-jenkins.qa.care.usw2.khorostech.com/job/Care_Dev/job/gopher/](https://care-jenkins.qa.care.usw2.khorostech.com/job/Care_Dev/job/gopher/)
+        - `gopher-ecr-docker`: Main CI/release job - builds, releases to Nexus, pushes Docker image to ECR
+        - `gopher-continuous`: Fast feedback build - runs tests + code coverage on every commit
+        - `gopher-deploy-qa`: Deploys to QA ECS service
+        - `gopher-deploy-stage`: Deploys to stage ECS cluster
+        - `gopher-deploy-prod-*`: Region-specific production deploys (us-west-2, eu-west-1, ap-southeast-2)
+    - `Roybean`
+      - Architecture
+        - Function: Named after Judge Roy Bean. It "judges" whether a post is complete enough to be sent to IC-Backend for case creation.
+        - Consumes content from The Lake and uses "arbitrary rules" (customer-configurable) to decide whether a piece of content should be sent to the IC Backend (for agent handling) or if it can be handled/ignored otherwise.
+        - Criteria: Checks include author normalization, sufficiency of data, and whether the content is actionable (e.g., filters out brand-only posts without comments).
+        - Output: Sends data via both Kinesis streams (KCL) and SQS queues to IC-Backend.
+          - Rationale for SQS: SQS handles large bursts of data better than Kinesis, as Kinesis sharding needs to be planned and doesn't react to sudden bursts quickly.
+        - Firefighting: Similar to Gopher, Roybean can have runtime filters to drop non-actionable content.
+        - Logic: Primarily uses Drools (Java rules engine) to make decisions. These rules haven't changed much in about two years.
+        - Tech Stack: Java 11.
+        - REST APIs: Yes. Exposes endpoints for ingestion control and monitoring.
+        - How APIs Work:
+          - POST /ingest – Ingest a new message.
+          - GET /status – Check ingestion status.
+      - Build commands
+        - Local developer build
+          - `mvn clean verify -P code-coverage`
+            - `java -jar core/target/roybean-core-<version>.jar server core/src/main/resources/config-local.yml`
+            - Compiles, tests with coverage, and starts service locally.
+        - Jenkins build
+          - `mvn clean verify -P code-coverage` for CI builds
+            - `git checkout "${BRANCH_NAME}" && git reset --hard HEAD && git pull --no-tags` for release preparation
+            - `mvn -B -U -fae -P code-coverage clean verify` for release builds
+      - Environment variables
+        - `AWS_PROFILE`
+          - Required in: Local development with real AWS services
+            - AWS profile for accessing real AWS services instead of embedded/localstack.
+        - `JAVA_TOOL_OPTIONS`
+          - Required in: Memory-intensive builds
+            - JVM memory settings, e.g., `-Xmx2g` for heap size configuration.
+        - `BRANCH_NAME`
+          - Required in: Release builds
+            - Git branch identification for checkout and build operations.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Java 11 and Maven 3.6+ for build environment
+        - Redis instance for local development and testing
+        - Local configuration file `config-local.yml` for service execution
+        - AWS services (optional, can use embedded/localstack for development)
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Java 11, Maven 3.6+, Redis, local config
+            - Outputs: Service JAR `roybean-core-<version>.jar`, test reports, code coverage reports.
+        - Build (release)
+          - Inputs: Source branch + Jenkins environment + AWS access
+            - Outputs: Maven artifacts, service JAR for deployment, code coverage analysis.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/roybean/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/roybean/)
+        - CI Build: `Jenkinsfile-continuous`
+          - Build and test with code coverage using Jenkins-provided Java 11 & Maven 3
+        - Release Build: `Jenkinsfile-ecr-docker`
+          - Git operations, Maven build with code coverage, release preparation
+    - `Enigma`
+      - Architecture
+        - Secret store backed by DynamoDB. Securely stores and manages access tokens (OAuth tokens, API keys) for communicating with external social networks.
+        - Tech Stack: Java 11, Maven 3.6.3, Docker, AWS CLI, Redis.
+        - Gopher uses tokens stored in Enigma to authenticate with social networks.
+        - REST APIs: Yes. Exposes endpoints for token creation, retrieval, and management.
+        - How APIs Work:
+          - POST /token – Store a new token.
+          - GET /token/{id} – Retrieve token by ID.
+          - DELETE /token/{id} – Revoke/delete token.
+          - APIs are secured and may require authentication and authorization.
+        - Notes: Centralized token management; AES-256 encryption; requires Java unlimited security policy.
+      - Build commands
+        - Local developer build
+          - `mvn clean install`
+          - Compiles, runs tests, and builds all modules in multi-module Maven project.
+        - Jenkins build
+          - `mvn clean verify sonar:sonar -P code-coverage` for CI builds with test coverage and SonarQube analysis
+          - `mvn release:clean release:prepare release:perform` for release builds with version tagging and artifact publishing
+      - Environment variables
+        - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`
+          - Required in: Release builds
+          - ECR authentication and Docker image push operations.
+        - `NEXUS_USERNAME`, `NEXUS_PASSWORD`
+          - Required in: Release builds
+          - Maven artifact publishing to Nexus repository.
+        - `BRANCH_NAME`
+          - Required in: CI & Release pipelines
+          - Pipeline branching logic and image tagging decisions.
+        - `JAVA_HOME`
+          - Required in: All builds
+          - Java 11 installation path for compilation.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Nexus credentials for Maven artifact publishing authentication
+        - GitHub SSH key for Git operations during release (tagging, version commits)
+        - AWS ECR access for Docker image push to ECR repository
+        - SonarQube integration for code quality analysis
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Java 11 environment
+          - Outputs: Compiled modules (parent, core, core-local, client, model), test reports.
+        - Build (release)
+          - Inputs: Source branch + AWS credentials + Nexus credentials + GitHub access
+          - Outputs: Maven artifacts published to Nexus, Docker image pushed to ECR, version tags created, SonarQube analysis reports.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/enigma/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/enigma/)
+        - CI Pipeline: Branch builds with test coverage and SonarQube analysis
+        - Release Pipeline: Version tagging, artifact publishing, and Docker image creation
+        - Multi-module Maven project structure with parent, core, core-local, client, and model components
+    - `Swithboard`
+      - Architecture
+        - Function: Handles the specifics of sending responses back to the various social networks.
+        - Contains network-specific logic (e.g., how to interact with Facebook API vs. Twitter API).
+        - Differentiates between public and private message responses.
+        - Output: Sends responses to the respective social networks.
+        - Feedback: Reports success or error messages back to IC-Backend.
+        - Rationale for separation: Decouples network-specific response logic from IC-Backend, allowing new products (like Manage View, Publisher) to also send messages without being tied to IC-Backend's release cycle and avoiding code duplication.
+        - REST APIs: Yes. Exposes endpoints for publishing, status, and troubleshooting.
+        - How APIs Work:
+          - POST /publish – Publish content to social networks.
+          - GET /status – Service status.
+      - Build commands
+        - Local developer build
+          - `mvn clean verify`
+          - `./ops/run-image-locally.sh`
+          - Local build with Java 11 and Maven 3.6+, Docker image execution locally.
+        - Jenkins build
+          - `mvn clean verify` for CI continuous builds with Docker build
+          - `mvn -B -U -P code-coverage clean verify` for CI release builds
+          - `mvn release:prepare release:perform -P docker-build` for Maven release with Docker image creation
+      - Environment variables
+        - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`
+          - Required in: Release pipeline
+          - ECR authentication for Docker image push operations.
+        - `NEXUS_USERNAME`, `NEXUS_PASSWORD`
+          - Required in: Release pipeline
+          - Maven artifact deployment to Nexus repository.
+        - `GITHUB_SSH_KEY`
+          - Required in: Release pipeline
+          - Git tag/branch operations for Maven release plugin.
+        - `REPOSITORY`
+          - Required in: Docker builds
+          - Base image specification (`spredfast/dockerfile.deploy.base`).
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - AWS build user credentials for ECR authentication and Docker push
+        - Nexus publish user credentials for JAR artifact deployment to Nexus
+        - GitHub deploy key for Git operations during Maven release plugin execution
+        - Base Docker image `spredfast/dockerfile.deploy.base`
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Java 11, Maven 3.6+, Docker environment
+          - Outputs: Compiled JAR, test reports, local Docker image.
+        - Build (release)
+          - Inputs: Source branch + AWS credentials + Nexus credentials + GitHub access
+          - Outputs: Maven artifacts deployed to Nexus, Docker image pushed to ECR, Git tags created.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/switchboard/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/switchboard/)
+        - CI Continuous: Maven build followed by Docker image creation
+        - CI Release: Code coverage builds, Maven release with Docker build profile
+        - Local development support with `./ops/run-image-locally.sh` script
+        - Integration with spredfast/dockerfile.deploy.base for consistent deployment images
+    - `Taz`
+      - Architecture
+        - Authentication service. Handles obtaining tokens and abstracting complicated auth flows (OAuth, OAuth2, etc...).
+        - Tech Stack: Java 11.
+        - Key Structure: Integrations for Twitter, YouTube, LinkedIn, Facebook, Twilio, NetBase, Smooch, Apple, Google, Yelp, TikTok, Reddit, etc.
+        - Uses Enigma for storage.
+        - Used by Gopher, ic-backend, Switchboard.
+        - REST APIs: Yes. Exposes endpoints for token management and auth flows.
+        - How APIs Work:
+          - POST /auth/{network} – Start an auth flow for a network.
+          - GET /token/{id} – Retrieve a token.
+          - DELETE /token/{id} – Revoke a token.
+        - Notes: JIRA ticket required in commit messages; supports many network-specific integrations.
+      - Build commands
+        - Local developer build
+          - `mvn clean install`
+          - Compiles all modules for authentication-flow broker & token-acquisition micro-service.
+        - Jenkins build
+          - `mvn clean verify` for full builds with tests
+          - Docker image creation for ECS deployment
+          - Maven artifact publishing to Nexus repository
+      - Environment variables
+        - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`
+          - Required in: Docker builds and ECS deployment
+          - AWS authentication for ECR operations and ECS service deployment.
+        - `JAVA_HOME`
+          - Required in: All build scenarios
+          - Java 11 installation path for compilation.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Java 11 and Maven 3.6+ for build environment
+        - Docker for containerization
+        - Redis for testing
+        - AWS CLI for deployment operations
+        - ECR repository access for Docker image publishing
+        - Nexus repository access for Maven artifact publishing
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Java 11, Maven 3.6+, Redis
+          - Outputs: Compiled modules, test reports.
+        - Build (release)
+          - Inputs: Source branch + AWS credentials + Nexus access
+          - Outputs: Docker image `642760139656.dkr.ecr.us-west-2.amazonaws.com/lswcore/taz-core:<ver>`, Maven JARs `taz-core-<ver>.jar` and `taz-client-<ver>.jar` published to Nexus.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/taz/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/taz/)
+        - ECS deployment pipeline for independent clusters in qa, stage, prod-us-west-2, prod-eu-west-1, prod-ap-southeast-2
+        - Docker image build and push to ECR
+        - Maven artifact publishing for core and client JARs
+        - Current production version: 0.58.0-SNAPSHOT
+    - `Lakehouse and Floodgate`
+      - Architecture
+        - Function: A central data lake/store for all incoming social content. It stores entities like authors, persons, and documents.
+        - Intended to be the central repository, reducing reliance on `IC Backend`'s MySQL for some data and enabling new use cases (e.g., Bot flows, Analytics) that don't require the full `IC Backend`.
+        - Data Storage: Primarily uses DynamoDB.
+        - "Poop Loop": An iterative enhancement process.
+          - Posts, messages, persons, and authors are stored in DynamoDB.
+          - Any write to the DynamoDB table triggers an event via DynamoDB Streams, which is fed into a Kinesis stream (KCL).
+          - The Lake listens to this Kinesis stream and performs further enhancements on the data (e.g., adding tags, language detection, ID generation, Lake author mapping/normalization).
+          - This loop continues until the post is considered "fully enhanced."
+        - Output: Once enhancements are complete, data is sent via a Kinesis stream (KCL) toward Roybean.
+        - Regional Scope: There is one Lake and one set of DynamoDB tables per AWS region.
+        - Tech Stack: Java 11.
+        - Key Structure: Docs in `docs/`; code style guidelines; JIRA ticket required in commit messages.
+        - REST APIs: Yes. Exposes endpoints for querying data, managing access, and retrieving analytics.
+        - How APIs Work:
+          - GET /data/{type} – Retrieve specific type of data.
+          - POST /query – Submit a data query.
+          - GET /status – Check service status.
+      - Build commands
+        - Local developer build
+          - `./gradlew clean build`
+          - Builds multi-module Gradle project with 18 submodules.
+        - Jenkins build
+          - `./gradlew -Pjenkins clean build compileTest -x check publishMavenJavaPublicationToMavenLocal --stacktrace --refresh-dependencies --parallel` for CI builds
+          - `./gradlew -Pelasticsearch.port=9302 -Pelasticsearch.host=127.0.0.1 -Pjenkins -Pcode-coverage check --stacktrace --parallel --continue` for CI verification
+          - `./gradlew -PskipJavaDocs clean release -Prelease.useAutomaticVersion=true -x check` for release builds
+          - `./gradlew -PdockerPublishNamespace=tocoma dockerTag dockerTagsPush -x check` for Docker image builds
+      - Environment variables
+        - `elasticsearch.port`, `elasticsearch.host`
+          - Required in: CI verification builds
+          - Elasticsearch connection configuration for testing.
+        - `dockerPublishNamespace`
+          - Required in: Docker builds
+          - Docker registry namespace for image publishing.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Elasticsearch instance for testing (port 9302, host 127.0.0.1)
+        - Docker registry access for image publishing
+        - Maven repository access for dependency resolution and publishing
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Gradle environment
+          - Outputs: Compiled modules, test reports for 18 submodules.
+        - Build (release)
+          - Inputs: Source branch + Docker registry credentials + Maven access
+          - Outputs: 4 deployable components (lakehouse-core, lake-floodgate, lakehouse-lia, lakehouse-public), Docker images pushed to registry, Maven artifacts published.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/lakehouse/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/lakehouse/)
+        - CI Build pipeline with parallel execution and dependency refresh
+        - CI Verification with Elasticsearch integration testing
+        - Release pipeline with automatic versioning
+        - Docker image build and push to tocoma namespace
+        - Multi-module Gradle project supporting 4 main deployable services
+    - `Omega`
+      - Architecture
+        - A lightweight job scheduler.
+        - Uses Redis and DynamoDB for its scheduling and state management.
+        - Features fairness queuing to manage load from bots and prevent them from overwhelming resources or hitting rate limits. Supports exponential backoff retries for fetching.
+        - The name Omega might refer to "Watchmaker, Omega watches".
+        - Tech Stack: Java 8.
+        - REST APIs: Yes. Exposes endpoints for job management.
+        - How APIs Work:
+          - POST /jobs – Schedule a new job.
+          - GET /jobs/{id} – Get job status.
+          - DELETE /jobs/{id} – Cancel a job.
+        - Notes: JIRA ticket required in commit messages; local config setup required.
+      - Build commands
+        - Local developer build
+          - `mvn clean verify -P code-coverage`
+          - `java -cp target/dependency/*:target/omega-core-<version>.jar com.lithium.omega.OmegaService server core/src/main/resources/config-local.yml`
+          - Compiles, tests with code coverage, and runs service locally.
+        - Jenkins build
+          - `mvn clean verify -P code-coverage` for continuous builds
+          - `mvn sonar:sonar` for SonarQube analysis (master branch only)
+          - `git checkout ${BRANCH_NAME} && git reset --hard HEAD && git pull --no-tags` for release preparation
+      - Environment variables
+        - `BRANCH_NAME`
+          - Required in: Release builds
+          - Git branch identification for checkout and build logic.
+        - `JAVA_HOME`
+          - Required in: All build scenarios
+          - Java installation path for compilation and execution.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - SonarQube integration for code quality analysis
+        - Maven repository access for dependency resolution
+        - Local configuration file `config-local.yml` for service execution
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Java environment, local config
+          - Outputs: Compiled JAR `omega-core-<version>.jar`, test reports, code coverage reports.
+        - Build (release)
+          - Inputs: Source branch + SonarQube credentials + Maven access
+          - Outputs: Maven artifacts, SonarQube analysis reports, service JAR for deployment.
+      - Jenkins jobs / Github actions
+        - Main folder: [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/omega/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/listening/job/omega/)
+        - Continuous Build: `Jenkinsfile-continuous`
+          - Build, test, and SonarQube analysis for master branch
+        - Release Build: `Jenkinsfile-ecr-docker`
+          - Git operations, Maven build with code coverage
+    - `Edgar`
+      - Architecture
+        - This is the directory of companies prior to the merger with spredfast.
+        - Stores Application specific settings in DynamoDB.
+        - Core Functionality
+          - Primarily used to create, update, delete, and get companies
+          - Serves as a critical dependency for many Khoros services
+        - Tech Stack: Java 11, maven
+        - Internal dependency: Bandolier, aws-common
+        - Data Stores
+          - DynamoDB Tables:
+            - prod-live-lswcore-edgar-search
+            - prod-live-lswcore-edgar-replication-kcl-reader-from-{region}
+            - prod-live-lswcore-edgar-company
+            - prod-live-lswcore-locks
+          - Redis Cluster: prod-live-edgr
+          - Multiple SSM parameters for API keys
+        - Deployment & Infrastructure
+          - Runs in Kubernetes (EKS) with deployments managed by ArgoCD
+          - Deployed across multiple environments: QA, Stage, Production
+          - Multi-region deployment: US West, EU West, AP Southeast
+          - Jenkins pipelines for build and deployment
+      - Build commands
+        - Local developer build
+          - `mvn clean verify`
+          - Builds all modules with unit tests using Java 11 and Maven.
+        - Jenkins build
+          - `mvn clean verify -P code-coverage` for builds with code coverage
+          - `docker build -f core/src/main/docker/app/Dockerfile -t edgar:latest .` for Docker image creation
+          - Multi-module Maven project with parent, model, core, client, core-local, and ops components
+      - Environment variables
+        - `JAVA_HOME`
+          - Required in: All build scenarios
+          - Path to Java 11 installation for compilation.
+        - `MAVEN_OPTS`
+          - Required in: Maven builds
+          - JVM options for Maven execution.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Docker registry access for image publishing
+        - Maven repository access for dependency resolution
+        - Java 11 runtime environment
+        - Dropwizard service configuration for core module
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Java 11 environment
+          - Outputs: JAR files for each module, test reports, `edgar-core-*-shaded.jar` executable.
+        - Build (release)
+          - Inputs: Source branch + Docker registry credentials
+          - Outputs: Maven artifacts, Docker image pushed to registry, shaded JAR for deployment.
+      - Jenkins jobs / Github actions
+        - [https://care-jenkins.qa.care.usw2.khorostech.com/job/Care_Dev/job/edgar/](https://care-jenkins.qa.care.usw2.khorostech.com/job/Care_Dev/job/edgar/)
+        - [https://care-jenkins.prod.care.usw2.khorostech.com/job/Edgar/](https://care-jenkins.prod.care.usw2.khorostech.com/job/Edgar/)
+        - Maven-based CI/CD pipeline for multi-module project
+        - Docker image builds for containerized deployment
+        - Code coverage reporting integration
+        - Automated testing across all modules (parent, model, core, client, core-local, ops)
+  - Brand Messenger
+    - Architecture
+      - BrandMessenger is Khoros' native real-time messaging and chat platform, designed to let end users (typically consumers of Khoros customers) interact with agents through a rich, embedded interface on web or mobile apps. It is a key part of the Care product, enabling direct, high-SLA communication channels between brands and their customers.
+      - It acts as a primary entry point for inbound support traffic.
+      - All BrandMessenger sessions are processed through the broader Khoros Care pipeline, including tagging, routing, analytics, and escalation.
+      - If the bot can’t handle a conversation, it triggers a handoff to a live agent.
+      - Integrates with Analytics UI and backends (e.g., Aurora, Elasticsearch) for reporting and dashboarding.
+    - `brandmessenger-chat-backend`
+      - Build commands
+        - Local developer build
+          - `./gradlew build -x test`
+          - Builds WAR file, skips tests for faster development builds.
+        - Jenkins build
+          - `./gradlew build` (DevQA pipeline)
+          - `./gradlew test` for unit testing
+          - `./gradlew integrationTest` for integration testing
+          - DevQA: uses development database • StageProd: uses production database credentials
+      - Environment variables
+        - `APPLOZIC_TEST_DB_HOST`, `APPLOZIC_TEST_DB_PORT`, `APPLOZIC_TEST_DB_NAME`
+          - Required in: Integration testing
+          - Test database connection configuration for Rest Assured tests.
+        - `TEST_DB_CREDENTIAL_USR`, `TEST_DB_CREDENTIAL_PWD`
+          - Required in: Jenkins pipelines
+          - Database credentials supplied by Jenkins secrets.
+        - `EMAIL_RECIPIENT`
+          - Required in: Jenkins pipelines
+          - Email address for test report notifications.
+        - `ECR_REPO`
+          - Required in: Docker build stage
+          - Docker registry path for image push operations.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - Jenkins credential `d0112402-cf73-4818-97d3-71fd7aa8c890`
+          - Supplies GitHub authentication.
+          - Consumed by: Git operations in Jenkinsfile
+        - Jenkins credential `applozic-dev-chb-test-db`
+          - Supplies `TEST_DB_CREDENTIAL_USR` & `TEST_DB_CREDENTIAL_PWD` for DevQA.
+          - Consumed by: DevQA pipeline integration tests
+        - Jenkins credential `applozic-stage-chb-test-db`
+          - Supplies database credentials for Stage/Prod environments.
+          - Consumed by: StageProd pipeline integration tests
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch
+          - Outputs: WAR file `brandmessenger-chat-backend-service.war`, test reports.
+        - Build (release)
+          - Inputs: Source branch + database credentials + ECR access
+          - Outputs: WAR file, Docker image pushed to ECR, test reports, updated deployment configs.
+      - Jenkins jobs / Github actions
+        - [https://care-jenkins.qa.care.usw2.khorostech.com/job/Applozic/](https://care-jenkins.qa.care.usw2.khorostech.com/job/Applozic/)
+        - [https://care-jenkins.prod.care.usw2.khorostech.com/job/Applozic/](https://care-jenkins.prod.care.usw2.khorostech.com/job/Applozic/)
+        - DevQA Pipeline: `Jenkinsfile-build-DevQA-new`
+          - Stages: Get version & Build → Unit testing → Docker build → Version increment
+        - StageProd Pipeline: `jenkins-build-StageProd-new`
+          - Same stages as DevQA but with production database credentials and different Java setup
+    - `react-native-brandmessenger-sdk`
+      - Build commands
+        - Local developer build
+          - `yarn clean && yarn prepare`
+          - `yarn test`
+          - `yarn typecheck`
+          - `yarn lint`
+          - Cleans, builds library, runs tests, type checking, and linting.
+        - Jenkins build
+          - `yarn turbo run build:android` for Android example builds
+          - `yarn turbo run build:ios` for iOS example builds
+          - Turbo-powered build system for multi-platform React Native development
+      - Environment variables
+        - `NODE_ENV`
+          - Required in: Build processes
+          - Environment setting for development/production builds.
+        - React Native and platform-specific environment variables for Android/iOS builds
+      - Required secrets / External resources
+        - All secrets stored in CI/CD platform.
+        - Node.js and Yarn package manager
+        - Android SDK for Android example builds
+        - Xcode and iOS SDK for iOS example builds
+        - Turbo build system for monorepo management
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Node.js environment, platform SDKs
+          - Outputs: Built library, test reports, type checking results, lint reports.
+        - Build (release)
+          - Inputs: Source branch + platform SDKs + npm credentials
+          - Outputs: React Native library package, Android and iOS example apps, published npm package.
+      - Jenkins jobs / Github actions
+        - Multi-platform CI/CD supporting both Android and iOS example builds
+        - Turbo-powered build system for efficient monorepo builds
+        - Automated testing, type checking, and linting pipeline
+        - React Native library packaging and distribution
+    - `ios-brandmessenger-ui`
+      - Build commands
+        - Local developer build
+          - `cd Demo && pod install`
+          - `Open Demo/BrandMessengerUI-Demo.xcworkspace in Xcode`
+          - Installs CocoaPods dependencies and opens demo app for development.
+        - Jenkins build
+          - `./buildxcframework.sh` for universal XCFramework builds
+          - `xcodebuild -workspace Demo/BrandMessengerUI-Demo.xcworkspace -scheme BrandMessengerUI-Demo -destination 'platform=iOS Simulator,name=iPhone 14' test` for testing
+      - Environment variables
+        - No specific environment variables required
+        - Build process managed through Xcode and shell scripts
+      - Required secrets / External resources
+        - Apple Distribution certificate for code signing XCFrameworks
+        - CocoaPods ≥1.9.0 for dependency management
+        - Xcode ≥13.0 (specifically 13.3.1 for XCFramework builds)
+        - Access to `ios-brandmessenger-sdk-dist/` distribution directory
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Xcode environment, CocoaPods
+          - Outputs: Demo app builds, test results.
+        - Build (release)
+          - Inputs: Source branch + Apple Distribution certificate + Xcode 13.3.1
+          - Outputs: Universal XCFrameworks for BrandMessengerCore, BrandMessengerUI, and RichMessageKit copied to `Frameworks/` and `ios-brandmessenger-sdk-dist/`.
+      - Jenkins jobs / Github actions
+        - XCFramework Build pipeline using `buildxcframework.sh`
+        - Archives each framework for iOS device and simulator
+        - Creates universal XCFrameworks using `xcodebuild -create-xcframework`
+        - Code signs with Apple Distribution certificate
+        - Demo app testing using iOS Simulator
+    - `ios-brandmessenger-core`
+      - Build commands
+        - Local developer build
+          - `xcodebuild build -project Demo/BrandMessengerCore-Demo/BrandMessengerCore-Demo.xcodeproj -scheme BrandMessengerCore-Demo -destination 'platform=iOS Simulator,name=iPhone 16'`
+          - Builds and verifies integration using demo app.
+        - Jenkins build
+          - `xcodebuild archive -project BrandMessengerCore.xcodeproj -scheme BrandMessengerCore -configuration Release -archivePath archives/ios -sdk iphoneos SKIP_INSTALL=NO` for device builds
+          - `xcodebuild archive -project BrandMessengerCore.xcodeproj -scheme BrandMessengerCore -configuration Release -archivePath archives/ios-sim -sdk iphonesimulator SKIP_INSTALL=NO` for simulator builds
+          - `xcodebuild -create-xcframework` to bundle device+simulator builds into single `.xcframework`
+      - Environment variables
+        - No specific environment variables required
+        - All paths and settings configured in Xcode projects
+      - Required secrets / External resources
+        - Apple Developer signing credentials required for code-signing during archive stages
+        - CocoaPods Trunk credentials required for publishing new versions via `pod trunk push BrandMessengerCore.podspec`
+        - Xcode development environment with iOS SDK support
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Xcode environment
+          - Outputs: Demo app builds, unit test results, framework verification.
+        - Build (release)
+          - Inputs: Source branch + Apple Developer credentials + CocoaPods credentials
+          - Outputs: `.xcarchive` files for device and simulator, bundled `.xcframework`, published CocoaPods spec.
+      - Jenkins jobs / Github actions
+        - SDK Framework Build pipeline for device and simulator architectures
+        - XCFramework packaging for universal distribution
+        - Demo app integration testing for verification
+        - Unit testing pipeline using iOS Simulator
+        - CocoaPods publishing for package distribution
+    - `android-brandmessenger-sdk`
+      - Build commands
+        - Local developer build
+          - `./gradlew clean build`
+          - Standard build with tests using Gradle wrapper.
+        - Release build
+          - `./buildbinaries.sh`
+          - Removes release guards, builds modules in order, publishes to local Maven, copies artifacts to distribution directory.
+      - Environment variables
+        - `JAVA_HOME`
+          - Required in: All build scenarios
+          - Path to JDK 11 installation for compilation.
+      - Required secrets / External resources
+        - All secrets stored in Travis CI settings.
+        - GitHub Token
+          - Supplies authentication for Travis CI release uploads.
+          - Consumed by: Travis CI deployment scripts
+        - Distribution Repository
+          - `../android-brandmessenger-sdk-dist/` directory must exist relative to project root.
+          - Consumed by: `buildbinaries.sh` script
+        - Python Dependencies
+          - `uritemplate`, `python-magic` packages required for release scripts.
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source code in 4 modules (app, brandmessengercommons, brandmessengercore, brandmessengerui)
+          - Outputs: Compiled classes, test reports, AAR files.
+        - Build (release)
+          - Inputs: Source branch + GitHub credentials + distribution directory
+          - Outputs: AAR files, POM files, local Maven artifacts, distribution artifacts in `../android-brandmessenger-sdk-dist/`.
+      - Jenkins jobs / Github actions
+        - Travis CI integration configured for automated builds and releases
+        - Release artifacts uploaded to GitHub releases via Travis CI deployment
+    - `flutter_brandmessenger_sdk`
+      - Build commands
+        - Local developer build
+          - `flutter pub get`
+          - `flutter analyze`
+          - `flutter test`
+          - Installs dependencies, runs static analysis, and executes tests using Flutter SDK ≥ 3.0.0.
+        - Jenkins build
+          - `flutter build apk` for Android builds (compileSdk 34, minSdk 21)
+          - `flutter build ios` for iOS builds (iOS 12+, Xcode ≥ 14.0)
+          - `pod install` for iOS dependency management via CocoaPods
+      - Environment variables
+        - `JAVA_HOME`
+          - Required in: Android builds
+          - Path to JDK 8+ installation for Android compilation.
+        - `FLUTTER_ROOT`
+          - Required in: All build scenarios
+          - Path to Flutter SDK installation.
+        - `ANDROID_HOME`
+          - Required in: Android builds
+          - Path to Android SDK for compilation and tooling.
+      - Required secrets / External resources
+        - All secrets stored in CI/CD platform.
+        - Android SDK with compileSdk 34 and minSdk 21 support
+        - Xcode ≥ 14.0 for iOS builds (macOS only)
+        - CocoaPods for iOS dependency management
+        - Flutter SDK ≥ 3.0.0 with Dart ≥ 3.0.0
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Flutter SDK environment
+          - Outputs: Analyzed code, test reports, development builds.
+        - Build (release)
+          - Inputs: Source branch + platform SDKs + signing credentials
+          - Outputs: APK files for Android, iOS app bundles, platform-specific artifacts for distribution.
+      - Jenkins jobs / Github actions
+        - Multi-platform CI/CD pipeline supporting both Android and iOS builds
+        - Automated testing and static analysis using Flutter toolchain
+        - Platform-specific build processes with appropriate SDK requirements
+  - Analytics
+    - Architecture
+      - Care Analytics provides real-time and historical data on how effectively teams handle customer issues across social media channels. Also provides dashboards and widgets for analyzing platform data like incoming posts, response times, and conversation volume. It helps organizations assess agent performance and identify escalating issues that need immediate attention.
+      - The old Analytics UI is written in GWT (Java). Analytics v2 is a more modern React UI, providing similar insights and using the same backend as the old Analytics UI.
+    - `care-analytics-ui`
+      - Build commands
+        - Local developer build
+          - `npm ci`
+          - `npm run dev` or `npm run dev-local`
+          - Installs dependencies and starts development server at `http://local.sdxdemo.com:8070/`.
+        - Jenkins build
+          - `npm run lint` for code quality checks
+          - `npm run test` for unit testing
+          - `npm run build:qa` • `npm run build:stage` • `npm run build:prod` for environment-specific builds
+      - Environment variables
+        - `NODE_ENV`
+          - Required in: All build modes
+          - Values: `development` / `production` for build optimization.
+        - `NPM_TOKEN`, `NODE_AUTH_TOKEN`
+          - Required in: CI/CD pipelines
+          - Authentication for private package access.
+        - `PACKAGE_TOKEN`
+          - Required in: Package publishing
+          - Scoped access token for `@spredfast` packages.
+      - Required secrets / External resources
+        - All secrets stored in GitHub Actions.
+        - GitHub Actions secret `CARE_ANALYTICS_GH_ACTION_BOT`
+          - Supplies GitHub authentication for automated workflows.
+          - Consumed by: GitHub Actions workflows
+        - GitHub Actions secret `PACKAGE_TOKEN`
+          - Supplies NPM publish token for private packages.
+          - Consumed by: Package publishing workflows
+        - GitHub Actions secret `CARE_ANALYTICS_OPENAI_API_KEY`
+          - Supplies OpenAI API access for translation updates.
+          - Consumed by: Translation automation workflows
+        - AWS IAM Role `arn:aws:iam::642760139656:role/GHA-CareAnalytics-UI-S3-Upload`
+          - Provides S3 upload permissions and CloudFront invalidation access.
+          - Consumed by: Deployment workflows
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Node.js v18.13.0
+          - Outputs: Development server, linting reports, test results.
+        - Build (release)
+          - Inputs: Source branch + AWS credentials + NPM tokens
+          - Outputs: Built static assets, S3 deployment to qa/stage/prod buckets, CloudFront cache invalidation.
+      - Jenkins jobs / Github actions
+        - [https://github.com/lithiumtech/care-analytics-ui/actions](https://github.com/lithiumtech/care-analytics-ui/actions)
+        - GitHub Actions workflows for automated CI/CD
+        - Pull Request CI: Triggered on PRs against `main`/`develop` branches
+        - Environment deployments: Automated builds and deployments to S3 buckets with CloudFront invalidation
+        - Translation updates: Automated using OpenAI API integration
+    - `socialweb-analytics-ui`
+      - Build commands
+        - Local developer build
+          - `dart pub get` for Dart dependencies
+          - `npm install` for React dependencies
+          - `dart run build_runner build` for Dart code generation
+          - `npm run build` for React production build
+          - Hybrid Dart + React frontend application build.
+        - Jenkins build
+          - `dart pub get && dart run build_runner build` for Dart builds
+          - `npm install && npm run build` for React builds
+          - `docker build -t socialweb-analytics-ui .` for containerized builds
+      - Environment variables
+        - `DART_SDK`
+          - Required in: Dart builds
+          - Dart SDK path for compilation and code generation.
+        - `NODE_ENV`
+          - Required in: React builds
+          - Node.js environment configuration (development/production).
+      - Required secrets / External resources
+        - All secrets stored in Jenkins or GitHub Actions.
+        - Dart SDK for Dart application components
+        - Node.js and npm for React application components
+        - Docker for containerized deployment
+        - Build runner for Dart code generation
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Dart SDK, Node.js environment
+          - Outputs: Generated Dart code, compiled React bundle, hybrid application.
+        - Build (release)
+          - Inputs: Source branch + Dart SDK + Node.js + Docker access
+          - Outputs: Production React build, Dart artifacts, Docker image for deployment.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/analytics/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/analytics/)
+        - Hybrid build pipeline supporting both Dart and React components
+        - Dart code generation using build_runner
+        - React production build and bundling
+        - Docker containerization for deployment
+        - Multi-technology frontend application build system
+        - Version 1.81.245 release management
+    - `socialweb-analytics-app`
+      - Build commands
+        - Local developer build
+          - `mvn clean verify`
+          - Multi-module Maven project build with all submodules.
+        - Jenkins build
+          - `mvn clean verify -P code-coverage` for CI builds with code coverage
+          - `mvn sonar:sonar` for SonarQube analysis (master branch only)
+          - `mvn release:clean release:prepare release:perform --batch-mode` for release builds
+      - Environment variables
+        - `JAVA_HOME`
+          - Required in: All build scenarios
+          - Java installation path for compilation.
+        - `MAVEN_OPTS`
+          - Required in: Build processes
+          - Maven JVM options for memory and performance tuning.
+      - Required secrets / External resources
+        - All secrets stored in Jenkins.
+        - SonarQube integration for code quality analysis
+        - Maven repository access for dependency resolution and publishing
+        - Multi-module project dependencies coordination
+      - Expected inputs & outputs
+        - Build (developer)
+          - Input: Source branch, Java environment, Maven configuration
+          - Outputs: Compiled modules, test reports for all submodules.
+        - Build (release)
+          - Inputs: Source branch + Maven credentials + SonarQube access
+          - Outputs: Maven artifacts for all modules, SonarQube analysis reports, released JARs.
+      - Jenkins jobs / Github actions
+        - [https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/analytics/](https://dev-lswcore-jenkins-master.dev.aws.lcloud.com/job/analytics/)
+        - Multi-module Maven build pipeline
+        - Continuous Build: Maven build with code coverage and SonarQube analysis
+        - Release Build: Maven release lifecycle with artifact publishing
+        - Code quality gates enforced through SonarQube integration
+- How to use these Runbooks
+  - This runbook isn’t a guide for setting up services locally, it documents how each application is built and what inputs and outputs each pipeline stage produces. Also includes architecture of each application.
+  - Architecture
+    - This section lists the Architecture of the application and detailed overview of the application. This section also includes tech stack and api structures of the application.
+  - Build commands
+    - This section lists the exact commands you need to compile, test and package each service, locally, in CI, and for release. Use it to copy-&-paste the correct invocation and to understand which build profiles or flags are required.
+  - Environment variables
+    - Here you’ll find all the `ENV` entries or Gradle/Maven/NPM properties that must be set before running your build or CI pipeline. Consult this list whenever you see missing configuration errors or authentication failures.
+  - Required secrets / External resources
+    - This lists Jenkins credentials, AWS IAM roles, external services (Redis, Elasticsearch, etc.) and other dependencies your build or tests rely on. Reference it to ensure all credentials and external endpoints are accessible before you kick off a pipeline.
+  - Expected inputs & outputs
+    - Use this to verify what each build or deploy stage consumes and produces—artifacts, Docker images, JARs, reports, etc. It’s your quickest way to troubleshoot “I ran the build, but nothing was published” or “where did my test reports go?”
+  - Jenkins jobs / Github actions
+    - Links to the folder and individual pipeline jobs for each component. Click through to inspect logs, parameters, or to manually trigger jobs. Keep this handy instead of hunting in Jenkins UI.

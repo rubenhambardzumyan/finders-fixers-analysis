@@ -1,0 +1,34 @@
+DynamoDB Capacity Mode Optimization
+
+- Owners
+  - Shahan Naqvi ([shahan.naqvi@trilogy.com](mailto:shahan.naqvi@trilogy.com))
+- Purpose
+  - The purpose of this brainlift is to list down all their is to optimize DynamoDb instances based on OnDemand and Provisioned types and which instance type to go for in order get the most savings by efficiently selecting options fit for the performance needed. The approach is more so concerned with programatic point of view.
+  - In Scope:
+    - Selection Between OnDemand and Provisioned DynamoDb types
+    - Instance mode to choose based of usage
+    - Ways to calculate these recommendations
+  - Out of Scope:
+    - optimizing DynamoDb based of any service other than AWS
+    - optimizing DynamoDb based on other factors of DynamoDb
+- DOK4 - Spiky Point of View (SPOV)
+  - [Add strong beliefs and convictions here that might be crtiqued or hot take but knowledge earning through experience that other might not know or unpopular, something that makes you stand out from the crowd in terms of experience/expertise on this subject]
+- DOK3 - Insights & Analysis
+  - [Add deep Knowledge here, that is found after reasoning]
+- DOK2 - Knowledge Tree
+  - DynamoDb
+    - Optimize Mode Selection
+      - DOK1 - Facts
+        - DynamoDB Capacity Modes: DynamoDB offers two primary capacity modes:
+          - Provisioned: Charges for pre-allocated Read Capacity Units (RCUs) and Write Capacity Units (WCUs) per second, billed hourly, regardless of actual consumption. Ideal for predictable workloads.
+          - On-Demand: Charges per actual read/write request, with no pre-allocation. Ideal for unpredictable or spiky workloads.
+        - Cost Drivers:
+          - Provisioned Cost: Hourly rate × provisioned RCUs/WCUs.
+          - On-Demand Cost: Request count (ConsumedReadCapacityUnits/ConsumedWriteCapacityUnits) × per-request price.
+        - Metric Sources: Accurate cost comparisons rely on ConsumedReadCapacityUnits and ConsumedWriteCapacityUnits metrics, available via AWS CloudWatch (typically at 1-minute granularity), and up-to-date regional pricing obtained from the AWS Price List API.
+        - Switching Modes: Switching between Provisioned and On-Demand is an API call with no data migration required, but is subject to a 24-hour cooldown period.
+        - Cost Estimation Logic:
+          - For Provisioned Tables (estimating On-Demand cost): The potential On-Demand cost is calculated by summing the actual consumed RCUs/WCUs over a specified lookback_days period and applying the current On-Demand per-request pricing.
+          - For On-Demand Tables (estimating Provisioned cost): The potential Provisioned capacity is estimated by identifying the maximum observed usage (RCUs/WCUs per second) during the lookback_days period, applying a configurable buffer_percent (e.g., 15-20%) to account for variability and prevent throttling, rounding up to whole units, and then pricing this estimated provisioned capacity at current hourly rates.
+        - Simplification Benefits: Explicitly removing complex autoscaling simulations, burst credit models, and mixed-mode recommendations dramatically reduces the tool's complexity, improves explainability, and fosters user trust.
+          - DOK2 - Summary
