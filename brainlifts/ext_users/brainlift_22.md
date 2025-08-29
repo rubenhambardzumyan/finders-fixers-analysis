@@ -1,0 +1,25 @@
+Prompt Engineering
+
+- Owner
+  - Huzefa
+- Purpose
+  - To contain information on designing effective prompts for LLMs. This is so we can eliminate guess work in generating prompts and get precise, accurate outputs.
+- SPOV
+- DOK3 - Insights
+- DOK2 - Knowledge Tree
+  - DOK2 - Summaries
+    - You can tell it to not make any changes but after 5 messages it will go in and make a change.
+  - DOK1 - Facts
+    - LLMs have limited context lengths
+    - LLM's recall depends on where in the context window the information was.
+    - LLM's take the easy way out.
+-
+- Sources
+  - [https://generativeai.pub/making-llms-remember-using-this-prompting-technique-5ea97a53fc07](https://generativeai.pub/making-llms-remember-using-this-prompting-technique-5ea97a53fc07)
+- Experts:
+  - AI Rabbit
+    - [https://medium.com/@airabbitX](https://medium.com/@airabbitX)
+    - Practical advice on LLM tools.
+  - Huzefa Tahir
+    - Multiple years of experience in software development
+    - Trying to work with an LLM first approach

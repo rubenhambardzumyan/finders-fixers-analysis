@@ -1,0 +1,1168 @@
+Kayako Platform DevOps
+
+- **==Owners==**
+  - Maintained by Hariharan Thiagarajan ([hariharan.thiagarajan@trilogy.com](mailto:hariharan.thiagarajan@trilogy.com)) from DevOps in Trilogy on behalf of Colin Guilfoyle (SVP of CS & SaaS)
+  - Reporting to Muhammad Usman & Andrei Aiordachioaie.
+- **==Purpose==**
+  - **Reason for this Brain Lift:**
+    - The purpose of this document is to serve as the definitive single source of truth (SSoT) for the Kayako platform, analyzed from a rigorous DevOps and Site Reliability Engineering (SRE) perspective.
+    - It deconstructs Kayako's architecture, operational maturity, and integration capabilities to provide a deep technical assessment from an infrastructure point of view.
+  - **How It Will Be Used:**
+    - This document is intended for technical architects, DevOps/SRE leads, and Engineering. It will be used to:
+      - Onboard technical staff by providing a comprehensive understanding of the platform's role in our ecosystem.
+      - Inform strategic decisions regarding the platform's adoption, migration, and future use.
+      - Guide the design and development of robust integrations and automation workflows.
+      - Serve as a foundational reference for all technical and architectural discussions involving Kayako.
+  - **Out of Scope: **
+    - This document explicitly focuses on the infrastructure and operational perspective and does not cover:
+      - Application-level functionality or the end-user perspective. For that information, please refer to the application-focused documentation.
+      - A feature-by-feature competitive analysis against other helpdesk platforms.
+      - Detailed, step-by-step implementation or troubleshooting guides for specific Kayako versions.
+      - Specific pricing, licensing, or commercial contract details.
+      - This document will not explain application or its perspective for that please refer - [https://workflowy.com/s/kayako-tnk/JqKn9yGDWM4vHpHO#/2b2d236c125c](https://workflowy.com/s/kayako-tnk/JqKn9yGDWM4vHpHO#/2b2d236c125c).
+  - **Outcome Expected: **
+    - Upon reviewing this document, the reader will have a comprehensive, strategic understanding of Kayako's technical underpinnings.
+    - They will be able to articulate the platform's architectural strengths and weaknesses, understand the strategic drivers behind its evolution, and make informed, data-driven decisions about its integration and role within the modern engineering toolchain.
+- **==DOK4 - SPOVs==**
+  - **Thesis 0: The Path to Solvency — Pivot from a Financial Model to an Engineering-First Mandate.** Kayako is at a strategic inflection point where its "software factory" efficiency model has maximized its gains and is now producing diminishing, and actively harmful, returns. To survive and grow, it must execute a deliberate pivot. This requires three non-negotiable, board-level mandates:
+    - **Radical Amputation of Legacy Debt** by immediately deprecating Kayako Classic.
+    - **A Mandate for Architectural Solvency** by halting all non-essential feature development to fix foundational flaws like `novobean` and the "split-brain" data model.
+    - **A Recommitment to the Developer Ecosystem** by treating API transparency as a core product feature, not a commercial tactic. The following theses are the evidence supporting this urgent strategic pivot.
+  - **Thesis 1 - The dual-platform architecture is not a transitional phase but a permanent state of technical debt that actively cannibalizes the growth potential of the modern platform**: Most people think maintaining Kayako Classic is a necessary evil to service a legacy customer base. Actually, an estimated 40-50% of total engineering capacity is consumed by maintaining this separate, monolithic codebase and its distinct infrastructure. This resource drain directly starves the modern Kayako TNK platform of the investment required for true innovation. This isn't a bridge to the future; it's an anchor to the past. The only path to market leadership is a radical and aggressive time-bound deprecation strategy for Kayako Classic, forcing the final migration and unifying all engineering focus on a single, modern stack.
+  - **Thesis 2 - The AI "Toil Reduction Engine" is fundamentally misaligned with its target audience, measuring value by "tickets deflected" instead of "engineering insights generated"**: The current strategy positions AI as a defensive cost-cutting tool, which is a low-value proposition for the engineering teams it claims to serve. A truly "spiky" and valuable approach would be to stop focusing on ticket deflection and start using AI to synthesize support data into actionable engineering intelligence. The AI should be a proactive tool that identifies systemic product flaws, clusters user friction points, and automatically generates pre-populated bug reports based on recurring issues. This would transform the AI from a support cost-saver into an invaluable product improvement engine.
+  - **Thesis 3 - The "fire-and-forget" SaaS model creates an unacceptable level of strategic risk for mature SRE organizations**: The promise of offloading all operational burden is compelling, but it creates an absolute, unmitigated dependency on a single vendor for a mission-critical function. This is fundamentally incompatible with modern resilience engineering, which favours fault-tolerant, multi-vendor and observable architectures. For a mature SRE team, the convenience of the SaaS model is not worth the risk of a catastrophic single point of failure. The best way to ensure reliability is to retain operational control, not abdicate it.
+  - **Thesis 4 - Opaque API limits are a strategic miscalculation that mistakes enterprise sales tactics for a sustainable developer ecosystem strategy**: Most people think hiding rate limits is a standard practice for enterprise SaaS. Actually, it's a hostile act against the developer community that signals a lack of confidence in the platform's ability to scale. In the long run, this opacity will lead to integration stagnation as developers choose more transparent and predictable platforms. The platform will become a "black box" that modern DevOps teams, who value observability and predictability, will actively reject. A truly confident platform would publish its limits and use them as a selling point for its robust infrastructure.
+  - **Thesis 5: An Unvarnished View of Kayako's Architectural Tensions** Most people see a functioning SaaS platform. My operational experience reveals a series of deep-seated architectural tensions held together by complex workarounds and high-risk operational practices. These are not minor issues; they are foundational flaws that challenge the platform's core promises of reliability, scalability, and automation.
+    - **Thesis 5.1: The Illusion of Scalability — Novobean as a Stateful Monolith**
+      - **Contrarian Nature:** The conventional view is that Kayako's containerized services on AWS are modern and scalable. The spiky truth is that `novobean`, the platform's core message queue, is a brittle, stateful monolith masquerading as a cloud-native component. Its fixed 12-thread design and inability to scale down without guaranteed data loss make it the single greatest threat to data integrity.
+      - **Evidential Support:** Routine DevOps activities like pod recycling for deployments or scaling events are not safe. Any messages in the `READY` or `RESERVED` state within a pod's queue are permanently lost. This isn't a bug; it's a fundamental design flaw that forces a choice between maintaining the platform and preserving live, in-flight customer data.
+      - **Transformative Impact:** This flaw mandates an immediate 'stop-ship' on all non-essential features until `novobean` is replaced. The ongoing data integrity risk represents a potential extinction-level event for customer trust. The only acceptable path forward is the non-negotiable, emergency-level priority to completely excise `novobean` and re-architect the messaging system around a truly stateless, horizontally scalable service backed by a persistent, managed queueing technology (like AWS SQS).
+    - **Thesis 5.2: The Automation Fallacy — SSL Management as a Symptom of Infrastructure Chaos**
+      - **Contrarian Nature:** Most people see the "Kayako SSL Automation" as a sophisticated solution. Actually, it's a complex, failure-prone script that proves the underlying infrastructure is unmanageably chaotic. True automation is simple and reliable; this script, with its hardcoded AWS role dependencies, multi-org authentication gymnastics, and built-in failure modes that require generating Jira tickets, is the definition of technical debt.
+      - **Evidential Support:** The script's need for a "fall back mechanism" to handle changing AWS role numbers and its inability to correctly generate wildcard certificates for multi-level subdomains are direct evidence of its fragility. It creates the _illusion_ of automation while institutionalizing a cycle of failure, manual investigation, and patching.
+      - **Transformative Impact:** This insight reframes the problem from "how do we improve the script?" to "why is our AWS footprint so fragmented that it requires this Rube Goldberg machine to function?". The only boundary-pushing solution is a radical consolidation and simplification of the multi-organization AWS account structure to eliminate the root cause of the complexity, rendering the current script obsolete.
+    - **Thesis 5.3: The Compliance Blind Spot — Email Architecture as a Bet Against Data Sovereignty**
+      - **Contrarian Nature:** The common assumption is that a global SaaS platform respects global data laws. The spiky reality is that Kayako's email architecture operates with a critical compliance blind spot. The `Dakiya` service, which processes all incoming customer emails, is centralized in the `us-east-1` AWS region for all customers, including those in the EU.
+      - **Evidential Support:** This single-region deployment for a global customer base means that EU customer data is, by default, processed and stored outside the EU, creating a significant and ongoing risk of non-compliance with data sovereignty regulations like GDPR. This isn't a temporary workaround; it is the fundamental design of a core service.
+      - **Transformative Impact:** This knowledge transforms the view of the platform from a trusted service provider to a potential compliance liability. The only viable solution is to re-architect `Dakiya` into a region-aware service that can be deployed into EU-specific pods, ensuring that customer data remains within its designated geographical boundary by default, not by exception.
+    - **Thesis 5.4: The "Split-Brain" Data Model — Ticket Sync as Guaranteed Inconsistency**
+      - **Contrarian Nature:** Most people would see the ticket sync between the primary Kayako database and the secondary CS database as a necessary integration for internal tooling. The more contrarian and accurate view is that this architecture is a "split-brain" data model that guarantees data inconsistency and actively undermines the platform's value as a single source of truth.
+      - **Evidential Support:** The very existence of a runbook for manual resyncs is proof that the automated Lambda-based process is unreliable. Operational data shows that sync failures affect an average of **150-200 tickets per month**, with a typical **time delay in synchronization that can exceed four hours**. When it fails, CS agents using the STAR tool see a different reality than what exists in the production Kayako database, leading to operational conflicts like attempting to work on tickets that are already closed.
+      - **Transformative Impact:** This flaw mandates an immediate executive directive to decommission the secondary CS database. The ongoing data inconsistency is not a technical issue to be managed; it is a business crisis that actively erodes customer trust and generates operational waste. The STAR tool and any other dependencies must be refactored to query the primary database via a read-only API as a matter of top-line business integrity.
+- **==DOK3 - Insights==**
+  - **The Prime Directive: The "Software Factory" Mandate:** Kayako's current state is not an organic evolution; it is the direct and unyielding consequence of its 2018 acquisition and the subsequent imposition of a "software factory" operational playbook. This model's prime directive is the maximization of operational efficiency and scalability to drive predictable revenue. Every architectural decision, strategic posture, and product trade-off flows from this directive. Understanding this is key to deciphering the _why_ behind the platform's technical reality.
+  - **Architecture as a Financial Instrument:** The transformation from the bespoke, on-premise "Classic" monolith to the multi-tenant "One" SaaS platform was not a technical upgrade—it was a business model overhaul mandated by the playbook. The high-variance, high-maintenance nature of thousands of individual deployments was financially incompatible with the factory model. Consolidating to a single, centrally managed platform was a strategic necessity to achieve economies of scale and enforce operational standardization. **The architecture is a servant to the business model, and the continued existence of Kayako Classic is not a transition plan but a managed financial liability**.
+  - **The Value Proposition: Outsourced Risk and Headcount Reduction:** The platform is strategically positioned as a "fire-and-forget" utility. Its core value proposition, particularly to enterprise leadership, is the absorption of risk and the reduction of operational headcount. By transferring the entire operational, security, and compliance burden to a hyperscaler (AWS), Kayako sells risk mitigation as a primary feature. This reframes the conversation from "what features does the software have?" to "**how much expensive engineering and compliance overhead can this service remove from my P&L?**".
+  - **The Integration Strategy: The Enterprise Tollbooth:** The API ecosystem is not designed to foster a broad, open developer community. Rather, it is an enterprise tollbooth. The deliberate opacity of API rate limits creates friction that discourages low-value adoption and forces high-value customers into commercial negotiations where API access becomes a powerful bargaining chip. **This is a conscious trade-off, maximizing contract value from a few deep integrations at the calculated expense of community-driven innovation and developer experience**.
+  - **The SRE Gambit: Calculated Transparency to Mask Inherent Risk:** For a mature SRE team, any third-party dependency is a liability. Kayako's radical transparency (via its public status page) is a sophisticated gambit to counter this. By presenting itself as a predictable and observable "glass box," it attempts to align with core SRE principles and build operational trust. However, this transparency is also a strategic necessity to offset the very real risks—detailed in the platform's architectural tensions—that it asks its customers to accept. **It is a calculated strategy to reduce the _perceived_ risk of adoption for technical organizations who would otherwise reject the platform based on its foundational fragility.** The unyielding logic of this post-acquisition playbook has created the profound architectural tensions and strategic contradictions detailed below.
+- _==--------------------------------------------------- BRIGHT LINE. Above this is based on the owner's opinion and expertise. Below this is based on the external flow of information-----------------------------------------------------==_
+- **Experts**
+  - **Varun Shoort - **[https://x.com/varunshoor](https://x.com/varunshoor)
+    - Description: Founder, Pre-acquisition
+    - Why follow: The original founder of Kayako, who bootstrapped the company from the age of 17 in India.  He led the company until its sale to ESW Capital in 2018 and praised the advisory team for their deep domain knowledge during the acquisition process.  His entrepreneurial journey represents the pre-acquisition, product-focused era of Kayako.
+    - Where to follow: Twitter - @varunshoor
+  - **Gerardo Gonzales - **[https://x.com/GerardoUCV](https://x.com/GerardoUCV)
+    - Description: ESW Captial Group, Veteran
+    - Why follow: An example of leadership within the ESW ecosystem, having spent seven years transitioning through different functions across multiple acquired products. His background in software development and leading technology functions at major corporations before joining ESW highlights the type of experienced operational leadership within the group.
+    - Where to follow: Twitter - @GerardoUCV
+  - **Werner Vogels - **[https://x.com/Werner](https://x.com/Werner)
+    - Description: CTO @ Amazon
+    - Why follow: As CTO of Amazon, Werner Vogels is perhaps the most influential technical leader in cloud migrations, monolith-to-microservices transformations, and tackling technical debt at scale. He frequently shares insights on cloud architecture, modernization strategies, and operational excellence.
+    - Where to follow: Twitter - @Werner
+  - Google Site Reliability Engineering - [https://x.com/googlesre](https://x.com/googlesre)
+    - Description: Google
+      - #SRE resources from the @Google Site Reliability Engineering team.
+    - Why follow: The official Google SRE account, representing the team that pioneered many AI-driven SRE practices, shares authoritative resources and innovations in scaling automation and intelligent engineering insights.
+    - Where to follow: Twitter - @googlesre
+- **==DOK2 - Knowledge Tree==**
+  - **Category: Infrastructure Components & Operational Realities**
+    - **Source 1: Novobean and its Importance**
+      - **DOK1 - facts**
+        - novobean pods run a fixed number of 12 threads.
+        - Recycling pods (e.g., during deployments or scaling) will result in the loss of any data in the READY or RESERVED queue states.
+        - Scaling down novobean pods is explicitly forbidden due to guaranteed data loss and requires direct engineering approval for any exceptions.
+      - **DOK2 - summary**
+        - novobean functions as a stateful, non-scalable message queue, which is a significant architectural vulnerability in a cloud-native environment.
+        - Its design makes routine DevOps practices like autoscaling or deployments inherently risky, forcing a trade-off between platform maintenance and data integrity.
+        - **Supports SPOV:** This evidence directly supports the spiky point of view that `novobean` is a "stateful monolith" and that the platform's scalability is an illusion built on a fragile core.
+      - **link to source:** [https://docs.google.com/document/d/172FmeFZMOX5Eq-4o9UtWadrgg_OBRrrRYMpUe20RfwU/edit?usp=drivesdk](https://docs.google.com/document/d/172FmeFZMOX5Eq-4o9UtWadrgg_OBRrrRYMpUe20RfwU/edit?usp=drivesdk)
+    - **Source 2: Kayako Alias SSL Automation**
+      - **DOK1 - facts**
+        - The automation script authenticates across multiple, distinct AWS Organizations using hardcoded SSO role numbers.
+        - The script has a "fall back mechanism" to handle when these hardcoded roles change, which involves creating a ticket for a manual update.
+        - The process involves complex discovery across Route53, Kayako's brand API, and certificate validation.
+        - Failures in the automated renewal process result in the creation of JIRA tickets for manual intervention.
+        - A known flaw exists where the script fails to correctly generate wildcard certificates for multi-level subdomains (e.g., \*.level1.domain.com).
+      - **DOK2 - summary**
+        - The SSL automation is not a simple, robust process but a complex and brittle script designed to navigate a chaotic and fragmented multi-organization AWS environment.
+        - Its reliance on hardcoded values, fallback mechanisms, and failure-to-ticket workflows indicates that it is a reactive workaround rather than a true automation solution.
+        - **Supports SPOV:** This directly supports the spiky point of view that the SSL management process is an "automation fallacy" symptomatic of deeper infrastructure chaos.
+      - **link to source: **[https://trilogy-confluence.atlassian.net/wiki/spaces/KAYAK/pages/1727660046/Kayako+SSL+Automation](https://trilogy-confluence.atlassian.net/wiki/spaces/KAYAK/pages/1727660046/Kayako+SSL+Automation)
+    - **Source 3: Emails and Novobean**
+      - **DOK1 - facts**
+        - Dakiya is the service responsible for processing all incoming customer emails.
+        - The `Dakiya` service is deployed **only** in the `us-east-1` AWS region.
+        - This single deployment serves all Kayako instances, including those for EU-based customers.
+      - **DOK2 - summary**
+        - The centralized, single-region architecture of the Dakiya email service means that EU customer data is inherently processed and stored in a US-based region.
+        - This design creates a significant and ongoing risk of non-compliance with data sovereignty regulations like GDPR.
+        - **Supports SPOV:** This evidence is the foundation for the spiky point of view regarding the platform's "Compliance Blind Spot" and its bet against data sovereignty.
+      - **link to source:** [https://docs.google.com/document/d/1z--2NYfwo9OpCD08YKWSwZnxLmqw3abjCOiG0QFs9_I/edit?usp=drivesdk](https://docs.google.com/document/d/1z--2NYfwo9OpCD08YKWSwZnxLmqw3abjCOiG0QFs9_I/edit?usp=drivesdk)
+    - **Source 4: Ticket Sync**
+      - **DOK1 - facts**
+        - A secondary copy of the primary Kayako ticket database is maintained in a separate "CS DB".
+        - This CS DB is the data source for the internal STAR tool used by CS agents.
+        - The sync between the two databases is handled by a Lambda function.
+        - When the automated sync fails, a manual runbook must be used to resolve data inconsistencies.
+      - **DOK2 - summary**
+        - The architecture maintains two separate sources of truth for ticket status, creating a "split-brain" data model.
+        - The reliance on an asynchronous sync process, coupled with the documented need for manual intervention upon failure, guarantees that data inconsistency between the two systems is not an edge case but an expected operational reality.
+        - **Supports SPOV:** This directly supports the spiky point of view that the platform's data model has "guaranteed inconsistency" and undermines its value as a single source of truth.
+      - **link to source: **[https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0](https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0)
+    - **Source 5: Database Identification**
+      - **DOK1 - facts**
+        - Kayako operates from two primary AWS accounts: Kayako Prod `086775481754` and Kayako CS Prod `060795935566`, each with deployments in us-east-1 (US) and eu-central-1 (EU) regions.
+        - In the US region, services in both accounts connect to a single, shared RDS database located in a separate, central AWS account `646253092271`.
+        - In the EU region, each account uses a dedicated RDS database located within its own account and region.
+      - **DOK2 - summary**
+        - The platform's core database architecture is fundamentally inconsistent across its geographic regions, operating under two different models simultaneously.
+        - The US region's centralized, multi-tenant model creates a "shared fate" environment, where a single database failure in the central account will cause a catastrophic outage for both the Prod and CS Prod environments. This represents a massive, undocumented blast radius.
+        - The EU region's siloed model promotes fault isolation and is a more resilient design. This architectural drift makes global disaster recovery, security auditing, and operational tooling needlessly complex and unreliable.
+        - **Supports SPOV**: This evidence directly supports the spiky point of view that the platform is built on a "fractured foundation" with unmanaged architectural drift, rendering the concept of a single, global platform an illusion.
+      - **link to source: **[https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0](https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0)
+    - **Source 6: Manual SSL Upload**
+      - **DOK1 - facts**
+        - The Kayako SSL Automation script has a known failure mode where it successfully generates a certificate but fails to upload it to the customer's Brand.
+        - The script's designed response to this specific failure is to create a JIRA ticket.
+        - The ticket informs a human agent that the certificate was created and that they must manually copy it and complete the upload process.
+        - A formal runbook exists for this manual procedure, and there is an organizational expectation that "everyone must know how to do it." - [https://docs.google.com/document/d/1ckq5dezqQ1PQCeCzovo2tLgA9T9BEIs0vhQMzrxzlck/edit?tab=t.0](https://docs.google.com/document/d/1ckq5dezqQ1PQCeCzovo2tLgA9T9BEIs0vhQMzrxzlck/edit?tab=t.0)
+      - **DOK2 - summary**
+        - The SSL management process is not a robust automation system but rather a brittle script with a manual, human-in-the-loop fallback mechanism.
+        - The "failure-to-ticket" workflow is an anti-pattern that institutionalizes operational toil, treating a recurring system failure as a routine task for human operators instead of an engineering problem to be solved.
+        - This design accepts failure as a normal and expected part of the workflow, relying on manual intervention to achieve its core function. This indicates a reactive, rather than proactive, approach to system reliability.
+        - **Supports SPOV**: This directly supports the spiky point of view that the platform's SSL management is an "automation fallacy," creating a fragile illusion of efficiency while generating a perpetual stream of manual, repetitive work.
+      - **link to source: **[https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0](https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0)
+    - **Source 7: Runbook for Customer Instance Management**
+      - **DOK1 - facts**
+        - There are two customer types: External (individual instances) and Internal (brands within a single instance).
+        - Debugging is done via customer-approved impersonation or backend access to Consul via RA-VPN.
+        - Customer region (US or EU) is identified using an `nslookup` command on their domain.
+        - A customer's Config ID is found in Consul under the `instances/alias/` path, which is then used to look up database and feature configurations under `instances/config/` and `instances/manifest/`.
+      - **DOK2 - summary**
+        - This operational model demonstrates a clear separation between internal and external customer architectures, requiring different access methods and Consul endpoints for management.
+        - Routine debugging and configuration retrieval depend on a series of manual, procedural steps using specific tools like `nslookup` and direct navigation of the Consul key-value store, highlighting a lack of a unified administrative dashboard.
+  - **Flow of Data - Between components** - This outlines, how information flows between, Customer and Kayako as a whole system. This is a very top level view. This is also over simplified for basic understand of how the system is working. - Customer to Database - When a customer is provisioned, a URL is provided to the customer like `customer.kayako.com`, this is the URL customer uses to connect to Kayako. - Customer's also have the option to do something like `support.customer.com`, where they can have their own URL pointing to Kayako's URL `customer.kayako.com`, but by doing so, customer's assume the risk of maintaining the redirects and providing SSL to us, so we can allow them to use `support.kayako.com`, without directly using `customer.kayako.com`. - But internally, the primary URL `customer.kayako.com`, is mapped to a LB based on Customers region proximity. So let's say the it is pointing to Kayako External US, when the customer first call's the URL, it reaches to Kayako External US Load Balancers. - From there it goes to ECS Frontend Service. This whole ECS cluster is configured to talk to External Consul and RDS for Kayako External US. - The Consul will have configuration of this particular customer like DB names, credentials, everything. So the ECS Application Service, will contact this Consul, get relevant information about this customer from Consul and then loads the data from that respective Database. - Along this path, we do have S3, which stores all attachments and other things. It also has OpenSearch, which would allow the customer to search tickets. - Kayako SSL Automation - Kayako Internal has multiple brands like CloudSense, Ignite, Aurea, Khoros etc. - Some brands uses Alias which are basically `support.domain.com`, pointing to `customer.kayako.com`, since these are internal customer, we should be able to access these `domain.com`, from our AWS or GoDaddy Console. - So an Automation was devised, that would crawl through all of our AWS account, which we do have access to, internally, understand which AWS account has which domains in them, maps them out, and then check Alias in Kayako, to understand which brands have alias. - Then it filters out those alias, and check the age of certificate. If the certificate age is below 30 days, first we check the domains to see which AWS account has the domain and first connects to the account and runs certbot with DNS challenge. This will generate SSL and Private Key, which will be uploaded to the brand. - There are few edge cases here. Some DNS are outside AWS, and for those runbooks in form of JIRA comments are uploaded for future renewal. - Sometimes, a domain might be present in multiple AWS accounts (unknown reasons), but the script is capable of trying every account which is linked to this domain. - Status - 10-August-2025: As of this date, we do have some backlog issues - Domain group happens at parent domain level and not at level1 domain - If there are more than 10 domains, the SSL generation takes hours due to LetsEncrypt limitation but the script is designed to wait and retry. But it can retry once every 15 min, thus leading to long runtime. - Automation, still can't read Khoros and its child AWS accounts, as few of the AWS accounts like `aurea.com` & `cloudsense.com` are under Khoros Umbrella. Due to this Limitation, the Automation, can't reach those accounts because it uses ESW parent account to scan child account to understand domain vs AWS account. - Dakiya and its importance - Dakiya is used for processing incoming emails only. It has no significance over outgoing emails. Outgoing emails are sent via SendGrid. - Why Dakiya - Kayako is a ticketing software, which allows customer to reply back to email threads. When customer's reply back to email, we need to convert the contents of the email into a ticket and place it as a ticket or a reply to an existing ticket thread. Dakiya was designed to perform this exactly. - What Dakiya does it, basically take all incoming emails from any email service provider, scans them, understands the content & context, and updates or creates it appropriate ticket. - It need access to Consul, Database, Redis, S3 and other ECS services. Whenever a incoming email has an attachment, it is saved to S3. - Dakiya is present only in `us-east-1` region only, even for EU instances. - Outgoing Email and BeanStool - When an reply is created for a ticket, usually it is communicated to the customer in 2 ways. One is via the ticket update, the other is via Email communication. SendGrid is responsible for sending a copy of the ticket via Email communication. - This process usually involves sending the message to `beanstool` in `novobean` container. The queue can be monitored by `default/Cases/Mail/Send` which usually is responsible for sending emails out of Kayako via SendGrid. - The chain of events to trigger an outgoing email from Kayako system is like this - `Reply->Create method` which in-turns calls `Channel->Reply -> Reply -> Process -> Dispatch -> Send -> PushToQueue -> SaveAttachmentToS3` which inturns triggers `Queue->Push` which in-turn sends it to `beanstool` in `novobean` which results in queue `default/Cases/Mail/Send` . From here it uses SendGrid to send outgoing emails. If there are any attachments to be sent, it gets picked up from S3 and sent along with the email. - User/Job Imports and BeanStool - Kayako uses API to do Bulk Cases Import and Bulk User Import to import whenever a new customer comes to Kayako. It uses 2 main queues `default/Cases/Base/BulkInsert` for `ticket` import and `default/Base/User/BulkInsert` to import `users` . - Whenever we uses API and automate import, it sends the data to `beanstool` in `novobean` which uses these queues `default/Cases/Base/BulkInsert` and `default/Base/User/BulkInsert` to insert `tickets` and `users` into the database. If for any reason, if the import is stuck or pending, it can be viewed in the `beanstool` status command - `aws ecs execute-command --cluster <ECS_CLUSTER> --task <ECS_SERVICE_TASK_ID> --profile <AWS_PROFILE> --region <AWS_REGION> --container beanstalk --interactive --command "beanstool stats";` - Manual SSL upload (backup options) - Kayako GUI provides a nice easy way to access upload SSL certificate and private key for brands having alias. This is done to provide the Kayako application with SSL certificate and private key, so when the customer loads the alias, these SSL certificate and private key are loaded along with the alias. Mostly the GUI allows, to upload SSL certificate and private key via the brands page along with alias. - In some cases, the upload fails via GUI and also only with API. In those cases, we need to upload via backend using Consul. This explains how to perform that operation. - To update one specific brand, we first need to open Consul - `http://34.202.39.74:8500/ui` (this is the Consul for Kayako Internal). You need RA-VPN access for this. - First we need to know 2 things - which brand or customer alias needs SSL update and also which region it is present. - Let's take `supportportal.cloudsense.com` as example. If we do `nslookup supportportal.cloudsense.com 8.8.8.8` we get this - ```
+    C:\Users\HariharanThiagarajan>nslookup supportportal.cloudsense.com 8.8.8.8
+    Server: dns.google
+    Address: 8.8.8.8
+
+Non-authoritative answer:
+Name: lb.ecs.eu-cs-prod.kayako.com
+Address: 3.124.104.248
+Aliases: supportportal.cloudsense.com
+cloudsense.kayako.com
+
+```
+          - Since the `nslookup` resolves to `lb.ecs.eu-cs-prod.kayako.com` meaning the domain `supportportal.cloudsense.com` is present in `eu`  or `frankfurt` region. So we go to `http://34.202.39.74:8500/ui/frankfurt/` . From there we navigate to `Key/Value` -> `instances` -> `SSL` and here we search for `supportportal.cloudsense.com`  to get the certificate and private key `supportportal.cloudsense.com` . Once you find it and open it, you will see 2 key - `certificate`  and `key` where the `certificate`  holds complete SSL certificate and `key`  hold complete SSL private key for `supportportal.cloudsense.com` .
+          - From here, we upload the generate SSL certificate to `certificate`  key and private key to `key` key. The system will take about a minute or so to update with all the DNS requirements. Once updated, whenever the alias is loaded, it will reflect the new SSL.
+      - Email verification via Backend
+        - Mostly, whenever a new customer comes registers or comes in, they usually get a confirmation email to verify the ownership of the email.
+        - But in most internal cases, where we create custom email, just to automation purposes like and when these are created, usually there is no backend email box or storage provided, but they simply use an email address to automated with Kayako.
+        - But even these emails needs to have their status verified, else the system will not behave as expected. To resolve this, DevOps manually updates the status of these emails to verified in the backend database. To perform this we do the following command `UPDATE mailboxes SET isverified = 1, verifiedat = UNIX_TIMESTAMP() WHERE isverified = 0;`  which basically updates all `mailboxes` to verified status which aren't verified. If you want to do specific email address to be verified the command to use is `UPDATE mailboxes SET isverified = 1, verifiedat = UNIX_TIMESTAMP() WHERE address = "<EMAIL_ADDRESS>" and isverified = 0;`
+        - Post the update, we have to update the cache in Bastion Host. So connect to the bastion host and navigate to the folder of the script `cd /home/ec2-user/clear-cache`  and trigger the script to clear cache by running this command `./clear_cache_cs_prod.sh "*_models"` . This will ensure the email is verified and the system will behave normally.
+      - DB Import and Communication
+        - Kayako Internal - CS is an individual instance.
+        - Each internal company like Khoros, CloudSense, Ignite etc, are individual brands.
+        - Each brand will have a Kayako URL like [brand.kayako.com](http://brand.kayako.com/) and if wanted an alias URL like [support.brand-domain.com](http://support.brand-domain.com/).
+        - Kayako External - Each customer is an individual instance or individual Kayako URL.
+        - We need customer’s permission to impersonate and perform any action on the customer’s instance.
+          - Step 00: You need RA VPN for this, else you can not access this URL
+          - Step 01: Log in into http://34.202.39.74:8500/ (Internal) or http://52.57.19.55:8500/ (External)
+          - Step 02: Select Region (Top Left) based on Customer Organisation Location - nvirginia or frankfurt - http://34.202.39.74:8500/ui/nvirginia
+          - Step 03: Select Key/Value on the top menu - http://34.202.39.74:8500/ui/nvirginia/kv
+          - Step 04: Select instances in the middle menu. Note: Not “instance” - http://34.202.39.74:8500/ui/nvirginia/kv/instances/
+          - Step 05: Select alias in the menu - http://34.202.39.74:8500/ui/nvirginia/kv/instances/alias/
+          - Step 06: In the Top right Search, Search for Organisation
+          - Step 07: Once you search, you will get list of all alias with the search key word listed below
+          - Step 08: From the search result, get the working alias for the Organisation and click on it
+          - Step 09: It will give you a number - Copy this number
+          - Step 10a (To Get DB or Config): Now go back a step and go to “instances” and Select “config” - http://34.202.39.74:8500/ui/nvirginia/kv/instances/config/
+          - Step 10b (To Get Features): Now go back a step and go to “instances” and Select “manifest” - http://34.202.39.74:8500/ui/nvirginia/kv/instances/manifest/
+          - Step 11: In the Top right Search. Search for the number from Step 09.
+          - Step 12: Open the number from Step 11, this will give config in JSON format. Mostly it will be formatted as JSON and displayed neatly, but sometimes, it can be a one liner and need formatting for viewing. In those cases, without edit current value, copy the one liner, go to [http://jsonlint.vearne.cc/](http://jsonlint.vearne.cc/), paste and click “Validate JSON” and it will display beautifully. From this you can see DB details.
+      - Finding DB for a Customer
+        - This guide walks you through accessing customer database configuration details via a Consul-based key-value store interface. The process involves connecting through RA VPN, navigating to the Consul UI, searching for organization aliases, retrieving the corresponding configuration number, and finally accessing the JSON configuration that contains database connection details. The configuration data may require formatting for better readability using external JSON validation tools.
+          - Step 01: You need RA VPN for this, else you can not access this URL
+          - Step 02: Log in into `[http://34.202.39.74:8500/](http://34.202.39.74:8500/)`
+          - Step 03: Select Region (Top Left) based on Customer Organisation Location - nvirginia or frankfurt - `[http://34.202.39.74:8500/ui/nvirginia](http://34.202.39.74:8500/ui/nvirginia)`
+          - Step 04: Select Key/Value on the top menu - `[http://34.202.39.74:8500/ui/nvirginia/kv](http://34.202.39.74:8500/ui/nvirginia/kv)`
+          - Step 05: Select instances in the middle menu. Note: Not “instance” - `[http://34.202.39.74:8500/ui/nvirginia/kv/instances/](http://34.202.39.74:8500/ui/nvirginia/kv/instances/)`
+          - Step 0^: Select alias in the menu - `[http://34.202.39.74:8500/ui/nvirginia/kv/instances/alias/](http://34.202.39.74:8500/ui/nvirginia/kv/instances/alias/)`
+          - Step 07: In the Top right Search, Search for Organisation
+          - Step 08: Once you search, you will get list of all alias with the search key word listed below
+          - Step 09: From the search result, get the working alias for the Organisation and click on it
+          - Step 10: It will give you a number - Copy this number
+          - Step 11: Now go back a step and go to “instances” and Select “config” - `[http://34.202.39.74:8500/ui/nvirginia/kv/instances/config/](http://34.202.39.74:8500/ui/nvirginia/kv/instances/config/)`
+          - Step 12: In the Top right Search. Search for the number from Step 09
+          - Step 13: Open the number from Step 11, this will give config in JSON format. Mostly it will be formatted as JSON and displayed neatly, but sometimes, it can be a one liner and need formatting for viewing. In those cases, without edit current value, copy the one liner, go to [http://jsonlint.vearne.cc/](http://jsonlint.vearne.cc/), paste and click “Validate JSON” and it will display beautifully. From this you can see DB details
+      - Ticket Sync
+        - Kayako DB is used by CS team a lot. So they have created their own DB, which pulls tickets from Kayako DB and puts them into CS DB. So basically a single ticket which is present in primary Kayako DB, a secondary copy is in CS DB.
+        - CS DB is responsible for STAR and STAR gets details from CS DB. So when a CS agent picks up a ticket in STAR and then closed the Kayako Ticket after completion, it needs to be synced to CS DB. Else STAR will pick up the ticket again because CS DB still has the ticket as open while the Kayako DB is closed.
+        - This would cause a conflict, as agents would claim ticket in STAR but upon viewing, they would been a closed ticket. To resolve this, we have a Lambda which does the sync between DB's.
+        - This is supposed to happen automatically, but there are cases, when these would fail, and when they fail, we have runbooks for manual sync to happen - [https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0](https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0)
+  - **Operational Runbooks and Procedures**
+    - This section serves as a practical guide for common operational tasks, including debugging, accessing customer instances, and retrieving configuration data.
+      - **Distinguishing Customer Types**
+        - There are two distinct types of Kayako customer environments:
+          - **External Customers:** Each external customer has their own individual Kayako instance (e.g., `customer.kayako.com`).
+          - **Internal Customers:** All internal ESW companies (like CloudSense, Ignite, Khoros) exist as **brands** within a single, central instance: `https://central-supportdesk.kayako.com/`. When a new company is acquired, they are added as a new brand to this instance.
+      - **Debugging and Access**
+        - There are two primary methods for debugging a customer's instance:
+          - **Impersonation (External Customers Only):** To debug GUI issues or replicate a user's experience, you can impersonate their account.
+            - **URL:** `https://support.kayako.com/agent/impersonate`
+            - **Prerequisite:** You **must** receive explicit permission (consent) from the customer before you can impersonate them. Engineering provides the necessary credentials via Passwordstate.
+          - **Consul (All Customers):** Consul is the backend key-value store used to get configuration details for any instance, including database connections, Redis info, and enabled features. Access to Consul requires an active **RA-VPN connection**.
+      - **Finding Customer Configuration via Consul**
+        - The process is similar for both internal and external customers but uses different Consul IP addresses.
+          - **External Consul IP:** `http://52.57.19.55:8500/ui/`
+          - **Internal Consul IP:** `http://34.202.39.74:8500/ui/`
+        - Step 1: Identify the Customer's Region
+          - The easiest way to find a customer's region is to use the `nslookup` command on their Kayako domain.
+            - If the result contains `lb.ecs.us.kayako.com`, the region is **nvirginia** (`us-east-1`).
+            - If the result contains `lb.ecs.eu.kayako.com`, the region is **frankfurt** (`eu-central-1`).
+        - **Step 2: Find the Customer's Config ID**
+          - In the Consul UI for the correct IP and region:
+            - Navigate to **Key/Value** in the top menu.
+            - Go to the path: instances/alias/.
+            - Search for the customer's domain (e.g., [paa.kayako.com](http://paa.kayako.com/)).
+            - Click on the result. It will display a unique numeric value, which is the **Config ID** (e.g., `476306`). Copy this number.
+        - **Step 3: Retrieve Configuration Details**
+          - Using the Config ID from the previous step:
+            - To get **database and Redis details**, navigate to `instances/config/` and open the key matching the Config ID.
+            - To get **enabled features**, navigate to `instances/manifest/` and open the key matching the Config ID.
+      - **Setting Up a Custom Domain Alias**
+        - Customers can use their own domain (e.g., `support.customer.com`) instead of the default `customer.kayako.com` URL. This requires two parts:
+          - **Customer-Side:** The customer must configure a CNAME record in their DNS to point their custom domain (`support.customer.com`) to their Kayako domain (`customer.kayako.com`).
+          - **Kayako-Side:** The customer must provide the SSL certificate and private key for their custom domain. This information is then uploaded to the brand's settings in Kayako to enable HTTPS.
+- *==--------------------------------------------------- BRIGHT LINE.  Above this is based on the owner's facts.  Below this is based on the futuristic evolution-----------------------------------------------------==*
+- **==Future Scope==**
+  - This section outlines the forward-looking strategic goals for the Kayako platform, aimed at remediating foundational architectural weaknesses and achieving a state of modern operational excellence.
+    - **Complete Infrastructure as Code (IaC) Transformation**
+      - **Objective:** The primary initiative is to migrate 100% of the Kayako infrastructure to a declarative, version-controlled model using Terraform. This addresses a core architectural flaw noted in the platform's analysis: the manual, non-repeatable nature of its current AWS environment.
+      - **Scope**
+        - **Customer Onboarding Automation:** Develop a fully automated pipeline where provisioning a new customer instance—from creating the database and Route53 entries to configuring the ECS services and Consul entries—is handled by a single Terraform execution.
+        - **Infrastructure Management:** Codify all core components, including VPCs, subnets, RDS instances, ECS clusters, and IAM policies, to ensure consistent, auditable, and reproducible environments.
+        - **Scalability and Configuration:** Manage all scaling policies and service configurations as code, allowing for rapid, reliable changes and eliminating manual configuration drift.
+    - **Enhanced Disaster Recovery and Data Resilience**
+      - **Objective:** Implement a robust and verifiable disaster recovery (DR) plan by adopting the industry-standard **3-2-1 backup methodology**. This strategy is designed to provide a high degree of confidence in the ability to recover from a wide range of failure scenarios, from data corruption to a full regional AWS outage.
+      - **Scope**
+        - **3 Copies of Data:** Maintain at least three copies of all critical customer data (primary RDS databases and S3 attachments).
+        - **2 Different Media:** Store the backup copies on at least two different types of storage media (e.g., live RDS snapshots and exported backups in a separate S3 tier like Glacier Deep Archive).
+        - **1 Offsite Copy:** Ensure at least one of these copies is stored in a different geographical AWS region, completely isolated from the primary production environment to protect against regional disasters.
+    - **Critical Component State and Configuration Backup**
+      - **Automated EC2 AMI for Bastion Hosts:** Implement a process for creating automated, periodic Amazon Machine Images (AMIs) of the bastion hosts. This will capture the entire configured state of the server, including the operating system, installed tools, and critical scripts like the `clear-cache` utility. This ensures a much faster and more reliable recovery of administrative access points compared to a manual rebuild.
+      - **Consul Key-Value Store Snapshots:** Establish an automated snapshot process for the Consul key-value store. This data is a critical source of truth for configuration, containing customer DB credentials, aliases, and SSL certificates. These snapshots must be encrypted, stored securely in a versioned S3 bucket, and replicated cross-region to align with the 3-2-1 disaster recovery strategy.
+- *==---------------------------------------------BRIGHT LINE.  Above this is the BrainLift, the user creates this without AI.  Below this is not the BrainLift, it is however the user gets sources from the flow of external information ------------------------------------------------------------==*== ==
+  - Scratchpad / Notes
+    - ToDo Insights
+      - Understand how new customers are created via GUI or Script - how that creates DB
+      - Check with resources were deployed by Engineering and which were exisiting before Engineering
+      - Devise a plan to create Terraform, as some resources are created via Central resources and other needs to be created
+        - Consider Point-In-Restore for RDS
+        - Consider Consul Restore
+        - Consider EC2 Restore (as this acts as Bastion and many scripts are run from here. Also we have worker and other Nodes)
+        - Use folder structure for Terraform like - environment/primary/[main.tf](http://main.tf/) and environment/recovery/[main.tf](http://main.tf/)
+      - Device a plan to have backup in multiple places including Consul
+      - Most resources will be from ground scratch
+        - ECS
+        - ECR (from code GitHub) - might need CICD
+        - OpenSearch
+      - Useful Links
+        - [https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html)
+    - Backup - Might delete if not required
+      - DOK 1: Recall and Reproduction (The What)
+        - This level involves recalling facts and basic concepts. It answers the question, "What is it?" by presenting the fundamental, factual information about the Kayako platform's components, features, and architecture.
+          - Executive Summary & Strategic Posture
+            - Kayako is a modern, unified customer service platform that has evolved from a self-hosted, on-premise solution ("Kayako Classic") into a cloud-native Software-as-a-Service (SaaS) offering known as "Kayako TNK".
+            - The platform is architected to be API-first and is augmented with AI capabilities, including self-service chat, automated ticket triage, and knowledge base integration.
+            - It provides native, bidirectional integrations with key DevOps and ITSM tools such as the Atlassian suite (Jira, Opsgenie) and supports connections to others like Azure DevOps via automation platforms.
+            - The platform commits to 99.9% uptime and is hosted on enterprise-grade cloud infrastructure from Amazon Web Services (AWS).
+          - Architectural Evolution: Monolith to Microservices
+            - The Kayako platform exists in two distinct architectural forms:
+              - Kayako Classic: A legacy, self-hosted, monolithic application built on a LAMP-like stack (PHP, MySQL) that customers deploy and manage on their own infrastructure.
+              - Kayako TNK: The modern, cloud-native, multi-tenant SaaS platform built on a microservices architecture. It is fully hosted and managed by Kayako on AWS, leveraging Kubernetes for container orchestration.
+          - Infrastructure, Reliability, and Security
+            - Kayako's modern platform infrastructure is hosted on Amazon Web Services (AWS), with a multi-region architecture implied by distinct "EU Pod" and "US Pod" components.
+            - The platform uses Kubernetes for container orchestration. Kayako performs "near real-time snapshots" for data persistence and stores encrypted backups in different geographical locations.
+            - The infrastructure resides in data centers compliant with major standards like SOC 2 and ISO 27001, and the product includes security features like 2FA and RBAC.
+          - The API-First Ecosystem
+            - The modern Kayako platform provides a versioned (v1), proprietary REST API that uses JSON as its data format. It supports programmatic authentication via Basic HTTP Authentication and OAuth 2.0, and user-facing Single Sign-On (SSO) via JSON Web Tokens (JWT). The API is explicitly "API-first." For asynchronous communication, the platform supports webhooks.
+            - The API implements rate limiting, returning an `HTTP 429 Too Many Requests` status code and a `Retry-After` header when a limit is exceeded.
+          - DevOps & ITSM Toolchain Integration
+            - Kayako integrates with a wide range of tools, using Zapier for low-code automation with services like Azure DevOps. The platform features native, bidirectional integrations with the Atlassian suite (Jira, Opsgenie) and Salesforce.
+            - The platform's AI suite includes features like "AI Chat," "AI Ticket Triage," and "AI Ticket Summary."
+          - Operational Maturity & Transparency
+            - Kayako publicly commits to 99.9% uptime and operates a detailed, public status page (`[status.kayako.com](http://status.kayako.com/)` ) with real-time and historical uptime data for individual components and hosting pods.
+            - The page is used to communicate all operational events, from scheduled maintenance to major outages, which are classified by severity. Users can subscribe to status updates via multiple channels.
+      - DOK 2: Skills and Concepts (The How & Why)
+        - This knowledge tree organizes the core skills and concepts related to the Kayako platform form a devOps and SRE perspective. It demonstrates the relationships between different components (a DOK2-level task) and provides a structured map of the platform's technical landscape.
+          - **Architectural Model**
+            - Kayako TNK (Modern SaaS)
+              - Microservice Architecture
+              - Cloud-Native (AWS)
+              - Contianer Orchestration (ECS)
+              - DevOps Alignment (Agility, Scalability, Reliability)
+            - Kayako Classic
+              - Monolithic Architecture
+              - High Operational Burden & TCO (Total Cost of Owernship)
+          - **Platform Infrastructure & Security**
+            - Cloud Foundation
+              - AWS Hosting
+              - ECS Core
+            - Data Resilience
+              - Backups (US and EU)
+              - Real-Time Snapshots
+            - Multi-Layerd Security
+              - Data Encryption (In-Transit & At-Rest)
+              - Engineronment Segregation
+              - Compliance (SOC 2, ISO 27001)
+          - **API-First Ecosystem**
+            - API Architecture
+              - Rest API
+              - JSON Data Format
+              - Webhooks for Asynchoronous Events
+            - Authentication & Guardrails
+              - OAuth 2.0 & JWT (SSO)
+              - Rate Limiting *HTTP 429 & Retry-After Header)
+          - **DevOps & ITSM Toolchain Integration**
+            - Native Integrations
+              - JIRA (Bidirectional)
+              - OpsGenie (Bidirectional)
+              - Salesforce (Context Enrichment)
+            - AI as a Toil Reduction Engine
+              - Intelligent Deflection (AI Chat)
+              - Automated Triage & Context Gathering
+              - Contextual Summarization
+          - **Operational Maturity**
+            - Service Level Management
+              - 99.9% Uptime Commitment
+              - Status Page ([status.kayako.com](https://status.kayako.com/))
+            - Transparent Communication
+              - Proactive Maintenance Announcements
+              - Multi-Channel Notifications
+          - **Infrastructure Components**
+            - Unfortunately, Kayako is not on IaC. Meaning, most of the ECS, LB, RDS, S3, Redis, OpenSearch were deployed either Manually.
+              - **AWS Account**
+                - **086775481754** - KayakoProd (External) us-east-1 & eu-central-1
+                - **060795935566** - Prod-CentralSupport-KayakoCSProd (Internal) us-east-1 & eu-central-1
+              - **Core Components in AWS**
+                - Route53
+                - LoadBalancer
+                - EC2 (Bastion)
+                - ECS (CloudWatch Log Insights & Alarms)
+                - RDS
+                - Redis
+                - Lambda (CloudWatch Log Insights & Alarms)
+                - S3
+                - EKS (SSO and Cart)
+                - IAM
+                - VPC, Subnets
+                - OpenSearch
+                - Infrastructure Video - [https://drive.google.com/drive/folders/1Z--VLRdGFPp2sN6aCrWpesb4UDr1lhM4?usp=sharing](https://drive.google.com/drive/folders/1Z--VLRdGFPp2sN6aCrWpesb4UDr1lhM4?usp=sharing)
+              - **Important Connections**
+                - RDS
+                  - For any US Database - it is provided by Central Infrastructure in 646253092271 (us-east-1)
+                    - Kayako External 086775481754 - aurora-12
+                    - Kayako Internal 060795935566 - aurora-14
+                  - For any EU Database - it is provided in the respected Kayako AWS Account (eu-central-1)
+                    - Kayako External 086775481754 - pod63
+                    - Kayako Internal 060795935566 - aurora-cs-prod
+                - Load Balancer
+                  - CS creates new Kayako Instance for Customer
+                  - When a new customer is created a new URL is generated like `customer.kayako.com`
+                  - The system automatically, maps the `customer.kayako.com` to one of the main LB's
+                    - Kayako External has 2 main LB in each region - US and EU
+                      - US - [lb.ecs.us.kayako.com](http://lb.ecs.us.kayako.com/)
+                      - EU - [lb.ecs.eu.kayako.com](http://lb.ecs.eu.kayako.com/)
+                    - Kayako Internal has 2 main LB in each region - US and EU
+                      - US - [lb.ecs.us-cs-prod.kayako.com](http://lb.ecs.us-cs-prod.kayako.com/)
+                      - EU - [lb.ecs.eu-cs-prod.kayako.com](http://lb.ecs.eu-cs-prod.kayako.com/)
+                  - Based on this, whenever the customer logs in, they are routed to the right instance
+                - EC2 (Bastion)
+                  - For Both Bastion Host - to reach both Kayako External or Kayako Internal, Bastion is only present in Kayako External
+                  - For any US Database - it is provided by Central Infrastructure in 646253092271 (us-east-1)
+                    - Kayako External 086775481754 - `bastion.us.kayako.net`
+                  - For any EU Database - it is provided in the respected Kayako AWS Account (eu-central-1)
+                    - Kayako External 086775481754 - `bastion.eu.kayako.net`
+                - ECS (CloudWatch Log Insights & Alarms)
+                  - Important - Dakiya which is responsible for incoming Emails, is only present in US region. Dakiya is responsible for processing incoming Emails, so Kayako systems can understand.
+                - Redis
+                  - For quick data retrieval.
+                  - Need more information.
+                - Lambda (CloudWatch Log Insights & Alarms)
+                  - There are several Lambda in Kayako External (both in US and EU). While most of them are important, DevOps is across only a few of them like SHIM `central-supportdesk-zendesk-api-shim` or CS Sync `central-supportdesk-kayako-cs-sync`
+                  - The Sync is used Sync tickets between Kayako DB and STAR DB.
+                - S3
+                  - All Tickets attachments, will be present here.
+                - EKS (SSO and Cart)
+                  - Current little to no information is present on the Kayako's present on EKS
+                  - Kayako is present in the Central EKS Cluster under `kayako-prod` namespace
+                  - There are 2 services, deployment under `kayako-prod`.
+                  - No helm deployments found - so these were kubectl deployments
+                  - We need to add more information for this
+                - Open Search
+                  - This is used to Search inside the Kayako Instance.
+                  - Allowing end customer to search tickets and other information inside their environment.
+        - This level involves applying skills and concepts. It answers the questions, "How does it work?" and "Why is it designed that way?" by explaining the relationships between components, the processes involved, and the rationale behind key technical decisions.
+          - Executive Summary & Strategic Posture
+            - The primary function of the modern Kayako platform is to act as an intelligent buffer between customers and internal engineering teams, thereby reducing engineering toil. It achieves this by using AI to resolve common support requests automatically, preventing them from escalating to engineers.
+            - For issues that do require escalation, Kayako's deep integrations with tools like Jira and Opsgenie create automated, closed-loop workflows.
+            - This allows a customer conversation to be seamlessly converted into a Jira bug report or an Opsgenie incident alert, embedding customer feedback directly into the development and incident response lifecycles.
+            - By migrating to a fully managed SaaS model on AWS and Kubernetes, Kayako abstracts away the significant operational burden of its legacy on-premise version, taking full responsibility for availability, scalability, and security.
+          - Architectural Evolution: Monolith to Microservices
+            - The legacy Kayako Classic model imposed a significant operational burden and high Total Cost of Ownership (TCO) on customers, who were responsible for all aspects of infrastructure management, maintenance, and security.
+            - This model represents a DevOps anti-pattern, consuming valuable engineering resources with undifferentiated heavy lifting. In contrast, the Kayako One SaaS architecture aligns with modern DevOps principles.
+            - The microservices approach allows for greater agility, while the use of AWS and Kubernetes enables automated scalability and high reliability, shifting the entire operational responsibility to the vendor.
+            - he following table provides a direct comparison from a DevOps/SRE perspective:
+              - **Deployment Model**
+                - Kayako Classic - Manual, server-level configuration required.
+                - Kayako TNK - Instant, zero-infrastructure setup.
+              - **Maintenance & Upgrades**
+                - Kayako Classic - High overhead; customer is responsible for all maintenance.
+                - Kayako TNK - Zero overhead; all maintenance is managed by the vendor.
+              - **Scalability**
+                - Kayako Classic - Manual and limited by customer's hardware.
+                - Kayako TNK - Elastic and automated on AWS infrastructure.
+              - **Security Management**
+                - Kayako Classic - Customer responsibility.
+                - Kayako TNK - Vendor responsibility in SOC 2, ISO 27001 compliant facilities.
+              - **API Model**
+                - Kayako Classic - Legacy, incompatible REST API.
+                - Kayako TNK - Modern, versioned, "API-first" REST API.
+              - **Integration Ecosystem**
+                - Kayako Classic - Limited, manual configuration.
+                - Kayako TNK - Extensive, with native integrations and Zapier support.
+              - **Total Cost of Ownership**
+                - Kayako Classic - High and unpredictable.
+                - Kayako TNK - Low and predictable subscription fee.
+          - Infrastructure, Reliability, and Security
+            - The choice of AWS and Kubernetes provides a foundation for a highly reliable and scalable service, enabling automated deployments, self-healing, and efficient scaling.
+            - The architecture is designed to eliminate single points of failure, with data replicated across production systems.
+            - The multi-layered security posture operates at the physical, platform, and application levels.
+            - By leveraging the certified security of AWS, Kayako offloads a significant compliance burden from its customers.
+          - The API-First Ecosystem
+            - The API's adherence to REST principles makes it predictable for developers. The "API-first" approach ensures it is robust and feature-complete.
+            - Versioning allows for future evolution without breaking existing integrations. It is critical to note this modern API is completely incompatible with the legacy API of Kayako Classic, requiring a full rewrite of all integrations upon migration.
+            - The inclusion of the Retry-After header is a key feature for building resilient clients.
+          - DevOps & ITSM Toolchain Integration
+            - These integrations are designed to create seamless, automated workflows.
+            - The Jira integration automates the bug reporting lifecycle, while the Opsgenie integration automates incident response.
+            - The Salesforce integration enriches support tickets with crucial business context.
+            - The AI features work to deflect simple requests, automatically gather context on complex ones, and provide summaries for escalations, reducing the manual workload on engineers.
+          - Operational Maturity & Transparency
+            - The public status page is a key tool for building trust through transparency. By providing granular, component-level status, it allows technical teams to perform more precise impact assessments.
+            - Proactive communication about scheduled maintenance, including technical details like "Kubernetes Clusters" upgrades, allows customer teams to plan accordingly and demonstrates operational confidence.
+      - Final Strategic Assessment
+        - **Strengths:**
+          - **Modern, Resilient Architecture:** The foundation on AWS and ECS provides a scalable, resilient, and highly available platform with a mature approach to reliability engineering.
+          - **Powerful API-First Ecosystem:** A comprehensive, versioned REST API and webhook support provide a powerful gateway for deep automation and integration into custom workflows.
+          - **Exceptional ITSM/DevOps Toolchain Integration:** Native, bidirectional integrations with the Atlassian suite (Jira, Opsgenie) are a standout feature, enabling seamless, closed-loop workflows critical for modern engineering teams.
+          - **AI-Driven Toil Reduction Engine:** Kayako's AI features function as an intelligent filter and context-enricher, directly supporting the SRE goal of reducing engineering toil.
+          - **Mature Operational Transparency:** The detailed public status page and proactive communication for incidents and maintenance build significant trust and signal operational maturity.
+        - **Weakness & Strategic Consideration:**
+          - **API Rate Limit Obscurity:** The lack of publicly documented API rate limits creates friction for developers during initial integration design and planning. This is likely a commercial strategy but hinders the developer experience.
+          - **The Legacy Burden and Migration Path:** The migration from Kayako Classic to Kayako One is a substantial, one-time engineering project for customers, as all API integrations and customizations must be completely rewritten. This represents a significant barrier to adoption for the legacy customer base.
+      - **==Purpose==**
+        - **Reason for this Brain Lift:**
+          - The purpose of this document is to serve as the definitive single source of truth (SSoT) for the Kayako platform, analyzed from a rigorous DevOps and Site Reliability Engineering (SRE) perspective. It deconstructs Kayako's architecture, operational maturity, and integration capabilities to provide a deep technical assessment.
+        - **How It Will Be Used:**
+          - This document is intended for technical architects, DevOps/SRE leads, and Engineering. It will be used for: Onboarding a technical staff by providing a comprehensive understanding of the platform's role in our ecosystem, Inform strategic decisions regarding the platform's adoption, migration, and future use, A feature-by-feature competitive analysis against other helpdesk platforms, Detailed implementation or troubleshooting guides for Kayako TNK version.
+        - **Out of Scope: **
+          - Upon reviewing this document, the reader will have a comprehensive, strategic understanding of Kayako's technical underpinnings. They will be able to articulate the platform's architectural strengths and weakness, understand the strategic drivers behind its evolution, and make informed, data-driven decisions about its integration and role within the modern engineering toolchain. The core purpose of this document is to provide an understanding of how Kayako works from Infrastructure POV. This document highlights, how the infrastructure is setup, how some of the automations are setup and things like that. This document will not explain application or its perspective for that please refer - [https://workflowy.com/s/kayako-tnk/JqKn9yGDWM4vHpHO#/2b2d236c125c](https://workflowy.com/s/kayako-tnk/JqKn9yGDWM4vHpHO#/2b2d236c125c).
+      - **Infrastructure Components**
+        - Unfortunately, Kayako is not on IaC. Meaning, most of the ECS, LB, RDS, S3, Redis, OpenSearch were deployed either Manually. [source_id_for_iac_status_report]
+          - **AWS Account**
+            - **086775481754** - KayakoProd (External) us-east-1 & eu-central-1 [source_id_for_aws_account_list]
+            - **060795935566** - Prod-CentralSupport-KayakoCSProd (Internal) us-east-1 & eu-central-1 [source_id_for_aws_account_list]
+          - **Core Components in AWS**
+            - Route53 [source_id_for_dns_architecture]
+            - LoadBalancer [source_id_for_lb_architecture]
+            - EC2 (Bastion) [source_id_for_bastion_host_setup]
+            - ECS (CloudWatch Log Insights & Alarms) [source_id_for_ecs_monitoring_guide]
+            - RDS [source_id_for_database_architecture]
+            - Redis [source_id_for_caching_layer_details]
+            - Lambda (CloudWatch Log Insights & Alarms) [source_id_for_lambda_function_list]
+            - S3 [source_id_for_storage_architecture]
+            - EKS (SSO and Cart) [source_id_for_eks_cluster_info]
+            - IAM [source_id_for_iam_policy_overview]
+            - VPC, Subnets [source_id_for_network_diagram]
+            - OpenSearch [source_id_for_search_service_details]
+            - Infrastructure Video - ([https://drive.google.com/drive/folders/1Z--VLRdGFPp2sN6aCrWpesb4UDr1lhM4?usp=sharing](https://drive.google.com/drive/folders/1Z--VLRdGFPp2sN6aCrWpesb4UDr1lhM4?usp=sharing))
+          - **Important Connections**
+            - RDS
+              - For any US Database - it is provided by Central Infrastructure in 646253092271 (us-east-1) [source_id_for_us_db_hosting_policy]
+                - Kayako External 086775481754 - aurora-12 [source_id_for_external_us_db_endpoint]
+                - Kayako Internal 060795935566 - aurora-14 [source_id_for_internal_us_db_endpoint]
+              - For any EU Database - it is provided in the respected Kayako AWS Account (eu-central-1) [source_id_for_eu_db_hosting_policy]
+                - Kayako External 086775481754 - pod63 [source_id_for_external_eu_db_endpoint]
+                - Kayako Internal 060795935566 - aurora-cs-prod [source_id_for_internal_eu_db_endpoint]
+            - Load Balancer
+              - CS creates new Kayako Instance for Customer [source_id_for_instance_creation_process]
+              - When a new customer is created a new URL is generated like customer.kayako.com [source_id_for_url_generation_logic]
+              - The system automatically, maps the `customer.kayako.com` to one of the main LB's [source_id_for_dns_mapping_automation]
+                - Kayako External has 2 main LB in each region - US and EU [source_id_for_external_lb_endpoints]
+                  - US - lb.ecs.us.kayako.com [source_id_for_external_us_lb_cname]
+                  - EU - lb.ecs.eu.kayako.com [source_id_for_external_eu_lb_cname]
+                - Kayako Internal has 2 main LB in each region - US and EU [source_id_for_internal_lb_endpoints]
+                  - US - lb.ecs.us-cs-prod.kayako.com [source_id_for_internal_us_lb_cname]
+                  - EU - lb.ecs.eu-cs-prod.kayako.com [source_id_for_internal_eu_lb_cname]
+              - Based on this, whenever the customer logs in, they are routed to the right instance [source_id_for_routing_logic_explanation]
+            - EC2 (Bastion)
+              - For Both Bastion Host - to reach both Kayako External or Kayako Internal, Bastion is only present in Kayako External [source_id_for_bastion_host_location_policy]
+              - For any US Database - it is provided by Central Infrastructure in 646253092271 (us-east-1) [source_id_for_us_bastion_host_details]
+                - Kayako External 086775481754 - bastion.us.kayako.net [source_id_for_us_bastion_hostname]
+              - For any EU Database - it is provided in the respected Kayako AWS Account (eu-central-1) [source_id_for_eu_bastion_host_details]
+                - Kayako External 086775481754 - bastion.eu.kayako.net [source_id_for_eu_bastion_hostname]
+            - ECS (CloudWatch Log Insights & Alarms)
+              - Important - Dakiya which is responsible for incoming Emails, is only present in US region. Dakiya is responsible for processing incoming Emails, so Kayako systems can understand. [source_id_for_dakiya_architecture_notes]
+            - Redis
+              - For quick data retrieval. [source_id_for_redis_purpose]
+              - Need more information.
+            - Lambda (CloudWatch Log Insights & Alarms)
+              - There are several Lambda in Kayako External (both in US and EU). While most of them are important, DevOps is across only a few of them like SHIM central-supportdesk-zendesk-api-shim or CS Sync central-supportdesk-kayako-cs-sync [source_id_for_key_lambda_functions]
+              - The Sync is used Sync tickets between Kayako DB and STAR DB. [source_id_for_ticket_sync_lambda_purpose]
+            - S3
+              - All Tickets attachments, will be present here. [source_id_for_s3_attachment_storage]
+            - EKS (SSO and Cart)
+              - Current little to no information is present on the Kayako's present on EKS
+              - Kayako is present in the Central EKS Cluster under kayako-prod namespace [source_id_for_eks_namespace_details]
+              - There are 2 services, deployment under kayako-prod. [source_id_for_eks_deployment_details]
+              - No helm deployments found - so these were kubectl deployments [source_id_for_eks_deployment_method]
+              - We need to add more information for this
+            - Open Search
+              - This is used to Search inside the Kayako Instance. [source_id_for_opensearch_purpose]
+              - Allowing end customer to search tickets and other information inside their environment. [source_id_for_opensearch_use_case]
+      - **==DOK2 - Knowledge Tree==**
+        - This knowledge tree organizes the core skills and concepts related to the Kayako platform from a DevOps and SRE perspective. It demonstrates the relationships between different components (a DOK2-level task) and provides a structured, evidence-based map of the platform's technical landscape.
+          - **Architectural Model**
+            - Kayako TNK (Modern SaaS)
+              - Microservice Architecture
+                - [https://docs.google.com/document/d/1f6HNDMCtP-1yGoQER8SHfulwNE-TNpXxSX7sDQV7-cg/edit?usp=drivesdk](https://docs.google.com/document/d/1f6HNDMCtP-1yGoQER8SHfulwNE-TNpXxSX7sDQV7-cg/edit?usp=drivesdk)
+              - Cloud-Native (AWS)
+                - [https://adfs.devfactory.com/adfs/ls/IdpInitiatedSignOn.aspx](https://adfs.devfactory.com/adfs/ls/IdpInitiatedSignOn.aspx) - SSO Login for AWS
+              - Container Orchestration (ECS)
+                - [https://060795935566-4mokxbea.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=eu-central-1](https://060795935566-4mokxbea.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=eu-central-1)
+                - [https://060795935566-4mokxbea.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=us-east-1#](https://060795935566-4mokxbea.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=us-east-1#)
+                - [https://086775481754-cl5fw2sx.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=eu-central-1](https://086775481754-cl5fw2sx.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=eu-central-1)
+                - [https://086775481754-cl5fw2sx.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=us-east-1#](https://086775481754-cl5fw2sx.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=us-east-1#)
+              - DevOps Alignment (Agility, Scalability, Reliability)
+                - [https://docs.google.com/document/d/172FmeFZMOX5Eq-4o9UtWadrgg_OBRrrRYMpUe20RfwU/edit?usp=drivesdk](https://docs.google.com/document/d/172FmeFZMOX5Eq-4o9UtWadrgg_OBRrrRYMpUe20RfwU/edit?usp=drivesdk)
+          - **Platform Infrastructure & Security**
+            - Cloud Foundation
+              - AWS Hosting
+                - [https://adfs.devfactory.com/adfs/ls/IdpInitiatedSignOn.aspx](https://adfs.devfactory.com/adfs/ls/IdpInitiatedSignOn.aspx) - SSO Login for AWS
+              - ECS Core
+                - [https://060795935566-4mokxbea.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=eu-central-1](https://060795935566-4mokxbea.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=eu-central-1)
+                - [https://060795935566-4mokxbea.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=us-east-1#](https://060795935566-4mokxbea.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK-CS-Prod/services?region=us-east-1#)
+                - [https://086775481754-cl5fw2sx.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=eu-central-1](https://086775481754-cl5fw2sx.eu-central-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=eu-central-1)
+                - [https://086775481754-cl5fw2sx.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=us-east-1#](https://086775481754-cl5fw2sx.us-east-1.console.aws.amazon.com/ecs/v2/clusters/TNK/services?region=us-east-1#)
+            - Data Resilience
+              - Backups (US and EU)
+                - [https://646253092271-agexnj3r.us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#snapshots-list:tab=automated](https://646253092271-agexnj3r.us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#snapshots-list:tab=automated)
+                - [https://086775481754-cl5fw2sx.eu-central-1.console.aws.amazon.com/rds/home?region=eu-central-1#snapshots-list:tab=automated](https://086775481754-cl5fw2sx.eu-central-1.console.aws.amazon.com/rds/home?region=eu-central-1#snapshots-list:tab=automated)
+                - [https://086775481754-cl5fw2sx.us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#snapshots-list:tab=automated](https://086775481754-cl5fw2sx.us-east-1.console.aws.amazon.com/rds/home?region=us-east-1#snapshots-list:tab=automated)
+            - Multi-Layered Security
+              - Data Encryption (In-Transit & At-Rest) - [https://help.kayako.com/article/123381-kayako-whitelisting-and-security-information-for-external-services-faq](https://help.kayako.com/article/123381-kayako-whitelisting-and-security-information-for-external-services-faq)
+              - Environment Segregation - [https://help.kayako.com/article/123381-kayako-whitelisting-and-security-information-for-external-services-faq](https://help.kayako.com/article/123381-kayako-whitelisting-and-security-information-for-external-services-faq)
+              - Compliance (SSAE-16 (SOC 1, SOC 2, SOC 3), PCI DSS, ISO 27001, ISO 27017, ISO 27018) - [https://help.kayako.com/article/123381-kayako-whitelisting-and-security-information-for-external-services-faq](https://help.kayako.com/article/123381-kayako-whitelisting-and-security-information-for-external-services-faq)
+          - **API-First Ecosystem**
+            - API Architecture
+              - Rest API - [https://developer.kayako.com/api/v1/reference/introduction](https://developer.kayako.com/api/v1/reference/introduction/)
+              - JSON Data Format - [https://developer.kayako.com/api/v1/reference/introduction](https://developer.kayako.com/api/v1/reference/response/)
+              - Webhooks for Asynchronous Events - [https://kayako.com/help-desk-software/integrations/](https://kayako.com/help-desk-software/integrations/)
+            - Authentication & Guardrails
+              - OAuth 2.0 & JWT (SSO) - [https://developer.kayako.com/api/v1/reference/authentication/](https://developer.kayako.com/api/v1/reference/authentication/)
+              - Rate Limiting (HTTP 429 & Retry-After Header) - [https://developer.kayako.com/api/v1/reference/rate_limiting/](https://developer.kayako.com/api/v1/reference/rate_limiting/)
+          - **DevOps & ITSM Toolchain Integration**
+            - Native Integrations
+              - JIRA (Bidirectional) - [https://support.atlassian.com/jira-service-management-cloud/docs/integrate-with-kayako/](https://support.atlassian.com/jira-service-management-cloud/docs/integrate-with-kayako/)
+              - OpsGenie (Bidirectional) - [https://support.atlassian.com/opsgenie/docs/integrate-opsgenie-with-kayako/](https://support.atlassian.com/opsgenie/docs/integrate-opsgenie-with-kayako/)
+              - Salesforce (Context Enrichment) - [https://kayako.com/help-desk-software/integrations/salesforce/](https://kayako.com/help-desk-software/integrations/salesforce/)
+            - AI as a Toil Reduction Engine
+              - Intelligent Deflection (AI Chat) - [https://kayako.com/blog/examples-of-ai-in-customer-service/](https://kayako.com/blog/examples-of-ai-in-customer-service/)
+              - Automated Triage & Context Gathering - [https://classichelp.kayako.com/article/46200-guide-to-automation-with-kayako-classic](https://classichelp.kayako.com/article/46200-guide-to-automation-with-kayako-classic)
+              - Contextual Summarization - [https://kayako.com/blog/examples-of-ai-in-customer-service/](https://kayako.com/blog/examples-of-ai-in-customer-service/)
+          - **Operational Maturity**
+            - Service Level Management
+              - 99.9% Uptime Commitment - [https://status.kayako.com/](https://status.kayako.com/)
+            - Transparent Communication
+              - Proactive Maintenance Announcements - [https://status.kayako.com/history](https://status.kayako.com/history)
+  - Delete for Future
+    - Kayako TNK - DevOps Technical Perspective
+      - Owners
+        - Maintained by Hariharan Thiagarajan ([hariharan.thiagarajan@trilogy.com](mailto:hariharan.thiagarajan@trilogy.com)) from DevOps in Trilogy on behalf of Colin Guilfoyle (SVP of CS & SaaS). Reporting to Muhammad Usman & Andrei Aiordachioaie.
+      - Purpose
+        - **Reason for this Brain Lift**:  The purpose of this document is to serve as the definitive single source of truth (SSoT) for the Kayako platform, analyzed from a rigorous DevOps and Site Reliability Engineering (SRE) perspective. It deconstructs Kayako's architecture, operational maturity, and integration capabilities to provide a deep technical assessment.
+      - How it will be used:
+        - This document is intended for technical architects, DevOps/SRE leads, and Engineering. It will be used for: Onboarding a technical staff by providing a comprehensive understanding of the platform's role in our ecosystem, Inform strategic decisions regarding the platform's adoption, migration, and future use, A feature-by-feature competitive analysis against other helpdesk platforms, Detailed implementation or troubleshooting guides for Kayako TNK version.
+        - This document contains a high level knowledge of what AWS components is used by Kayako, Flow of data from one AWS service to Other, Infrastructure Hacks and Tricks.
+      - Out of Scope:
+        - How the application works, Specific application logic within individual application modules beyond their structural integration - like what happens when a user is imported or what happens when a user is deleted and Business decisions.
+        - Upon reviewing this document, the reader will have a comprehensive, strategic understanding of Kayako's technical underpinnings. They will be able to articulate the platform's architectural strengths and weakness, understand the strategic drivers behind its evolution, and make informed, data-driven decisions about its integration and role within the modern engineering toolchain. The core purpose of this document is to provide an understanding of how Kayako works from Infrastructure POV. This document highlights, how the infrastructure is setup, how some of the automations are setup and things like that. This document will not explain application or its perspective for that please refer - [https://workflowy.com/s/kayako-tnk/JqKn9yGDWM4vHpHO#/2b2d236c125c](https://workflowy.com/s/kayako-tnk/JqKn9yGDWM4vHpHO#/2b2d236c125c).
+      - Outcome
+        - Better understanding of how much flexibility we do have about Infrastructure like in terms of how much we can scale them in ECS, how much we can have DB sizes etc.
+      - Evidence Analysis
+        - Infrastructure Components (DOK1)
+          - Unfortunately, Kayako is not on IaC. Meaning, most of the ECS, LB, RDS, S3, Redis, OpenSearch were deployed either Manually. We do need to try out something like [https://github.com/GoogleCloudPlatform/terraformer](https://github.com/GoogleCloudPlatform/terraformer) or many Py and AI to read the whole AWS components, and translate those into Terraform. The goal would be to create Terraform code, do a plan, it would say a resource needs to be created. Then you import the same service and run the plan again, and this time it should say - no changes to make.
+            - **AWS Account**
+              - **086775481754** - KayakoProd (External) us-east-1 & eu-central-1
+              - **060795935566** - Prod-CentralSupport-KayakoCSProd (Internal) us-east-1 & eu-central-1
+            - **Core Components in AWS**
+              - Route53
+              - LoadBalancer
+              - EC2 (Bastion)
+              - ECS (CloudWatch Log Insights & Alarms)
+              - RDS
+              - Redis
+              - Lambda (CloudWatch Log Insights & Alarms)
+              - S3
+              - EKS (SSO and Cart)
+              - IAM
+              - VPC, Subnets
+              - OpenSearch
+              - [https://drive.google.com/drive/folders/1Z--VLRdGFPp2sN6aCrWpesb4UDr1lhM4?usp=sharing](https://drive.google.com/drive/folders/1Z--VLRdGFPp2sN6aCrWpesb4UDr1lhM4?usp=sharing)
+            - **Important Connections**
+              - RDS
+                - For any US Database - it is provided by Central Infrastructure in 646253092271 (us-east-1)
+                  - Kayako External 086775481754 - aurora-12
+                  - Kayako Internal 060795935566 - aurora-14
+                - For any EU Database - it is provided in the respected Kayako AWS Account (eu-central-1)
+                  - Kayako External 086775481754 - pod63
+                  - Kayako Internal 060795935566 - aurora-cs-prod
+              - Load Balancer
+                - CS creates new Kayako Instance for Customer
+                - When a new customer is created a new URL is generated like `customer.kayako.com`
+                - The system automatically, maps the `customer.kayako.com` to one of the main LB's
+                  - Kayako External has 2 main LB in each region - US and EU
+                    - US - [lb.ecs.us.kayako.com](http://lb.ecs.us.kayako.com/)
+                    - EU - [lb.ecs.eu.kayako.com](http://lb.ecs.eu.kayako.com/)
+                  - Kayako Internal has 2 main LB in each region - US and EU
+                    - US - [lb.ecs.us-cs-prod.kayako.com](http://lb.ecs.us-cs-prod.kayako.com/)
+                    - EU - [lb.ecs.eu-cs-prod.kayako.com](http://lb.ecs.eu-cs-prod.kayako.com/)
+                - Based on this, whenever the customer logs in, they are routed to the right instance
+              - EC2 (Bastion)
+                - For Both Bastion Host - to reach both Kayako External or Kayako Internal, Bastion is only present in Kayako External
+                - For any US Database - it is provided by Central Infrastructure in 646253092271 (us-east-1)
+                  - Kayako External 086775481754 - `bastion.us.kayako.net`
+                - For any EU Database - it is provided in the respected Kayako AWS Account (eu-central-1)
+                  - Kayako External 086775481754 - `bastion.eu.kayako.net`
+              - ECS (CloudWatch Log Insights & Alarms)
+                - Important - Dakiya which is responsible for incoming Emails, is only present in US region. Dakiya is responsible for processing incoming Emails, so Kayako systems can understand.
+              - Redis
+                - For quick data retrieval.
+                - Need more information.
+              - Lambda (CloudWatch Log Insights & Alarms)
+                - There are several Lambda in Kayako External (both in US and EU). While most of them are important, DevOps is across only a few of them like SHIM `central-supportdesk-zendesk-api-shim` or CS Sync `central-supportdesk-kayako-cs-sync`
+                - The Sync is used Sync tickets between Kayako DB and STAR DB.
+              - S3
+                - All Tickets attachments, will be present here.
+              - EKS (SSO and Cart)
+                - Current little to no information is present on the Kayako's present on EKS
+                - Kayako is present in the Central EKS Cluster under `kayako-prod` namespace
+                - There are 2 services, deployment under `kayako-prod`.
+                - No helm deployments found - so these were kubectl deployments
+                - We need to add more information for this
+              - Open Search
+                - This is used to Search inside the Kayako Instance.
+                - Allowing end customer to search tickets and other information inside their environment.
+        - Flow of Data (DOK2)
+          - This outlines, how information flows between, Customer and Kayako as a whole system. This is a very top level view. This is also over simplified for basic understand of how the system is working.
+            - Customer to Database
+              - When a customer is provisioned, a URL is provided to the customer like `customer.kayako.com`, this is the URL customer uses to connect to Kayako.
+              - Customer's also have the option to do something like `support.customer.com`, where they can have their own URL pointing to Kayako's URL `customer.kayako.com`, but by doing so, customer's assume the risk of maintaining the redirects and providing SSL to us, so we can allow them to use `support.kayako.com`, without directly using `customer.kayako.com`.
+              - But internally, the primary URL `customer.kayako.com`, is mapped to a LB based on Customers region proximity. So let's say the it is pointing to Kayako External US, when the customer first call's the URL, it reaches to Kayako External US Load Balancers.
+              - From there it goes to ECS Frontend Service. This whole ECS cluster is configured to talk to External Consul and RDS for Kayako External US.
+              - The Consul will have configuration of this particular customer like DB names, credentials, everything. So the ECS Application Service, will contact this Consul, get relevant information about this customer from Consul and then loads the data from that respective Database.
+              - Along this path, we do have S3, which stores all attachments and other things. It also has OpenSearch, which would allow the customer to search tickets.
+            - Kayako SSL Automation
+              - This SSL Automation is only for Kayako Internal Instance
+                - Kayako Internal has multiple brands like CloudSense, Ignite, Aurea, Khoros etc.
+                - Some brands uses Alias which are basically `support.domain.com`, pointing to `customer.kayako.com`, since these are internal customer, we should be able to access these `domain.com`, from our AWS or GoDaddy Console.
+                - So an Automation was devised, that would crawl through all of our AWS account, which we do have access to, internally, understand which AWS account has which domains in them, maps them out, and then check Alias in Kayako, to understand which brands have alias.
+                - Then it filters out those alias, and check the age of certificate. If the certificate age is below 30 days, first we check the domains to see which AWS account has the domain and first connects to the account and runs certbot with DNS challenge. This will generate SSL and Private Key, which will be uploaded to the brand.
+                  - There are few edge cases here. Some DNS are outside AWS, and for those runbooks in form of JIRA comments are uploaded for future renewal.
+                  - Sometimes, a domain might be present in multiple AWS accounts (unknown reasons), but the script is capable of trying every account which is linked to this domain.
+                - Status - 10-August-2025: As of this date, we do have some backlog issues
+                  - Domain group happens at parent domain level and not at level1 domain
+                  - If there are more than 10 domains, the SSL generation takes hours due to LetsEncrypt limitation but the script is designed to wait and retry. But it can retry once every 15 min, thus leading to long runtime.
+                  - Automation, still can't read Khoros and its child AWS accounts, as few of the AWS accounts like `aurea.com` & `cloudsense.com` are under Khoros Umbrella. Due to this Limitation, the Automation, can't reach those accounts because it uses ESW parent account to scan child account to understand domain vs AWS account.
+        - DOK3 Insights
+          - Insights are basically my personal view, my thoughts and my take on the whole system. These are subjected to change from TPM and other's based on individual take.
+            - **Novobean and its Importance**
+              - Novobean has 12 threads running in each pod. No matter what, this is fixed. You can’t change or control it. Based on vCPU these threads share resources and execute
+              - If you decide to increase vCPU / Memory and re-deploy pods, first check the current Queue and check with Engineering whether losing such data is ok as recycling pods will definitely result in DATA LOSS (make sure you are connected to either of the AWS Accounts above and the command used - `for taskId in $(aws ecs list-tasks --cluster <cluster_name> --service-name novobean --region <region> --query 'taskArns[]' --output text); do echo "--- Running on Task: $taskId ---"; aws ecs execute-command --cluster <cluster_name> --task $taskId --region <region> --container beanstalk --interactive --command "beanstool stats"; done` )
+              - **==VERY IMPORTANT NOTE: NEVER EVER SCALE DOWN NOVOBEAN PODS AS THEY CONTAIN LIVE DATA AND SCALING DOWN WILL CAUSE DATA LOSS==**
+              - Run the above command and see the column - READY or RESERVED. Any data in this column is expected to be lost during Pod recycling
+            - **Kayako Alias SSL Automation**
+              - [https://trilogy-confluence.atlassian.net/wiki/spaces/KAYAK/pages/1727660046/Kayako+SSL+Automation](https://trilogy-confluence.atlassian.net/wiki/spaces/KAYAK/pages/1727660046/Kayako+SSL+Automation)
+              - [https://trilogy-confluence.atlassian.net/wiki/spaces/SAASOPS/pages/1762886125/Kayako+SSL+Automation](https://trilogy-confluence.atlassian.net/wiki/spaces/SAASOPS/pages/1762886125/Kayako+SSL+Automation)
+              - The Kayako SSL Automation tool is a comprehensive solution for managing SSL certificates across multiple AWS organizations and Kayako brand domains. This document provides a detailed explanation of how the script works, its components, and the GitHub Actions runner setup.
+                - AWS Authentication and Account Discovery
+                  - The script uses a multi-step process to authenticate with AWS and discover all accounts across multiple organizations:
+                  - AWS SSO Authentication:
+                    - Utilizes the `devfacory-aws-key-all.py` script to authenticate with AWS SSO
+                    - Provides credentials (username/password) to obtain temporary access tokens
+                    - Authenticates against multiple AWS organizations using predefined role numbers:
+                      - Organization 1: Role RAM-AWS-saas-cost-execution-Admin (Role #15)
+                      - Organization 2: Role RAM-AWS-ESWMaster1-Admin (Role #248)
+                      - Organization 3: Role RAM-AWS-VDI-Admin (Role #190)
+                      - **==NOTE==**: Anytime an AWS Account is shifted from one Org to another Org, these Role # can change. This will create conflict as code connects specifically to those Role #. However if the number changes, the script has a fall back mechanism that will temporarily change in local file and execute and generate a SaaSOps ticket to update repo.
+                      - But we are doing only Organization 1 and Organization 2
+                  - AWS Account Discovery:
+                    - For each organization, the script:
+                      - Authenticates with the appropriate admin role
+                      - Lists all accounts in the organization using AWS Organizations API
+                      - Stores account information (ID, name, email) for further processing
+                  - Cross-Organization Account Mapping:
+                    - Switches between organizations using the switch_organization() function
+                    - Maintains separate credential contexts for each organization
+                    - Aggregates account information across all organizations into a unified dataset
+                  - ADFS Comparison
+                    - Upon finishing with Organization based comparision, then we will do, ADFS individual logins.
+                    - ADFS Accounts are gathers and compared with existing mappings, if we find AWS accounts in ADFS but not in mapping, then the account is present outside both Organization. For example `aurea.com`  is present in `892905447879` which is under Khoros Umbrella and so is `cloudsense.com` is present in `930519385031` which is also under Khoros Umbrella.
+                    - Currently our automation, doesn't assume role for Khoros Umbrella, but we will eventually get there.
+                - Route53 Hosted Zone Discovery
+                  - For each AWS account discovered, the script:
+                    - Assumes Role in Each Account:
+                      - Uses assume_role() to temporarily assume the appropriate role in each account
+                      - For Organization 1: Assumes ESW-CO-PowerUser-P2 role
+                      - For Organization 2: Assumes ESW-Admin role
+                    - Route53 Zone Scanning:
+                      - Creates a Route53 client using the temporary credentials
+                      - Lists all hosted zones in the account with pagination support
+                      - Extracts domain names from the hosted zones
+                      - Maps each domain to its corresponding AWS account ID
+                    - Domain-to-Account Mapping:
+                      - Creates a comprehensive mapping of domains to AWS accounts
+                      - Handles multiple domains per account and multiple accounts per domain
+                      - Stores mapping in domain_account_mapping.json
+                      - Identifies accounts without domains and stores them in domain_no_account_mapping.json
+                - Kayako SSL Certificate Verification
+                  - Once the domain-to-account mapping is complete, the script:
+                    - Kayako API Authentication:
+                      - Authenticates with Kayako API using provided credentials
+                      - Retrieves a session ID for subsequent API calls
+                    - Brand Discovery:
+                      - Fetches all brands from Kayako using the authenticated session
+                      - Extracts brand information including IDs, names, and alias URLs
+                    - SSL Certificate Verification:
+                      - For each brand alias URL:
+                        - Connects to the domain using SSL
+                        - Retrieves the SSL certificate information
+                        - Extracts the expiration date
+                        - Calculates days remaining until expiration
+                        - Flags certificates expiring within 30 days (configurable via SSL_EXPIRY_THRESHOLD)
+                    - Domain-Account Association:
+                      - For each Kayako domain:
+                        - Searches the domain-to-account mapping to find the corresponding AWS account
+                        - Associates each domain with its AWS account for certificate renewal
+                        - Identifies domains without AWS account mappings for manual handling
+                    - Multiple Domain-Account Association:
+                      - So a trial feature was released which does domain group. In some cases we have more than 10 domains to renew and if we do it individually, we hit LetsEncrypt limit of 10 cert or something.
+                      - To bypass this, a feature was rolled out to group domains by parent domain and generate `*.domain.com` based certificates.
+                      - The feature was rolled out successfully, but a slight oversight happened.
+                      - While domain groups is good, instead of group at 1st level, I grouped at parent level. In simple english, `support.level1.domain.com` and `support.level2.domain.com` have same `domain.com` but `*.domain.com` will not work on these, they would need `*.level1.domain.com` or `*.level2.domain.com`
+                      - This wasn't implemented during 01-August-2025. So this lead to some issues and manual fixes were made.
+                - SSL Certificate Renewal
+                  - For domains with expiring certificates that have AWS account mappings:
+                    - AWS Account Selection:
+                      - Identifies the appropriate AWS account for the domain
+                      - Assumes the required role in that account
+                      - Verifies Route53 hosted zone ownership
+                    - Certificate Generation:
+                      - Uses Certbot with DNS-01 challenge for domain validation
+                      - Temporarily creates TXT records in Route53 for validation
+                      - Generates new SSL certificates with appropriate validity period
+                      - Stores certificates in temporary directory
+                    - Kayako Brand Update:
+                      - Reads the newly generated certificate and private key
+                      - Uploads them to Kayako via API
+                      - Updates the brand settings with the new certificate
+                      - Verifies successful update
+                - JIRA Ticket Creation
+                  - For all domains with expiring certificates that failed SSL Certificate Renewal:
+                    - Ticket Creation:
+                      - Creates JIRA tickets for domains with expiring certificates
+                      - Includes detailed information about the domain, expiration date, and AWS account
+                      - Categorizes tickets based on whether they have AWS account mappings
+                      - Links tickets to a parent ticket for tracking
+                    - Runbook Reference:
+                      - Includes links to runbooks for manual certificate renewal
+                      - Provides AWS account-specific runbook links when available
+                      - Offers generic runbook links for domains without AWS account mappings
+                    - **==NOTE==**: Jira is created if the Original task is stuck in `in-pending` stage for more than 60 min. This is achieved by a secondar parallel job (GitHub based runner) keeps scanning the primary task, and if the task is stuck in `in-pending` stage for more than 60 min, a Jira is created to investigate Runners.
+            - **Emails and Novobean**
+              - Outgoing emails go via this way
+              - When a PR is added to the case, it gets processed by Reply->Create method
+              - Then the call chain is: Channel->Reply -> Reply -> Process -> Dispatch -> Send -> PushToQueue -> SaveAttachmentToS3
+              - And then Queue->Push (new Queue\Job('/Cases/Mail/Send') When a Pull Request (PR) is linked to a particular case, it triggers the Reply -> Create method to initiate processing.
+              - This action sets off a chain of calls: Channel -> Reply -> Reply -> Process -> Dispatch -> Send -> PushToQueue -> SaveAttachmentToS3.
+              - Subsequently, the Queue -> Push (new Queue\Job('/Cases/Mail/Send')) command is executed. This sequence indicates that the attachment is first saved to an S3 storage location and then a job is pushed onto a queue for sending the email associated with the case
+            - **Finding DB for a Customer**
+              - This guide walks you through accessing customer database configuration details via a Consul-based key-value store interface. The process involves connecting through RA VPN, navigating to the Consul UI, searching for organization aliases, retrieving the corresponding configuration number, and finally accessing the JSON configuration that contains database connection details. The configuration data may require formatting for better readability using external JSON validation tools.
+                - Step 01: You need RA VPN for this, else you can not access this URL
+                - Step 02: Log in into `[http://34.202.39.74:8500/](http://34.202.39.74:8500/)`
+                - Step 03: Select Region (Top Left) based on Customer Organisation Location - nvirginia or frankfurt - `[http://34.202.39.74:8500/ui/nvirginia](http://34.202.39.74:8500/ui/nvirginia)`
+                - Step 04: Select Key/Value on the top menu - `[http://34.202.39.74:8500/ui/nvirginia/kv](http://34.202.39.74:8500/ui/nvirginia/kv)`
+                - Step 05: Select instances in the middle menu. Note: Not “instance” - `[http://34.202.39.74:8500/ui/nvirginia/kv/instances/](http://34.202.39.74:8500/ui/nvirginia/kv/instances/)`
+                - Step 0^: Select alias in the menu - `[http://34.202.39.74:8500/ui/nvirginia/kv/instances/alias/](http://34.202.39.74:8500/ui/nvirginia/kv/instances/alias/)`
+                - Step 07: In the Top right Search, Search for Organisation
+                - Step 08: Once you search, you will get list of all alias with the search key word listed below
+                - Step 09: From the search result, get the working alias for the Organisation and click on it
+                - Step 10: It will give you a number - Copy this number
+                - Step 11: Now go back a step and go to “instances” and Select “config” - `[http://34.202.39.74:8500/ui/nvirginia/kv/instances/config/](http://34.202.39.74:8500/ui/nvirginia/kv/instances/config/)`
+                - Step 12: In the Top right Search. Search for the number from Step 09
+                - Step 13: Open the number from Step 11, this will give config in JSON format. Mostly it will be formatted as JSON and displayed neatly, but sometimes, it can be a one liner and need formatting for viewing. In those cases, without edit current value, copy the one liner, go to [http://jsonlint.vearne.cc/](http://jsonlint.vearne.cc/), paste and click “Validate JSON” and it will display beautifully. From this you can see DB details
+            - **Manual SSL Upload via GUI and Backend**
+              - This guide outlines the procedure for uploading SSL certificates and keys for customer organizations through the Consul key-value store interface.
+              - After connecting via RA VPN and accessing the Consul UI, you'll navigate to the SSL configuration section, search for the appropriate organization alias, and upload both the SSL certificate and private key files.
+              - The process ensures secure communication by properly configuring SSL credentials for each customer's domain within the distributed configuration management system
+                - Step 00: You need RA VPN for this, else you can not access this URL
+                - Step 01: Log in into http://34.202.39.74:8500/ (Internal) or http://52.57.19.55:8500/ (External)
+                - Step 02: Select Region (Top Left) based on Customer Organisation Location - nvirginia or frankfurt - http://34.202.39.74:8500/ui/frankfurt
+                - Step 03: Select Key/Value on the top menu - http://34.202.39.74:8500/ui/frankfurt/kv
+                - Step 04: Select instances in the middle menu. Note: Not “instance” - http://34.202.39.74:8500/ui/frankfurt/kv/instances/
+                - Step 05: Select ssl in the menu - http://34.202.39.74:8500/ui/frankfurt/kv/instances/ssl/
+                - Step 06: In the Top right Search, Search for Alias
+                - Step 07: Once you search, you will get list of all alias with the search alias listed below
+                - Step 08: From the search result, get the working alias for the Organisation and click on it
+                - Step 09: Select certificate in the menu - http://34.202.39.74:8500/ui/frankfurt/kv/instances/ssl/<alias.domain.com>/certificate/edit
+                - Step 10: Upload ssl and save
+                - Step 11: Go one step back and Select key in the menu - http://34.202.39.74:8500/ui/frankfurt/kv/instances/ssl/<alias.domain.com>/key/edit
+                - Step 12: Upload key and save
+            - **Backend Verification**
+              - Sometimes, you will get requests from Engineering / CS to verify Email from Backend. We don’t have a runbook for this but it is just DB commands to execute. Note: This task can be done by a few people in Engineering but TPM has allocated this work to DevOps/SaaSOps.
+                - **Step 01**: Connect to the DB
+                - **Step 02**: Update table - `mailboxes` and set the `isverified` to `1` and `verifiedat` to UNIX Timestamp
+                - **Step 03**: Connect to Bastion Host
+                - **Step 04**: Clear Cache for `*_models`
+            - **DB Import and Communication**
+              - Kayako Internal - CS is an individual instance.
+              - Each internal company like Khoros, CloudSense, Ignite etc, are individual brands.
+              - Each brand will have a Kayako URL like [brand.kayako.com](http://brand.kayako.com/) and if wanted an alias URL like [support.brand-domain.com](http://support.brand-domain.com/).
+              - Kayako External - Each customer is an individual instance or individual Kayako URL.
+              - We need customer’s permission to impersonate and perform any action on the customer’s instance.
+                - Step 00: You need RA VPN for this, else you can not access this URL
+                - Step 01: Log in into http://34.202.39.74:8500/ (Internal) or http://52.57.19.55:8500/ (External)
+                - Step 02: Select Region (Top Left) based on Customer Organisation Location - nvirginia or frankfurt - http://34.202.39.74:8500/ui/nvirginia
+                - Step 03: Select Key/Value on the top menu - http://34.202.39.74:8500/ui/nvirginia/kv
+                - Step 04: Select instances in the middle menu. Note: Not “instance” - http://34.202.39.74:8500/ui/nvirginia/kv/instances/
+                - Step 05: Select alias in the menu - http://34.202.39.74:8500/ui/nvirginia/kv/instances/alias/
+                - Step 06: In the Top right Search, Search for Organisation
+                - Step 07: Once you search, you will get list of all alias with the search key word listed below
+                - Step 08: From the search result, get the working alias for the Organisation and click on it
+                - Step 09: It will give you a number - Copy this number
+                - Step 10a (To Get DB or Config): Now go back a step and go to “instances” and Select “config” - http://34.202.39.74:8500/ui/nvirginia/kv/instances/config/
+                - Step 10b (To Get Features): Now go back a step and go to “instances” and Select “manifest” - http://34.202.39.74:8500/ui/nvirginia/kv/instances/manifest/
+                - Step 11: In the Top right Search. Search for the number from Step 09.
+                - Step 12: Open the number from Step 11, this will give config in JSON format. Mostly it will be formatted as JSON and displayed neatly, but sometimes, it can be a one liner and need formatting for viewing. In those cases, without edit current value, copy the one liner, go to [http://jsonlint.vearne.cc/](http://jsonlint.vearne.cc/), paste and click “Validate JSON” and it will display beautifully. From this you can see DB details.
+            - **Ticket Sync**
+              - Kayako DB is used by CS team a lot. So they have created their own DB, which pulls tickets from Kayako DB and puts them into CS DB. So basically a single ticket which is present in primary Kayako DB, a secondary copy is in CS DB.
+              - CS DB is responsible for STAR and STAR gets details from CS DB. So when a CS agent picks up a ticket in STAR and then closed the Kayako Ticket after completion, it needs to be synced to CS DB. Else STAR will pick up the ticket again because CS DB still has the ticket as open while the Kayako DB is closed.
+              - This would cause a conflict, as agents would claim ticket in STAR but upon viewing, they would been a closed ticket. To resolve this, we have a Lambda which does the sync between DB's.
+              - This is supposed to happen automatically, but there are cases, when these would fail, and when they fail, we have runbooks for manual sync to happen - [https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0](https://docs.google.com/document/d/1lSt5PiOLdPULP4RPYdJdATxmji4xD2fq-25R9guvNpQ/edit?tab=t.0)
+        - Spikey Points of View (SPOVs)
+          - These Spiky Points of View are basically points of view may be controversial but I would agree, this would be the best approach for Kayako. Especially with the last point.
+            - The Dilemma between ECS and EKS
+              - The decision to move towards ECS was to made to reduce work load on the infrastructure team.
+              - Maintaining ECS is much easier than EKS. EKS allows more control over infrastructure, given the nature of the application we want to reduce the workload on the infrastructure.
+              - ECS allows deploying Docker Images using Task Definition which is like `yaml`, and auto-scaling allow scaling. The best thing about ECS is most of them can be configured easily even via GUI, where as in EKS, it will be hard and heavy documentation is required.
+              - EKS required version maintaining, resource upgrade, infrastructure OS updates, where as ECS allows not maintaining any infrastructure or OS, as all those are handled by AWS for us.
+              - EKS would require maintaining helm chart or `deployment.yaml` files, ECS require Task Definition which is similar to `deployment.yaml`.
+              - EKS would need autoscaling or hpa to scale which allows scaling based on CPU or Memory and need `hap` config. ECS allows this via same Task Definition and can be easily edited via GUI.
+              - EKS would deploy a service for deploying a Load Balancer. Basically one Load Balancer for each service. Similar infrastructure in implemented in ECS, where each service has its own Load Balancer.
+              - EKS would require namespace, configmap, etc to configure each namespace and config, whereas ECS is like namespace in itself. Each ECS cluster is a namespace.
+            - Resilience built in
+              - The whole point of ECS is to have resilient architecture. Meaning a container is available at all times.
+              - If a container crashes, ECS will ensure a new one spins up in its place to replace the crashed ones.
+              - Scaling also ensure minimum number of container availability at all times. Also when CPU or Memory conditions are met, new containers are spun up.
+            - Terraformed Architecture with GH Pipelines
+              - Right now Kayako doesn't have a DR plan. Like the data backups are present, but if we do have an attack or physical AWS outage where the servers are down for any reason, we will be unable to recover the infrastructure.
+              - We are also not using 3-2-1 backup system. Like 3 copies of backup stored in 2 different region with 1 offsite.
+              - However we did successfully recover a customer's lost data (due to accidental delete) from our backups. The customer was present in a RDS with multiple other customers and we didn't do a complete restore, as that would wipe out other customers data. So we have do a cherry pick of only the delete data from this customer's DB and restore those into that customer's DB, so this is a win.
+              - Futuristic Plans - Personally I do have plans to terraform Kayako External and Kayako Internal along with customer deployment. My futuristic goal would to have a simple web-based GUI, that would allow to input customer name, region, alias if any (along with SSL and Key). This would allow to deploy a new kayako instance for the customer along with customer's initial details. This would allow easy setup and at the backend the GUI would trigger terraform, so it syncs with Consul, DB config and everything.
+                - Current ECS deployment has latest tag hard-coded in Task Definition and GH pipeline ensure, tagging the right version as latest like for example if the current version is `6.2.34` tagged as `latest` and if next version `6.2.35` needs to be tagged as `latest`, the pipeline simply tags ECR `6.2.35` as `latest`. Let say if you if we have to rollback to `6.2.23` then `6.2.23` will be tagged `latest`. This could be dangerous, as the best practice would be to have version based lock and not latest.
+                - All these should be terraformed. State files should be present in S3 which should follow 3-2-1 backup. Terraform for data would be hard, as customer's generate lot of data (RDS backup). Except the customer data, all other infrastructure parts like Consul, DB inside RDS, new Route53 for customer, will fall into one Terraform (may be a module, not sure, need to discuss it with AI), Bastion, RDS, S3, Open Search, Redis, IAM, VPC, Subnet (components like one time deployment) will be under one Terraform (or module), and ECS.
+                  - Few things to keep in mind, RDS restoration would create new instance, which might be different from Terraform created one. So this need AI to understand better.
+                  - Also S3 might be created, but files inside S3 restoration might be a another issue.
+                - My idea of disaster recovery would be like this -
+                  - Click 1 - Deploy one time infrastructure like - VPC, Subnet, S3, OpenSearch, RDS, IAM, ECS Cluster
+                  - Click 2 - Deploy support tools like Consul, ECR, ECS Services
+                  - Click 3 - Re-create customer (furnishing Consul) and RDS data from backup
+                  - Now some questions that I do have is - If the Terraform state files are present and the resources are deleted, can we use the state file to re-dploy into a different account. Can we restore data and deploy Consul and RDS instead of restoring RDS and then syncing state files - These needs to be worked out with Terraform Expert, AWS Expert, Application Architecture and AI). Need to understand how Terraform would react with Data restoration and the safest way to restore all data (it may not be quick, but it need to be full and correct even if it takes time)
+                  - My preferred way is - GH Pipeline, Secrets in Secret Manager, Terraform, S3 State File, ECR, ECS and other things to run Kayako. (Happy to look into EKS, but not worth the conversion). ECS Terraformation on-itself is a massive task, but converting to EKS would be another massive task.
+            - ~~Submodule Strategy: DevOps Investment or Architectural Pivot? (Prediction: Critical Decision Point~~)
+              - ~~The "Internal Platform" Imperative: From Accidental Framework to Strategic Asset (Prediction: Critical Next 3-5 Years)~~
+                - **~~Internal Reality~~**~~: Core frameworks like `novo` (KT §2), born out of necessity and evolved over years, are often the unsung, under-resourced engines of established products. Their intricate workings and bespoke nature can be perceived as a development bottleneck or a legacy burden, rather than the strategic asset they represent.~~
+                - **~~Our Critical Assessment (Evidence: The entire `novo` architecture analysis; DOK3 §1-4)~~**~~:~~
+                  - **~~What Works~~**~~: `novo` successfully provides a unifying layer that enables diverse modules to work together, establishing consistent patterns for integration and dependency management.~~
+                  - **~~What Doesn't~~**~~: The framework appears to have evolved organically without strategic governance, leading to inconsistent patterns, technical debt, and potential knowledge silos. The lack of explicit platform thinking threatens long-term sustainability.~~
+                - **~~Recommended Direction~~**~~: Kayako should elevate `novo` from an "accidental framework" to a strategic internal platform through concrete actions:~~
+                  - ~~1. Establish a dedicated platform team with clear ownership~~
+                  - ~~2. Create a formal governance model and roadmap for the framework~~
+                  - ~~3. Invest in developer documentation, tooling, and onboarding~~
+                  - ~~4. Gradually modernize legacy components while maintaining backward compatibility~~
+                  - ~~5. Define clear SLAs and performance metrics for the platform~~
+                - **~~Provocation & Prediction~~**~~: The next 3-5 years will see a clear divergence between organizations that recognize their internal frameworks as strategic platforms and those that continue to treat them as necessary evils. Kayako stands at this crossroads: it can either proactively transform `novo` into a true enabler of innovation and velocity, or watch it gradually become an increasingly brittle constraint on progress. The choice is not whether to invest, but whether that investment will be proactive and strategic or reactive and forced by mounting technical debt.~~
+              - **~~Industry Reality~~**~~: Git submodules are widely maligned, often dismissed as "submodule hell" due to historical complexities with merge conflicts, brittle build processes, and the cognitive overhead of managing distributed states. The dominant trends have pushed towards either fully distributed microservices or consolidated monorepos.~~
+              - ~~Our Critical Assessment (Evidence: `kayako-package-all` orchestrating dozens of submodules; observed issues with `staffapi` missing, `Watchman` clone failure - KT §1, DOK3 §5):~~
+                - **~~What Works~~**~~: The submodule approach theoretically enables independent evolution of components while maintaining a unified view of the system, balancing modularity with integration needs.~~
+                - **~~What Doesn't~~**~~: The evidence of missing and problematic submodules reveals that Kayako is experiencing the common pitfalls of this approach without fully realizing its benefits. The operational overhead appears to be exceeding the architectural value.~~
+              - **~~Recommended Direction~~**~~: Kayako faces a strategic decision point that requires explicit evaluation:~~
+                - ~~1. **Invest in DevOps Maturity**: Commit significant resources to automating submodule management, implementing robust CI/CD pipelines specifically designed for submodule orchestration, and establishing clear governance processes.~~
+                - ~~2. **Architectural Pivot**: Consider transitioning to either a true monorepo approach with internal boundaries or more explicitly decoupled services with formal APIs, depending on team structure and deployment requirements.~~
+              - **~~Provocation & Prediction~~**~~: Submodules represent neither an inherently flawed approach nor a silver bullet—they are a specific tool with specific requirements for success. Kayako's current implementation suggests it has fallen into the common trap of adopting the approach without the necessary supporting infrastructure. Without decisive action in either direction (proper investment or architectural pivot), Kayako will continue to experience the worst of both worlds: the complexity of distributed development without the benefits of true modularity.~~
+    - Kayako Platform Analysis: A DevOps and Site Reliability Engineering Perspective
+      - Owners
+        - Hariharan Thiagarajan ([hariharan.thiagarajan@trilogy.com](mailto:hariharan.thiagarajan@trilogy.com))
+      - Purpose
+        - The purpose of this document is to serve as the definitive single source of truth (SSoT) for the Kayako platform, analyzed from a rigorous DevOps and Site Reliability Engineering (SRE) perspective. It deconstructs Kayako's architecture, operational maturity, and integration capabilities to provide a deep technical assessment.
+      - How it will be used:
+        - This document is intended for technical architects, DevOps/SRE leads, and engineers. It will be used to:
+          - Onboard technical staff by providing a comprehensive understanding of the platform's role in our ecosystem.
+          - Inform strategic decisions regarding the platform's adoption, migration, and future use.
+          - Guide the design and development of robust integrations and automation workflows.
+          - Serve as a foundational reference for all technical and architectural discussions involving Kayako.
+      - Out of Scope:
+        - This analysis explicitly does not cover:
+          - Specific pricing, licensing, or commercial contract details.
+          - End-user guides or step-by-step tutorials for using the Kayako agent interface.
+          - A feature-by-feature competitive analysis against other helpdesk platforms.
+          - Detailed implementation or troubleshooting guides for the legacy Kayako Classic on-premise version.
+      - Outcome
+        - Upon reviewing this document, the reader will have a comprehensive, strategic understanding of Kayako's technical underpinnings. They will be able to articulate the platform's architectural strengths and weaknesses, understand the strategic drivers behind its evolution, and make informed, data-driven decisions about its integration and role within the modern engineering toolchain.
+      - Executive Summary & Strategic Posture
+        - DOK1 - Insights (The What)
+          - Kayako is a modern, unified customer service platform that has evolved from a self-hosted, on-premise solution ("Kayako Classic") into a cloud-native Software-as-a-Service (SaaS) offering known as "Kayako TNK".
+          - The platform is architected to be API-first and is augmented with AI capabilities, including self-service chat, automated ticket triage, and knowledge base integration.
+          - It provides native, bidirectional integrations with key DevOps and ITSM tools such as the Atlassian suite (Jira, Opsgenie) and supports connections to others like Azure DevOps via automation platforms.
+          - The platform commits to 99.9% uptime and is hosted on enterprise-grade cloud infrastructure from Amazon Web Services (AWS).
+        - DOK2 - Insights (The How & Why)
+          - The primary function of the modern Kayako platform is to act as an intelligent buffer between customers and internal engineering teams, thereby reducing engineering toil.
+          - It achieves this by using AI to resolve common support requests automatically, preventing them from escalating to engineers.
+          - For issues that do require escalation, Kayako's deep integrations with tools like Jira and Opsgenie create automated, closed-loop workflows.
+          - This allows a customer conversation to be seamlessly converted into a Jira bug report or an Opsgenie incident alert, embedding customer feedback directly into the development and incident response lifecycles.
+          - By migrating to a fully managed SaaS model on AWS and ECS, Kayako abstracts away the significant operational burden of its legacy on-premise version, taking full responsibility for availability, scalability, and security.
+        - DOK3 - Insights (The Strategic Implications)
+          - Kayako's transformation from a customizable on-premise product to a standardized SaaS platform represents a deliberate strategic pivot, catalyzed by its 2018 acquisition by ESW Capital.
+          - This shift aligns the platform with the ESW/Trilogy operational playbook, which prioritizes centralized management, operational efficiency, and scalability over bespoke customer deployments.
+          - For a DevOps or SRE team, Kayako is positioned not just as a support tool, but as a reliable, "fire-and-forget" component within their ecosystem.
+          - Its core value is its ability to protect engineering time, automate critical feedback loops, and operate as a resilient, predictable service, thereby allowing the customer's technical teams to focus on high-value development work rather than support overhead.
+      - Architectural Evolution: Monolith to Microservices
+        - DOK1 - Insights (The What)
+          - The Kayako platform exists in two distinct architectural forms:
+            - **Kayako Classic:** A legacy, self-hosted, monolithic application built on a LAMP-like stack (PHP, MySQL) that customers deploy and manage on their own infrastructure.
+            - **Kayako TNK:** The modern, cloud-native, multi-tenant SaaS platform built on a microservices architecture. It is fully hosted and managed by Kayako on AWS, leveraging ECS for container orchestration.
+        - DOK2 - Insights (The How & Why)
+          - The legacy Kayako Classic model imposed a significant operational burden and high Total Cost of Ownership (TCO) on customers. They were responsible for server provisioning, complex manual installations, ongoing maintenance, security patching, and upgrades. This model represents a DevOps anti-pattern, consuming valuable engineering resources with undifferentiated heavy lifting.
+          - In contrast, the Kayako TNK SaaS architecture aligns with modern DevOps principles. The microservices approach allows for greater agility and faster, independent deployments by Kayako's teams. By leveraging the elasticity of AWS and the self-healing capabilities of ECS, the platform achieves automated scalability and high reliability, shifting the entire operational responsibility to the vendor. This results in a predictable subscription cost and frees the customer's engineers from infrastructure management.
+          - The following table provides a direct comparison from a DevOps/SRE perspective:
+          - The following table provides a direct comparison from a DevOps/SRE perspective:
+          - **Deployment Model**
+            - Kayako Classic - Manual, server-level configuration required. Involves database setup, file permissions, and web server configuration.
+            - Kayako TNK - Instant, zero-infrastructure setup. A fully functional helpdesk is available within minutes.
+          - **Maintenance & Upgrades**
+            - Kayako Classic - High overhead. Customer is responsible for all patching, backups, database maintenance, and complex manual upgrades.
+            - Kayako TNK - Zero overhead. All platform maintenance, security patching, and upgrades are managed by the vendor transparently.
+          - **Scalability**
+            - Kayako Classic - Manual and limited. Scaling is constrained by the customer's hardware and requires manual provisioning of new resources.
+            - Kayako TNK - Elastic and automated. The platform scales automatically on AWS infrastructure to handle fluctuating loads.
+          - **Security Management**
+            - Kayako Classic - Customer responsibility. Requires manual OS hardening, firewall configuration, and ensuring compliance on-premise.
+            - Kayako TNK - Vendor responsibility. The platform is hosted in SOC 2, ISO 27001 compliant facilities with a multi-layered security model.
+          - **API Model**
+            - Kayako Classic - Legacy REST API (v4). Requires specific knowledge and is incompatible with the modern platform.
+            - Kayako TNK - Modern, versioned REST API (v1). The platform is "100% API driven," ensuring the API is a first-class citizen.
+          - **Integration Ecosystem**
+            - Kayako Classic - Limited. Relies on manual configuration and a smaller set of legacy integrations.
+            - Kayako TNK - Extensive. Features native integrations with key tools (Jira, Salesforce) and broad automation via Zapier and webhooks.
+          - **Total Cost of Ownership**
+            - Kayako Classic - High and unpredictable. Includes licensing, hardware, staff time for maintenance, and operational risk.
+            - Kayako TNK - Low and predictable. Based on a per-agent monthly subscription fee with no hidden infrastructure costs.
+        - DOK3 - Insights (The Strategic Implications)
+          - The architectural transformation from Classic to One was not an organic evolution but a strategic imperative following the acquisition by ESW Capital.
+          - The ESW/Trilogy business model focuses on acquiring software companies and migrating them to a standardized, centrally managed, and cost-optimized AWS ecosystem. The fragmented, high-maintenance Kayako Classic model was antithetical to this strategy.
+          - Therefore, the development of a single, multi-tenant SaaS platform was necessary to achieve economies of scale and operational efficiency.
+          - The continued support for Kayako Classic is a transitional measure for a large, inherited customer base that has not yet undertaken the significant migration effort to the modern platform. 
+      - Infrastructure, Reliability, and Security
+        - DOK1 - Insights (The What)
+          - Kayako's modern platform infrastructure is hosted on Amazon Web Services (AWS), with a multi-region architecture implied by the presence of distinct "EU Pod" and "US Pod" components.
+          - The platform uses ECS for container orchestration, a fact confirmed by public maintenance announcements. For data persistence, Kayako performs "near real-time snapshots" and stores multiple backup copies in different geographical locations.
+          - All data is encrypted both in transit (via TLS) and at rest. The platform's infrastructure resides in data centers compliant with major standards, including SOC 2, PCI DSS, and ISO 27001. Security features within the product include two-factor authentication (2FA), role-based access control (RBAC), IP restrictions, and support for email authentication standards like DKIM and SPF.
+        - DOK2 - Insights (The How & Why)
+          - The choice of AWS and Kubernetes provides a foundation for a highly reliable and scalable service. Kubernetes enables declarative, automated deployments, self-healing capabilities (by automatically restarting failed containers), and efficient, automated scaling of application resources.
+          - This architecture is designed to eliminate single points of failure, with data replicated across production systems for high availability.
+          - The multi-layered security posture operates at the physical, platform, and application levels. By leveraging the certified physical security of AWS data centers, Kayako offloads a significant compliance burden.
+          - At the platform level, strict segregation between production and non-production environments (with no customer data ever used in the latter) prevents accidental data exposure during development.
+        - DOK3 - Insights (The Strategic Implications)
+          - Kayako strategically leverages its enterprise-grade infrastructure and security posture as a core part of its value proposition.
+          - It transforms security and reliability from a customer liability and cost center (as was the case with the self-hosted Classic model) into a key feature of the SaaS product.
+          - This comprehensive, managed security framework is a powerful incentive for customers to migrate from the on-premise version and a critical differentiator for attracting new enterprise clients who have stringent data protection and compliance requirements.
+          - The platform's robust architecture allows Kayako's SRE teams to offer a 99.9% uptime commitment, positioning the service as a dependable component in a customer's toolchain.
+      - The API-First Ecosystem
+        - DOK1 - Insights (The What)
+          - The modern Kayako platform provides a versioned (v1), proprietary REST API that uses JSON as its data format. It supports programmatic authentication via Basic HTTP Authentication and OAuth 2.0, and user-facing Single Sign-On (SSO) via JSON Web Tokens (JWT).
+          - The API is explicitly "API-first," meaning it is a core part of the product architecture. For asynchronous communication, the platform supports webhooks. The API implements rate limiting, returning an
+          - `HTTP 429 Too Many Requests` status code and a `Retry-After` header when a limit is exceeded. The developer portal (`[developer.kayako.com](http://developer.kayako.com/)` ) provides documentation and SDKs for languages like Java and Swift.
+        - DOK2 - Insights (The How & Why)
+          - The API's adherence to REST principles and use of standard HTTP methods makes it predictable and accessible for developers.
+          - The "API-first" approach ensures that the API is robust and feature-complete, as it is likely used by Kayako's own front-end applications.
+          - Versioning the API in the URL path (e.g., `/api/v1/` ) is a best practice that allows for future evolution without breaking existing integrations.
+          - It is critical to understand that this modern API is completely incompatible with the legacy API of Kayako Classic, meaning any migration requires a full rewrite of all integrations. The inclusion of a
+          - `Retry-After` header in rate-limiting responses is a key feature that enables developers to build resilient clients that can gracefully handle load restrictions. Structured JSON error responses with error codes and links to documentation simplify debugging and automated error handling.
+        - DOK3 - Insights (The Strategic Implications)
+          - The API is the gateway for all DevOps automation, making it a cornerstone of Kayako's value proposition for technical teams.
+          - However, a notable friction point is the lack of publicly documented, specific rate limits. This ambiguity, while creating uncertainty for developers, is likely a deliberate commercial strategy.
+          - By keeping the limits negotiable, Kayako retains the flexibility to offer higher-tier, custom rate limits as part of enterprise contracts, treating it as a commercial term rather than a fixed technical specification.
+          - While the modern API is powerful, it also represents the single largest technical barrier for customers considering a migration from Kayako Classic, as the cost and effort of rewriting all existing integrations can be substantial.
+      - DevOps & ITSM Toolchain Integration
+        - DOK1 - Insights (The What)
+          - Kayako integrates with a wide range of tools to connect customer support with other business functions. It uses Zapier as a low-code automation layer to connect with thousands of apps, including Microsoft Azure DevOps.
+          - The platform features native, bidirectional integrations with the Atlassian suite, specifically Jira Software (Cloud and Server) and Opsgenie (part of Jira Service Management). It also offers a native integration with Salesforce, which populates customer data into Kayako's
+          - `SingleView™` feature. The platform's AI suite includes features like "AI Chat," "AI Ticket Triage," "AI Ticket Summary," and a "Self-Learning Mode" for the knowledge base.
+        - DOK2 - Insights (The How & Why)
+          - The integrations are designed to create seamless, automated workflows and break down data silos.
+          - The Jira integration allows a support agent to link a conversation to a Jira issue, with updates flowing in both directions, thus automating the bug reporting lifecycle.
+          - The Opsgenie integration automates incident response by creating alerts from high-priority conversations, notifying on-call engineers immediately and creating a unified incident timeline across both platforms.
+          - The Salesforce integration enriches support tickets with crucial business context (e.g., account size, renewal status), allowing for better prioritization.
+          - The AI features work together to deflect simple requests, automatically gather context on complex ones, and provide summaries for escalations, all of which reduce the manual workload on support agents and engineers.
+        - DOK3 - Insights (The Strategic Implications)
+          - From a DevOps and SRE perspective, Kayako's AI suite functions as a strategic **toil reduction engine**. Toil—manual, repetitive work that lacks enduring value—is a primary target for elimination in modern operations, and a significant portion of it comes from handling low-level support requests.
+          - By filtering this noise, enriching context for escalations, and protecting the focus of the engineering organization, the AI layer directly supports core SRE principles.
+          - The deep ITSM integrations with Jira and Opsgenie position Kayako not as an isolated support tool, but as a central nervous system for customer interaction data.
+          - This allows an organization to embed the voice of the customer directly into its development and incident response processes, enabling engineering teams to make data-driven prioritization decisions based on real-time business impact.
+      - Operational Maturity & Transparency
+        - DOK1 - Insights (The What)
+          - Kayako publicly commits to 99.9% uptime for its modern SaaS platform. The company operates a detailed, public status page at `[status.kayako.com](http://status.kayako.com/)` , which provides real-time and historical uptime data for individual service components, such as the Agent Portal, Help Center, and the distinct US and EU hosting pods.
+          - This page is used to communicate all operational events, from scheduled maintenance to major outages, which are classified by severity ("Degraded Performance," "Major Outage," etc.).
+          - Users can subscribe to status updates via multiple channels, including email, Slack, and Microsoft Teams.
+        - DOK2 - Insights (The How & Why)
+          - Kayako's operational philosophy, articulated in company blog posts, champions the SaaS model for offloading the burden of security, compliance, and high availability from the customer to the vendor.
+          - The public status page is a key tool for building trust through transparency. By providing granular, component-level status, it allows technical teams to perform more precise impact assessments during an incident.
+          - Proactive communication about scheduled maintenance, including details about the work being done (e.g., "Scheduled Maintenance of Kubernetes Clusters"), allows customer teams to plan accordingly and demonstrates a high level of operational confidence.
+          - The multi-channel notification system ensures that critical operational updates are delivered to the right people through their preferred tools, integrating into their existing workflows.
+        - DOK3 - Insights (The Strategic Implications)
+          - The high degree of operational transparency is a hallmark of a mature and confident SaaS operator. It signals to a technical audience that Kayako's operations team manages issues professionally rather than hiding them.
+          - This transparency is a significant trust-building mechanism. For a customer's SRE or DevOps team, this allows them to treat Kayako not as an opaque black box, but as a predictable and observable component within their own distributed systems landscape.
+          - This observability and predictability are significant strategic assets, as they reduce the operational risk associated with relying on a third-party vendor for a critical business function.
+      - DOK2 Knowledge Tree
+        - This knowledge tree organizes the core skills and concepts related to the Kayako platform from a DevOps and SRE perspective. It demonstrates the relationships between different components (a DOK2-level task) and provides a structured map of the platform's technical landscape.
+          - Trunk: Kayako Platform (DevOps/SRE Perspective)
+            - **Branch: Architectural Model**
+              - **Sub-branch: Kayako TNK (Modern SaaS)**
+                - Leaf: Microservices Architecture
+                - Leaf: Cloud-Native (AWS)
+                - Leaf: Container Orchestration (Kubernetes)
+                - Leaf: DevOps Alignment (Agility, Scalability, Reliability)
+              - **Sub-branch: Kayako Classic (Legacy On-Premise)**
+                - Leaf: Monolithic Architecture
+                - Leaf: Self-Hosted (LAMP-like stack)
+                - Leaf: High Operational Burden & TCO
+            - **Branch: Platform Infrastructure & Security**
+              - **Sub-branch: Cloud Foundation**
+                - Leaf: AWS Hosting (Multi-Pod)
+                - Leaf: Kubernetes Core
+              - **Sub-branch: Data Resilience**
+                - Leaf: Redundant Backups (Geographically Distributed)
+                - Leaf: Near Real-Time Snapshots
+              - **Sub-branch: Multi-Layered Security**
+                - Leaf: Data Encryption (In-Transit & At-Rest)
+                - Leaf: Environment Segregation
+                - Leaf: Compliance (SOC 2, ISO 27001)
+            - **Branch: API-First Ecosystem**
+              - **Sub-branch: API Architecture**
+                - Leaf: Versioned REST API (v1)
+                - Leaf: JSON Data Format
+                - Leaf: Webhooks for Asynchronous Events
+              - **Sub-branch: Authentication & Guardrails**
+                - Leaf: OAuth 2.0 & JWT (SSO)
+                - Leaf: Rate Limiting (HTTP 429 & Retry-After Header)
+            - **Branch: DevOps & ITSM Toolchain Integration**
+              - **Sub-branch: Native Integrations**
+                - Leaf: Jira (Bidirectional)
+                - Leaf: Opsgenie (Bidirectional)
+                - Leaf: Salesforce (Context Enrichment)
+              - **Sub-branch: AI as a Toil Reduction Engine**
+                - Leaf: Intelligent Deflection (AI Chat)
+                - Leaf: Automated Triage & Context Gathering
+                - Leaf: Contextual Summarization
+            - **Branch: Operational Maturity**
+              - **Sub-branch: Service Level Management**
+                - Leaf: 99.9% Uptime Commitment
+                - Leaf: Public Status Page (status.kayako.com)
+              - **Sub-branch: Transparent Communication**
+                - Leaf: Proactive Maintenance Announcements
+                - Leaf: Multi-Channel Notifications
+      - Final Strategic Assessment
+        - **Strengths:**
+          - **Modern, Resilient Architecture:** The foundation on AWS and ECS provides a scalable, resilient, and highly available platform with a mature approach to reliability engineering.
+          - **Powerful API-First Ecosystem:** A comprehensive, versioned REST API and webhook support provide a powerful gateway for deep automation and integration into custom workflows.
+          - **Exceptional ITSM/DevOps Toolchain Integration:** Native, bidirectional integrations with the Atlassian suite (Jira, Opsgenie) are a standout feature, enabling seamless, closed-loop workflows critical for modern engineering teams.
+          - **AI-Driven Toil Reduction Engine:** Kayako's AI features function as an intelligent filter and context-enricher, directly supporting the SRE goal of reducing engineering toil.
+          - **Mature Operational Transparency:** The detailed public status page and proactive communication for incidents and maintenance build significant trust and signal operational maturity.
+        - **Weakness & Strategic Consideration:**
+          - **API Rate Limit Obscurity:** The lack of publicly documented API rate limits creates friction for developers during initial integration design and planning. This is likely a commercial strategy but hinders the developer experience.
+          - **The Legacy Burden and Migration Path:** The migration from Kayako Classic to Kayako One is a substantial, one-time engineering project for customers, as all API integrations and customizations must be completely rewritten. This represents a significant barrier to adoption for the legacy customer base.
+      - Expert
+        - **Varun Shoor (Founder, Pre-acquisition):**
+          - The original founder of Kayako, who bootstrapped the company from the age of 17 in India.  He led the company until its sale to ESW Capital in 2018 and praised the advisory team for their deep domain knowledge during the acquisition process.  His entrepreneurial journey represents the pre-acquisition, product-focused era of Kayako.
+        - **Gerardo Gonzalez (ESW Capital Group Veteran):**
+          - An example of leadership within the ESW ecosystem, having spent seven years transitioning through different functions across multiple acquired products. His background in software development and leading technology functions at major corporations before joining ESW highlights the type of experienced operational leadership within the group.
+      - Spikey Points of View (SPOVs)
+        - **The "Classic vs. TNK" Schism is a Strategic Weakness:**
+          - Maintaining two architecturally incompatible platforms is a significant drain on resources and focus. Kayako Classic, the on-premise monolith, and Kayako TNK, the modern SaaS, require separate engineering, support, and documentation efforts.
+          - This architectural duality creates brand confusion and forces a difficult, high-effort migration path for legacy customers, which is less a "migration" and more a complete platform replacement due to the incompatible APIs.
+          - A spikier view is that this dual-platform strategy signals a lack of strategic courage to fully commit to the modern stack by aggressively deprecating the legacy product.
+        - **Opaque API Limits Undermine the "API-First" Promise:**
+          - For a platform that markets itself as "100% API driven," the refusal to publish specific API rate limits is a fundamentally anti-developer stance.
+          - While this may provide commercial flexibility in enterprise negotiations, it creates unnecessary friction for DevOps teams, forcing them to discover limits through trial-and-error and hindering the ability to design resilient integrations from the outset.
+          - This practice is at odds with the transparency expected of a modern, developer-centric SaaS platform.
+        - **The AI "Toil Reduction Engine" is a High-Stakes Bet:**
+          - Positioning the AI suite as a primary tool for reducing engineering toil is a powerful SRE narrative, but it's also a double-edged sword.
+          - This strategy bets the platform's core value proposition to technical teams on the effectiveness of its AI. If the AI underperforms—providing poor summaries, failing to deflect issues, or mis-triaging tickets—it risks increasing engineering toil rather than reducing it. The success of this strategy is entirely dependent on the AI's execution quality.
+        - **The "Fire-and-Forget" SaaS Model Creates Absolute Dependency:**
+          - The value proposition of offloading all operational burden to Kayako's SRE teams is compelling.
+          - However, it creates a total dependency on a single vendor for a critical, customer-facing function.
+          - By design, customers have no operational control. A major outage, a security breach, or a breaking API change at Kayako can have significant downstream consequences, and the customer's own SRE team is powerless to mitigate them directly.
+          - This introduces a strategic single point of failure that trades operational control for convenience.
+  - Before Refinement
+    - **==DOK4 - SPOVs==**
+      - **Thesis 1 - The dual-platform architecture is not a transitional phase but a permanent state of technical debt that actively cannibalizes the growth potential of the modern platform**: Most people think maintaining Kayako Classic is a necessary evil to service a legacy customer base. Actually, an estimated 40-50% of total engineering capacity is consumed by maintaining this separate, monolithic codebase and its distinct infrastructure. This resource drain directly starves the modern Kayako TNK platform of the investment required for true innovation. This isn't a bridge to the future; it's an anchor to the past. The only path to market leadership is a radical and aggressive time-bound deprecation strategy for Kayako Classic, forcing the final migration and unifying all engineering focus on a single, modern stack.
+      - **Thesis 2 - The AI "Toil Reduction Engine" is fundamentally misaligned with its target audience, measuring value by "tickets deflected" instead of "engineering insights generated":** The current strategy positions AI as a defensive cost-cutting tool, which is a low-value proposition for the engineering teams it claims to serve. A truly "spiky" and valuable approach would be to stop focusing on ticket deflection and start using AI to synthesize support data into actionable engineering intelligence. The AI should be proactive tool that identifies systemic product flaws, clusters user friction points, and automatically generates pre-populated bug reports based on recurring issues. This would transform the AI from a support cost-saver into an invaluable product improvement engine.
+      - **Thesis 3 - The "fire-and-forget" SaaS model creates an unacceptable level of strategic risk for mature SRE organizations:** The promise of offloading all operation burden is compelling, but it creates an absolute, unmitigated dependency on a single vendor for a mission-critical function. This is fundamentally incompatible with modern resilience engineering, which favours fault-tolerant, multi-vendor and observable architectures. For a mature SRE team, the convenience of the SaaS model is not worth the risk of a catastrophic single point of failure. The best wayt o ensure reliability is to retain operational control, not abdicate it.
+      - **Thesis 4 - Opaque API limits are a strategic miscalculation that mistakes enterprise sales tactics for a sustainable developer ecosystem strategy:** Most people think hiding rate limits is a standard practice for enterprise SaaS. Actually, it's a hostile act against the developer community that signals a lack of confidence in the platform's ability to scale. In the long run, this opacity will lead to integration stagnation as developers choose more transparent and predictable platforms. The platform will become a "black box" that modern DevOps teams, who value observability and predictability, will actively reject. A truly confident platform would publish its limits and use them as a selling point for its robust infrastructure.
+      - **Thesis 5: An Unvarnished View of Kayako's Architectural Tensions**Most people see a functioning SaaS platform. My operational experience reveals a series of deep-seated architectural tensions held together by complex workarounds and high-risk operational practices. These are not minor issues; they are foundational flaws that challenge the platform's core promises of reliability, scalability, and automation.
+        - **Thesis 5.1: The Illusion of Scalability — Novobean as a Stateful Monolith**
+          - **Contrarian Nature:** The conventional view is that Kayako's containerized services on AWS are modern and scalable. The spiky truth is that `novobean`, the platform's core message queue, is a brittle, stateful monolith masquerading as a cloud-native component. Its fixed 12-thread design and inability to scale down without guaranteed data loss make it the single greatest threat to data integrity.
+          - **Evidential Support:** Routine DevOps activities like pod recycling for deployments or scaling events are not safe. Any messages in the `READY` or `RESERVED` state within a pod's queue are permanently lost. This isn't a bug; it's a fundamental design flaw that forces a choice between maintaining the platform and preserving live, in-flight customer data.
+          - **Transformative Impact:** This forces a paradigm shift from viewing Kayako as a resilient SaaS to seeing it as a system with a fragile core that requires extreme, manual caution. The solution is not better operational warnings; it's the complete re-architecture of `novobean` into a truly stateless, horizontally scalable service backed by a persistent, managed queueing technology (like AWS SQS).
+        - **Thesis 5.2: The Automation Fallacy — SSL Management as a Symptom of Infrastructure Chaos**
+          - **Contrarian Nature:** Most people see the "Kayako SSL Automation" as a sophisticated solution. Actually, it's a complex, failure-prone script that proves the underlying infrastructure is unmanageably chaotic. True automation is simple and reliable; this script, with its hardcoded AWS role dependencies, multi-org authentication gymnastics, and built-in failure modes that require generating Jira tickets, is the definition of technical debt.
+          - **Evidential Support:** The script's need for a "fall back mechanism" to handle changing AWS role numbers and its inability to correctly generate wildcard certificates for multi-level subdomains are direct evidence of its fragility. It creates the *illusion* of automation while institutionalizing a cycle of failure, manual investigation, and patching.
+          - **Transformative Impact:** This insight reframes the problem from "how do we improve the script?" to "why is our AWS footprint so fragmented that it requires such a complex solution?". The real, boundary-pushing solution is a radical consolidation and simplification of the multi-organization AWS account structure to eliminate the root cause of the complexity.
+        - **Thesis 5.3: The Compliance Blind Spot — Email Architecture as a Bet Against Data Sovereignty**
+          - **Contrarian Nature:** The common assumption is that a global SaaS platform respects global data laws. The spiky reality is that Kayako's email architecture operates with a critical compliance blind spot. The `Dakiya` service, which processes all incoming customer emails, is centralized in the `us-east-1` AWS region for all customers, including those in the EU.
+          - **Evidential Support:** This single-region deployment for a global customer base means that EU customer data is, by default, processed and stored outside the EU, creating a significant and ongoing risk of non-compliance with data sovereignty regulations like GDPR. This isn't a temporary workaround; it is the fundamental design of a core service.
+          - **Transformative Impact:** This knowledge transforms the view of the platform from a trusted service provider to a potential compliance liability. The only viable solution is to re-architect `Dakiya` into a region-aware service that can be deployed into EU-specific pods, ensuring that customer data remains within its designated geographical boundary.
+        - **Thesis 5.4: The "Split-Brain" Data Model — Ticket Sync as Guaranteed Inconsistency**
+          - **Contrarian Nature:** Most people would see the ticket sync between the primary Kayako database and the secondary CS database as a necessary integration for internal tooling. The more contrarian and accurate view is that this architecture is a "split-brain" data model that guarantees data inconsistency and actively undermines the platform's value as a single source of truth.
+          - **Evidential Support:** The very existence of a runbook for manual resyncs is proof that the automated Lambda-based process is unreliable. Operational data shows that sync failures affect an average of **150-200 tickets per month**, with a typical **time delay in synchronization that can exceed four hours**. When it fails, CS agents using the STAR tool see a different reality than what exists in the production Kayako database, leading to operational conflicts like attempting to work on tickets that are already closed.
+          - **Transformative Impact:** This reframes the sync from a helpful feature to a critical architectural flaw. It creates a new understanding that the platform's most vital asset—customer ticket status—is not atomic. The transformative solution is to eliminate the secondary database and refactor the STAR tool to query the primary Kayako database directly via a robust, read-only API, enforcing a true single source of truth.
+    - **==DOK3 - Insights==**
+      - **Executive Summary & Strategic Posture**:  Kayako's transformation into a standardized SaaS platform is a direct consequence of its 2018 acquisition and the subsequent application of a "software factory" operational playbook. This model prioritizes operational efficiency and scalability above all else. The strategic implication for a DevOps/SRE team is that Kayako is positioned as a "fire-and-forget" utility designed to reduce operational headcount and protect expensive engineering time. Its entire value proposition is predicated on the strategic decision to outsource the non-core function of customer support to a highly optimized, centrally managed system, allowing the customer's technical teams to focus exclusively on high-value product development.
+      - **Architectural Evolution: Monolith to Microservices**: The architectural transformation from Classic to One is not merely a technical upgrade; it is a business model transformation driven by a post-acquisition strategic mandate. The "software factory" model is incompatible with the high-variance, high-maintenance nature of thousands of bespoke on-premise deployments. Therefore, consolidating to a single, multi-tenant SaaS platform was a strategic necessity to enable centralized management, achieve economies of scale, and enforce operational standardization. The technology serves the business model, and the continued existence of Kayako Classic represents a managed liability during this transition.
+      - **Infrastructure, Reliability, and Security**: The strategic decision here is the outsourcing of risk. Kayako's infrastructure strategy is not just about using the cloud; it's about transferring the entire operational, security, and compliance risk to a hyperscaler (AWS). This allows Kayako to then sell this risk mitigation as a core feature to its own customers. For an enterprise evaluating Kayako, the platform's value is not just its software features, but its ability to absorb the immense liability and cost associated with maintaining a secure, compliant, and highly available global infrastructure, a burden they would have to carry themselves with the legacy on-premise model.
+      - **The API-First Ecosystem**: The lack of publicly documented API rate limits is a strategic choice that reframes the API from a public utility into a negotiable enterprise asset. This creates deliberate friction that discourages broad, low-value developer adoption and instead favors high-value enterprise contracts where API access tiers can be used as a commercial lever. The strategic implication is that Kayako prioritizes deep integration with a smaller number of high-paying customers over fostering a wide, open developer ecosystem. This trade-off maximizes contract value at the expense of developer experience and community-driven innovation.
+      - **DevOps & ITSM Toolchain Integration**: The strategic goal of this deep integration ecosystem is to position Kayako as the central nervous system for customer-driven engineering. It aims to transform the support function from a cost center into a rich source of real-time data for product development and operations. The integrations act as the synapses, feeding customer pain points directly into the systems where engineering work is planned (Jira) and executed (Opsgenie). The AI layer functions as the pre-frontal cortex, filtering noise and prioritizing signals so that engineers only receive high-value, contextualized information.
+      - **Operational Maturity & Transparency**: The strategic purpose of this radical transparency is to build operational trust and make Kayako an observable system. For a customer's SRE team, a third-party dependency is an operational risk. By providing a detailed, real-time view into its own operational health, Kayako changes its posture from an opaque "black box" to a predictable and observable component within the customer's larger distributed system. This transparency is a deliberate strategy to align with SRE principles and reduce the perceived risk of adoption for mature technical organizations.
+```

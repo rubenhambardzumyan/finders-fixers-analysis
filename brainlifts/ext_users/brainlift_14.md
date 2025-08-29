@@ -1,0 +1,236 @@
+🧠BrainLift Template SV
+
+- Owners
+  - Shubhashish Verma
+- Purpose
+  - This BrainLift captures my expertise in building and scaling production-grade AI-powered content platforms, specifically focusing on LLM-integrated editorial workflows.
+  - The focus includes:
+    - Designing LLM-powered features that mirror editorial best practices
+    - Structuring prompts and pipelines for predictable, human-aligned content output
+    - Integrating agent reasoning and tool usage in content generation environments
+  - Out of scope are:
+    - Low-level model training or fine-tuning
+    - Generic AI applications outside editorial or marketing content use cases
+    - Infrastructure-level concerns unrelated to AI-human content collaboration
+  - Why this matters:
+    - This domain is core to my work: it represents how I build tools that make AI outputs match editorial intent, which is central to how I ship reliable features at scale and onboard engineers to large codebases like Contently and Stratifyd.
+- Experts
+
+  - Internal
+    - Shubhashish Verma - Stratifyd and Contently
+    - Views are noted in import repos on github, which help onboard to codebases of these products and get a overview of how things work there
+    - Repos can be found [here](https://github.com/trilogy-group/stratifyd_import) and [here](https://github.com/trilogy-group/contently_import)
+  - External Twitter Experts
+    - Chris Duffey — [@ChrisDuffey](https://twitter.com/ChrisDuffey)
+      - Role: Creative Director at Adobe, author of Superhuman Innovation
+      - SPOV: AI should augment—not replace—human creativity
+      - Agreement: Strongly aligned with building editorially intelligent tools
+      - Why Follow: Explores creative workflows that mirror your domain
+    - Karen Hao — [@\_KarenHao](https://twitter.com/_KarenHao)
+      - Role: Journalist and former AI editor at MIT Tech Review and WSJ
+      - SPOV: AI deployment has systemic consequences that must be made visible
+      - Agreement: Offers important counterpoints around ethical risks
+      - Why Follow: Helps temper design decisions with ethical awareness
+    - Rumman Chowdhury — [@ruchowdh](https://twitter.com/ruchowdh)
+      - Role: Responsible AI expert, former ML Ethics lead at Twitter
+      - SPOV: AI systems must be transparent and justifiable in operation
+      - Agreement: Aligned on building trust into AI-backed editorial tools
+      - Why Follow: Her views offer a strong moral compass for design
+    - Emilio Ferrara — [@emilio_ferrara](https://twitter.com/emilio_ferrara)
+      - Role: USC Professor, expert on bots and misinformation
+      - SPOV: Content virality must be studied through AI’s behavioral footprints
+      - Agreement: Valuable for preventing content misuse and AI-generated manipulation
+      - Why Follow: Helps ensure platform features respect truth and quality
+    - Julia Hood — [@JuliaHood](https://twitter.com/JuliaHood)
+      - Role: Newsroom AI Lead at Business Insider
+      - SPOV: AI tools should fit into—not override—editorial judgment
+      - Agreement: Completely aligned with your product goals
+      - Why Follow: Brings practical experience from AI in real editorial settings
+  - External AI-Discovered Experts
+
+    - These experts were surfaced using AI tools to expand beyond my known network. They bring novel, often contrarian perspectives to each Knowledge Area and publish accessible content I can integrate into my DOK1–DOK4 layers.
+
+    ***
+
+    - #### 🧩 Prompt Engineering for Editorial Outcomes
+    - **Ann Marie Ure** — _Editor, Alchemist Review_
+      - **Viewpoint**: Advocates “build-with-editors” over perfectionist AI deployment
+      - **Why Follow**: Brings real-world lessons from editorial workflow integration
+      - **Where to Find**: [blog.hum.works](https://blog.hum.works/posts/building-ai-into-editorial-workflows?utm_source=chatgpt.com)
+      - **Start Here**: _Building AI into Editorial Workflows: Early Lessons_
+    - **Cesar Miguelañez** — _Prompt Engineering Lead, Latitude_
+      - **Viewpoint**: Emphasizes prompt creation by domain experts
+      - **Why Follow**: Offers workshop-style prompt development frameworks
+      - **Where to Find**: [latitude-blog.ghost.io](https://latitude-blog.ghost.io/blog/ultimate-guide-to-training-experts-in-prompt-engineering/?utm_source=chatgpt.com)
+      - **Start Here**: _Ultimate Guide to Training Experts in Prompt Engineering_
+    - **Anthropic Prompt Engineers** (e.g., Amanda Askell, Alex Albert)
+      - **Viewpoint**: Promote iterative, conversational prompt refinement
+      - **Why Follow**: High-fidelity prompting insights from leading practitioners
+      - **Where to Find**: Anthropic blog, YouTube
+      - **Start Here**: _27 Prompt Engineering Tips from Anthropic_
+
+    ***
+
+    - #### 🤖 Agent Architecture & Workflow Orchestration
+    - **maiAbdelghany28** — _Researcher, GitHub Maintainer_
+      - **Viewpoint**: Demonstrates DAG and reflexion agent workflows
+      - **Why Follow**: Hands-on code examples across complexity tiers
+      - **Where to Find**: [GitHub](https://github.com/maiAbdelghany28/Building-LLM-Workflows-From-Basic-to-Advanced?utm_source=chatgpt.com)
+      - **Start Here**: _Building LLM Workflows from Basic to Advanced_
+    - **Harper Reed** — _Tech Entrepreneur, Former Obama CTO_
+      - **Viewpoint**: Shares code-first “plan + execute” LLM flows
+      - **Why Follow**: Practical thinking around code orchestration
+      - **Where to Find**: [harper.blog](https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/?utm_source=chatgpt.com)
+      - **Start Here**: _My LLM Codegen Workflow atm_
+    - **CompatibL Team** — _Workflow Framework Engineers_
+      - **Viewpoint**: LLMs should follow human task logic
+      - **Why Follow**: Highlights architectural reliability gaps
+      - **Where to Find**: [compatibl.com](https://www.compatibl.com/insights/how-to-build-reliable-llm-based-workflows/?utm_source=chatgpt.com)
+      - **Start Here**: _How to Build Reliable LLM-Based Workflows_
+
+    ***
+
+    - #### 🧬 Brand-Aligned Output & Tone Enforcement
+    - **Melissa Fanella** — _Content Lead, Originality.AI_
+      - **Viewpoint**: Tone guides are productivity levers
+      - **Why Follow**: Offers editorial tone design templates
+      - **Where to Find**: [originality.ai](https://originality.ai/blog/editorial-workflow-ideas?utm_source=chatgpt.com)
+      - **Start Here**: _Editorial Workflow: 7 Ideas to Supercharge Productivity_
+    - **Stan** — _Independent LLM Workflow Writer_
+      - **Viewpoint**: LLMs assist but don’t replace brand voice
+      - **Why Follow**: Clean breakdown of real editorial usage
+      - **Where to Find**: [stanislas.blog](https://stanislas.blog/2025/02/writing-workflow-llm/?utm_source=chatgpt.com)
+      - **Start Here**: _My Writing Workflow with LLMs_
+    - **Arvind Narayanan** — _AI Ethics & Fairness Researcher_
+      - **Viewpoint**: Warns of style bias & tone hallucination
+      - **Why Follow**: Adds ethical depth to tone alignment concerns
+      - **Where to Find**: Princeton faculty page, BrainMax content
+      - **Start Here**: _Bias in Style Transfer_ (via BrainMax surfacing)
+
+    ***
+
+    - #### 🧠 Human-AI Collaboration Patterns
+    - **Ann Marie Ure** _(also in Prompt Engineering)_
+      - **Why Follow**: Applies human-in-the-loop design with editors
+      - **Where to Find**: [blog.hum.works](https://blog.hum.works/posts/building-ai-into-editorial-workflows?utm_source=chatgpt.com)
+    - **Terry Fortescue (Savant Labs)**
+      - **Viewpoint**: Treats LLMs as interns needing structured guidance
+      - **Why Follow**: Clear model of human-overseen AI work
+      - **Where to Find**: [savantlabs.io](https://savantlabs.io/blog/llm-best-practices-at-work/?utm_source=chatgpt.com)
+      - **Start Here**: _10 Best Practices for Using LLMs at Work_
+    - **mrowe.co.za Blog (Academic Peer Reviewers)**
+      - **Viewpoint**: Dual oversight: LLM + human judgment in publishing
+      - **Why Follow**: Adds rigorous review loops as norm
+      - **Where to Find**: [mrowe.co.za](https://www.mrowe.co.za/blog/2023/11/journals-should-be-experimenting-with-llms-in-their-editorial-workflow/?utm_source=chatgpt.com)
+
+    ***
+
+    - #### ⚠️ Risks, Ethics & Misinformation Management
+    - **(Already Included)** Karen Hao, Rumman Chowdhury, Emilio Ferrara
+    - **Additions**:
+      - **Arvind Narayanan** _(see above)_ — Adds tone misalignment analysis
+      - **mrowe.co.za Blog** _(se_
+
+- Knowledge Tree
+  - A structured map of how I organize and reason through my domain knowledge.
+    - Knowledge Tree
+    - ├── Prompt Engineering for Editorial Outcomes
+    - │   ├── Prompt templating for tone and formatting
+    - │   ├── Prompt chaining for reasoning and structure
+    - │   └── Prompt reuse and guardrails
+    - ├── Agent Architecture & Workflow Orchestration
+    - │   ├── Human-in-the-loop editorial review
+    - │   ├── LangChain-style modular agent flows
+    - │   └── Agent task decomposition and handoff
+    - ├── Brand-Aligned Output & Tone Enforcement
+    - │   ├── Style transfer and tone adaptation challenges
+    - │   ├── Editorial policy alignment in LLMs
+    - │   └── Reducing hallucination via structured scaffolding
+    - ├── Human-AI Collaboration Patterns
+    - │   ├── Where AI ends and human judgment begins
+    - │   ├── Feedback loop integration
+    - │   └── Improving trust with explainability
+    - ├── Risks, Ethics & Misinformation Management
+      - ├── Mitigating hallucinations in editorial contexts
+      - ├── AI misuse in content pipelines
+      - └── Ethical prompt design and transparency
+  - This structure reflects how I mentally model LLM-integrated editorial systems: as modular, human-compatible pipelines tuned for brand specificity, clarity, and trustworthiness.
+- Tool Integration: Ephor & BrainMax
+  - Ephor Usage
+    - Used my BrainLift in [Ephor.ai](https://ephor.ai/) to ask questions about:
+      - Structuring prompt templates for editorial tone
+      - Designing LLM agents with editorial reliability
+      - Reducing hallucination without manual editing
+    - Observations:
+      - Responses aligned well with my DOK4 SPOVs about human-in-the-loop workflows and structured prompts.
+      - However, some replies still assumed default “chatbot” use cases and lacked awareness of editorial context or brand style expectations.
+    - BrainLift Improvement Opportunities:
+      - Add SPOVs that explicitly reject “chatbot-first” assumptions
+      - Enrich DOK1 with examples from branded editorial systems (e.g., The New York Times AI tools, Contently pipelines)
+      - Introduce a new knowledge area: "Brand-aligned AI tone enforcement"
+  - BrainMax Usage
+    - Engaged with content surfaced by BrainMax on:
+      - AI-generated misinformation in content pipelines
+      - Prompt chaining and modular agent architecture
+      - Human-AI collaboration in editorial planning
+    - Value Added:
+      - Discovered new experts (e.g., Arvind Narayanan) and threads contrasting deterministic vs stochastic LLM applications
+      - Identified gaps in my current BrainLift such as:
+        - No current DOK1 or DOK2 coverage of editorial feedback loops
+        - Missing insight into style transfer limitations in LLMs
+    - Next Steps:
+      - Incorporate spaced repetition for key DOK1 facts via BrainMax
+      - Summarize challenges of tone transfer and alignment in DOK2
+      - Build a DOK3 insight around the friction between AI-generated fluency and brand specificity
+- DOK1 Facts
+  - **Knowledge Area**: LLM-powered editorial workflows
+  - “**Anthropic’s Claude can be instructed to adopt editorial guidelines like tone, length, and factuality checks when generating content, improving alignment with human editors.**” — Source: Anthropic Technical Blog, 2024
+  - “**Content platforms using OpenAI's GPT-4-Turbo see reduced editing time by up to 30% when prompt templates reflect publication-specific tone and formatting.**” — Source: OpenAI Enterprise Use Case Reports, 2023
+  - “**In newsroom applications, AI tools integrated with human-in-the-loop workflows outperform fully automated systems in content accuracy and user trust metrics.**” — Source: JournalismAI Research (London School of Economics), 2023
+  - “**Human editors prefer copy generated using structured prompt chains with embedded reasoning steps, as it reduces hallucinations and increases narrative cohesion.**” — Source: Julia Hood, Newsroom AI Lead, Business Insider, via [@JuliaHood](https://twitter.com/JuliaHood), 2024
+  - “**Agent frameworks like LangChain can orchestrate LLM workflows that include prompt rewriting, retrieval augmentation, and editorial formatting hooks, enabling composable AI editorial pipelines.**” — Source: LangChain Documentation, 2024
+- DOK2 Summary
+  - Knowledge Area: LLM-powered editorial workflows
+    - AI-driven editorial workflows consistently benefit from structured prompt designs, modular agent architectures, and a human-in-the-loop model. Across multiple platforms and tools (Claude, GPT-4-Turbo, LangChain), we observe a convergence on principles like tone adaptation, embedded reasoning, and prompt templating as key levers for reducing hallucination and improving editorial trust. When LLMs are tuned to mimic house styles and factual norms, human editors spend less time post-processing, and content quality improves. These facts underscore a pattern: predictability and editorial alignment emerge not from raw LLM output, but from well-designed input frameworks and collaborative loops between humans and agents.
+- DOK3 Insights
+  - **Insight 1: Predictability Emerges from Human-First, Not Model-First Design**
+    - The most reliable and brand-aligned LLM editorial workflows emerge not from improving model outputs directly, but from designing systems around editorial human behavior first — prompt chaining, tone scaffolding, and modular agents should follow how editors think, not how models perform.
+    - This pattern appears consistently across:
+      - **Prompt Engineering**: Structured prompt chains aligned with tone reduce hallucinations and editing time (GPT-4-Turbo, Claude)
+      - **Agent Architecture**: LangChain-style workflows with editorial checkpoints outperform high-throughput agents
+      - **Human-AI Collaboration**: Human-in-the-loop systems build trust and coherence
+    - 💡 **Example**: At Contently, AI-assisted outline generation was only successful once editor-driven checkpoints were added — without them, article structure often drifted off-message.
+  - **Insight 2: Integration Quality Defines Editorial AI Success More Than Model Quality**
+    - From Stratifyd to Contently, the most impactful AI features were not the most advanced models, but the ones with the best fit into the editorial toolchain — CMS sync, audit logging, and asset linking.
+    - This spans:
+      - **Agent Architecture**: Task orchestration around tool interfaces
+      - **Tool Integration**: Speed and usability trump raw model power
+      - **Tone Enforcement**: Output validation tied to UI-level controls
+  - **Insight 3: Off-Tone Content Is More Dangerous Than Factual Errors**
+    - In branded content, subtle tone mismatches are remembered longer than factual slip-ups. What "sounds wrong" undermines trust, even when it's technically correct.
+    - Applies to:
+      - **Brand Tone Enforcement**: AI approximates tone, but rarely matches it
+      - **Ethics**: Overconfident but off-message AI is a reputational risk
+    - 💡 **Example**: At Stratifyd, a high-scoring LLM-generated newsletter draft passed all metrics — but was rejected by leadership due to tone misalignment with brand voice.
+  - **Insight 4: Auditing Beats Training for Long-Term Editorial Alignment**
+    - Alignment is sustained not by better fine-tuning, but by auditable workflows. Audit logs and feedback mechanisms create lasting control points.
+    - Spans:
+      - **Human-AI Collaboration**: Visibility builds trust
+      - **Risk Management**: Catching tone drift before it goes live
+    - 💡 **Proposed Framework**: **The Editorial Approval Loop**
+      - A generation cycle is not complete until it includes: (1) structured prompt input, (2) model output, (3) human override interface, (4) audit trail.
+      - → Without all 4, editorial reliability degrades over time.
+- DOK4 SPOV
+  - **SPOV 1: AI Content Systems MUST Be Designed Around Human Editorial Judgment — Not Model Capabilities**
+    - By 2026, editorial content systems that prioritize human approval loops will reduce revision cycles by over 40% compared to model-centric pipelines.
+    - LLM-powered editorial tools MUST mirror how editors think, revise, and approve content — not how LLMs generate it. Any system that prioritizes LLM throughput over editorial checkpoints will ALWAYS produce untrustworthy and off-brand results.
+    - You should NEVER design workflows by first asking “what can the model do?” — instead, ALWAYS begin with “how does a human editor review this?”
+    - Based on my DOK3 insight around human-first design — battle-tested at Contently and Stratifyd.
+  - **SPOV 2: Tool Interoperability MUST Outweigh Model Sophistication in Editorial AI Stacks**
+    - By mid-2025, editorial AI platforms with better tool integration (CMS, versioning, feedback) will capture >60% of enterprise content teams — even if they use smaller models.
+    - Interoperability beats intelligence. A weaker LLM with seamless CMS integration will ALWAYS outperform a stronger model that sits outside the workflow.
+    - Based on my insight about agent modularity, prompt reuse, and CMS success metrics observed at Contently.
+  - **SPOV 3: AI Tone Alignment CAN NEVER Be Fully Trusted Without Human Auditing**
+    - Firms relying solely on AI tone scoring WILL face brand trust incidents within 12 months. Human review is NOT optional — it's brand protection.
+    - The greatest risk isn’t hallucination — it’s confident, polished, off-tone output that sounds right but feels wrong.
+    - This SPOV is drawn from tone alignment insights and real cases where AI-generated drafts passed all checks but were flagged during final review.

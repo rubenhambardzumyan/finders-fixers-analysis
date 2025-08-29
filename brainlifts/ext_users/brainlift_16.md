@@ -1,0 +1,760 @@
+Khoros One brainlift
+
+- Owner(s)
+  - Pablo Fernandez
+- Purpose
+  - Be an expert on Khoros one product and help Trilogy make the best Product and Technology decisions
+  - We're aiming at understanding what drives customer value while keeping a healthy and scalable architecture
+- _----------- Depth of Knowledge / DOK starts here ----------_
+- DOK4 - SPOV
+  - Spreadfast / Publishing
+    - AI-powered publishing is now just the cost of entry in social marketing platforms. The battle is no longer about who has AI, but about who enables brands to orchestrate, measure, and govern publishing across the entire customer journey. Spredfast/Khoros One must lead with workflow intelligence and unified insights—not just smarter scheduling.
+  - Care
+    - If AI can directly handle a substantial portion of conversations, it could potentially reduce the need for human intervention and, by extension, the platform's USPs.
+    - AI will convert care into a AI-human workflows orchestrator
+      - Spiky POV: As AI takes over routine customer interactions, the true strategic value of Khoros Care shifts from boosting agent productivity to orchestrating seamless AI-human workflows. The platform’s future isn’t about making agents faster, but about acting as the intelligent ‘air traffic control system’ that decides which conversations stay with AI, which escalate to humans, and how context transfers flawlessly between them. In a world of multiplying AI agents and engagement channels, Khoros Care’s unique advantage becomes its ability to master the handoff: routing, timing, and context—making the platform more essential, not less, as AI adoption accelerates.
+    - Pricing should penalize platform fragmentation
+      - Spiky POV: Instead of competing on simplicity, make fragmented solutions expensive. Charge customers MORE if they want to use Khoros alongside other platforms. Create pricing incentives that reward full platform adoption and penalize partial implementations. Make the unified approach not just better, but economically inevitable.
+- DOK3 - Insights
+  - Spredfast / Publishing
+    - Spredfast has been in maintenance mode for months/years
+      - no new feature
+      - no dev
+      - only integrations work
+    - Publishing (NGP) is still not release to customers and has gaps
+    - The reason to move from Spreadfast to NGP in K1 is to
+      - For customres
+        - unify the UX, training learning curve is less steep
+        - single authentication
+        - not moving from one tool to another
+        - there's value to reply to customers from the same interface
+      - For Khoros
+        - Cost of the infrastructure
+        - Only deployed in the US
+        - Compliance (only US deployment)
+  - Care
+    - Khoros Care orchestrates high-volume, multi-channel interactions to optimize agent capacity and service quality.
+      - Khoros Care is a highly valued platform for its ability to serve as a single pane of glass, enabling agents to efficiently manage high conversation volumes, multiple languages, and diverse channels without disrupting workflow or losing context. This capability is particularly important for high-volume service teams, where it is not just about having omnichannel capability, but also about achieving mastery of workload. A good analogy would be an air traffic control system for customer conversations, where just as air traffic controllers coordinate multiple aircraft across different altitudes, speeds, and destinations while ensuring safe and efficient flow, Khoros Care orchestrates customer interactions across various channels, languages, and complexity levels while optimizing agent capacity and maintaining service quality.
+    - Khoros Care's primary competitive advantage (unified high-volume platform) aligns perfectly with the volume-based pricing model, but the pricing complexity is a genuine competitive weakness that needs addressing.
+    - CRM Integration: Data Plumbing, Not AI Value
+      - Input: Pulls customer context from external CRMs into Care
+      - Output: Pushes Care conversation outcomes back to CRMs
+      - Function: Data synchronization, not intelligence
+- _---------- BRIGHT LINE. Above this is based on the owner's opinion and expertise. Below this is based on the external flow of information ----------_
+- Experts
+  - James Dodkins
+    - [https://x.com/JDODKINS](https://x.com/JDODKINS)
+    - Customer Experience Rockstar | CX Evangelist @ PEGA | Self appointed 'Chief Content Officer' | International Keynote Speaker
+- DOK2 Knowledge tree
+  - Publishing platforms integrations
+    - Complete Production Integrations
+      - X (Twitter): ✅ Spredfast + K1 Publishing + K1 Care - Full OAuth, publishing, customer service
+      - Facebook: ✅ Spredfast + K1 Publishing + K1 Care - Pages, Groups, publishing, customer service
+      - Instagram: ✅ Spredfast + K1 Publishing + K1 Care - Native publishing, customer service
+      - LinkedIn: ✅ Spredfast + K1 Publishing + K1 Care - Complete OAuth, publishing, customer service
+      - YouTube: ✅ Spredfast + K1 Publishing + K1 Care - Publishing, monitoring, content ingestion
+      - Meta Threads: ✅ K1 Publishing + K1 Care - Recently added, fully operational
+    - Partial/In Development
+      - TikTok: ⚠️ Partial across all platforms - Publishing works, content limitations, rate issues (K1 Enhancement Q2-Q3 2025)
+      - Facebook Messenger: ✅ Spredfast publishing, 🔄 K1 + Care synchronous chat development
+      - Twitter DMs: ✅ Spredfast publishing, 🔄 K1 + Care synchronous expansion in progress
+      - WhatsApp Business: ❌ Not on Spredfast, 🔄 K1 + Care development (Meta approval process required)
+    - Roadmap/Future
+      - Bluesky: ❌ Spredfast maintenance mode, 🔄 K1 + Care roadmap Q2 2025
+      - Khoros Community: ❌ Not publishing platform, ✅ K1 Care production (community discussions feed into support)
+      - Reddit: ❓ Unknown customer-facing status, ✅ Gateway backend complete (subreddit interactions, author mod notes)
+    - Development Strategy
+      - Spredfast: Maintenance mode only, no new development, end-of-life migration to K1
+      - K1 Publishing: Primary development target, inherits Spredfast + new features
+      - K1 Care: Real-time messaging focus, AI orchestration enhancements
+      - Social Gateway: Universal backend service enabling all integrations
+  - ==Customer Segments==
+    - ## Customer Type 1: Enterprise Multi-Product Customers
+      - ### DOK1 Facts:
+        - **Customer Profile**: Large enterprises using 2-3 Khoros products (Community + SMM/Care combinations)
+        - **Typical ARR**: High-value customers with dedicated technical features and account management
+        - **Problem Solved**: Eliminates "redundant management governance" and "siloed apps & analytics screen switching" across marketing and service teams
+        - **Communication Structure**: Dedicated CSMs, real-time threading for feature requests, quarterly reviews
+      - ### DOK2 Analysis:
+        - These customers chose Khoros specifically to consolidate their social engagement stack. They're solving organizational complexity where marketing and service teams were using different tools, creating data silos and operational inefficiencies. The unified platform enables cross-functional insights and workflows that weren't possible with point solutions.
+        - **Deal-Breakers:**
+        - **Data integration failures** - If customer data isn't properly migrated or validated during platform moves
+        - **Cross-product workflow breakage** - Breaking the unified experience that justifies their multi-product investment
+        - **Performance issues during peak usage** - API limits or scaling problems during high-volume periods (like quarter-end sales cycles)
+    - ## Customer Type 2: Community-First Organizations
+      - ### DOK1 Facts:
+        - **Customer Profile**: Organizations prioritizing brand communities as their primary engagement channel
+        - **Strategic Value**: Community is identified as "the most valuable because it has the least risk and the least complexity of third party"
+        - **Product Focus**: Aurora community platform with next-generation version resolving tech debt
+        - **Problem Solved**: Knowledge management and expert network scaling for community engagement
+      - ### DOK2 Analysis:
+        - These customers view communities as strategic assets for customer engagement and knowledge sharing. They're solving the fundamental community challenge: "how do you scale the answer and how do you connect the right answer." The knowledge management and AI agent capabilities directly address community stickiness and growth.
+        - **Deal-Breakers:**
+        - **Community platform instability** - Any downtime or performance issues that disrupt member engagement
+        - **Knowledge management system failures** - Breaking the core value proposition of connecting users to expert answers
+        - **Migration complexity** - Losing community content, member data, or engagement history during platform transitions
+    - ## Customer Type 3: Social Marketing-Only Customers (Spredfast Users)
+      - ### DOK1 Facts:
+        - **Customer Profile**: "Khoros Marketing" customers using only Spredfast, not Care components
+        - **Migration Target**: Ideal candidates for Khoros One onboarding with new SKU structure
+        - **Problem Solved**: Social media publishing, scheduling, and analytics without service component complexity
+        - **Current Gap**: No dedicated Khoros One SKU exists yet for this segment
+      - ### DOK2 Analysis:
+        - These customers need pure social marketing capabilities without the complexity of service integration. They're solving content management and social analytics challenges but don't want to pay for or manage customer service features they won't use.
+        - **Deal-Breakers:**
+        - **Forced bundling** - Being required to purchase service features they don't need
+        - **Publishing reliability** - Any failures in content scheduling or posting across social channels
+        - **Analytics accuracy** - Incorrect or delayed social media performance data that impacts campaign decisions
+    - ## Customer Type 4: Service-Centric Organizations
+      - ### DOK1 Facts:
+        - **Customer Profile**: Organizations primarily focused on social customer service and care
+        - **Current Focus**: "Much less customers that just do service only" - typically combined with social marketing
+        - **Problem Solved**: Omnichannel customer support with unified agent desktop and routing
+        - **Technology Stack**: "One tech stack and two different use cases" with higher ARR from combined social media management
+      - ### DOK2 Analysis:
+        - These customers are solving customer service scalability challenges across multiple channels. They need unified agent experiences and intelligent routing to handle customer inquiries efficiently while maintaining service quality.
+        - **Deal-Breakers:**
+        - **Agent desktop failures** - Any disruption to the unified agent experience that impacts productivity
+        - **Routing system breakdowns** - Incorrect ticket assignment or priority handling that impacts customer satisfaction
+        - **Integration failures** - Breaking connections with existing CRM or helpdesk systems
+        - **Response time degradation** - Any performance issues that slow agent response capabilities
+    - ## Customer Type 5: Beta/Early Adopters (Khoros One)
+      - ### DOK1 Facts:
+        - **Customer Profile**: 10 customers in Khoros One closed beta program
+        - **Current Status**: 2 officially launched, 3 in hypercare, 5 more in implementation pipeline
+        - **Commitment Level**: Signed beta agreements including feedback, case studies, and confidentiality terms
+        - **Examples**: King Arthur, US Bank, CSL among active participants
+      - ### DOK2 Analysis:
+        - These customers are investing in the future vision of unified social engagement. They're early adopters willing to accept some instability in exchange for next-generation capabilities and direct influence on product development.
+        - **Deal-Breakers:**
+        - **Beta program abandonment** - Khoros pulling resources or support from the beta program
+        - **Migration path uncertainty** - Unclear timeline or process for moving from beta to production
+        - **Feedback ignorance** - Khoros not incorporating their input into product development
+        - **Performance regression** - New platform performing worse than legacy systems they're migrating from
+    - ## Cross-Customer Deal-Breakers
+      - ### DOK1 Facts:
+        - **Pricing Complexity**: Historical "extreme amount of SKUs" creating buying friction
+        - **Technical Dependencies**: Major reliance on social network APIs and cloud services
+        - **Support Structure**: Varying support levels based on customer tier and ARR
+      - ### DOK2 Analysis:
+        - Regardless of customer type, certain systemic issues would drive churn across the entire customer base:
+        - **Universal Deal-Breakers:**
+        - **Social network API disruptions** - Loss of access to major platforms like Facebook, Instagram, or Twitter
+        - **Data security breaches** - Any compromise of customer or end-user data
+        - **Pricing model disruption** - Sudden changes to consumption-based pricing that dramatically increase costs
+        - **Platform reliability issues** - Consistent downtime or performance problems across core functionality
+  - ==Use-cases==
+    - Use-Case 1: Unified Agent Desktop for Omnichannel Engagement
+      - DOK1 Facts:
+        - Primary Use-Case: Centralizes all customer interactions (social, digital, reviews, listening, email, chat, community) into a single interface.
+        - Core Workflow: "Push Next" mode for handling multiple conversations across high-volume channels without application switching.
+        - Multi-Device Support: Desktop and mobile application support for agent flexibility and field operations.
+        - Role-Based Views: Different user personas get appropriate views and capabilities within the same platform.
+        - Channel Coverage: Voice, digital chat, social channels, and community moderation through one login.
+      - DOK2 Analysis:
+        - This use-case eliminates the agent pain of "tool fragmentation" and "context switching overhead" that reduces productivity in traditional multi-tool support environments. The unified desktop directly addresses the operational inefficiency where agents lose 15-30 seconds per interaction switching between applications, multiplied across hundreds of daily interactions. This targets Service-Centric Organizations and Enterprise Multi-Product Customers who need to scale agent productivity without proportional staff increases, while maintaining service quality consistency across all engagement channels.
+    - Use-Case 2: Manage View Command Center Operations
+      - DOK1 Facts:
+        - Multi-Purpose Interface: Supports diverse use cases from marketing "surprise and delight" campaigns to rapid care issue resolution and community moderation.
+        - Column Organization:
+          - Post Columns (single bubble) for individual posts
+          - Conversation Columns (double bubble) for entire threads
+          - Smart View Columns with predefined rule filters
+          - Moderation Columns for bulk approval/rejection workflows
+          - Personal Columns for agent-specific tasks
+        - Customization Scale: Up to 10 columns per view with unlimited total views for different scenarios.
+        - Bulk Operations: Mass actions for moderation, assignment, and workflow management.
+      - DOK2 Analysis:
+        - This use-case addresses the supervisory challenge of "operational visibility without micromanagement" across marketing and service teams. The command center approach eliminates the manager pain of switching between separate dashboards to understand team performance, campaign effectiveness, and service queue health. This directly targets Enterprise customers and Community-First Organizations where managers need real-time operational control while empowering agents with workflow flexibility, enabling "management by exception" rather than constant oversight.
+    - Use-Case 3: Advanced Multi-Language & Localization Support
+      - DOK1 Facts:
+        - Translation Capability: Real-time language detection with translation capabilities for 100+ languages.
+        - Localized Interface: UI available in 8 languages with agent-specific language preferences.
+        - Workflow Integration: Automatic language tagging and routing to appropriate multilingual agents.
+        - Cultural Context: Language-aware sentiment analysis and cultural nuance recognition.
+        - Compliance Support: Region-specific data handling and regulatory compliance per locale.
+      - DOK2 Analysis:
+        - This use-case solves the global enterprise pain of "language barrier customer abandonment" where customers disengage when they cannot communicate in their preferred language. Unlike basic translation tools, this addresses the operational challenge of maintaining brand voice consistency across languages while ensuring cultural appropriateness. This targets Enterprise Multi-Product Customers operating in multiple markets, preventing the common scenario where language barriers force expensive market-specific platform deployments or result in customer satisfaction drops in non-English markets.
+    - Use-Case 4: Intelligent Routing and Prioritization
+      - DOK1 Facts:
+        - Skills-Based Routing: Directs inquiries to agents based on skills, availability, and channel expertise.
+        - Automatic Tagging: System applies tags like "VIP," "technical issue," "French" for intelligent routing.
+        - Priority Management: Synchronous channels (live chat) surface with higher priority than asynchronous channels.
+        - Expert Network Integration: Connects to community expert knowledge for complex technical routing.
+        - Load Balancing: Dynamic agent assignment based on current workload and response time targets.
+      - DOK2 Analysis:
+        - This use-case eliminates the service operations pain of "wrong agent, wrong time" scenarios that drive customer frustration and increase resolution time. The intelligent routing addresses the fundamental challenge where 40-60% of first-contact resolutions fail due to skills mismatching, creating expensive escalation cycles. This targets Service-Centric Organizations and Enterprise customers who need to optimize first-call resolution rates while managing specialized expertise efficiently, directly impacting both customer satisfaction scores and operational cost per resolution.
+    - Use-Case 5: Response-Reach Paradigm Integration
+      - DOK1 Facts:
+        - Unified Marketing-Care Workflow: Publishers can create campaigns and immediately respond to engagement from the same interface.
+        - Real-Time Campaign Monitoring: Marketing teams can track campaign performance and handle resulting customer inquiries seamlessly.
+        - Cross-Functional Data Sharing: Marketing, care, and automation teams share unified data views and customer context.
+        - Handoff Automation: Automatic escalation from marketing engagement to service workflow when issues arise.
+        - Attribution Tracking: Complete journey mapping from campaign touchpoint to service resolution.
+      - DOK2 Analysis:
+        - This use-case addresses the organizational pain of "campaign-to-care disconnection" where marketing drives engagement but cannot handle the resulting service needs, creating customer frustration and lost opportunities. This eliminates the common scenario where customers engage with marketing content but then experience friction when needing support, often resulting in negative sentiment toward campaigns. This targets Enterprise Multi-Product Customers and Social Marketing-Only segments transitioning to integrated approaches, enabling marketing ROI protection through seamless service delivery and customer journey continuity.
+    - Use-Case 6: Synchronous-Asynchronous Convergence
+      - DOK1 Facts:
+        - Time Collapse Architecture: Asynchronous foundation that "collapses time" for real-time interactions when needed.
+        - Flexible Communication Models: Brands can designate channels as synchronous or asynchronous based on business needs.
+        - Conversation Continuity: Maintains context when customers switch between immediate and delayed communication modes.
+        - Smart Reopening: Automatic conversation lifecycle management with intelligent thread resurrection.
+        - Channel Fluidity: Seamless transitions between chat, social, email, and community without context loss.
+      - DOK2 Analysis:
+        - This use-case solves the customer experience pain of "conversation fragmentation" where customers must repeat context when switching between channels or timeframes. The architecture addresses the operational challenge where traditional systems treat each channel interaction as separate events, forcing customers to re-explain issues and agents to rebuild context. This targets all customer segments but particularly benefits Enterprise customers with complex customer journeys, preventing the common abandonment pattern where customers give up after being forced to restart conversations multiple times across different engagement touchpoints.
+    - Use-Case 7: Advanced Agent Assist & Expert Consultation
+      - DOK1 Facts:
+        - AI-Powered Suggestions: Real-time recommendations for templates, knowledge articles, and responses based on conversation context.
+        - Internal Expert Network: Private consultation channels allowing agents to get expert help without customer visibility.
+        - Knowledge Base Integration: Seamless access to organizational knowledge with agent contribution capabilities.
+        - Response Quality Scoring: AI evaluation of response appropriateness before sending.
+        - Learning Loop: Agent feedback improves AI suggestions and expert routing over time.
+      - DOK2 Analysis:
+        - This use-case eliminates the agent productivity pain of "knowledge hunting" where agents spend significant time searching for information while customers wait. The expert consultation addresses the escalation dilemma where agents either provide incorrect information or create delays transferring to specialists. This targets Community-First Organizations and Enterprise customers with deep technical knowledge requirements, preventing the common scenario where expertise bottlenecks create service delays and reducing the training time needed for new agents to deliver expert-level responses.
+    - Use-Case 8: Comprehensive Analytics & Performance Management
+      - DOK1 Facts:
+        - Unified Reporting Platform: Single analytics dashboard covering marketing performance, agent productivity, and customer satisfaction.
+        - Real-Time Dashboards: Live monitoring of queue depths, response times, and agent availability.
+        - Cross-Channel Attribution: Complete view of customer journey from marketing touchpoint to service resolution.
+        - Predictive Analytics: Forecasting for staffing, campaign impact, and service volume planning.
+        - Customizable KPIs: Role-specific metrics and reporting for different organizational levels.
+      - DOK2 Analysis:
+        - This use-case addresses the management pain of "analytics fragmentation" where decision-makers cannot get unified views of customer engagement performance across marketing and service functions. The comprehensive approach eliminates the common scenario where teams optimize for their individual metrics while missing cross-functional impact and customer journey optimization opportunities. This targets all customer segments but particularly benefits Enterprise Multi-Product Customers who need board-level reporting and data-driven decision making, enabling strategic alignment between marketing investment and service delivery while identifying revenue protection and growth opportunities.
+  - ==Business model and pricing==
+    - ## Primary Revenue Drivers
+      - ### DOK1 Facts:
+        - **Platform Costs**: Not tied to seats but to content ingestion pace, monetized via channel bundles (Social, Digital, Reviews, Messages, Yelp)
+        - **Alternative Pricing Models**:
+          - Volume-based charging by inbound conversations and outbound responses
+          - Conversation retention periods (1-7 years based on regulatory requirements)
+        - **Social Network Fees**: Fixed fees (Twitter) bundled into platform cost; variable fees (WhatsApp, Review Trackers, Yelp) passed through
+        - **User/Seats**: Becomes factor only after 100+ seats, with concurrent and flex seat alternatives
+        - **Community Pricing**: Visits (page views by unique users), message/post volume, and content size
+        - **Automation Costs**: Scale directly with conversation volume regardless of channel
+      - ### DOK2 Analysis:
+        - The primary revenue driver is **content/conversation volume** rather than traditional seat-based licensing. This consumption-based model aligns with customer value realization - customers pay based on their actual platform usage and engagement levels. The shift from seat-based to volume-based pricing reflects the platform's core value proposition of managing high-volume social interactions efficiently.
+        - The multi-tiered approach (platform + network fees + automation + seats) creates revenue diversification but also complexity. Channel bundles provide predictable revenue while variable network fees ensure cost pass-through for external dependencies.
+    - ## Pricing-Value Alignment by Customer Segment
+      - ### DOK1 Facts:
+        - **Entry-Level Community**: Proposed baseline of 10,000 users and 100,000 posts with user limitations as "protection against abusive scaling"
+        - **App Server Scaling**: Need to add nodes once customers exceed 50 seats, with single-node limitations for 10-20 seat entry offerings
+        - **Analytics Retention**: Currently 2 years, planned reduction to 6 months for starter/emerging enterprise with extended history as paid add-on
+        - **Integration Marketplace**: New revenue stream with 4-9 integrations per customer expected, monthly subscription basis
+      - ### DOK2 Analysis:
+        - **Well-Aligned Value:**
+          - **Volume-based pricing** directly correlates with customer engagement success - higher social activity generates more revenue for both customer and Khoros
+          - **Conversation retention tiers** align with regulatory compliance needs, allowing customers to pay only for required retention periods
+          - **Integration marketplace** creates value-added revenue where customers pay for specific functionality they need
+        - **Misaligned Areas:**
+          - **Seat-based components** don't reflect actual platform value for high-automation customers who may need fewer agents but higher conversation volumes
+          - **Channel bundling** may force customers to pay for channels they don't actively use
+          - **Infrastructure scaling** (app server costs) may not be transparent to customers, creating unexpected cost increases
+        - **Emerging Opportunities:**
+          - **Network fee pass-through model** positions Khoros to maintain margins regardless of social platform pricing changes
+          - **Tiered analytics retention** allows value-based pricing where compliance-heavy industries pay premium for longer data retention
+          - **Entry-level tiers** with usage caps provide clear upgrade paths as customer volume grows
+    - ## Revenue Model Sustainability
+      - ### DOK1 Facts:
+        - **Cost Structure**: Infrastructure costs scale with usage (app servers, content storage, API calls)
+        - **Network Dependencies**: External fees from social platforms create variable cost structure
+        - **Professional Services**: Custom development and migration services provide additional revenue streams
+      - ### DOK2 Analysis:
+        - The pricing model shows strong alignment with value delivery in high-usage scenarios but faces challenges:
+        - **Strengths:**
+          - Consumption-based pricing scales with customer success and engagement growth
+          - Pass-through network fees protect Khoros from external cost increases
+          - Multiple revenue streams reduce dependency on any single pricing mechanism
+        - **Risks:**
+          - Complex pricing structure with "extreme amount of SKUs" creates sales friction
+          - Infrastructure scaling costs may outpace revenue growth for inefficient usage patterns
+          - Heavy reliance on social network API access creates revenue vulnerability
+          - The shift toward volume-based pricing with clear usage tiers represents better value alignment than traditional seat-based models, particularly for the social engagement use case where success is measured by interaction volume rather than user count.
+  - ==Architecture==
+    - ## Deployment Footprints
+      - ### DOK1 Facts:
+        - **Primary Cloud**: AWS across 3 regions (US West 2/Oregon, EU West 1/Ireland, AP Southeast 2/Sydney)
+        - **Multi-Cloud Exceptions**:
+          - Microsoft Azure deployment for Microsoft as customer (Community product only)
+          - Google Cloud Platform deployment for Google as customer (Community product only)
+        - **Regional Separation**: Regions intentionally don't communicate with each other for data sovereignty
+        - **Multi-Tenant Architecture**: Logically-separated data and access controls within shared infrastructure
+        - **Community-Specific Tool**: "RC" (deployment tool) provides abstraction layer across clouds for Community product
+      - ### DOK2 Analysis:
+        - The deployment strategy reflects a "cloud-agnostic by exception" approach - Khoros is fundamentally an AWS shop but accommodates specific enterprise customers' cloud requirements for Community deployments. The regional isolation strategy enables GDPR compliance and data residency requirements while the multi-tenant approach provides cost efficiency. The minimal Azure/GCP footprints (described as "small, small") indicate these are customer-specific accommodations rather than strategic multi-cloud investments.
+    - ## AWS Account Structure
+      - ### DOK1 Facts:
+        - **Organization Structure**: Brand organization split into non-production and production OUs (Organizational Units)
+        - **Account Separation by Product**:
+          - Care Development/Production accounts
+          - Community Development/Analytics accounts
+          - Legacy Spredfast product accounts
+          - Minor shared services accounts
+        - **Environment Strategy**: Dev/QA in development accounts; Stage/Pre-prod/Prod in production accounts
+        - **Network Isolation**: Fully separated at network layer - "I don't want Dev talking to prod"
+        - **Access Management**: AWS Single Sign-On with role-based access by job function
+      - ### DOK2 Analysis:
+        - The account structure follows AWS best practices with clear environment and product boundaries. The separation by product rather than just environment enables independent scaling and security policies per product line. The choice to separate dev/prod by account rather than just VPC provides stronger security isolation, particularly important for a SaaS platform handling customer data across multiple tenants.
+    - ## High-Level Architecture and Building Blocks
+      - ### DOK1 Facts:
+        - **Khoros One Architecture**: Service-based architecture with asynchronous processing, APIs, and AI/ML components
+        - **Data Flow Pipeline**:
+          - **Ingest**: API-based channel integration, normalization, real-time integration
+          - **Normalize**: Data lake, author/content normalization, indexing, streaming
+          - **Enrich**: Filtering, routing, sentiment/intent/language detection, redaction
+          - **Workflows**: Content planning/publishing, case management, moderation, bot design
+        - **Community Engine**: API-driven customization platform with web UX, APIs, and developer experience layers
+        - **Integration Protocols**: GraphQL APIs, REST endpoints, real-time event firehose
+      - ### DOK2 Analysis:
+        - The architecture follows modern microservices patterns with clear data processing stages. The pipeline approach (Ingest → Normalize → Enrich → Workflows) enables scalability and allows different services to operate at different processing speeds. The separation of concerns between data processing and application logic provides flexibility for both real-time interactions and batch analytics processing.
+        - The Community platform's API-driven approach enables extensive customization while maintaining platform integrity, addressing the enterprise need for brand-specific experiences without compromising core functionality.
+    - ## Technology Stack by Module
+      - ### DOK1 Facts:
+        - **Frontend Technologies**:
+          - React, TypeScript, JavaScript
+          - Tapestry (likely custom framework)
+          - "Shoei" UI library (shared across Khoros One)
+        - **Backend Languages**: Java (48.9% of repos), Node.js (17.8%), Python, Go, Scala, Ruby
+        - **Java Versions**: Java 8 (72.7%), Java 11 (22.7%), Java 21 (4.5%)
+        - **Frameworks**: Dropwizard (33.3%), Spring (17.8%), Express.js
+        - **Databases**: MySQL/MariaDB, Cassandra, PostgreSQL, Elasticsearch, Redis, DynamoDB, MongoDB Atlas, Amazon Aurora
+        - **Infrastructure**: Docker containers, EKS/ECS, EC2, Lambda
+        - **Build/Deploy**: Jenkins (66.7%), GitHub Actions, CircleCI, Ansible, CloudFormation, ArgoCD
+      - ### DOK2 Analysis:
+        - The technology diversity reflects the platform's evolution through acquisitions (Spredfast, Lithium, [Flow.ai](http://flow.ai/)). The heavy Java presence indicates enterprise-grade backend services, while the Node.js components likely handle real-time interactions and API gateways. The database diversity (polyglot persistence) suggests different data models for different use cases - likely relational for transactional data, NoSQL for social content, and specialized stores for search and caching.
+        - The containerization strategy (Docker + Kubernetes) enables consistent deployment across environments, though the 53.3% containerization rate indicates ongoing modernization efforts.
+    - ## Traffic Scaling Mechanisms
+      - ### DOK1 Facts:
+        - **Auto Scaling**: AWS Auto Scaling Groups, Load Balancing across multiple Availability Zones
+        - **Container Orchestration**: Amazon EKS for Kubernetes workloads, ECS for simpler container deployments
+        - **Serverless Components**: AWS Lambda for event-driven processing
+        - **Database Scaling**: Multiple database technologies optimized for different access patterns
+        - **CDN**: Amazon CloudFront for global content delivery
+        - **Caching**: ElastiCache Redis for performance optimization
+        - **Stream Processing**: Amazon Kinesis, Apache Kafka for real-time data processing
+      - ### DOK2 Analysis:
+        - The scaling strategy leverages AWS managed services to handle traffic spikes automatically. The multi-AZ deployment ensures high availability while auto-scaling groups handle horizontal scaling. The combination of synchronous (REST/GraphQL) and asynchronous (Kafka/Kinesis) processing enables the platform to handle both real-time interactions and high-volume batch operations.
+        - The polyglot database approach allows each component to scale independently using the most appropriate data technology, though this creates operational complexity for data consistency and migration.
+    - ## Customer System Integration
+      - ### DOK1 Facts:
+        - **CRM Integrations**: Salesforce, Microsoft, SAP, Oracle, Zendesk, Siebel
+        - **Marketing Platforms**: Adobe, Talkwalker, EveryoneSocial, Brightcove
+        - **Social Channels**: Facebook, Instagram, Twitter/X, LinkedIn, TikTok, YouTube, WhatsApp, Apple Messages for Business
+        - **Integration Framework**: "Khoros Bridge" CRM integration system
+        - **API Access**: GraphQL APIs, Bulk Data API, REST endpoints with authentication
+        - **Data Sync**: Real-time streaming, batch exports, webhook notifications
+        - **Professional Services**: SDK approach (Aurora SDK) for custom React components stored in GitHub repos
+      - ### DOK2 Analysis:
+        - The integration strategy balances standardized connectors with custom development capabilities. The CRM integrations enable bidirectional data sync for customer service workflows, while marketing platform integrations focus on content and campaign management. The social channel integrations are critical dependencies that require constant maintenance due to platform API changes.
+        - The shift from embedded customizations to SDK-based development represents a more maintainable approach, allowing customers to build custom functionality without modifying core platform code. However, this requires customers to maintain their own custom components and manage upgrade compatibility.
+        - **Integration Patterns:**
+          - **Real-time**: WebSocket connections, webhook notifications for immediate data sync
+          - **Batch**: Scheduled data exports, bulk API operations for large datasets
+          - **Event-driven**: Kafka/Kinesis streams for asynchronous processing
+          - **Direct API**: GraphQL/REST for real-time application integration
+          - The integration architecture enables customers to maintain their existing technology investments while leveraging Khoros as the social engagement hub, though the complexity of managing multiple integration points creates operational challenges for both Khoros and customers.
+  - ==Operations==
+    - ## Operational Roles for Value Delivery
+      - ### DOK1 Facts:
+        - **Technical Operations (TechOps)**: 51 total staff across Infrastructure Operations (17), Architecture (3), Rocket/Orchestration (10), SRE (14), Aether/Customer Operations (7)
+        - **Mission Critical Support (MCS)**: 24/7 support run out of BLR, front-line defense for customer-facing issues
+        - **Professional Services**: Community Management, Moderation Team, Advisory Services with decades of experience across industries
+        - **Engineering Teams**:
+          - Community Engineering: 39 FTE + 14 contractors across US/BLR/Argentina
+          - Khoros One Engineering: 81 FTE + 9 contractors across US/BLR
+        - **Information Security**: 13-person team under CISO covering risk management, compliance, and security operations
+      - ### DOK2 Analysis:
+        - Value delivery requires coordinated effort across multiple specialized teams. TechOps provides the foundational infrastructure and reliability, while Engineering delivers feature development and bug fixes. Professional Services bridges the gap between platform capabilities and customer success, particularly for community management where "without a Community Manager and Moderation Team, the ROI is at risk."
+        - The 24/7 follow-the-sun model (BLR/US coverage) ensures continuous platform availability, while the dedicated security team addresses enterprise compliance requirements that many competitors cannot match.
+        - **Critical Dependencies:**
+          - **Customer Onboarding**: Aether team handles provisioning/de-provisioning, GDPR execution, certificate management
+          - **Platform Stability**: SRE teams manage observability, performance testing, security tooling (WAF/Shield/Bot Control)
+          - **Content Moderation**: Professional Services teams provide human oversight that automated systems cannot replace
+    - ## Trilogy Team Interaction Model
+      - ### DOK1 Facts:
+        - **Current Integration Phase**: Trilogy evaluating Khoros as partner for integration into IgniteTech suite
+        - **Access Strategy**: ESW machine proposed for source code access due to security and audit compliance requirements
+        - **Knowledge Transfer Process**: AI-first structured knowledge transfer with use-cases to code and test-cases mapping
+        - **Resource Transition Plans**:
+          - Central TPM: Capture full state of current and planned work during KT
+          - Central Eng: Maintain small QA team beyond initial 90 days
+          - Central SaaS Ops: Take over responsibilities different from standard offering
+      - ### DOK2 Analysis:
+        - Trilogy's integration approach recognizes that "the target team has more mature processes and practices than our own." Unlike typical acquisitions where bringing products into Trilogy's model improves operations, Khoros requires preserving existing capabilities while adapting to Trilogy's standards.
+        - **Key Interaction Points:**
+          - **Engineering**: Central Eng will implement AI-first testing solutions and support SRE practices through dedicated Kanban quarters
+          - **SaaS Operations**: Central SaaS Ops will take over TechOps responsibilities, requiring adaptation to Khoros's more sophisticated operational model
+          - **Business Unit**: IgniteTech BU will maintain specialized functions (security operations, social platform relationships) that Trilogy doesn't traditionally provide
+        - The transition represents a "bringing up" rather than "bringing down" integration model.
+    - ## Security Incidents and Learnings
+      - ### DOK1 Facts:
+        - **Current Security Posture**: No specific incidents detailed in available documentation
+        - **Security Organization**: Dedicated 13-person security team with SOC coverage across US, India, and EMEA time zones
+        - **Compliance Capabilities**: Customer portal with downloadable compliance audit results (unlike Trilogy's manual process)
+        - **Security Tooling**: WAF/Shield/Bot Control deployments, threat and vulnerability management
+        - **Access Controls**: AWS Single Sign-On with role-based access, RBAC/ABAC across multiple clouds
+      - ### DOK2 Analysis:
+        - The robust security organization suggests proactive rather than reactive security management. The fact that Khoros provides automated compliance result downloads while Trilogy requires manual handling indicates superior security operations maturity.
+        - **Security Investment Areas:**
+          - **24/7 SOC Coverage**: Three security engineers across global time zones provide continuous monitoring
+          - **Tools and Automation**: Dedicated engineer for security tooling automation
+          - **Threat Management**: Specialized roles for vulnerability assessment and threat hunting
+        - The absence of documented major incidents in the provided materials, combined with the sophisticated security organization, suggests either effective prevention or careful incident response documentation practices.
+    - ## Monitoring Alerts and Use Case Mapping
+      - ### DOK1 Facts:
+        - **Monitoring Stack**: Datadog, Sumo Logic, Nagios for comprehensive observability
+        - **Alert Volume**: Nearly 900 points monitored for alerts across the platform
+        - **Escalation Process**:
+          - MCS (Mission Critical Support) as front-line defense
+          - Community: SRE is first escalation point
+          - Khoros One: Engineering Management is first escalation
+        - **On-Call Teams**: MCS, SRE, Engineering, TechOps with PagerDuty integration
+        - **Alert Routing**: Based on team expertise - infrastructure alerts to Infrastructure, engineering alerts to appropriate engineering teams
+      - ### DOK2 Analysis:
+        - The monitoring strategy follows a "human teams for alert management" approach rather than full automation. With 900+ monitoring points, the system generates significant alert volume requiring human triage and response.
+        - **Use Case Mapping:**
+        - **Infrastructure Health**: Database, server, network alerts → Infrastructure Operations team
+        - **Application Performance**: Service degradation, API errors → Engineering teams by product
+        - **Customer Impact**: User-reported issues, service outages → MCS → appropriate technical team
+        - **Security Events**: WAF triggers, access violations → Security Operations Center
+        - The escalation model preserves product expertise while providing clear escalation paths, though the high alert volume suggests opportunity for noise reduction through better alerting hygiene.
+    - ## Credential Management
+      - ### DOK1 Facts:
+        - **Cloud Access**: AWS Single Sign-On with role-based access controls
+        - **Multi-Cloud**: RBAC/ABAC implementation across AWS, GCP, and Azure
+        - **Architecture Team**: Matt McCarthy leads access management program for clouds
+        - **Network Isolation**: "Dev/QA in development accounts; Stage/Pre-prod/Prod in production accounts"
+        - **Account Structure**: Fully separated at network layer with "I don't want Dev talking to prod" principle
+      - ### DOK2 Analysis:
+        - Credential management follows enterprise security best practices with centralized identity management and principle of least privilege. The separation of environments by AWS account provides strong security boundaries, while SSO integration enables consistent access policies.
+        - **Security Architecture:**
+        - **Identity Provider**: Centralized through AWS SSO
+        - **Access Patterns**: Role-based rather than individual credential management
+        - **Environment Separation**: Network-level isolation prevents credential cross-contamination
+        - **Multi-Cloud Consistency**: Unified RBAC/ABAC approach across cloud providers
+        - The mature credential management approach reflects enterprise-grade security requirements, particularly important for a platform handling customer data across multiple tenants.
+    - ## Scaling Readiness and Bottlenecks
+      - ### DOK1 Facts:
+        - **Auto Scaling**: AWS Auto Scaling Groups, Load Balancing across multiple AZs
+        - **Container Strategy**: 53.3% containerization rate with EKS/ECS orchestration
+        - **Database Scaling**: Polyglot persistence with MySQL/MariaDB, Cassandra, PostgreSQL, Elasticsearch
+        - **Current Limitations**: "Need to add nodes once customers exceed 50 seats" for app servers
+        - **Infrastructure Modernization**: Ongoing migration from legacy systems to standardized EKS/Argo deployment
+      - ### DOK2 Analysis:
+        - The platform demonstrates good horizontal scaling capabilities through AWS managed services, but several bottlenecks exist:
+        - **Scaling Strengths:**
+          - **Multi-AZ Deployment**: Provides both availability and scaling capacity
+          - **Microservices Architecture**: Enables independent scaling of different platform components
+          - **Database Specialization**: Different databases optimized for different access patterns
+          - **Current Bottlenecks:**
+          - **App Server Scaling**: Manual intervention required for 50+ seat customers
+          - **Legacy Infrastructure**: 47% non-containerized components limit elastic scaling
+          - **Database Diversity**: Operational complexity of managing multiple database technologies
+          - **Manual Processes**: Some infrastructure operations still require human intervention
+        - The modernization toward EKS/Argo represents movement toward more automated scaling, though the transition is incomplete.
+    - ## SLA Commitments and Availability
+      - ### DOK1 Facts:
+        - **Uptime SLA**: 99.9% availability commitment
+        - **Actual Performance**:
+          - Community: Q1-Q3 FY25: 100%, 99.88%, 100%; Q4: 100%
+          - Khoros One: Q1-Q3 FY25: 99.99%, 99.98%, 100%; Q4: 99.87%
+        - **Maintenance Strategy**: "Aim for zero downtime updates" with status page for planned downtime
+        - **Customer Communication**: Status page notifications, direct customer contact for specific impacts
+        - **Change Control**: Weekly board meetings for standard changes, daily for normal/emergency changes
+      - ### DOK2 Analysis:
+        - Khoros consistently meets or exceeds SLA commitments, with actual performance often reaching 100% uptime. The "zero downtime" approach for updates demonstrates mature deployment practices, while the formal change control process ensures stability.
+        - **SLA Risk Management:**
+          - **Exceeding Commitments**: Actual performance regularly exceeds 99.9% commitment, providing buffer for occasional issues
+          - **Proactive Communication**: Status page and direct customer notification reduce perceived impact during planned maintenance
+          - **Change Control**: Formal approval process reduces risk of change-related outages
+        - The strong uptime record suggests both robust infrastructure and effective operational processes, though specific penalty structures for SLA violations are not detailed in available documentation. The consistency across both Community and Khoros One platforms indicates platform-wide operational excellence rather than product-specific performance variations.
+  - ==Algorithms==
+    - ## Algorithm Type 1: Social Content Enrichment Pipeline
+      - ### DOK1 Facts:
+        - **Algorithm Components**: Real-time sentiment analysis, intent detection, language detection, and content redaction
+        - **Processing Flow**: Ingest → Normalize → Enrich → Workflows with filtering and routing capabilities
+        - **Data Sources**: Multi-channel social content (Facebook, Instagram, Twitter, LinkedIn, etc.) with real-time integration
+        - **Output**: Enriched metadata for routing, prioritization, and automated response triggering
+      - ### DOK2 Analysis:
+        - **Khoros-Specific Approach**: Unlike vanilla AI that processes content in isolation, Khoros's enrichment pipeline operates on normalized multi-channel data with brand-specific context. The algorithm considers:
+        - **Brand voice and historical interaction patterns** for sentiment scoring
+        - **Channel-specific context** (e.g., Instagram comment vs. Twitter reply) for intent classification
+        - **Customer relationship data** from CRM integration for prioritization weighting
+        - **Problem Solved Differently**: Standard sentiment analysis might flag "This is sick!" as negative, but Khoros's brand-aware algorithm recognizes positive slang usage based on historical brand interactions and demographic context of the speaker.
+    - ## Algorithm Type 2: Expert Content Routing and Knowledge Matching
+      - ### DOK1 Facts:
+        - **Core Challenge**: "How do you scale the answer and how do you connect the right answer"
+        - **Implementation**: Topical expertise routing that connects questions to appropriate experts rather than generic support agents
+        - **Knowledge Base**: RAG (Retrieval Augmented Generation) models connecting community knowledge with external knowledge sources
+        - **Automation Framework**: Routes questions based on expertise matching when knowledge is missing
+      - ### DOK2 Analysis:
+        - **Khoros-Specific Approach**: Rather than using generic Q&A matching, Khoros builds expertise graphs that map:
+          - **Community members' historical answer quality** by topic area
+          - **Expert availability and response patterns** for intelligent routing
+          - **Content authority scoring** based on community engagement and brand validation
+        - **Problem Solved Differently**: Vanilla AI might route a complex product question to any available agent. Khoros's algorithm identifies that "Sarah from Engineering answered 15 similar questions with 95% satisfaction scores" and routes accordingly, even if she's not immediately available.
+    - ## Algorithm Type 3: Conversation Volume Prediction and Bot Orchestration
+      - ### DOK1 Facts:
+        - **Bot Technology**: Flow AI with intent detection and complex flow management
+        - **Escalation Logic**: Intelligent routing between automated and human responses
+        - **Multi-Channel Deployment**: Single bot persona deployable across all channels (Facebook DM, brand messenger, etc.)
+        - **Learning Mechanism**: Automation rules that can execute code through third-party integration services
+      - ### DOK2 Analysis:
+        - **Khoros-Specific Approach**: Instead of channel-specific bots, Khoros creates unified bot personas that adapt behavior based on:
+          - **Channel capabilities and user expectations** (formal tone on LinkedIn vs. casual on Instagram)
+          - **Customer journey stage** (first-time visitor vs. existing customer)
+          - **Historical interaction success rates** by channel and topic
+        - **Problem Solved Differently**: Vanilla chatbots treat each channel independently. Khoros's algorithm maintains conversation context across channels - if a customer starts on Twitter and moves to direct message, the bot maintains full context and escalation history.
+    - ## Algorithm Type 4: Community Content Curation and AI Answer Validation
+      - ### DOK1 Facts:
+        - **Quality Control**: "How do we approve, validate, recertify knowledge, and make sure anything connected in generative answers is vetted, moderated, and quality content?"
+        - **AI Integration**: Leverage AI to reduce costs of content moderation while maintaining quality
+        - **Expert Flywheel**: Continue intersection of AI and human experts for content generation
+        - **Trust Mechanism**: Brand-moderated expert content differentiated from unvetted social network content
+      - ### DOK2 Analysis:
+        - **Khoros-Specific Approach**: Rather than relying solely on automated content moderation, Khoros combines:
+          - **Brand voice consistency scoring** against established brand guidelines
+          - **Expert authority weighting** based on community standing and historical accuracy
+          - **Cross-reference validation** against brand-approved knowledge sources
+          - **Human-in-the-loop feedback** for continuous algorithm improvement
+        - **Problem Solved Differently**: Generic AI moderation flags content based on general safety rules. Khoros's algorithm understands that "our competitors are inferior" might be acceptable in a tech community but inappropriate in healthcare, adjusting standards based on brand context and industry norms.
+    - ## Algorithm Type 5: Personalization and Role-Based Experience Generation
+      - ### DOK1 Facts:
+        - **Personalization Strategy**: "More personalization than we've ever been able to do before" using AI
+        - **User Segmentation**: Automation rules can look at CRM data to assign roles for personalization
+        - **Content Delivery**: Curated experiences for different roles and personas interfacing with the brand
+        - **Engagement Optimization**: Designed to drive more engagement and bring people to communities versus just SEO landing
+      - ### DOK2 Analysis:
+        - **Khoros-Specific Approach**: Unlike generic personalization engines, Khoros creates dynamic experiences based on:
+          - **Multi-source identity resolution** (social profiles + CRM + community behavior)
+          - **Brand relationship lifecycle** (prospect → customer → advocate progression)
+          - **Cross-channel behavior patterns** (social engagement + support history + community participation)
+        - **Problem Solved Differently**: Standard personalization shows "recommended content" based on browsing history. Khoros's algorithm recognizes that a customer who complained on Twitter but actively participates in the community forum should receive "resolution-focused + engagement-reward" content mix, acknowledging both the negative experience and positive community contribution.
+    - ## Algorithm Type 6: Bot Activity and Data Monetization Intelligence
+      - ### DOK1 Facts:
+        - **Bot Traffic Analysis**: "Gen AI crawlers are out sourcing all other bot traffic by almost 10x"
+        - **Traffic Classification**: Identifying 7 million daily crawls from Google, GPT bots, and other AI systems
+        - **Monetization Strategy**: "How do we monetize this data and provide companies lower cost community solutions"
+        - **Content Licensing**: Expert data licensing as new revenue path
+      - ### DOK2 Analysis:
+        - **Khoros-Specific Approach**: Rather than simply blocking or allowing bots, Khoros develops:
+          - **Bot value classification** distinguishing between beneficial AI training and harmful scraping
+          - **Content value scoring** to determine licensing rates for different content types
+          - **Attribution tracking** to prove content usage in AI-generated responses
+          - **Dynamic access control** that adjusts bot permissions based on value exchange
+        - **Problem Solved Differently**: Most platforms either block all bots or allow unrestricted access. Khoros's algorithm creates a "bot economy" where valuable content commands premium access rates, and different AI systems pay different rates based on the value they provide back to the community through enhanced search results or content attribution.
+    - ## Cross-Algorithm Integration Pattern
+      - ### DOK1 Facts:
+        - **Unified Data Flow**: All algorithms operate on the same normalized data pipeline
+        - **Real-Time Processing**: Event-driven architecture enables immediate algorithm response
+        - **Feedback Loops**: Human expert input continuously improves algorithm performance across all use cases
+      - ### DOK2 Analysis:
+        - **Khoros-Specific Innovation**: The platform's unique value comes from algorithms that learn from each other:
+          - **Content enrichment** informs **expert routing** which improves **bot orchestration**
+          - **Personalization insights** enhance **curation quality** which drives **engagement prediction**
+          - **Community behavior patterns** improve **sentiment accuracy** across all channels
+        - This interconnected approach means Khoros algorithms become more accurate over time through cross-pollination of insights, something vanilla AI implementations cannot achieve without similar multi-domain integration.
+  - ==Data Model==
+    - ## Entity 1: Social Content/Conversation
+      - ### DOK1 Facts:
+        - **Primary Purpose**: Captures all inbound and outbound social interactions across channels (Facebook, Instagram, Twitter, LinkedIn, etc.)
+        - **Usage Patterns**: Foundation for enrichment pipeline (sentiment, intent, language detection), routing decisions, and analytics
+        - **Data Flow**: Ingested → Normalized → Enriched → Routed to workflows
+        - **Storage Strategy**: Retention periods vary (1-7 years) based on regulatory requirements and customer tier
+      - ### DOK2 Analysis:
+        - **Non-Obvious Attributes:**
+          - **Channel-Specific Metadata**: Not just the content, but platform-specific context like Instagram story vs. post vs. comment, each requiring different response strategies
+          - **Cross-Channel Conversation Threading**: Tracks when a customer starts on Twitter and continues via DM or moves to community forum - maintaining context across platform boundaries
+          - **Brand Voice Consistency Scoring**: Each piece of content gets scored against established brand guidelines, enabling brand-aware AI responses
+          - **Bot/Human Attribution**: Tracks whether content was generated by AI crawlers (7M daily), legitimate bots, or humans - critical for monetization and content licensing strategies
+    - ## Entity 2: Expert/Agent Profile
+      - ### DOK1 Facts:
+        - **Core Function**: Represents both human agents and community experts for intelligent routing
+        - **Routing Logic**: "How do you connect the right answer" through topical expertise matching
+        - **Performance Tracking**: Historical answer quality, response times, satisfaction scores by topic area
+        - **Availability Management**: Real-time status for routing decisions
+      - ### DOK2 Analysis:
+        - **Non-Obvious Attributes:**
+          - **Expertise Authority Graphs**: Not just "Sarah knows Java" but "Sarah answered 15 complex Java questions with 95% satisfaction and 12-minute average response time"
+          - **Cross-Product Knowledge Mapping**: Tracks expertise across Community, Care, and Social Media Management to enable unified expert routing
+          - **Channel-Specific Performance**: Same expert may excel at forum responses but struggle with Twitter's character limits - routing algorithms account for this
+          - **Community Standing Weighting**: Expert answers in communities get authority scores based on community engagement, not just brand validation
+    - ## Entity 3: Brand/Customer Organization
+      - ### DOK1 Facts:
+        - **Multi-Tenant Architecture**: Logically separates data and access controls within shared infrastructure
+        - **Product Portfolio**: Can use Community, Care, SMM, or combinations with different configurations
+        - **CRM Integration**: Bidirectional sync with Salesforce, Microsoft, SAP, Oracle systems
+        - **Regulatory Compliance**: Data retention and processing rules vary by industry and geography
+      - ### DOK2 Analysis:
+        - **Non-Obvious Attributes:**
+          - **Brand Voice Fingerprint**: Algorithmic representation of acceptable tone, language, and response patterns - enables AI to respond "in brand voice"
+          - **Cross-Product Behavioral Patterns**: Tracks how customers use multiple Khoros products to optimize workflows (e.g., community question → social care escalation)
+          - **Bot Economy Participation**: Tracks which AI systems are accessing their content and at what value exchange rates
+          - **Expertise Flywheel Maturity**: Measures how well the brand has developed their expert community for self-service resolution
+    - ## Entity 4: Community Knowledge Node
+      - ### DOK1 Facts:
+        - **Knowledge Management**: "How do you scale the answer" through curated expert content
+        - **RAG Integration**: Connects community knowledge with external knowledge sources
+        - **Quality Control**: "Approve, validate, recertify knowledge" for AI-generated responses
+        - **Content Authority**: Differentiates brand-moderated expert content from unvetted social content
+      - ### DOK2 Analysis:
+        - **Non-Obvious Attributes:**
+          - **AI Training Value Score**: Each knowledge piece gets scored for its value to AI training systems - used for content licensing negotiations
+          - **Cross-Reference Validation Network**: Tracks relationships between knowledge nodes to prevent contradictory AI responses
+          - **Expert-Generated vs. Curated Flag**: Distinguishes between organic community knowledge and brand-curated content for different AI confidence levels
+          - **Engagement-to-Resolution Ratio**: Measures whether knowledge drives community engagement or just serves as SEO landing pages
+    - ## Entity 5: Conversation Flow/Bot Interaction
+      - ### DOK1 Facts:
+        - **Multi-Channel Deployment**: Single bot persona across all channels (Facebook DM, brand messenger, etc.)
+        - **Complex Flow Management**: Intent detection with escalation logic between automated and human responses
+        - **Third-Party Integration**: Automation rules can execute code through external services
+        - **Learning Mechanism**: Continuously improves routing decisions based on success rates
+      - ### DOK2 Analysis:
+        - **Non-Obvious Attributes:**
+          - **Channel Adaptation Matrix**: Same bot persona adjusts behavior based on channel expectations (formal LinkedIn vs. casual Instagram)
+          - **Conversation Context Persistence**: Maintains full context when customers move between channels or escalate to humans
+          - **Success Rate by Topic-Channel Combination**: Tracks which conversation flows work best for specific topics on specific platforms
+          - **Human Handoff Quality Score**: Measures how well bots prepare conversations for human takeover - includes context summary quality
+    - ## Entity 6: Usage/Consumption Metrics
+      - ### DOK1 Facts:
+        - **Pricing Foundation**: Volume-based pricing tied to content ingestion pace, conversation volume, and retention periods
+        - **Scaling Indicators**: Determines when infrastructure scaling is needed (50+ seats requires additional app server nodes)
+        - **Channel Bundle Tracking**: Monitors usage across Social, Digital, Reviews, Messages, Yelp channels
+        - **Network Fee Attribution**: Tracks variable costs from social platforms (WhatsApp, Review Trackers, Yelp)
+      - ### DOK2 Analysis:
+        - **Non-Obvious Attributes:**
+          - **Value-Aligned Consumption Patterns**: Tracks not just volume but value-generating usage vs. noise - enables consumption pricing that scales with customer success
+          - **Cross-Product Usage Correlation**: Identifies patterns like "high community engagement predicts lower care volume" for pricing optimization
+          - **Bot vs. Human Resource Allocation**: Granular tracking of automation savings to demonstrate ROI and optimize pricing models
+          - **Infrastructure Efficiency Metrics**: Measures resource utilization patterns to predict scaling needs before performance degradation
+    - ## Entity 7: Integration Configuration
+      - ### DOK1 Facts:
+        - **CRM Bidirectional Sync**: Connects with customer's existing systems for unified data flow
+        - **Custom SDK Components**: Aurora SDK enables custom React components stored in customer GitHub repos
+        - **API Access Patterns**: GraphQL, REST, and bulk data APIs for different integration needs
+        - **Social Platform Connections**: Critical dependencies on Facebook, Instagram, Twitter APIs
+      - ### DOK2 Analysis:
+        - **Non-Obvious Attributes:**
+          - **Integration Health Scoring**: Continuously monitors API connection quality and predicts potential failures before they impact customers
+          - **Custom Component Compatibility Tracking**: Manages upgrade compatibility for customer-built SDK components across platform updates
+          - **API Rate Limit Optimization**: Intelligent batching and caching to maximize throughput within social platform API constraints
+          - **Data Sovereignty Compliance Mapping**: Tracks which integrations can operate in which regions based on data residency requirements
+    - ## Cross-Entity Relationship Patterns
+      - ### DOK1 Facts:
+        - **Unified Data Pipeline**: All entities flow through the same Ingest → Normalize → Enrich → Workflows process
+        - **Real-Time Event Architecture**: Changes in one entity immediately impact related entities through event streaming
+        - **Multi-Tenant Isolation**: Entity relationships respect customer boundaries while enabling platform-wide learning
+      - ### DOK2 Analysis:
+        - **Non-Obvious Cross-Entity Intelligence:**
+          - **Predictive Escalation Modeling**: Combines content sentiment, expert availability, and customer history to predict which conversations will require human intervention
+          - **Community-to-Care Pipeline**: Automatically identifies community discussions that should become care knowledge base articles, reducing future support volume
+          - **Expert Authority Transfer**: Community experts who demonstrate high-quality responses get invited to become customer care experts, creating expertise mobility across products
+          - **Bot Training Feedback Loop**: Failed bot interactions automatically become training data for expert routing algorithms, creating continuous improvement across automation and human workflows
+        - This data model enables Khoros to deliver unified experiences across products while maintaining the specialized functionality each use case requires. The non-obvious attributes are what differentiate Khoros from simpler social management tools - they enable the platform to learn, adapt, and improve outcomes over time.
+  - ==Compliance and Regulations==
+    - ## Code Compliance Requirements
+      - ### DOK1 Facts:
+        - **Security Scanning Integration**: SAST/DAST code scanning integrated into development lifecycle
+        - **Dependency Management**: SCA (Software Composition Analysis) scans flag incorrect library usage and vulnerable dependencies
+        - **Open Source Compliance**: Manual checks and controls ensure only authorized components are used in Khoros products
+        - **Code Review Process**: Architecture Review Board provides feedback on code changes
+        - **Vulnerability Tracking**: Zero Day tracking and monitoring for security vulnerabilities in code dependencies
+      - ### DOK2 Analysis:
+        - Code compliance follows a multi-layered approach that goes beyond basic security scanning. The integration of security scanning into the Software Secure Development Lifecycle (SSDLC) ensures that compliance is built into the development process rather than being an afterthought. The manual oversight of open source dependencies, combined with automated SCA scanning, addresses both security vulnerabilities and licensing compliance concerns that are critical for enterprise customers.
+    - ## Release Process Compliance Requirements
+      - ### DOK1 Facts:
+        - **Change Control Board (CCB)**: Daily meetings (Mon-Fri 11 AM-12 PM CST) where all Production Change Requests must be presented and approved
+        - **Change Request Types**: Emergency, Standard (pre-defined processes), and Normal changes with different approval workflows
+        - **Documentation Requirements**: All changes must document potential customer impact, dependencies, and test plan coverage/results
+        - **Approval Authority**:
+          - Emergency changes: Minimum Director or Principal Engineer approval
+          - Standard/Normal changes: Full CCB review with representatives from Engineering, InfoSec/GRC, Operations, Product Management, and Customer Success
+        - **Communication Protocol**: #production-change-request-approvers Slack channel for async approvals, with follow-up documentation in Jira
+      - ### DOK2 Analysis:
+        - The release process compliance reflects enterprise-grade change management that prioritizes stability over speed. The requirement for CCB approval on all production changes ensures cross-functional review that considers not just technical readiness but customer impact and business continuity. The daily meeting cadence balances agility with governance, while the emergency change process provides necessary flexibility for critical issues while maintaining audit trails.
+    - ## Deployment Compliance Requirements
+      - ### DOK1 Facts:
+        - **Maintenance Windows**: Structured regional windows (AMER: 8 AM-12 PM UTC, APAC: 4 PM-8 PM UTC, EMEA: 11 PM-3 AM+1 UTC) for changes requiring downtime
+        - **Change Windows**: Scheduled no-downtime deployments for different services (Wed 5 AM-4 PM UTC across different service types)
+        - **Zero Downtime Objective**: "Aim for zero downtime updates" with status page communication for any planned maintenance
+        - **Monitoring Requirements**: Post-deployment testing, monitoring, and reporting for stakeholders mandatory
+        - **Rollback Procedures**: Must be documented and automated as part of deployment approval
+        - **Environment Progression**: Changes must flow through Dev/QA → Stage/Pre-prod → Production with appropriate testing at each stage
+      - ### DOK2 Analysis:
+        - Deployment compliance balances customer experience requirements (99.9% uptime SLA) with operational flexibility. The structured maintenance windows provide predictability for customers while enabling necessary infrastructure updates. The zero downtime aspiration pushes teams toward deployment practices that minimize customer impact, while the formal monitoring and rollback requirements ensure rapid recovery if issues arise.
+    - ## Regulatory and Framework Compliance
+      - ### DOK1 Facts:
+        - **Compliance Standards**: ISO 27001/27701/22301, SOC 2, PCI DSS, NIST 800-53/171 covering 200+ controls
+        - **Audit Schedule**: PCI (May-August), ISO (June-August overlapping), SOC (July with November report)
+        - **GRC Program Structure**: 26 Information Security Policies covering everything from Access Management to Vulnerability Management
+        - **Risk Management Process**: Formal risk analysis at multiple points throughout the year with Critical (48 hours), High (30 days), Medium (90 days) resolution timeframes
+        - **Continuous Monitoring**: Internal audit activities, external audit compliance, quarterly GRC committee reviews
+      - ### DOK2 Analysis:
+        - The comprehensive compliance framework addresses enterprise customer requirements across multiple industries and geographies. The overlap of audit periods (particularly ISO and PCI during summer months) creates operational stress but ensures continuous compliance validation. The risk-based approach to compliance issues enables prioritization of remediation efforts while maintaining audit trail documentation required by enterprise customers.
+    - ## Industry-Specific Compliance Requirements
+      - ### DOK1 Facts:
+        - **GDPR Compliance**: ISO 27701 certification with region-specific deployment configurations for EU data residency
+        - **PCI DSS**: Required for SecureForms feature enabling secure customer data input including accidental credit card information
+        - **Data Retention Compliance**: 1-7 year retention periods based on regulatory requirements and customer industry
+        - **Physical Security**: Four offices (Austin, Tarleton, Bangalore, London) covered under physical environmental security audits
+        - **Business Continuity**: ISO 22301 compliance with annual BCDR testing and customer-shareable summaries
+      - ### DOK2 Analysis:
+        - Industry-specific compliance requirements drive architectural decisions around data residency, retention, and processing. The PCI compliance for SecureForms represents a strategic differentiator that enables customers to handle sensitive data securely. The GDPR compliance through ISO 27701 addresses European market requirements, while the various retention periods accommodate industries with different regulatory obligations (financial services vs. healthcare vs. general business).
+    - ## Emerging Compliance Considerations
+      - ### DOK1 Facts:
+        - **AI Regulations**: "Ensure we are compliant with emerging AI regulations and frameworks" identified as forward-looking priority
+        - **Accessibility Compliance**: Customer obligation particularly in response to requests from major clients like Bank of America
+        - **New Regulations**: Team maintains proactive approach to stay compliant with upcoming regulations like EAA and UK Online Safety Act
+        - **Due Diligence Increase**: "Prepare for further increase of due diligence requests from customers and auditors"
+      - ### DOK2 Analysis:
+        - The proactive approach to emerging compliance requirements reflects the platform's enterprise focus and the increasing regulatory complexity in the social media and AI space. The identification of accessibility compliance as a customer obligation rather than a platform requirement indicates a consultative approach to compliance where Khoros helps customers meet their regulatory obligations. The anticipation of increased due diligence requests suggests the compliance program is designed to scale with growing regulatory scrutiny in the social media management space.
+  - ==Cost==
+    - ## Components Used by Small Number of Customers
+      - ### DOK1 Facts:
+        - **Multi-Cloud Deployments**: Microsoft Azure and Google Cloud Platform deployments exist only for Microsoft and Google as customers (Community product only) - described as "small, small" footprints
+        - **Custom Integrations**: Brightcove Video Integration and Embedly integrations are pass-through costs suggesting limited customer adoption
+        - **Advanced Analytics Retention**: Extended analytics history beyond 2 years - currently bundled but planned to be charged separately for "starter and emerging enterprise packages"
+        - **GitHub Licenses for Dev Tools**: Hard cost component with limited customer usage
+        - **Concurrent/Flex Seats**: Alternative seat offerings used only when customers exceed 100+ seats
+        - **Complex Customizations**: Bespoke pricing with committed maintenance contracts for customers with "unique cost profiles"
+      - ### DOK2 Analysis:
+        - The multi-cloud deployments represent significant infrastructure overhead for just two customers, indicating these are strategic account accommodations rather than profitable offerings. The pass-through cost model for specialized integrations suggests these components don't have sufficient adoption to justify bundling into platform costs.
+        - The custom development work requiring "bespoke pricing" indicates a long tail of customer-specific requirements that don't scale across the customer base, creating operational complexity without broad revenue impact.
+    - ## Cost Influencing Factors by Product
+      - ### DOK1 Facts:
+        - **KhorosOne Platform Costs:**
+          - **Content Ingestion Volume**: Primary driver rather than seat count, monetized through channel bundles (Social, Digital, Reviews, Messages, Yelp)
+          - **Conversation Volume**: Both inbound conversations and outbound responses as alternative pricing model
+          - **Social Network Fees**: Fixed fees (Twitter) bundled into platform cost; variable fees (WhatsApp, Review Trackers, Yelp) passed through
+          - **User/Seat Scaling**: App server nodes needed once customers exceed 50 seats; evaluation starts at 100+ seats
+        - **Community Product Costs:**
+          - **Memory Usage**: For high-performance caching and responsive use cases
+          - **Traffic Volume**: Measured by visits (page views by unique users) for public communities
+          - **Database Size**: For private, low-traffic communities with high-value content
+          - **Content Size**: Directly affects memory requirements; proposed pricing on message/post volume
+      - ### DOK2 Analysis:
+        - **Primary Cost Determination Strategy:**
+          - The shift from seat-based to consumption-based pricing aligns costs with customer value realization. Volume-based pricing reflects the platform's core value proposition of managing high-volume social interactions efficiently.
+        - **Cost Scaling Patterns:**
+          - **Linear Scaling**: "Overall costs scale roughly linearly" once community instance is created
+          - **Threshold Effects**: Clear breakpoints where pricing adjustments are needed (50 seats, 100 seats, various traffic/memory tiers)
+          - **Value-Based Tiers**: Different pricing models for different use cases (memory for performance, visits for traffic, database size for content value)
+    - ## Cost Structure Optimization Opportunities
+      - ### DOK1 Facts:
+        - **Entry-Level Limitations**: Proposed baseline of 10,000 users and 100,000 posts with "user limitation as protection against abusive scaling"
+        - **Analytics Optimization**: Current 2-year retention planned reduction to 6 months for lower tiers
+        - **Infrastructure Efficiency**: Single-node limitation for 10-20 seat entry offerings
+        - **Network Fee Management**: Industry trend toward pass-through fees as "social networks charge by volume irrespective of automation or human engagement"
+      - ### DOK2 Analysis:
+        - **Cost Determination Principles:**
+          - 1. **Value Alignment**: Pricing should reflect customer business value rather than Khoros infrastructure costs
+          - 2. **Usage-Based Scaling**: Costs should increase with customer success metrics (engagement volume, conversation resolution)
+          - 3. **External Cost Protection**: Pass-through model for social network fees protects Khoros margins from external price increases
+          - 4. **Tiered Access**: Entry-level offerings with usage caps provide clear upgrade paths
+        - **Optimization Strategy:**
+        - The trend toward consumption-based pricing with clear usage tiers enables:
+          - **Predictable Customer Costs**: Clear correlation between usage and pricing
+          - **Scalable Revenue Model**: Revenue grows with customer platform usage and success
+          - **Cost Control**: Infrastructure scaling decisions based on actual usage rather than projected seats
+          - **Competitive Positioning**: Entry-level tiers compete with "ankle biters" while premium tiers deliver enterprise capabilities
+        - The cost structure reflects a mature SaaS platform transitioning from traditional seat-based licensing to value-based consumption pricing, with infrastructure costs optimized for different customer usage patterns and success metrics.
+  - ==Things I Wish I Knew==

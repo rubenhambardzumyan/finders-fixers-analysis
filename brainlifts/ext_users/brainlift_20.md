@@ -1,0 +1,262 @@
+BrainLift - (Using DevContainers to unify development environments)
+
+- Owner
+  - Alaa Nassef, Senior Software Engineer at Trilogy
+- Ephor ([https://ephor.ai/join/8b47baaa](https://ephor.ai/join/8b47baaa))
+- Purpose
+  - Primary Purpose:
+    - After retiring the in‑house DevSpaces, we need a modern, reproducible environment that supports our polyglot (Java 21 / Go 1.23 / Node 18-22 / Python) stack and scales to 12+ developers.
+    - Adopt the open Development Container specification (.devcontainer/devcontainer.json) so that VS Code, IntelliJ, GitHub Codespaces, Gitpod, or DevPod can all run the same environment definition.
+    - Document benefits, trade‑offs, best practices, and the community experts that can help us go faster.
+  - Out of scope:
+    - Detailed cost modelling of paid cloud IDE services (Codespaces, Gitpod SaaS, Coder Enterprise, etc.)
+    - Build‑farm or binary‑cache optimisation benchmarks
+    - Alternative host‑level package managers (Nix flakes, asdf, Homebrew) unless referenced only for comparison
+- DOK4 - SPOV
+  - **IDE Commoditization Is Inevitable:** The Dev Container spec will do to IDEs what Docker did to operating systems: turn them into interchangeable client skins over a standardized, containerized backend. Within three years, competitive advantage will shift from IDE feature‑sets to cloud workspace orchestration, and licensing models based on per‑seat ‘desktop IDEs’ will evaporate.
+    - Supported by DOK3:
+      - Insight 4 - Vendor‑neutral portability proves the same devcontainer.json opens seamlessly in VS Code, IntelliJ, Gitpod, DevPod, or Codespaces.
+      - Insight 5 - IDE parity removes adoption friction shows that once devs can swap front‑ends without losing functionality, the differentiator becomes who hosts and pre‑builds the workspace fastest, not which editor has the slicker UI.
+      - Categories 1, 4, 6, 7 collectively describe the rising ecosystem (Devfile, prebuilds, DevPod) that abstracts the IDE layer away from the developer’s laptop.
+  - **DevContainers Are Creating a New Developer Caste System:** The tooling that promises democratization is actually bifurcating teams into 'environment architects' who understand the magic and 'feature factories' who can only function inside the box. This isn't technical debt - it's the deliberate deskilling of an entire generation of developers, and the most successful teams will be those who weaponize this divide rather than fight it.
+    - Supported by DOK3:
+      - Insight 1 - Onboarding acceleration documents the dramatic drop from hours to seconds.
+      - Insight 3 - Polyglot maintainability via Features shows how the stack complexity is hidden inside declarative snippets, further insulating devs from understanding what’s installed.
+      - Insight 6 - Security baseline is attainable ironically reinforces the point: hardening is automated, so fewer engineers learn why non‑root matters—until an edge case breaks.
+      - Categories 2, 3, 8 illustrate how productivity narratives can overshadow the subtle expertise loss in ops, security, and performance tuning.
+  - **The Maintenance Cost Curve Flips After Year 1:** DevContainers deliver a quick win, but for teams with a stable tech stack the total cost of ownership climbs stealthily: image bloat, version‑pin churn, and CI‑cache invalidations begin to outweigh the original time savings. Past the first year, disciplined host‑based automation (e.g., Nix or scripted installers) can beat DevContainers on reliability, performance, and long‑term upkeep.
+    - Supported by DOK3:
+      - Insight 2 - Manageable performance overhead reveals that you must tune volume strategies and WSL 2 paths—an ongoing sys‑admin chore.
+      - Insight 6 - Security baseline is attainable but only if images are rebuilt on every CVE; that continuous upkeep becomes an extra backlog line‑item.
+      - Categories 3 & 7 highlight performance tweaks and CI prebuild logistics that need constant attention; Category 4 shows lighter‑weight alternatives (Devfile, Nix) that incur less image maintenance.
+- DOK3 - Insights
+  - **Insight 1 - Onboarding acceleration:** Encoding the entire toolchain in a pre-built DevContainer image can significantly reduce bootstrap time from hours or tens of minutes to seconds, as evidenced by case studies from GitHub and npm. However, while these examples demonstrate substantial productivity gains, it is essential to recognize that results may vary across different organizational contexts. To maximize effectiveness, organizations should ensure robust CI/CD infrastructure for automatic image refreshing and implement strategies to maintain developer understanding of the underlying systems. This approach allows every engineer—new hire or veteran—to start coding almost immediately while fostering long-term productivity.
+    - Supports future SPOV about velocity gains.
+  - **Insight 2 - Manageable performance overhead:** Reported file-system slowdowns on macOS and Windows primarily occur when host paths are bind-mounted; storing source code inside WSL 2 (Windows) or using named volumes for hot paths restores near‑native I/O. Performance still varies by OS, hardware, and watcher patterns, so the right **operational posture** matters more than the container itself.
+    - **Recommended baseline for our stack (Java 21 / Go 1.23 / Node 18–22 / Python):**
+      - **Windows:** require WSL 2 and keep the repo under the Linux filesystem (not `C:\`); avoid bind‑mounting Windows paths; use named volumes for caches.
+      - **macOS:** prefer named volumes for caches and keep heavy writes (Maven/`node_modules`/Go mod cache) off the bind‑mounted workspace.
+      - **All OSes:** persist build caches via volumes (`~/.m2`, `~/.npm`, `~/.cache/pip`, `$GOMODCACHE`) and cap file watchers for large trees; start with ~4 vCPUs and 8–12 GB RAM for the container and tune per service. With this baseline, DevContainers rarely require extra hardware investment, and day‑to‑day latency becomes negligible.
+    - Addresses common “containers are slow” objection **and provides a concrete baseline for our team’s polyglot stack**.
+  - **Insight 3 - Polyglot maintainability via Features:** DevContainer features let the team add Java 21, Go 1.23, Node 22, Python, AWS CLI, etc., through declarative snippets instead of bespoke Dockerfile sections—keeping images readable and upgrades predictable across IDEs.
+    - **Trade‑off:** this creates a **runtime dependency on the Features ecosystem** (availability, versioning, and security posture). If a Feature is removed or changes semantics, builds can break; if a Feature is compromised, it becomes a supply‑chain entry point.
+    - **So what for our team:**
+      - Pin exact Feature versions;
+      - Vendor mission‑critical Features (Java/Node/Go) in our org registry or repo;
+      - Add CI smoke‑tests that validate toolchain presence (`java -version`, `node --version`, `go version`) and run a minimal build per language;
+      - Fall back to a minimal Dockerfile “escape hatch” for emergency rebuilds. This preserves maintainability without opaque magic, and pairs well with Insight 6’s hardening (non‑root, scanning).
+    - Connects Category 5 (setup) + Category 1 (spec) and Insight 6 (security).
+  - **Insight 4 - Vendor‑neutral portability:** Because the open spec is implemented by VS Code, IntelliJ, GitHub Codespaces, Gitpod, and DevPod, the same `devcontainer.json` can move from laptops to cloud or self‑hosted clusters—reducing lock‑in and widening platform options.
+    - **Contrarian nuance:** portability can devolve into a “lowest‑common‑denominator” environment if we refuse editor‑specific capabilities (e.g., first‑class Java debugging in IntelliJ) in the name of purity; the result is friction like we saw in Category 9.
+    - **So what for our team:** formalize a two‑layer policy—(1) a **Portable Core** (build, test, debug ports, non‑root user, caches, neutral scripts) that must run identically in VS Code and IntelliJ; and (2) **Editor Add‑ons** (e.g., IntelliJ run configs for Java, VS Code tasks for Node) that improve experience without breaking Core portability. Document a **capability matrix** (what’s guaranteed across IDEs vs add‑ons) to prevent the Java/IntelliJ vs VS Code split noted in Insights 7–8.
+    - Links Categories 4, 6, 7 and builds directly on Insights 7–8 (real‑world fragmentation risks).
+  - **Insight 5 - IDE parity removes adoption friction:** JetBrains’ 2024 DevContainer plug‑in brings full backend support to IntelliJ‑family IDEs; combined with VS Code’s mature integration, IDE preference is no longer a blocker. Teams can standardize on DevContainers yet let developers keep their editor of choice.
+    - Bridges Categories 6 & 2.
+  - **Insight 6 - Security baseline is attainable:** Running containers as a non‑root user (or in Docker rootless mode) plus forwarding host‑side credentials avoids new attack surfaces and meets typical enterprise policies. With automated rebuilds that pull patched base images, security maintenance effort remains low.
+    - Synthesizes Categories 8, 1, 7.
+  - **Insight 7 - Unreliable standardization is worse than no standardization:** When DevSpaces outages forced fallbacks to non-standardized local environments, the context-switching cost exceeded the original problem. Teams ended up ignoring the centralized solution entirely, resulting in greater environment drift than if they'd never adopted it. This validates the DevContainer approach of local-first with cloud-optional rather than cloud-only architectures.
+    - Supported by Category 9
+  - **Insight 8 - Language-specific tooling creates hidden IDE inequality:** While DevContainers promise IDE-agnostic development, language ecosystems have deep IDE preferences. Java's superior IntelliJ integration meant VS Code users faced debugging workarounds so complex they weren't even documented, driving developers back to local environments and fragmenting the team by language preference.
+- Experts
+  - Brigit Murtaugh
+    - name: Brigit Murtaugh
+    - main views: Co‑author of the **Development Container specification** and PM on the VS Code Remote team; advocates “environment‑as‑code” so any IDE can open the same dev container
+    - why follow: Shares first‑hand updates on spec changes, VS Code features, and cross‑IDE support for DevContainers.
+    - locations:
+      - X: <[https://twitter.com/BrigitMurtaugh](https://twitter.com/BrigitMurtaugh)>
+      - LinkedIn: <[https://www.linkedin.com/in/brigit-murtaugh](https://www.linkedin.com/in/brigit-murtaugh)>
+      - GitHub: <[https://github.com/BAMurtaugh](https://github.com/BAMurtaugh)>
+      - Talks/Blog: <[https://code.visualstudio.com/blogs/2022/05/18/dev-container-cli](https://code.visualstudio.com/blogs/2022/05/18/dev-container-cli)>
+  - Aaron Powell
+    - name: Aaron Powell
+    - main views: Microsoft Cloud Advocate who writes deep‑dive guides on **Dev Container Features** and polyglot Dockerfiles for VS Code.
+    - why follow: Hands‑on tips for simplifying multi‑runtime containers and integrating them with CI/CD.
+    - locations:
+      - X: <https://twitter.com/slace>
+      - LinkedIn: <https://www.linkedin.com/in/aaronpowell>
+      - Blog: <[https://www.aaron-powell.com/](https://www.aaron-powell.com/)>
+      - GitHub: <https://github.com/aaronpowell>
+  - Burke Holland
+    - name: Burke Holland
+    - main views: VS Code Developer Advocate; co‑host of the _Beginner’s Series to Dev Containers_, focusing on onboarding and productivity.
+    - why follow: Clear, beginner‑friendly videos and posts that demystify remote‑container workflows.
+    - locations:
+      - X: <https://twitter.com/burkeholland>
+      - LinkedIn: <https://www.linkedin.com/in/burkeholland>
+      - Dev.to: <https://dev.to/burkeholland>
+      - Resume: <https://burkeholland.github.io/resume/>
+  - Neha Batra
+    - name: Neha Batra
+    - main views: **VP Engineering – Core Productivity at GitHub**; champions Codespaces and cloud dev environments to boost team velocity.
+    - why follow: Shares exec‑level insights on rolling out DevContainers/Codespaces across large engineering orgs and measuring productivity gains.
+    - locations:
+      - X: <https://twitter.com/nerdneha>
+      - LinkedIn: <https://www.linkedin.com/in/nbatra>
+      - GitHub Blog author page: <https://github.blog/author/nerdneha/>
+  - Cory Wilkerson
+    - name: Cory Wilkerson
+    - main views: Senior Director of Engineering who led GitHub’s migration of **600+ devs to Codespaces**, proving cloud dev viability.
+    - why follow: Offers concrete data on prebuilds, onboarding time cuts, and culture change required for DevContainer adoption at scale.
+    - locations:
+      - X: <https://twitter.com/corywilkerson>
+      - LinkedIn: <https://www.linkedin.com/in/coryjwilkerson>
+      - GitHub Blog: <https://github.blog/author/corywilkerson/>
+  - Sven Efftinge
+    - name: Sven Efftinge
+    - main views: Co‑founder of **Gitpod**; evangelist for “dev‑envs‑as‑code” & early adopter of the DevContainer spec in cloud IDEs.
+    - why follow: Visionary takes on open standards (Devfile, DevContainer) and the future of fully automated, ephemeral workspaces.
+    - locations:
+      - X: <https://twitter.com/svenefftinge>
+      - LinkedIn: <https://www.linkedin.com/in/svenefftinge>
+      - Gitpod Blog: <https://www.gitpod.io/blog>
+  - Lukas Gentele
+    - name: Lukas Gentele
+    - main views: CEO & co‑founder of Loft Labs; created **DevPod**, a self‑hosted Codespaces alternative that re‑uses `devcontainer.json`.
+    - why follow: Shares open‑source tools and multi‑cloud strategies that avoid vendor lock‑in while leveraging the DevContainer standard.
+    - locations:
+      - X: <https://twitter.com/lukasGentele>
+      - LinkedIn: <https://www.linkedin.com/in/lukas-gentele>
+      - Loft Blog: <https://loft.sh/blog>
+      - DevPod repo: <https://github.com/loft-sh/devpod>
+  - Michael Irwin
+    - name: Michael Irwin
+    - main views: Senior DevRel at **Docker**; focuses on using Docker Desktop + Compose as the foundation for DevContainers and secure local dev.
+    - why follow: Deep Docker know‑how, performance tuning tips, and security best practices for container‑based development workflows.
+    - locations:
+      - X: <https://twitter.com/mikesir87>
+      - LinkedIn: <https://www.linkedin.com/in/mikesir87>
+      - Blog: <https://mikesir87.io>
+      - GitHub: <https://github.com/mikesir87>
+  - Bret Fisher
+    - name: Bret Fisher
+    - main views: Docker Captain & educator; reviews Codespaces, DevPod, and Gitpod from an independent DevOps lens.
+    - why follow: Extensive tutorials, weekly live shows, and honest comparisons of container‑based dev tools.
+    - locations:
+      - X: <https://twitter.com/BretFisher>
+      - LinkedIn: <https://www.linkedin.com/in/bretfisher>
+      - Website: <https://www.bretfisher.com>
+      - YouTube: <https://www.youtube.com/c/BretFisher>
+  - Rich Burroughs
+    - name: Rich Burroughs
+    - main views: Senior Dev Advocate at Loft Labs; focuses on Kubernetes‑backed dev environments (DevPod, vCluster) and workspace security.
+    - why follow: Hosts the _Kube Cuddle_ podcast and shares real‑world lessons on scaling and hardening containerized dev setups.
+    - locations:
+      - X: <https://twitter.com/richburroughs>
+      - LinkedIn: <https://www.linkedin.com/in/richburroughs>
+      - Blog: <https://blog.richburroughs.dev>
+      - Podcast: <https://kubecuddle.transistor.fm>
+- DOK2 - Knowledge Tree
+  - Category 1 - DevContainer fundamentals & specification
+    - Source 1 - Development Container Specification site
+      - DOK1 - facts
+        - The spec “enriches containers with content and metadata necessary to enable development inside them.”
+        - A `devcontainer.json` file drives setup for tools that implement the spec.
+        - Features and Templates let teams reuse common setup steps across stacks.
+      - DOK2 - summary
+        - The open specification turns any Docker image into a portable development environment, defined declaratively in one JSON file and extended by reusable building blocks.
+      - [https://containers.dev/](https://containers.dev/implementors/spec/?utm_source=chatgpt.com)
+  - Category 2 - Benefits & real‑world impact
+    - Source 2 - GitHub Engineering “Moved to Codespaces” post
+      - DOK1 - facts
+        - Initial bootstrap for the 13 GB [GitHub.com](http://github.com/) repo dropped from 45 min → 5 min via shallow clones & nightly cached images.
+        - Prebuild pools pushed startup further to ≈ 10 s, allowing task‑based, disposable environments.
+      - DOK2 - summary
+        - Pre‑caching and prebuilds transform large‑repo onboarding from nearly an hour to seconds, proving the productivity upside of treating dev envs as throw‑away commodities.
+      - [https://github.blog/engineering/infrastructure/githubs-engineering-team-moved-codespaces/](https://github.blog/engineering/infrastructure/githubs-engineering-team-moved-codespaces/)
+    - Source 3 - npm registry team Codespaces case study
+      - DOK1 - facts
+        - Environment setup time for npm services went from “hours to minutes”, improving debugging and inner‑loop speed.
+      - DOK2 - summary
+        - Even mid‑sized microservice teams report multi‑hour local‑setup pain evaporates once the environment is encoded in a devcontainer and prebuilt centrally.
+      - [https://github.blog/engineering/engineering-principles/bringing-npm-registry-services-to-github-codespaces](https://github.blog/engineering/engineering-principles/bringing-npm-registry-services-to-github-codespaces/?utm_source=chatgpt.com)
+  - Category 3 - Drawbacks & performance considerations
+    - Source 4 - VS Code guide “Improve disk performance”
+      - DOK‑1 facts
+        - Storing code inside the WSL 2 filesystem “significantly” improves container file‑I/O vs. mounting Windows paths.
+      - DOK‑2 summary
+        - On Windows/macOS, performance bottlenecks are tied to host‑OS file mounts; using WSL 2 or named volumes mitigates the hit.
+      - [https://code.visualstudio.com/remote/advancedcontainers/improve-performance](https://code.visualstudio.com/remote/advancedcontainers/improve-performance?utm_source=chatgpt.com)
+    - Source 5 - Docker Community thread on slow bind mounts
+      - DOK‑1 facts
+        - Mounting Windows folders into containers “will slow down file access”; named volumes stored inside WSL are recommended.
+      - DOK‑2 summary
+        - Developers must be aware of host‑filesystem overhead; correct volume strategy is the key performance lever.
+      - [https://forums.docker.com/t/poor-container-performance/127671](https://forums.docker.com/t/poor-container-performance/127671?utm_source=chatgpt.com)
+  - Category 4 - Alternatives & complementary standards
+    - Source 6 - Loft Labs blog “Comparing Codespaces vs DevPod”
+      - DOK‑1 facts
+        - DevPod is an open‑source, self‑hosted alternative that re‑uses `devcontainer.json` unchanged, supporting Docker, Kubernetes or any VM
+      - DOK‑2 summary
+        - Teams can avoid vendor lock‑in by re‑targeting the same DevContainer manifest to DevPod or Codespaces.
+      - [https://www.loft.sh/blog/comparing-coder-vs-codespaces-vs-gitpod-vs-devpod](https://www.loft.sh/blog/comparing-coder-vs-codespaces-vs-gitpod-vs-devpod?utm_source=chatgpt.com)
+    - Source 7 - CNCF project page for Devfile
+      - DOK‑1 facts
+        - Devfile became a CNCF Sandbox project on 11 Jan 2022 and defines a kube‑native API for cloud dev‑workspaces.
+      - DOK‑2 summary
+        - Devfile is the YAML‑based sibling spec popular in Eclipse Che, OpenShift Dev Spaces, & AWS CodeCatalyst; it competes/co‑exists with the JSON‑based DevContainer format.
+      - [https://www.cncf.io/projects/devfile/](https://www.cncf.io/projects/devfile/?utm_source=chatgpt.com)
+  - Category 5 - Polyglot setup & best practices
+    - Source 8 - Aaron Powell “Simplifying devcontainers with Features”
+      - DOK‑1 facts
+        - Features let you add runtimes (e.g., Go, Java, Docker CLI) by referencing a registry item instead of hand‑coding Dockerfile lines.
+      - DOK‑2 summary
+        - For multi‑runtime images (Java 21 + Go 1.23 + Node 22) use Features to keep the Dockerfile short and maintainable.
+      - [https://www.aaron-powell.com/posts/2023-01-11-simplifying-devcontainers-with-features/](https://www.aaron-powell.com/posts/2023-01-11-simplifying-devcontainers-with-features/?utm_source=chatgpt.com)
+    - Source 9 - “The Ultimate Web Dev Environment” post
+      - DOK‑1 facts
+        - `postCreateCommand` automates dependency install so devs “get up and running with as few steps as possible.”
+      - DOK‑2 summary
+        - Automating first‑run tasks inside the container ensures every team member (and CI) starts from the same dependency baseline.
+      - [https://www.aaron-powell.com/posts/2022-03-04-the-ultimate-web-dev-environment/](https://www.aaron-powell.com/posts/2022-03-04-the-ultimate-web-dev-environment/?utm_source=chatgpt.com)
+  - Category 6 - IDE integration & plugin customization
+    - Source 10 - VS Code Dev Containers tutorial
+      - DOK‑1 facts
+        - `.devcontainer` folder with `devcontainer.json` + Dockerfile lets VS Code reopen the project “inside a container” with full IntelliSense & debugging.
+      - DOK‑2 summary
+        - VS Code treats the container as the compute backend, yet the user experience stays native thanks to auto‑installed extensions.
+      - [https://code.visualstudio.com/docs/devcontainers/tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial?utm_source=chatgpt.com)
+    - Source 11 - JetBrains IntelliJ IDEA Dev Container docs
+      - DOK‑1 facts
+        - Since 2024, IntelliJ lets you edit, build and run projects directly in a DevContainer; the plugin adds backend auto‑download & volume sharing.
+      - DOK‑2 summary
+        - JetBrains parity means DevContainers now cover both VS Code‑first and IntelliJ‑first developers.
+      - [https://www.jetbrains.com/help/idea/connect-to-devcontainer.html](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html?utm_source=chatgpt.com)
+  - Category 7 - Team workflow, CI/CD & prebuilds
+    - Source 12 - GitHub Blog “Codespaces for largest repos just got faster”
+      - DOK‑1 facts
+        - GitHub calls prebuilds a “huge part” of reducing time‑to‑bootstrap; private preview across 50 orgs confirmed productivity gains.
+      - DOK‑2 summary
+        - Building and caching the devcontainer image in CI (nightly or on push) keeps local build times near‑zero and removes the last onboarding hurdle.
+      - [https://github.blog/news-insights/product-news/codespaces-largest-repositories-faster/](https://github.blog/news-insights/product-news/codespaces-largest-repositories-faster/?utm_source=chatgpt.com)
+    - Source 13 - Changelog post “Prebuilds GA”
+      - DOK‑1 facts
+        - Repository admins can create prebuild configs from the CodeSpaces settings UI; GA for Enterprise Cloud & Team plans.
+      - DOK‑2 summary
+        - Prebuilds are now an out‑of‑the‑box option for any GitHub org — no custom infra needed.
+      - [https://github.blog/news-insights/product-news/prebuilding-codespaces-is-generally-available/](https://github.blog/news-insights/product-news/prebuilding-codespaces-is-generally-available/?utm_source=chatgpt.com)
+  - Category 8 - Security & maintenance
+    - Source 14 - VS Code guide “Add a non‑root user”
+      - DOK‑1 facts
+        - Many base images run as root by default; VS Code recommends creating a dev user and setting `"remoteUser"` for safety and correct file ownership.
+      - DOK‑2 summary
+        - Running the editor and build as a non‑root user is the first hardening step and avoids permission mismatches on bind‑mounts.
+      - [https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user](https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user?utm_source=chatgpt.com)
+    - Source 15 - Docker Docs “Rootless mode”
+      - DOK‑1 facts
+        - Docker offers a rootless‑DIND image that runs as UID 1000, reducing the attack surface while still supporting privileged operations when required.
+      - DOK‑2 summary
+        - Organisations with stricter policies can combine DevContainers with rootless Docker to meet security benchmarks without losing functionality.
+      - [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/?utm_source=chatgpt.com)
+  - Category 9 - DevSpaces PainPoints
+    - Source 16 - Personal experience and feedback from team members
+      - DOK‑1 facts
+        - DevSpaces browser-based IDE experienced periodic outages that blocked all development work
+        - Developers maintained non-standardized local environments as fallbacks, defeating the standardization goal
+        - Context-switching between DevSpaces and local IDEs caused enough friction that teams abandoned DevSpaces entirely
+        - Java debugging in VS Code DevContainers required manual terminal commands with specific flags and port exposures
+        - Workarounds were so complex they were never properly documented
+        - Java developers abandoned the standardized VS Code DevContainer setup for local IntelliJ, creating a two-tier system
+      - DOK‑2 summary
+        - A centralized, browser‑only IDE became a single point of failure; recurring outages forced teams to keep ad‑hoc local fallbacks.
+        - Cumbersome Java debugging in VS Code DevContainers (manual flags/port exposure) and undocumented workarounds eroded trust and productivity.
+        - The team split into a two‑tier toolchain (local IntelliJ for Java vs. standardized VS Code/DevContainer for others), re‑introducing environment drift and nullifying the standardization goal.

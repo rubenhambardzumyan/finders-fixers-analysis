@@ -1,0 +1,142 @@
+Reverse Engineering Cloud Dependencies: A Guide to Safe Cost Optimization in Inherited Systems
+
+- **Owner**
+  - Dmitry Degtyarev
+- **Purpose**
+  - Build expertise in rapidly mapping and documenting service dependencies and performance characteristics in inherited cloud infrastructures, enabling confident cost optimization decisions that maintain production stability while accelerating ticket throughput. This will focus on creating repeatable discovery methodologies, dependency visualization techniques, and performance baseline documentation that can be used to evaluate cost reduction changes efficiently.
+    - Out of scope: general DevOps practices, cost optimization strategies themselves, or incident response procedures.
+- **DOK4 - SPOV**
+  - AImations should not be used in place of automations or manual actions making the actual changes in the env
+  - AImations are great for pre- and post- change analysis
+  - AImations are not supposed to replace existing health checks, but rather complement them and cover the areas where we don't know what we don't know.
+  - AI adds the most value in DevOps by tackling tasks that involve massive data analysis, pattern recognition, and prediction.
+- **DOK3 - Insights**
+  - It is possible to execute runbooks using Cursor step-by-step, but it is painfully slow
+  -
+- **Experts**
+  - [https://x.com/cloud_keeper](https://x.com/cloud_keeper)
+    - CloudKeeper has helped 400+ companies worldwide save an average of 20% on cloud bills, modernize their cloud setup, and maximize value across AWS & GCP.
+  - [https://x.com/AWS_Storage](https://x.com/AWS_Storage)
+    -
+  - @ronald_vanLoon
+    - Name: Ronald van Loon
+    - Main Views: Advocates for data-driven business transformation through AI, analytics, and big data. Emphasizes practical applications of AI to generate measurable business value, including cost efficiencies.
+    - Why Follow: Shares actionable content on AI implementation, often touching on optimizing resources and maximizing ROI, which aligns with AI-first cost optimization.
+    - Locations:
+      - X: @Ronald_vanLoon
+      - LinkedIn: [Ronald van Loon](https://www.linkedin.com/in/ronald-van-loon/)
+      - Blog: [Intelligent World](https://www.intelligentworld.org/)
+  - @CodySlingerland
+  - Name: Cody Slingerland
+  - Main Views: Focuses on cloud cost optimization and FinOps, with experience creating content for SaaS and tech companies. Emphasizes practical strategies for controlling cloud costs, particularly for compute-intensive AI workloads.
+  - Why Follow: His FinOps expertise and collaboration with platforms like CloudZero make him a valuable source for AI-related cost management tips.
+  - Locations:
+    - X: @CodySlingerland
+    - LinkedIn: [Cody Slingerland](https://www.linkedin.com/in/codyslingerland/)
+  - @nigewillson
+    - Name: Nige Willson
+    - Main Views: Promotes responsible AI adoption and its business applications, drawing from his experience at Microsoft and as founder of We and AI. Focuses on practical AI deployment, likely including cost considerations.
+    - Why Follow: His deep knowledge of AI tools and business strategy may include insights on cost-efficient AI implementation for organizations.
+    - Locations:
+      - X: @nigewillson
+      - LinkedIn: [Nige Willson](https://www.linkedin.com/in/nigewillson/)
+      - Website: [We and AI](https://weandai.org/)
+  - @bernardmarr
+    - Name: Bernard Marr
+    - Main Views: Advises global businesses on AI, data, and digital transformation strategies. Highlights how AI can drive efficiency and competitive advantage while managing implementation costs.
+    - Why Follow: Offers a high-level perspective on cost-effective AI adoption, making his content relevant for AI-first cost optimization strategies.
+    - Locations:
+      - X: @bernardmarr
+      - LinkedIn: [Bernard Marr](https://www.linkedin.com/in/bernardmarr/)
+      - Blog: [Bernard Marr & Co.](https://bernardmarr.com/)
+  - @AndrewYNg
+    - Name: Andrew Ng
+    - Main Views: A pioneer in AI education and deployment, he focuses on scaling AI systems for real-world applications. Discusses efficient AI model development and deployment, which includes cost considerations.
+    - Why Follow: His expertise in AI scalability offers valuable insights into cost-effective strategies for AI-first organizations.
+    - Locations:
+      - X: @andrewyng
+      - LinkedIn: [Andrew Ng](https://www.linkedin.com/in/andrewyng/)
+      - Website: [DeepLearning.AI](https://www.deeplearning.ai/)
+  - [@QuinnyPig](https://bsky.app/profile/quinnypig.com)
+    - Name: Corey Quinn
+    - Main Views: Challenges the complexity of AWS billing with humor and clarity. Advocates for transparency, simplicity, and dev empowerment in cloud cost optimization.
+    - Why Follow: Sharp, entertaining, and deeply insightful on AWS economics. Regularly breaks down cost patterns and poor architectural choices with real-world examples.
+    - Locations:
+      - BlueSky: [@QuinnyPig](https://bsky.app/profile/quinnypig.com)
+      - ~~X: [@QuinnyPig](https://twitter.com/QuinnyPig)~~
+      - LinkedIn: [Corey Quinn](https://www.linkedin.com/in/quinnypig/)
+      - Blog: [Last Week in AWS](https://www.lastweekinaws.com/)
+  - [@stormental](https://twitter.com/stormental)
+    - Name: J.R. Storment
+    - Main Views: Co-founder of FinOps Foundation. Promotes collaborative, engineering-friendly financial practices for cloud spend. Strong advocate of the FinOps framework and cost accountability.
+    - Why Follow: Co-author of Cloud FinOps, he shares the latest on FinOps standards, tooling, and cultural adoption, especially in large-scale enterprises.
+    - Locations:
+      - X: [@stormental](https://twitter.com/stormental)
+      - LinkedIn: [J.R. Storment](https://www.linkedin.com/in/storment/)
+      - Blog: [FinOps Foundation](https://www.finops.org/)
+  - [@silvexis](https://twitter.com/silvexis)
+    - Name: Erik Peterson
+    - Main Views: Advocates engineering-led cloud cost control, with a strong belief in empowering developers to make cost-effective architectural choices.
+    - Why Follow: Co-founder of CloudZero. Shares technical and strategic advice on cost optimization, often focused on “unit cost” and real-time observability.
+    - Locations:
+      - X: [@silvexis](https://twitter.com/silvexis)
+      - LinkedIn: [Erik Peterson](https://www.linkedin.com/in/erikpeterson3/)
+      - Blog: [CloudZero Blog](https://www.cloudzero.com/blog)
+  -
+- DOK2 - Knowledge Tree
+  - **Infrastructure Discovery Methodologies** - Methods and techniques for systematically uncovering and cataloging components, configurations, and relationships in existing cloud environments. This includes automated discovery tools, manual investigation approaches, and frameworks for organizing findings into actionable documentation.
+    - Create a "Service Criticality Discovery Checklist" that includes:
+      - Keywords to search for in code (error handling, retry logic, circuit breakers often indicate critical paths)
+      - Meeting notes patterns that indicate business importance ("customer-facing", "revenue-impacting", "SLA-bound")
+      - Code commit frequency as a proxy for service importance
+      - Presence of monitoring alerts/runbooks as indicators of criticality
+  - **Service Dependency Mapping** - Approaches for identifying, visualizing, and documenting how services interact and depend on each other within cloud infrastructures. This covers dependency analysis techniques, visualization tools and formats, and methods for capturing both runtime and deployment-time dependencies.
+    - Create a template for capturing Datadog-discovered dependencies that includes: service name, dependency type (DB/queue/API), average request rate, latency baselines, and cost implications
+    - Develop a classification system for dependencies: critical path vs. nice-to-have, synchronous vs. asynchronous, high-volume vs. low-volume
+    - Develop a "Reverse Engineering Template" that captures:
+      - Service purpose (gleaned from docs/code comments)
+      - Business stakeholders (found in meeting notes)
+      - Criticality indicators (SLAs, alert configurations, backup policies)
+      - Safe-to-optimize signals (low traffic, no recent commits, no alerts configured)
+  - **Performance Baseline Documentation** - Techniques for establishing, measuring, and documenting normal operating parameters of cloud services. This includes metrics selection, baseline establishment methods, documentation formats that support quick reference during optimization decisions, and approaches for tracking performance characteristics over time.
+    - Create a standard format for recording the performance metrics Datadog captures on these auto-discovered dependencies (response times, error rates, throughput)
+    - Document how to identify "normal" vs "anomalous" patterns in these metrics before making cost optimization changes
+  - **Documentation Mining and Extraction** - Techniques for processing varied formats of existing infrastructure documentation (wikis, runbooks, diagrams, tickets) to extract meaningful information about services, dependencies, and performance characteristics. This includes parsing outdated or inconsistent documentation, identifying reliable vs. unreliable information, and handling contradictions across sources.
+    - Look for on-prem to cloud and self hosted to managed migrations as these typically obsolete runbooks in masse
+  - **Knowledge Graph Construction** - Methods for transforming extracted documentation into structured knowledge graphs that represent service relationships, dependencies, and performance baselines. This covers graph schema design for infrastructure representation, entity resolution across different documentation sources, and maintaining graph accuracy as new documentation is processed.
+    - Create an "Alias Discovery Checklist":
+      - Check service configuration files for internal names
+      - Scan marketing materials/wikis for product names
+      - Look for role-based references in runbooks ("the database", "the queue")
+      - Search for environment-specific variations (prod-X, staging-X)
+    - Build a "Name Rosetta Stone" pattern:
+      - Primary identifier: Choose one canonical name (usually the developer name)
+      - Alias registry: Map all discovered names to the primary
+      - Context tags: Note where each alias typically appears (runbooks, architecture docs, marketing)
+      - Confidence scoring: Rate how certain you are about each mapping
+    - Develop "Entity Disambiguation Rules":
+      - If a document says "the database" - look for other service references nearby for context
+      - Marketing names often appear with version numbers or feature descriptions
+      - Developer names typically appear near technical details (ports, endpoints, configs)
+  - **AI-Driven Documentation Analysis** - Approaches for using natural language processing and machine learning to understand technical documentation context, identify outdated information, extract implicit relationships not explicitly stated, and automatically enrich the knowledge graph with inferred connections and performance patterns from historical documentation.
+  - **AI Knowledge Base - AI FAQ Generator**
+    - Functions
+      - Semantic Search
+      - Summarization
+      - Text Extraction
+      - Usage Report
+      - Share Chat
+      - Invite Teammate
+      - Add sites, docs, QAs, previous RFPs/Questionnaires
+      - Wiki + Slack-like channels
+      - Fact Staging
+    -
+  - [https://coralogix.com/guides/aiops/](https://coralogix.com/guides/aiops/)
+  - [https://www.logicmonitor.com/blog/key-considerations-aiops](https://www.logicmonitor.com/blog/key-considerations-aiops)
+    > CORE BELIEFS:
+    > AImations should not be used in place of automations or manual actions making the actual changes in the env
+    > AImations are great for pre- and post- change analysis
+    > AImations are not supposed to replace existing health checks, but rather complement them and cover the areas where we don't know what we don't know.
+    > AI adds the most value in DevOps by tackling tasks that involve massive data analysis, pattern recognition, and prediction.
+    > SOURCE MATERIALS:
+    > [https://www.logicmonitor.com/blog/how-artificial-intelligence-supercharges-it-operations](https://www.logicmonitor.com/blog/how-artificial-intelligence-supercharges-it-operations) > [https://www.logicmonitor.com/blog/how-it-teams-leverage-aiops-capabilities](https://www.logicmonitor.com/blog/how-it-teams-leverage-aiops-capabilities) > [https://www.logicmonitor.com/blog/key-considerations-aiops](https://www.logicmonitor.com/blog/key-considerations-aiops) > [https://www.logicmonitor.com/blog/4-ways-aiops-will-build-more-resilient-it-operations](https://www.logicmonitor.com/blog/4-ways-aiops-will-build-more-resilient-it-operations)
