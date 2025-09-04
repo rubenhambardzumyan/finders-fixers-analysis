@@ -1,0 +1,183 @@
+BrainLift v3 #copy
+
+- Purpose
+  - primary purpose
+    - To get help with design and implementation
+    - Remember previous decisions for the project and implementation
+  - out of scope:
+    - Other than Kandy UCAAS, Kandy CPAAS and Lithium Projects
+- Key terms:
+  - BrainLift: core human knowledge data structure
+  - BrainMaxxing: core knowledge creation process
+- DOK constructs and BrainLift invariants
+  - BrainLift structure and organization
+    - High Level organization
+      - Owner
+        - Emre Sener
+      - Purpose
+        - To get help with design and implementation
+        - Remember previous decisions for the project and implementation
+      - _----------- Depth of Knowledge / DOK starts here ----------_
+      - DOK4 - SPOV
+      - DOK3 - Insights
+      - _---------- BRIGHT LINE. Above this is based on the owner's opinion and expertise. Below this is based on the external flow of information ----------_
+      - Experts
+      - DOK2 - Knowledge Tree
+        - DOK2 -summaries
+        - DOK1 - facts
+        - links to original sources
+      - _---------- BRIGHT LINE. Above this is the BrainLift, the user creates this without AI. Below this is not the BrainLift, it is however the user gets sources from the flow of external information ----------_
+      - BrainMaxxing, other feeds, etc.
+    - Owner(s)
+      - The human owner(s) of this BrainLift
+    - Purpose
+      - In scope Kandy UCAAS, KANDY CPAAS, Lithium Projects
+      - Out of scope, other projects
+    - DOK4 - SPOV / New Knowledge
+      - list each spiky point of view
+        - each spiky point of view should be supported by 2 more more DOK3 insights, else they are just empty claims.
+        - These don't need to be in the BrainLift file, but AI checkers will look for this.
+    - DOK3 - Insights
+      - list each of the owners' insights
+        - each insight should be supported by DOK1-2 items, else they are just made up.
+        - These don't need to be in the BrainLift file, but AI checkers will look for this.
+    - Experts
+      - List the experts in the domain of this BrainLift. These are the people that you will follow voraciously to become an expert yourself.
+      - Experts - Experts are people or organizations or websites or mailing lists that should be followed because they produce sources (tweets, blog posts, articles, papers, books, etc.).
+        - the experts list can be used to "filter the internet" to just materials produced by experts in the field.
+        - humans can create expert lists by asking perplexity, searching twitter, find like posts, and following links.
+        - the expert list is what gets you into the flow of information
+      - Each expert entry will include who the expert is, what their main views are, why you are following them, and the main places one can look to find them online.
+      - In the experts section, do not include analysis of their sources, just list them for Ephor. You can organize their analyzed sources in the Knowledge Tree
+      - you can start organizing experts into categories when the list of experts becomes hard to manage without them.
+    - DOK1 and DOK2 - Knowledge Tree and Sources
+      - Note: items here evolve the most frequently as they are directly tied to the flow of new external information
+      - Knowledge Tree and Sources
+        - The KT is how one subdivides external knowledge (in the domain of the BrainLift) into sub-topics
+          - categorizing and summarizing sets of sources into a coherent and easy to understand knowledge tree is a form of DOK2
+          - KT may be flat or hierarchical
+        - The KT can and should be be changed and refactored as the BrainLift owner becomes more expert (and has more DOK3 and DOK4)
+        - The knowledge tree (KT) holds and organizes DOK1 and DOK2 information based from external Sources
+          - Sources are primary source documents (books, papers, articles, tweets, blog posts, diagrams, apps, tools, websites, etc.).
+          - The DOK1 and DOK2 information from sources support the BrainLift's DOK3 insights
+      - The KT holds and organizes the key sources in that support DOK3 insights in this BrainLift.
+        - Each node in the KT lists its sources
+          - each source must have DOK1 facts
+          - each source must have the owner's DOK2 summary
+            - summary will be through the lens of the DOK4 spov (when that exists), and generic prior to that
+          - must be a link to the actual source publication
+    - Items in the BrainLift are based on DOK constructs
+      - DOK = Depth of Knowledge
+        - DOK1 - **facts**
+          - recall and reproduction: learners must have command of the facts
+          - facts come from sources (each article, blog, post, etc. is a source)
+          - facts are objective - same for anybody that reads the source
+        - DOK2 - **summary**
+          - basic application of ~~skills~~ and concepts - logically tying the facts together to understand how or why something occurs, direct causality and chaining
+          - summaries are of an individual source
+          - summaries are objective - directly supported by the facts in the source
+          - early learning (before SPOVs) - summaries are the same or similar for anybody that reads the source and what an LLM would summarize
+          - once there are SPOVs - reader will summarize in the context of their SPOVs, which may lead to summaries different than others or an LLM
+        - DOK3 - **insights**
+          - strategic thinking - insights are surprising, contrarian, interesting patterns or logical chains that transcend multiple sources, etc.
+          - insights are subjective - an individual creates these based on their analysis of underlying DOK1 and DOK2 information
+          - insights must be supported by DOK1 and DOK2 - otherwise, they are baseless claims
+        - DOK4 - **spiky points of view / new knowledge**
+          - extended thinking - transference of insights from multiple domains to create new knowledge
+          - new knowledge is subjective - directly supported by DOK3 from multiple domains
+          - new knowledge is expressed as spiky points of view (spov) - short bright line statements that crystalize one's new expertise
+            - these are assertions, not explanations
+          - spov are the rules that guide our actions and the basis for one's operating decisions
+          - spov are the rules that govern how AI should think to be consistent with the one's world view
+          - spov are the lens through with the user will read and comment (in public) on sources
+    - Key invariants and seams in BrainLift usage of the DOK constructs
+      - BrainLift is owned by a person, not a system or AI
+      - BRIGHT LINE between DOK1-2 and DOK3-4
+        - DOK1-2 are based on the external world
+        - DOK3-4 are based on ones own expertise
+      - BRIGHT LINE between DOK1 and DOK2
+        - no learning occurs pulling DOK1 facts out of a source - AI can do this for you
+        - learning occurs when a learner creates their own DOK2-4 - can initially use AI assist to understand the source material
+        - user needs to type their own DOK2-4 into the BrainLift, ideally only after directly reading the actual source material
+      - BRIGHT LINE between BrainLift and BrainMaxxing
+        - Humans curate and edit their own BrainLift. Period. No automation or cut-and-paste.
+        - Deciding what to add, edit, remove and how to organize the BrainLift is part of DOK2 learning.
+        - BrainMaxxing is focused at exposing the user to the flow of relevant information in the world and does not modify, or even propose updates to, a BrainLift.
+      - To learn, an owner must constantly curate and refactor their BrainLift
+        - test DOK3-4 against new DOK1-2 data - if new data contradicts, why? do you need to evolve your DOK3-4 world view?
+        - replace existing DOK1-2 sources with better/more credible DOK1-2 sources (do not simply append, one learns when they test and decide whether to swap or not to swap)
+        - refactor organization of DOK1-2 material as one's DOK3-4 evolve
+        - crufty BrainLifts become more and more useless over time
+- Using BrainLifts: BrainMaxxing, Ephor, and (AI)PI
+  - BrainMaxxing relies on key BrainLift seams to reinforce the core knowledge creation process
+    - BrainMaxxing is a process, feed, and coaches the user on building great BrainLifts
+    - D - domain
+      - BrainMaxxing has to be **great** at finding new source material
+        - Search from BrainLift experts as well as tangential sources (comments, posts like this one)
+        - Scan for content based on DOK3 insights and DOK2 summaries
+        - Scan for content based on ephor project activity in projects that have BrainLifts
+        - Etc.
+        - In general, anything in the BrainLift (or user’s set of BrainLifts) is fair game for BrainMaxxing to use to kick off async deep research, or other thread pulling, to go find more sources
+        - Etc.
+    - A - actions
+      - BrainMaxxing has to be **great** at curating the user's feed, most important posts first
+        - Each project will have a single BrainMaxxing feed for the project
+        - Each user will have a single personal BrainMaxxing feed
+          - User will be able to subscribe to multiple BrainLifts: their personal BrainLifts, project BrainLifts, other public BrainLifts (e.g. our AI multiplexer BrainLift)
+            - Will receive BrainMaxxing posts for all the raw sources associated with this feed
+            - Will receive BrainMaxxing generated posts each time the BrainLift is modified
+            - Won't be too much - ultimately BrainMaxxing algo will filter and useless stuff will never show up.
+          - BrainMaxxing combines and interleaves the feeds for each of a user's subscribed BrainLifts for that user
+          - BrainMaxxing algorithm determines the order that a user sees content - over time, it needs to be great at filtering and sequencing for highest impact
+      - Should extract facts from sources and generate posts for the users's feed containing DOK1 facts, citations, and link to the actual source.
+        - BM posts should be and presented to user over time (borrowing from spaced repetition)
+        - User should be able to bookmark posts
+          - once they have wallowed in the sources and data, will go back to the bookmarked posts to decide whether it should be included in the BrainLift (then include it with DOK1 facts and DOK2 summaries).
+          - the act of deciding to include or not, as well as organizing in the KT is DOK2
+        - BM posts should be color coded as green (source supports existing DOK3 and DOK4) or red (source existing contradicts DOK3 and DOK4).
+          - BrainMaxxing looks at the facts and source author's proposed insights to determine green/red
+          - Won't color code if post is not obviously green/red
+      - QC reviews and coaches user on BrainLifts
+        - Checks that DOK4 is supported by multiple DOK3, and DOK3 is supported by DOK1 and 2
+        - It's still a valid BrainLift file without this support, but calls into question the expertise of the author if they are making empty claims
+    - R - Rules
+      - SPOV on what a great BrainLift is (coach user, review and QC quality of BrainLifts).
+      - Key insights for determining best content to put in front of user
+    - T - Targets
+      - Curated feed of knowledge
+      - Feedback and coaching on quality of BrainLift data structure
+    - S - Simple
+      - User should get realtime and async coaching on improving the BrainLift
+      - User should be able to kick off an async research task directly based on something in the post
+        - BrainMaxxing should be aware of this and the results, treating the results as "a new fact source" for the feed
+  - (AI)PI = BrainLift should be accessible via (AI)PI
+    - Used by Ephor, code-as-caller, LLM-as-caller, and human-as-caller patterns
+    - Ephor talks to (AI)PI, not Workflowy directly
+    - Workflowy may be a UI on top of a more durable / flexible data structure
+    - (AI)PI server can enforce key seams, consistency checking, etc.
+      - DOK4 relies on DOK3 that use DOK1/2 - flag if these source authors are not in the Experts list (owner has to affirmatively add the expert)
+      - Flag DOK4 without 2 or more DOK3's, DOK3 without at least one supportive Source, etc.
+      - Flag if AI believes a Source is in the wrong node of the Knowledge Tree
+  - Ephor causes LLMs to enforce SPOVs
+    - SPOV must be short and simple and without explanation.
+    - SPOV serve as rules to focus SPOV.
+    - Remainder of BrainLift is interesting Domain context, but not what is used to focus LLM response
+  - **It is up to the user to add / modify the BrainLift** based on key learning processes:
+    - Is it worth putting this into the knowledge tree with new DOK1 and DOK2 info?
+      - Have I read it in the context of my SPOV?
+      - Does something come out of the tree in favor of this more credible information?
+      - Is there contradictory information that causes me to rethink my DOK3 and DOK4?
+    - Does the inclusion of this source cause me to create/update my DOK3 insights?
+      - If yes, I should post in public to see comments/reactions to my insights
+    - Do the changes to DOK3 cause me to create new knowledge, and update my DOK4 spov?
+      - If yes, I should post public to show off my expertise.
+    - Have done all this, do I need to restructure my DOK2 knowledge tree?
+    - Should I add the source's author to my BrainLift experts?
+  - BrainLifts should be pushed and consumed organization wide to accelerate learning
+    - Ephor coach should create experts based on BrainLift (AI)PI
+      - BrainLifts as experts are in the Ephor council of kings and expert debates
+      - BrainLifts as experts are used by Ephor Coach to give realtime advice and coaching
+        - For example, our AI coding and AI cursor BrainLifts are dynamic Ephor experts that the RealTime coach will automatically load when the user has Cursor open
+        - Experts give real time feedback to user to do better in cursor: "hey, stop asking Cursor to fix the bug - go back to the original prompt, modify it to say that the table rows must be able to be dynamically reordered without affecting subtotals"
+    - BrainMaxxing should allow a user to subscribe to change in other organizational BrainLifts (deltas appear in my feed with a link to the BL)
+      - For example, our internal BrainLift on 0-1 prototyping

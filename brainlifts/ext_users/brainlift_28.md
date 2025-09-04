@@ -1,0 +1,74 @@
+Kandy SBC-AS Configuration Management and Troubleshooting
+
+- Purpose
+  - Capture expertise around Session Border Controller (SBC) and Application Server (AS) configuration to prevent project delays
+  - Preserve troubleshooting knowledge and configuration patterns that are currently siloed with specific experts
+  - Provide structured approach to resolving SBC configuration issues, call flows, and trunk setup problems
+- Key terms:
+  - Core SBC and Application Server terminology
+    - SBC - Session Border Controller
+      - A specialized network element controlling signaling, media, and data flows for IP communications at network borders. Operating as a Back-to-Back User Agent (B2BUA), the SBC protects and regulates communications while providing security, interoperability, quality assurance, and policy enforcement. [Ribbon](https://ribboncommunications.com/company/get-help/glossary/session-border-controller-sbc)[Wikipedia](https://en.wikipedia.org/wiki/Session_border_controller) It manipulates both SIP signaling and media streams (RTP), appearing as an endpoint to each side of the communication while maintaining complete control over the session
+    - AS - Application Server
+      - A SIP-based server hosting and executing telecommunications applications within IMS or SIP networks. The AS implements business logic for value-added services like call routing, presence, conferencing, and subscriber features. It operates as either a B2BUA or SIP proxy to control session flows, invoking specific service logic based on network triggers. [ResearchGate](https://www.researchgate.net/publication/289897555_Service_composition_in_IMS_using_Java_EE_SIP_servlet_containers) In SBC-AS integration, the AS handles service-specific logic while the SBC manages network-level controls.
+    - Back-to-Back User Agent (B2BUA)
+      - A critical SBC architectural component operating simultaneously as both User Agent Client (UAC) and User Agent Server (UAS). The B2BUA terminates SIP signaling on both sides, creating two discrete call legs for each session. [Oracle +4](https://docs.oracle.com/en/industries/communications/session-border-controller/9.2.0/configuration/sbc-and-sip.html) Unlike proxies that forward messages with minimal modification, B2BUAs regenerate entirely new messages, maintaining complete session state and enabling full control over all message content.
+    - Access SBC vs Trunking SBC
+      - Access SBC deployments face enterprise locations or subscribers at service provider access borders, handling registration, authentication, and session control for end-user devices.
+      - Trunking SBC deployments operate at borders between service provider networks, facilitating peering, PSTN termination, and wholesale voice services with protocol interworking and enhanced security functions.
+    - Q SBC vs Core SBC - Ribbon SBC hardware models
+  - Routing terminology and mechanisms
+    - Trunk groups
+      - Logical collections of communication channels grouped for routing and management in SBC systems. Configuration includes ingress IP prefixes, signaling peer groups, packet service profiles, and state management. Trunk group names use ALL UPPERCASE for DTG routing. [Rbbn](https://publicdoc.rbbn.com/display/SBXDOC101/Routing+Mechanisms)[Rbbn](https://publicdoc.rbbn.com/spaces/SBXDOC120/pages/372567202/Reference+Configuration) Selection criteria involve destination-based routing, carrier-based routing, and load balancing across multiple groups for redundancy.
+    - IP routing vs PSX routing
+      - **IP routing** employs local SBC-based decisions using configured routing tables without external consultation—ideal for simple topologies with static requirements.
+      - **PSX routing** utilizes centralized policy servers (PSX/ERE) providing dynamic routing based on comprehensive policy evaluation, supporting carrier-grade deployments with number portability, lawful intercept, and complex routing logic. PSX offers "light dip" (minimal lookup) or "heavy dip" (full evaluation) options.
+    - On-net routing vs PSTN routing
+      - **On-net **routing keeps calls within the provider's infrastructure, avoiding external charges while maintaining quality control with direct RTP streams and end-to-end encryption possibilities.
+      - **PSTN routing** traverses Public Switched Telephone Network infrastructure, incurring per-minute charges and requiring transcoding, with limited QoS control and mandatory regulatory compliance including lawful intercept capabilities.
+    - Username routing vs standard routes
+      - **Username routing** uses SIP URI components (username and domain) for routing decisions, supporting alphanumeric usernames with full match, domain suffix, and FQDN matching.
+      - **Standard routes **employ traditional numeric pattern matching with prefix-based routing. Priority hierarchy favors most specific username matches, then domain suffixes, falling back to numeric patterns and finally default routes.
+    - Lawful intercept
+      - Regulatory compliance feature enabling authorized communications interception through standardized interfaces. [Wikipedia](https://en.wikipedia.org/wiki/Session_border_controller) SBC implementation includes Call Data Channels supporting multiple standards, mediation server integration, and policy-driven activation via PSX
+- Owner(s)
+  - Rafal Hryniow
+- **DOK4 - SPOV**
+  - SBC configuration issues are critical blockers that can halt entire project timelines if not addressed systematically
+  - Knowledge concentration in single experts creates dangerous bottlenecks during critical project phases
+  - Proper SBC-AS configuration requires understanding both technical implementation and business call flow requirements
+  - Manual configuration changes to SBC routing create technical debt and should be replaced with systematic configuration management through proper tooling
+  - On-net routing between different customer domains creates potential regulatory compliance issues by bypassing lawful intercept capabilities and should be avoided in favor of PSTN routing
+  - SBC registration handling requires careful design to prevent registration table overflow during network outages, with public-side registration timers kept intentionally short
+  - UAE's emirate-specific routing requirements create unique challenges for subscriber routing that require specialized PSX configuration patterns
+- **DOK3 - Insights**
+  - SBC configuration problems often manifest as call flow issues that are difficult to diagnose without proper logging, with transparency settings and SIP message manipulation requiring systematic debugging approaches
+  - Trunk setup requires coordination between multiple teams and clear documentation of configuration dependencies
+  - Trunk group configuration requires careful coordination between ingress/egress settings, with mismatched IP signaling profiles often causing subtle call routing failures that are difficult to diagnose
+  - Zone isolation principles recommend one SIP SIG port per zone to prevent routing conflicts and simplify troubleshooting
+  - Registration flows between SBC and Application Server involve complex session timers, with the SBC maintaining shorter public-side registration timers (typically 180 seconds) while private-side registration to the AS uses longer timers (typically 3600 seconds)
+  - When routing between different SESMs on the same AS, the first SESM stays in the path for call routing but removes itself from the path for registration flows through a 503 redirect mechanism
+  - Username routing versus standard routes are determined by the first character of the username - alphabetic characters trigger username routing while numeric characters use standard routes
+- **Experts**
+  - Neihls Jacobson
+  - Stephen Brown
+  - Phil Karam
+- **DOK2 - Knowledge Tree**
+  - SBC Configuration Fundamentals: Basic setup procedures, common configuration patterns, trunk configuration basics
+  - Troubleshooting Methodologies: Log analysis techniques, call flow debugging, systematic problem isolation approaches
+  - Expert Collaboration Patterns: When to escalate to specialists, effective knowledge transfer methods, documentation standards
+  - SBC-AS Integration Configuration: IP routing configuration between SBC and Application Servers, trunk group setup for multiple Application Server instances, configuration management through KBS portal
+  - DOK1 Facts: SBC configuration for Application Servers is managed through the KBS portal which populates IP routing information; Manual changes to SBC IP routing can temporarily fix issues but create maintenance problems
+  - DOK2 Summary: When setting up multiple Application Server instances (AS1, AS2), proper SBC configuration is required to ensure calls are routed correctly between instances
+  - SBC Configuration Fundamentals: Transparency profiles control how SIP headers are handled between zones, with counterintuitive settings that require careful testing
+  - Cross-Application Server Routing: Calls between different application servers require consistent trunk group configuration with proper IP signaling profiles
+  - Configuration Documentation Resources: PRA documentation in Confluence contains critical reference configurations for trunk groups and profiles
+  - When standard transparency profiles don't provide needed behavior, SMM rules can be used as an alternative, but require careful management to avoid conflicts
+  - SBC Registration Handling section with detailed DOK1 facts about registration timer management and authentication flows
+  - Multi-SESM Routing Patterns section covering internal forwarding vs redirect mechanisms
+  - PSX Routing Fundamentals section with Element Routing Priority (ERP) profiles and username routing triggers
+  - UAE-Specific Routing Considerations section covering emirate-based routing requirements
+  - SBC caches REGISTRATION requests so not all REGISTRATION requests are routed to SESM.
+    - this happens as phones re-register very often so in order to prevent massive SESM traffic SBC is caching REGISTRATION requests and goes to SESM with differnet timeouts
+  - [https://trilogy-confluence.atlassian.net/wiki/spaces/KDO/pages/1098003142/PRA+HLD+Docs](https://trilogy-confluence.atlassian.net/wiki/spaces/KDO/pages/1098003142/PRA+HLD+Docs)
+  - [https://trilogy-confluence.atlassian.net/wiki/spaces/KDO/pages/1097995141/PRA+Config+Foundation](https://trilogy-confluence.atlassian.net/wiki/spaces/KDO/pages/1097995141/PRA+Config+Foundation)
+  - [https://trilogy-confluence.atlassian.net/wiki/spaces/KDO/pages/1098077693/Help+-+PSX+Debug](https://trilogy-confluence.atlassian.net/wiki/spaces/KDO/pages/1098077693/Help+-+PSX+Debug)

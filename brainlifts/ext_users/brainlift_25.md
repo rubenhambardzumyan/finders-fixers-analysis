@@ -1,0 +1,77 @@
+Using AI in Software Maintenance
+
+- BrainLift represents our ideas and spiky points of view in areas where we have expertise. These perspectives are supported by insights, which are in turn backed by summaries of real facts—facts that are gathered from experts
+- Owner
+  - Mohammad Azhari
+- Knowledge Areas
+  - Using AI tools in day-to-day job
+  - Some prompt engineering knowledge
+- Purpose
+  - Learn the best practices of using AI in daily maintenance work
+  - Out of scope:
+    - Compare between LLM models
+    - Compare between AI tools
+- DOK4 - SPOV
+  - Engineers should delegate code creation to AI and evolve into high-leverage reviewers.
+  - Engineers must generate test cases using AI and focus on refining and validating those cases.
+- DOK3 - Insights
+  - AI Significantly Enhances Automation, But Context and Human Judgment Remain Critical Gaps
+  - AI’s Value in Legacy Code Lies in Pattern Recognition, Not Deep System Understanding
+- Knowledge tree
+  - AI in Automation for Coding and Testing
+    - DOK1 – Facts
+      - AI-driven tools generate and prioritize software test cases.
+      - AI can quickly scaffold E2E test scripts from code changes, user stories, or UI recordings.
+      - AI can automatically detect and fix bugs in codebases.
+    - DOK2 – Summaries
+      - AI excels at detecting bugs, generating test cases, and scaffolding E2E test scripts from code changes or requirements—reducing manual effort and accelerating development cycles.
+  - AI for Legacy Code Comprehension
+    - DOK1 – Facts
+      - AI can reverse-engineer undocumented legacy code by identifying patterns and dependencies.
+      - AI struggles without documentation or original developer context.
+      - Tightly coupled legacy components make safe AI-driven refactoring difficult.
+    - DOK2 – Summaries
+      - AI can reverse-engineer undocumented systems by spotting structural patterns, but it struggles when lacking documentation or institutional knowledge, especially in tightly coupled systems.
+  - AI Limitations in Human-Centric and Visual Evaluation
+    - DOK1 – Facts
+      - AI cannot reliably test features requiring human judgment, like UI/UX aesthetics or usability.
+      - Visual regressions, accessibility issues, and responsive layout bugs often evade AI detection.
+    - DOK2 – Summaries
+      - Tasks like UI/UX evaluation, accessibility validation, and detecting layout regressions often require human perception, where AI tools remain unreliable.
+  - AI Gaps in Contextual and Environmental Awareness
+    - DOK1 – Facts
+      - AI cannot interact with or validate client environments where real-world data, permissions, or integrations are involved.
+    - DOK2 – Summaries
+      - AI can't effectively simulate or validate real-world scenarios involving client-specific data, integrations, or permissions—leading to blind spots in critical testing.
+- How [Ephore.ai](http://ephore.ai/) helped me
+  - It gives me a grade for each section, along with coaching to help me improve.
+  - It provides content from various social media platforms like X and YouTube.
+  - It also helps me chat with different AI models about my content to assist with adding and reviewing it.
+- Experts
+  - 1. Andrew Ng (@AndrewYNg)
+    - Background: Co-founder of Coursera; former head of Baidu AI Group and Google Brain.
+    - Unique Perspective: Advocates for democratizing AI education and practical applications over speculative fears.
+    - Contrarian Views: Emphasizes real-world AI applications over discussions about AI superintelligence.
+    - Value to BrainLift: Offers pragmatic insights into integrating AI into daily workflows, aligning with maintenance best practices.[Nextotech](https://www.ciodive.com/news/11-ai-experts-to-follow-on-twitter/520205/?utm_source=chatgpt.com)[+3](https://www.ciodive.com/news/11-ai-experts-to-follow-on-twitter/520205/?utm_source=chatgpt.com)[CIO Dive](https://www.ciodive.com/news/11-ai-experts-to-follow-on-twitter/520205/?utm_source=chatgpt.com)[+3](https://www.ciodive.com/news/11-ai-experts-to-follow-on-twitter/520205/?utm_source=chatgpt.com)[WebWand AI](https://www.ciodive.com/news/11-ai-experts-to-follow-on-twitter/520205/?utm_source=chatgpt.com)[+3](https://www.ciodive.com/news/11-ai-experts-to-follow-on-twitter/520205/?utm_source=chatgpt.com)
+  - 2. Fei-Fei Li (@drfeifei)
+    - Value to BrainLift: Provides a balanced view on implementing AI in maintenance with ethical considerations.[WebWand AI](https://webwand.ai/15-twitter-accounts-to-follow-for-ai-insights/?utm_source=chatgpt.com)
+    - Contrarian Views: Challenges purely technical approaches by emphasizing ethical and societal considerations.
+    - Unique Perspective: Focuses on human-centered AI, ensuring technology serves societal needs.
+    - Background: Professor at Stanford University; co-director of the Stanford Human-Centered AI Institute.
+  - 3. Andrej Karpathy (@karpathy)
+    - Value to BrainLift: Offers insights into how AI can streamline maintenance coding tasks.[WebWand AI](https://webwand.ai/15-twitter-accounts-to-follow-for-ai-insights/?utm_source=chatgpt.com)[Business Insider](https://www.businessinsider.com/mark-zuckerberg-ai-startup-company-with-small-team-2025-5?utm_source=chatgpt.com)[+1](https://www.businessinsider.com/mark-zuckerberg-ai-startup-company-with-small-team-2025-5?utm_source=chatgpt.com)[Wikipedia](https://www.businessinsider.com/mark-zuckerberg-ai-startup-company-with-small-team-2025-5?utm_source=chatgpt.com)[+1](https://www.businessinsider.com/mark-zuckerberg-ai-startup-company-with-small-team-2025-5?utm_source=chatgpt.com)
+    - Contrarian Views: Suggests that natural language could become a primary programming interface.
+    - Unique Perspective: Coined "vibe coding," highlighting AI's role in simplifying coding tasks.
+    - Background: Former Director of AI at Tesla; known for work on deep learning and computer vision.
+  - 4. Hilary Mason (@hmason)
+    - Value to BrainLift: Provides actionable advice on implementing AI in real-world maintenance scenarios.[The Verge](https://www.theverge.com/decoder-podcast-with-nilay-patel/667538/workday-gerrit-kazmaier-enterprise-software-ai-interview?utm_source=chatgpt.com)
+    - Contrarian Views: Advocates for simplicity and clarity in AI applications over complexity.
+    - Unique Perspective: Bridges the gap between data science research and practical applications.
+    - Background: Data scientist; founder of Fast Forward Labs; former Chief Scientist at Bitly.
+  - 5. Eric Horvitz (@erichorvitz)
+    - Value to BrainLift: Offers insights into collaborative AI tools beneficial for maintenance teams.
+    - Contrarian Views: Emphasizes the importance of human-AI collaboration over full automation.
+    - Unique Perspective: Explores the integration of AI into everyday systems and its societal impacts.
+    - Background: Chief Scientific Officer at Microsoft; pioneer in AI and human-computer interaction.
+- Time Tracking
+  - 22 May 2025: Re-searched for one hour through the suggestions in Ephor and X (Twitter)

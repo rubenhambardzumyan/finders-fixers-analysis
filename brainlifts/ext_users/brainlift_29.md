@@ -1,0 +1,64 @@
+Developing on the Khoros One/Care Platform Using AI
+
+- Owner
+  - Sarang Mongia
+  - [sarang.mongia@trilogy.com](mailto:sarang.mongia@trilogy.com)
+- Purpose
+  - This BrainLift provides comprehensive, one-stop documentation for all of Khoros One. It includes key information for every repository that is part of the Khoros One ecosystem, covering the overall architecture and best development practices for each repo.
+  - The goal is to have a single reference that we can provide to AI for context on any repository we need to work on. It also focuses on establishing best practices for developing on this platform with AI, detailing how we can maximize our productivity.
+  - This BrainLift will not cover the specific setup, build, or execution steps for a repository, as that information should be covered in each repo's [README.md](http://readme.md/) file.
+- DOK4 - SPOV
+  -
+- DOK3 - Insights
+  - DOK3 - We need to resolve tech debt first, like upgrade java versions, maven/grale versions, fix security defects and vulnerabilities. Improve infrasructure issues like maybe maybe the ic-backend deployment proccess use EKS and auto scaling etc. These are some of the tech debts etc we could fix before we prioritize new feature work. Once this will be done, it will be much easier to add new features to our existing infrastructure.
+  - DOK3 - A few apps have secure credentials we need to plug in to environment files. We should make sure all of these credentials are in one place such as aws and need to get rid of insititutional knowledge where people need to contact team memebers for secrets.
+  - DOK3 - The mobile brandmessenger sdk testing process needs to be automated. Especially for android brand messenger. Automated tests dont work and we have a spreadsheet for manual testing. This spreadsheet needs to be converted into automated end to end integration tests which would look at the same test cases the spread sheet does, but just automated.
+  - DOK3 - Again mobile android brandmessenger sdk needs its java and sdk versions properly updated before new feature work. This does not support the two latest versions of android.
+  - DOK3 - A lot of webapps have config files and a clunky manual setup process. We need to at the very least write interactive shell/python scipts which automate the initial setup into just one command. Ex socialwebapp analytics backend. Just one script you run where you type stuff like unique name, es cluster name, aws profile name and it sets your config for oyu. COnfig setter java app or soemthing which takes your config file and inputs and sets it for you. Infact we could do with this altogether and have some sort of online config system which we connect to for each app.
+  - QA is very slow to run and this slows the developing process. If you reload the analytics page on manual-c01, it takes a full 3+ mins to open. We need to improve its perfomrance to improve the overall development experience. Would also need to see how fast production loads.
+  - DOK4 - Using IntelliJ with the windsurf cascade plugin is a good way to utilize the windsurf ai capabilities while also using the advanced Java debugging and tools provided by IntelliJ.
+- Experts
+  - Zoltan Szolantai - via his brainlift on Khoros One - [https://workflowy.com/s/khoros-architecture/0Zi0FbcrDyGTcrTP#/f5ea3c2003c5](https://workflowy.com/s/khoros-architecture/0Zi0FbcrDyGTcrTP#/f5ea3c2003c5)
+    - name
+    - main views
+    - why follow
+    - locations (X, LinkedIn!, substack, blog, etc.)
+  - Sam Altman on Twitter -[https://x.com/sama](https://x.com/sama)
+    - name
+    - main views
+    - why follow
+    - locations (X, LinkedIn!, substack, blog, etc.)
+  - Elvis/Omar Sar on Twitter - [https://x.com/omarsar0](https://x.com/omarsar0)
+  - Andrej Karpathy on Twitter - [https://x.com/karpathy](https://x.com/karpathy)
+  -
+- DOK2 - Knowledge Tree
+  - DOK2 - The Analytics system populates a lot of data from various sources. It has a pipeline which takes in data from sources like reach and lake and then puts them into elastic search clusters. There is data like case-states, responses, posts. This data is then provided via an api for reporting or use in widgets by the front end.
+  - DOK2 - The Khoros One platform's architecture is a hybrid system, combining a large legacy Java monolith (the "IC Backend") with a growing ecosystem of modern microservices. The main engineering effort is focused on migrating all customers to this unified stack.
+  - DOK2 - The backend is composed of a central monolith for core application logic, supported by key microservices that handle external integrations. Knowing the internal names ("Response," "Social Gateway") is crucial for navigating the codebase.
+  - DOK2 - Brand Messenger is the platform's proprietary, mission-critical chat solution. It's a modern, service-oriented system with its own backend for transiting messages and frontend SDKs for embedding chat experiences.
+  - DOK2 - The deployment infrastructure is a mix of modern and legacy patterns. New microservices follow a GitOps model to EKS, but the core monolith relies on a legacy, script-based manual deployment process to EC2 instances.
+  - DOK2 - The daily workflow for a developer involves a hybrid local/remote setup to manage the platform's complexity. Concurrency is managed via feature flags and isolated test containers, and a structured branching strategy is enforced.
+  - DOK2 - The quality process relies on a combination of automated CI checks and manual review. The core principle is developer ownership of quality, with developers writing and executing their own tests.
+  - DOK2 - The data layer uses MySQL with an automated migration process via Flyway to ensure schema consistency. A significant technical debt exists in the legacy method of managing secrets, which involves encrypted files within the codebase.
+  - DOK1 - The core platform is architected to handle **asynchronous** customer conversations that persist over long periods.
+  - DOK1 - The legacy monolith is referred to internally as the **"IC Backend"** or **"Response"** and is a **"GWT Java"** application.
+  - DOK1 - A critical microservice, the **"Social Gateway,"** acts as an abstraction layer for all third-party social network API integrations.
+  - DOK1 - The **"Publisher"** feature is the modern name for the legacy publishing component known internally as "Reach."
+  - DOK1 - Brand Messenger is a **service-oriented architecture**, not part of the legacy monolith.
+  - DOK1 - Its frontend is delivered via **SDKs** for web, native iOS, and native Android.
+  - DOK1 - A failure of the Brand Messenger chat widget on a customer's site is considered a **P0, "five-alarm fire" outage.**
+  - DOK1 - Because the stack is owned end-to-end, it is significantly easier to create reliable automated tests for Brand Messenger compared to third-party channels.
+  - DOK1 - There are three deployment patterns in use: **Amazon EKS** with **ArgoCD** (modern), **Amazon ECS** with a legacy Python 2 framework called **"Skillet"** (older microservices), and direct **EC2 deployment** with Fabric/RPMs (legacy monolith).
+  - DOK1 - The "IC Backend" monolith is segmented into ~82 independent multi-tenant **"pods,"** each on its own auto-scaling group.
+  - DOK1 - Production deployments for the IC Backend are a **manual process** executed by an Ops team using a command-line tool called **Fabric**, which installs **RPM packages** via SSH and YUM.
+  - DOK1 - The standard development model is hybrid: run one service locally and connect to a shared QA environment for dependencies due to high local resource requirements (**32GB RAM**).
+  - DOK1 - Developers use remote **"team containers"** for isolated testing of the IC Backend.
+  - DOK1 - The team follows a `main`-based branching strategy, and all feature branches must be named with the **Jira ID**.
+  - DOK1 - The engineering culture follows a "left shift" model where developers are responsible for writing their own **JUnit/Mockito** tests.
+  - DOK1 - There are no mandated code coverage metrics; test quality is enforced by human PR reviewers.
+  - DOK1 - Performance testing is done on-demand using **Gatling** by replaying anonymized **production access logs**.
+  - DOK1 - The QA team manually adds developer-written test cases to the official test plans in **TestRail**.
+  - DOK1 - The primary database is **MySQL**, running on **AWS RDS Aurora**.
+  - DOK1 - Database schema migrations are handled automatically on application startup using **Flyway**.
+  - DOK1 - A known piece of technical debt is the legacy secrets management system, which uses encrypted **"databags"** stored directly in the code repository.
+  - DOK1 - Newer services are migrating to **AWS SSM** and Secrets Manager for handling credentials.

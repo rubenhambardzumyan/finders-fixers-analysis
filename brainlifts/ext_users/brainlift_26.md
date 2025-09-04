@@ -1,0 +1,30 @@
+Software Design Principles in AI-augmented Development
+
+- Purpose
+  - To redefine software design principles for AI-augmented development, focusing on how semantic abstractions outperform traditional technical abstractions like SOLID.
+  - This BrainLift captures expertise in creating code that remains highly maintainable while being optimized for both human comprehension and AI context windows.
+  - It challenges established software engineering dogma by prioritizing domain-oriented organization over pattern-based abstractions, ultimately delivering superior long-term maintainability and development velocity in AI-assisted environments.
+- Owner
+  - Hasan Serkan Yilmaz
+- _----------- Depth of Knowledge / DOK starts here ----------_
+- DOK4 - SPOV
+  - Semantic cohesion outperforms technical abstraction in AI-first development.
+    - Code that tells the complete story in one place over separated concerns.
+    - Functions with 50-100 lines of semantically coherent code over 5-10 line "clean" functions scattered across files.
+- DOK3 - Insights
+  - Systems with fewer technical abstractions but stronger semantic organization present a more immediately comprehensible structure to both humans and AI.
+- _---------- BRIGHT LINE. Above this is based on the owner's opinion and expertise. Below this is based on the external flow of information ----------_
+- Experts
+- DOK2 - Knowledge Tree
+  - DOK2 -summaries
+    - Pre-AI software design principles focused on technical organization of the code over semantic clarity. Principles optimized for such constraints hinder AI-first development. This represents a paradigm shift with AI readability becoming a primary concern alongside human readability.
+    - Code bases with fewer, more semantically meaningful abstractions often demonstrate better long-term maintainability metrics.
+  - DOK1 - facts
+    - LLMs have finite context windows that limit the amount of code they can process at once.
+    - Each additional layer of abstraction consumes context window space with boilerplate, imports, and relationship definitions.
+    - Empirical studies show that strict SOLID adherence can increase initial code size by 30-70% compared to more direct implementations.
+    - Industry surveys indicate that while 87% of teams claim to follow SOLID principles, only 24% strictly implement all five principles consistently.
+    - LLMs generate more accurate code when domain concepts are clearly articulated in variable and function names.
+    - Studies show that AI tools generate 45% fewer errors when completing code organized semantically versus technically.
+  - links to original sources
+- _---------- BRIGHT LINE. Above this is the BrainLift, the user creates this without AI. Below this is not the BrainLift, it is however the user gets sources from the flow of external information ----------_

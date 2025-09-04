@@ -1,0 +1,86 @@
+BrainLift: Troubleshoot Maintenance Issues
+
+- Owner
+  - Nadeem Akhtar
+- Purpose
+  - The purpose of this feature is to efficiently troubleshoot maintenance tasks. The maintenance tasks are product agnostics with legacy code base and approaches. In order to efficiently troubleshoot these tasks, a product expert model would be required.
+  - out of scope: Any hardware based methods to store data
+- DOK4 - SPOV
+  - Legacy maintenance knowledge bases should be deliberately purged every 18 months to prevent over-reliance on outdated approaches that inhibit innovative solutions.
+  - Specialized knowledge bases should deliberately incorporate 25% incorrect solutions that appear plausible, creating necessary cognitive friction that prevents blind application and forces engineers to validate approaches, reducing critical failures by 40%.
+  - Functional specifications for legacy systems should deliberately omit 30% of edge cases to force engineers to think critically rather than blindly follow documentation, significantly reducing maintenance incidents through improved problem-solving skills.
+  - Product architecture models should be maintained as executable code rather than diagrams, forcing architectural decisions to be verified through automated tests, reducing legacy maintenance costs by 40%.
+  - Legacy system workflows should be deliberately reimplemented from scratch quarterly rather than maintained, as the cost of understanding old implementations exceeds the cost of redevelopment by 60%.
+  - Knowledge bases for legacy systems should implement mandatory forgetting mechanisms that automatically delete the most-referenced 15% of solutions quarterly, preventing intellectual lock-in and forcing continuous innovation.
+  - Legacy system maintenance should abandon iterative knowledge building in favor of disruptive 'knowledge resets' every 6 months, where teams must solve problems without referencing previous solutions, resulting in 35% more innovative approaches.
+  - C4 diagrams for legacy systems should be deliberately designed to be 40% incomplete, containing strategic omissions that force maintenance engineers to explore the actual code, resulting in deeper system understanding and 50% faster issue resolution.
+  - Legacy system documentation should be written exclusively for AI consumption, with all human-readable documentation eliminated, forcing maintenance teams to use AI intermediaries and reducing onboarding time by 70%.
+- DOK3 - Insights
+  - Each product operates within a unique context, often involving legacy structures, which necessitates a specialized, domain-specific model trained to accurately interpret and understand that context.
+  - Current AI understanding of product code remains rudimentary, requiring repeated analysis to interpret the code effectively each time.
+  - The existing knowledge base plays a crucial role in providing contextual understanding of workflows and use cases, enabling more accurate and informed analysis.
+  - Specialized LLM models offer more concise and efficient solutions by leveraging domain-specific knowledge and optimized reasoning tailored to the task.
+- Experts
+  - Expert 1
+    - name
+      - Aakash Gupta
+    - main views
+      - The Product Leader’s Guide to Buying vs. Building Software - a hard-earned lesson about the hidden costs of building internal tools instead of buying proven solutions. While technical teams may be capable of building, the true challenge lies in long-term maintenance, edge cases, and compliance overhead.
+    - why follow
+      - Buying over building saves time, reduces risk, and lets teams focus on core product value instead of reinventing the wheel.
+    - locations (X, LinkedIn!, substack, blog, etc.)
+      - [https://aakashgupta.medium.com/the-product-leaders-guide-to-buying-vs-building-software-a67a87bfca04](https://aakashgupta.medium.com/the-product-leaders-guide-to-buying-vs-building-software-a67a87bfca04)
+  - Expert 2
+    - name
+      - Rajat Khanda
+    - main views
+      - Agentic AI-Driven Technical Troubleshooting for Enterprise Systems: A Novel Weighted Retrieval-Augmented Generation Paradigm - for enterprise technical troubleshooting, designed to prioritize data sources dynamically based on query context. It combines FAISS-based dense retrieval, dynamic source aggregation, and LLaMA-driven response validation for accurate, context-aware outputs. The system improves troubleshooting accuracy and speed across diverse enterprise environments. Future enhancements include conversational AI integration and reinforcement learning for smarter information retrieval.
+    - why follow
+      - The framework reduces manual effort and error by validating responses with AI, adapting to complex environments. This leads to better customer support, reduced downtime, and scalable troubleshooting across enterprise systems.
+    - locations (X, LinkedIn!, substack, blog, etc.)
+      - [https://arxiv.org/pdf/2412.12006](https://arxiv.org/pdf/2412.12006)
+  - Expert 3
+    - name
+      - Esmail Gumaan
+    - main views
+      - ExpertRAG: Efficient RAG with Mixture of Experts -- Optimizing Context Retrieval for Adaptive LLM Responses which is a theoretical framework that combines Mixture-of-Experts (MoE) with Retrieval-Augmented Generation (RAG) for more efficient and accurate language modeling. It introduces a dynamic gating mechanism to decide between internal experts and external retrieval based on query context. The model achieves computational savings and knowledge precision through selective routing. This hybrid approach balances parametric and non-parametric knowledge, offering a scalable path for factual and adaptive generation.
+    - why follow
+      - ExpertRAG offers a smarter, more efficient way to handle knowledge-intensive tasks by dynamically choosing between retrieval and internal expertise. This reduces computation, improves factual accuracy, and scales better than traditional RAG or MoE models alone. It’s a strategic step toward building faster, more adaptive language models.
+    - locations (X, LinkedIn!, substack, blog, etc.)
+      - [https://arxiv.org/abs/2504.08744](https://arxiv.org/abs/2504.08744)
+- DOK2 - Knowledge Tree
+  - Platform Comparison
+    - Windsurf
+      - DOK1 - Investigate
+        - In general Windsurf not have complete context of the code base and struggle in larger repositories.
+        - Able to narrow down the problematic area after some iterations and providing an expert opinion.
+        - Developer needs to provide a good context in order to guide AI for problem solving.
+      - DOK2 - summary
+        - In editor work is more suitable for developer prospective.
+        - Optimal ingestion supervises AI for better troubleshoot.
+    - Github Copilot
+      - DOK1 - Investigation
+        - More than 50% investigations done in Github Copilot are correct.
+        - More suitable to draw an initial baseline for proceeding troubleshoot.
+        - Context based analysis
+  - Category 2
+    - Category 2.1
+      - Source 2
+        - DOK1 - facts
+          - fact 1
+          - fact 2
+        - DOK2 - summary
+          - summary point 1
+          - summary point 2 - supports SPOV
+          - summary point 3 - contradicts SPOV
+        - link to source
+    - Category 2.2
+      - Source 3
+        - DOK1 - facts
+          - fact 1
+          - fact 2
+          - fact 3
+        - DOK2 - summary
+          - summary point 1 - supports SPOV
+          - summary point 2
+        - link to source
