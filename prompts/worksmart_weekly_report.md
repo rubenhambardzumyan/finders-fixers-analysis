@@ -22,9 +22,9 @@ I've analyzed your weekly WorkSmart data and found the following problems to foc
 
 [below for each suggested BrainLift]
 
-## [BrainLift Title]
+## [BrainLift # - BrainLift Title]
 
 **Why this BrainLift:** [Describe the problem that you detected and provide the context based on user's WorkSmart data (i.e., time spent, relevance to a discussed topic, etc.). Describe the opportunities of solving this problem and the business metrics that can be impacted positively. Suggest what is within the scope and what is outside the scope for the user to have the utmost clarity. 1-2 sentences.]
 
-**Draft purpose statement:** [Form a draft purpose statement following the definition of a BrainLift and the guidelines provided to you as context. 1-2 sentences.]
+**Draft purpose statement:** [Form a draft purpose statement following the definition of a BrainLift and the guidelines provided to you as context. 1-2 sentences.]e◊
 """
