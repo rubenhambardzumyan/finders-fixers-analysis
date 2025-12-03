@@ -1,0 +1,219 @@
+**Limitless Pendant Analytics for Guide Coaching**
+
+- **Owner(s)**
+  - Alec Ngai
+- **Stakeholders**
+  - Stefanie Baduria - Head of Guide Operations, primary decision maker
+  - Kim Rodriguez - Confirmed transcript sharing workflow
+  - CeCe Hill - Co-creating rubrics with Stef & Training Guides
+- **Purpose**
+  - **In Scope:** Evaluating how Limitless AI wearable pendants can capture guide-student interactions at Alpha School to enable AI-powered rubric analysis (mentor mindset, communication style, equity distribution) for objective training evaluation and ongoing coaching at scale.
+  - **Out of Scope:** General Limitless consumer use cases, student-worn devices, academic content delivery, comparison of all AI wearables on market, or building Limitless's product roadmap.
+- **DOK4 - Spiky Points of View**
+  - **Transcript-based coaching will outperform traditional classroom observation within 3 years.** Human observers can watch 2-3 sessions per guide per year; AI can analyze every interaction daily. The math is simple: more data + faster feedback loops = faster improvement. The only question is adoption friction, not efficacy.
+  - **The biggest risk to AI coaching tools isn't privacy concerns - it's the "Karen problem."** Dan Siroker's story about the all-caps complaint from a user rejecting painful truths reveals the real barrier: people who want validation, not improvement. Guide selection that filters for growth mindset matters more than any technical feature.
+  - **Equity maps expose unconscious bias more effectively than any diversity training.** When a guide sees they mentioned Lucian 27 times (11%) and Lola 6 times (2.4%), the data speaks louder than any workshop. Objective measurement creates undeniable feedback that bypasses defensive rationalization.
+  - **The "set and forget" architecture is non-negotiable for educator adoption.** Teachers/guides are cognitively overloaded. Any tool requiring manual recording start/stop, file management, or session tagging will fail adoption. Limitless's automatic capture with intelligent chunking solves the right problem.
+- **DOK3 - Insights**
+  - **The mentor mindset is measurable through language patterns.** Yeager's 2x2 framework (high/low standards × high/low support) maps directly to linguistic markers: directive vs. coaching language, scaffolding presence, belief statements, and correction style. AI can reliably classify transcripts into Enforcer/Mentor/Protector categories by analyzing these patterns.
+  - **Voice identification is the foundational data quality layer.** Without accurate speaker attribution, all downstream analysis (equity maps, time-with-kids metrics, student-specific coaching) becomes unreliable. The 20-second voice training requirement per person is an upfront investment that compounds in value over time.
+  - **API architecture determines analytics possibilities.** Limitless's per-user API model (no admin access) means centralized analytics requires explicit guide consent and key sharing. This is a feature, not a bug - it aligns with Dan's "iPhone not BlackBerry" philosophy and ensures guides opt-in rather than feel surveilled.
+  - **The three Alpha commitments create natural rubric categories.** "Kids love school" maps to engagement/relationship quality metrics. "2X in 2 hours" maps to time-on-task and academic focus. "Life skills" maps to afternoon workshop facilitation. Each commitment has measurable transcript indicators.
+  - **Feedback timing matters more than feedback depth.** Christie's pilot feedback ("After a week I noticed trends") and Liam's communication coaching both show value comes from pattern recognition over time, not single-session deep dives. Daily lightweight prompts beat weekly comprehensive reports.
+  - **DOK3 - Blueprints**
+    - **Blueprint: Daily Guide Coaching Loop**
+      - Domain Context: Guide wears pendant all day, captures kid interactions, wants actionable next-day improvement
+      - Actions: (1) Pendant syncs when guide opens app after school (2) Nightly poll of API for day's transcripts (3) Run through 3 rubric prompts: Mentor Mindset, Communication Style, Equity Map (4) Generate morning push notification with 1-2 specific improvement actions (5) Guide implements, cycle repeats
+      - Tools: Limitless API, Claude/GPT for rubric analysis, custom notification system
+      - QC / Definition of Done: Guide receives actionable feedback by 7am next day; feedback references specific quotes from previous day; guide reports finding at least 1 insight useful per week
+    - **Blueprint: Training Week Pass/Fail Evaluation**
+      - Domain Context: 2nd-week training guides need objective pass/fail determination
+      - Actions: (1) Collect 5 days of transcripts (2) Run each day through all rubrics (3) Calculate aggregate scores: Mentor Mindset rating 4/5 days, >70% coaching language, equity distribution within 3-15% per student, >80% time with kids (4) Flag any day with "Enforcer" rating for manual review (5) Generate summary report with pass/fail recommendation and evidence
+      - Tools: Limitless API, structured rubric prompts, scoring algorithm, report template
+      - QC / Definition of Done: Pass/fail decision supported by specific transcript evidence; no guide fails without human review of flagged concerns; inter-rater reliability >85% when human spot-checks AI ratings
+- **Experts**
+  - **Dan Siroker**
+    - Who: CEO and Founder of Limitless AI, former Director of Analytics at Obama campaign, founder of Optimizely (sold for $300M)
+    - Focus: Memory augmentation through AI, wearable technology, personalized AI coaching, the "hearing aid for memory" vision
+    - Why Follow: Direct access to Limitless roadmap and philosophy; his "iPhone not BlackBerry" stance on B2B shapes what's possible; personally invested in education (3 kids, interested in Alpha)
+    - Where: @dsiroker on Twitter, [limitless.ai](http://limitless.ai/), direct relationship via pilot
+  - **David Yeager**
+    - Who: Professor of Psychology at UT Austin, author of "10 to 25: The Mentor Mindset"
+    - Focus: Motivation science, growth mindset research (collaborated with Carol Dweck and Angela Duckworth), the mentor mindset framework (high standards + high support)
+    - Why Follow: His 2x2 framework IS the rubric Alpha uses for guide evaluation; research-backed evidence that mentor mindset doubles feedback implementation rates
+    - Where: @DavidYeager on Twitter, UT Austin, "10 to 25" book
+  - **Dorottya Demszky**
+    - Who: Assistant Professor at Stanford, researcher on AI in education
+    - Focus: NLP for classroom discourse analysis, automated teacher feedback, the TeachFX research validating AI coaching efficacy
+    - Why Follow: Her 2023 study showed TeachFX feedback increased "focusing questions" by 20% - empirical proof that automated transcript analysis improves teaching
+    - Where: Stanford NLP Group, Google Scholar, TeachFX research papers
+  - **Adam Geller**
+    - Who: Founder and CEO of Edthena
+    - Focus: Video-based teacher coaching, AI Coach platform, scaling classroom observation
+    - Why Follow: Edthena's "Observation Copilot" (TIME Best Inventions 2025) shows the market direction; their video-based approach contrasts with Limitless's audio-first model
+    - Where: @edaboringai on Twitter, [edthena.com](http://edthena.com/)
+  - **Jamie Poskin**
+    - Who: Founder and CEO of TeachFX
+    - Focus: Audio-based classroom analytics, teacher talk vs. student talk metrics, scalable teacher feedback
+    - Why Follow: TeachFX is closest competitor/parallel to what we're building; their "teacher talk time" metric doubled student participation - proof of concept for transcript-based coaching
+    - Where: [teachfx.com](http://teachfx.com/), LinkedIn
+  - **Stefanie Baduria**
+    - Who: Head of Guide Operations at Alpha School (effectively Head of Product for the school experience)
+    - Focus: Guide training, three commitments delivery, scaling quality across campuses, data-driven guide evaluation
+    - Why Follow: Primary stakeholder and domain expert; her rubrics (mentor mindset checklist, communication coaching prompts) are the ground truth for what "good" looks like
+    - Where: Internal - Alpha School leadership
+- **DOK2 - Knowledge Tree**
+  - **Limitless Platform & API**
+    - **Section Summary**
+      - Limitless is a wearable AI pendant that captures ambient audio, transcribes conversations, and enables AI-powered insights. The platform differentiates through "set and forget" automatic capture, voice identification for speaker attribution, and an extensible API. Key limitation: per-user data model with no admin access, requiring explicit consent for centralized analytics.
+    - **Sources**
+      - **"Limitless Developer API Documentation" - Limitless AI (2024)**
+        - **DOK2 Summary**
+          - The API enables programmatic access to transcripts but enforces per-user authentication - each guide needs their own API key. This architecture prioritizes user privacy over organizational convenience, requiring explicit opt-in for any centralized data collection. Rate limits (180 req/min) and pagination requirements mean bulk analysis needs thoughtful implementation.
+        - **DOK1 Facts**
+          - Base URL: https://api.limitless.ai/v1/ with X-API-Key header authentication (per-user keys from Developer settings)
+          - Rate limit: 180 requests per minute per API key
+          - Primary endpoint: GET /v1/lifelogs returns transcripts with date filtering, search, and pagination via cursor tokens
+          - Transcripts include speaker labels, timestamps, and AI-generated summaries organized into "chapters"
+          - Audio download available (Ogg Opus format, max 2hr per request) via /v1/download-audio endpoint
+          - MCP integration available at https://api.limitless.ai/mcp for Claude Desktop and ChatGPT Workspace
+          - No webhook support - must poll for new data; no bulk export - must paginate through results
+          - Beta status - subject to change
+        - Link: https://www.limitless.ai/developers
+      - **"Meeting with Dan Siroker" - Stefanie Baduria & Dan Siroker (August 2025)**
+        - **DOK2 Summary**
+          - Dan's origin story (hearing loss → hearing aid → "superpower" feeling → quest for memory augmentation) explains Limitless's core philosophy: technology should give humans capabilities they didn't know they were missing. His explicit stance against B2B surveillance ("iPhone not BlackBerry") shapes what integrations are possible - guides must want to wear it, not be told to.
+        - **DOK1 Facts**
+          - Dan started Limitless after experiencing hearing aids as "gaining a superpower" - the same feeling he wants for memory
+          - 90% of memories are forgotten after one week (the "forgetting curve"); memory peaks at age 20 and declines thereafter
+          - 20,000+ pendants sold with 99.6% retention rate (3.5x better than iPhone return rate)
+          - Every morning, users can get push notifications with AI-generated coaching based on previous day's conversations
+          - Dan uses it for parenting - gets specific language suggestions for handling his stubborn 7-year-old (Luke)
+          - Explicit philosophy: "I want people to wear the pendant because they want to wear it, not because their boss tells them to"
+          - Offered 5 free pendants for Alpha pilot with no strings attached
+          - Voice identification requires ~20 seconds of labeled speech per person, then auto-assigns going forward
+        - Link: Internal transcript (Aug202025-transcript.txt)
+      - **"Limitless Demo Session with Alpha Guides" - Dan Siroker (September 2025)**
+        - **DOK2 Summary**
+          - The demo revealed practical capabilities: real-time transcription chunked into navigable chapters, starred moments for quick bookmarking, custom daily prompts, and the ability to paste context (like Alpha's training materials) directly into prompts for rubric-aligned feedback. The 6-foot optimal range and "crystal clear audio in crowded cafe" design target classroom use cases well.
+        - **DOK1 Facts**
+          - Optimal audio capture range: 6 feet; designed for "crystal clear audio in a crowded cafe"
+          - Voice identification stores up to ~30 regular speakers; requires manual assignment first time, then auto-labels
+          - Custom daily notifications can be scheduled with any prompt - will run against previous day's transcripts
+          - Transcripts auto-organize into chapters with H2 headers; goal is ~12 high-level cards per day
+          - Can star moments in real-time by tapping pendant - creates bookmarks in transcript
+          - Audio retention is user-configurable: 1 day, 1 week, 1 month, 1 year, or forever
+          - Custom word dictionary available for domain-specific terminology and name spellings
+          - Supports 100+ languages with automatic language detection and switching mid-conversation
+        - Link: Internal transcript (Sep12025-transcript.txt)
+  - **Alpha School Context & Requirements**
+    - **Section Summary**
+      - Alpha School's model (2-hour AI academics + guide mentoring + life skills) creates a unique use case where guides do zero teaching - their entire value is relationship quality, motivation, and mentor mindset embodiment. The three commitments (love school, 2X learning, life skills) provide natural rubric categories. Stef's requirement is structured, pass/fail evaluation for training cohorts.
+    - **Sources**
+      - **"Alpha School Overview" - Alpha School Website (2025)**
+        - **DOK2 Summary**
+          - Alpha's model inverts traditional schooling: academics are individualized via AI in just 2 hours, freeing afternoons for life skills. Adults are "Guides" not teachers - their job is mentoring and relationship-building, not content delivery. This makes transcript-based coaching particularly valuable because guide quality IS the product.
+        - **DOK1 Facts**
+          - Three commitments: (1) Kids must love school (surveyed 5x/year, new metric: "would you rather go to school than vacation?"), (2) Learn 2X in 2 hours (AI-powered adaptive apps for academics), (3) Learn life skills (afternoon workshops: public speaking, growth mindset, grit, teamwork)
+          - Guides do zero academic teaching - their role is motivate, mentor, build relationships, facilitate workshops
+          - Guide minimum pay: $100,000 (2x Austin teacher average) to attract top talent
+          - Age bands: K-1, 2-3, 4-5, middle school
+          - Austin flagship: 150+ students, 11 years operating, located near Zilker Park
+          - Expansion: Sister schools at $25K price point, Montessorium model integrating 2-hour learning as "another material"
+        - Link: https://alpha.school/
+      - **"Email Thread: Limitless Pendant Analytics" - Stef, Alec, Kim, CeCe (November 2025)**
+        - **DOK2 Summary**
+          - Stef's core requirement is structured, rubric-based analysis of full training days for pass/fail decisions on 2nd-week guides. This is bigger scope than just 1:1 meetings - it's ALL interactions throughout the day. Kim confirmed guides can share transcripts via app settings, reducing friction for the pilot.
+        - **DOK1 Facts**
+          - Target users: Guides in their second week of training, acting as guide with kids while wearing pendant
+          - Evaluation scope: Full training day, not just structured 1:1s
+          - Analysis type: Structured, rubric-based (not open-ended); pass/fail decisions
+          - Example rubric questions: "Did guide spend 90% of time with kids?", "Did guide show mentor mindset?", "What percentage coaching vs. directive language?"
+          - Transcript sharing: Guides can enable sharing in app settings, can disable after training week
+          - CeCe involvement: Will co-create simple rubrics with Stef
+        - Link: Internal email (email.txt)
+  - **Mentor Mindset Framework**
+    - **Section Summary**
+      - David Yeager's mentor mindset framework provides the theoretical foundation for guide evaluation. The 2x2 matrix (standards × support) creates four archetypes: Mentor (high/high - the goal), Enforcer (high/low - demanding without scaffolding), Protector (low/high - coddling), and Apathetic (low/low). Research shows mentor-framed feedback doubles implementation rates.
+    - **Sources**
+      - **"10 to 25: The Mentor Mindset" - David Yeager (2024)**
+        - **DOK2 Summary**
+          - Yeager's research proves that young people are twice as likely to implement feedback when it's delivered with both high standards AND high support. The mentor mindset isn't about being nice or being tough - it's about being both simultaneously. This maps directly to measurable language patterns in guide transcripts.
+        - **DOK1 Facts**
+          - Four mindsets: Mentor (high standards + high support), Enforcer (high standards + low support), Protector (low standards + high support), Apathetic (low standards + low support)
+          - Research finding: 7th graders are 2x more likely to implement critical feedback when prefaced with high standards + high support framing
+          - Enforcer characteristics: Demands excellence without guidance on how to achieve it; believes young people respond to pressure; creates compliance but breeds resentment
+          - Protector characteristics: Removes obstacles, inflates grades, shields from challenges; communicates lack of respect for capabilities
+          - Mentor characteristics: Sets high expectations AND provides scaffolding to meet them; creates environments where students willingly engage with challenges
+          - Yeager collaborated with Carol Dweck (growth mindset) and Angela Duckworth (grit) on related research
+          - Was a middle school teacher and coach before becoming a professor - has practitioner experience
+        - Link: https://www.amazon.com/10-25-Groundbreaking-Generation-Making-Your/dp/0593655366
+      - **"Alpha Mentor Mindset Checklist" - Alpha School (2025)**
+        - **DOK2 Summary**
+          - Alpha operationalized Yeager's framework into a 12-concept checklist with 4 anti-patterns. The checklist provides specific linguistic markers (Transparency, Wise Feedback, Authentic Questions, etc.) that can be detected in transcripts, plus red flags (Compulsion to Tell, Grownsplaining, Compliment Sandwich) that indicate non-mentor behavior.
+        - **DOK1 Facts**
+          - 12 key concepts evaluated: Transparency, Wise Feedback, Collaborative Troubleshooting, Authentic Questions, Purpose & Meaning, Status & Respect, Growth Mindset, Belonging Stories, Celebrating Wins, Stress-can-be-enhancing, Opportunities/Action Steps, Guide Self-reflection
+          - 4 anti-patterns: Compulsion to Tell, Barrier of Mistrust, Grownsplaining, Compliment Sandwich
+          - Final rating output: Enforcer / Mentor / Protector classification
+          - Checklist designed to be run against transcript with specific quote extraction
+        - Link: Internal document (Mentor Mindset Checklist.pdf)
+  - **Pilot Results & Guide Feedback**
+    - **Section Summary**
+      - Early pilot feedback validates the concept: guides find the prompts valuable, with specific praise for trend identification over time and concrete language suggestions. Key friction point: equity maps have imperfect name fidelity, detecting when guide SAYS names but not always when guide is TALKING TO the student.
+    - **Sources**
+      - **"Limitless Pilot Feedback" - Christie, Liam (2025)**
+        - **DOK2 Summary**
+          - Both pilot guides found value but in different ways: Christie loved the daily mentor mindset check for trend identification over a week; Liam appreciated concrete phrase swaps from communication coaching but noted equity maps have fidelity issues with name detection.
+        - **DOK1 Facts**
+          - Christie on mentor mindset: "LOVE this prompt. After using for a week I noticed several trends that would make me a better guide. The chatbot made me cards with simple prompts to help me remember."
+          - Christie on coaching language: "Clear mirror as I work to lower directives and increase coaching language. AI offered stems I printed and kept near me."
+          - Liam on communication coaching: "A bit verbose, but I like concrete examples to work on that day. Extrapolates actual quotations, shares why problematic, gives specific phrases to switch."
+          - Liam on equity maps: "Really want this to work but doesn't have 100% fidelity of names. Checks for when I say names, not necessarily differentiating when I'm talking TO them."
+        - Link: Internal spreadsheet (Limitless Pilot DS - Sheet1.csv)
+      - **"Communication Style Feedback Report" - Limitless AI Analysis (2025)**
+        - **DOK2 Summary**
+          - The communication coaching output demonstrates what's possible: exact quote extraction, linguistic analysis of WHY phrases limit impact (passive phrasing, public shaming, negative framing), and specific alternative scripts. The swap table format (Original → Problem → Alternative) is immediately actionable.
+        - **DOK1 Facts**
+          - Analysis identified overall style as "High-expectations + directive" with specific patterns
+          - Example swap: "We should have been started by now" → passive, self-doubt → "Okay — we start now. Eyes here."
+          - Example swap: "Do not be the weakest link" → negative label, fosters fear → "Be the teammate who keeps the chain strong"
+          - Example swap: "I can't help you, London. I've helped you twice." → public withdrawal of support → "I think you're ready to try solo. Use two strategies, then come back if stuck."
+          - Recommended actions: High-expectation + immediate scaffold script; Choice + Challenge + Support phrasing
+          - Pattern identified: Praise is specific but sometimes paired with public corrections
+        - Link: Internal document (Limitless Response for Communication Coaching.pdf)
+      - **"Equity Map Analysis" - Limitless AI Analysis (2025)**
+        - **DOK2 Summary**
+          - Equity maps quantify attention distribution across students, revealing over-engagement (Lucian at 11%) and under-engagement (Lola at 2.4%). The output provides specific tactical fixes: name-rotation scripts for intentional engagement, shift from public correction to group+private approach. Data makes bias undeniable.
+        - **DOK1 Facts**
+          - Method: Count direct name mentions when addressing students across all recorded sessions
+          - Total sample: 245 student-name mentions across 18 students
+          - Over-engaged: Lucian (27 mentions, 11.0%), London (23, 9.3%), Annabelle (20, 8.1%)
+          - Under-engaged: Lola (6, 2.4%), Mireille (7, 2.8%), Jaya (8, 3.2%), Emma (8, 3.2%)
+          - Recommendation 1: Name-rotation script - prepare 6-8 names of quieter students, call on intentionally for low-pressure contributions
+          - Recommendation 2: Shift repeated corrections to group + private - "Team, we should all be ready in 60 seconds" then privately help individual
+          - Limitation noted: Counts when guide SAYS name, not when guide is talking TO student
+        - Link: Internal document (Limitless Equity Maps.pdf)
+  - **Competitive Landscape: AI Classroom Analytics**
+    - **Section Summary**
+      - TeachFX and Edthena represent the two main approaches to AI-powered teacher coaching: audio-based metrics (TeachFX) and video-based reflection (Edthena). Research validates efficacy: TeachFX doubled student talk time and increased focusing questions by 20%. Limitless differs by being wearable (always-on, not session-based) and relationship-focused (not just instruction quality).
+    - **Sources**
+      - **"Automated feedback improves teachers' questioning quality" - Demszky et al. (2023)**
+        - **DOK2 Summary**
+          - Stanford research with TeachFX provides empirical validation that automated transcript analysis improves teaching. The 20% increase in focusing questions from AI feedback demonstrates that the core hypothesis (AI can coach teachers effectively) is proven - the question is implementation, not feasibility.
+        - **DOK1 Facts**
+          - Study: Randomized controlled trial with 224 Utah mathematics and science teachers
+          - Intervention: Automated feedback on "focusing questions" - questions that probe students' thinking by pressing for explanations
+          - Result: Teachers receiving TeachFX feedback increased focusing questions by 20%
+          - Mechanism: NLP analyzes transcripts, identifies high-leverage practices, delivers insights to facilitate reflection
+          - Company data: Just turning on TeachFX helped teachers more than double student talk time during class
+        - Link: https://scale.stanford.edu/sites/default/files/ai23-875_v2.pdf
+      - **"Next-Gen Classroom Observations, Powered by AI" - Education Next (2024)**
+        - **DOK2 Summary**
+          - The education technology landscape shows convergence: both audio (TeachFX) and video (Edthena) approaches are moving toward AI-powered automated feedback. The key differentiator is coaching philosophy: Edthena emphasizes self-paced reflection; TeachFX emphasizes data-driven metrics. Limitless's approach (ambient capture + personalized prompts) is distinct from both.
+        - **DOK1 Facts**
+          - TeachFX: Audio-based, focuses on teacher talk vs. student talk ratio, provides analysis in ~1 day, scalable automated feedback
+          - Edthena AI Coach: Video-based, facilitates non-directive self-paced reflection, guides through goal-setting and action planning
+          - Edthena Observation Copilot: Launched Oct 2025, turns classroom notes into framework-aligned feedback, described as "game changer" for principals
+          - Key difference: TeachFX is data-first (metrics drive feedback); Edthena is reflection-first (questions drive insight)
+          - Both validate market demand for AI-powered teacher coaching tools
+        - Link: https://www.educationnext.org/next-gen-classroom-observations-powered-by-ai/

@@ -14,16 +14,16 @@ This document shows the most important goals for Q4, organized by priority. For 
 
 **BrainLifts to create**:
 
-- **"How to Run Organization Discovery Sessions"** - Step-by-step guide for aligning with clients upfront so roles don't get stuck later
-- **"AI Fraud Detection Setup Guide"** - How to roll out the fraud detection tool to prevent bad hires
-- **"AI RWA Grading Quick Start"** - How to use AI to grade candidate work samples consistently
+- **"Organization Discovery & Client Alignment"** - Building expertise in identifying client needs and organizational requirements upfront to prevent role misalignment
+- **"AI-Driven Fraud Detection in Hiring"** - Developing knowledge of fraud patterns, detection methods, and AI-based prevention strategies
+- **"AI-Based Candidate Assessment & RWA Grading"** - Mastering consistent evaluation of candidate work samples using AI tools and quality frameworks
 
 **Sub-goals that help**:
 
 - Reduce interview delays (currently causing 5-day slippage)
-  - BrainLift: **"Fixing Interview SLA Breaches"** - Common causes and how to prevent them
+  - BrainLift: **"Interview Process & SLA Management"** - Understanding root causes of interview delays and developing strategies to maintain service levels
 - Help hiring managers unblock themselves
-  - BrainLift: **"Pipeline Troubleshooting for Hiring Managers"** - Self-service guide using AIPIs
+  - BrainLift: **"Hiring Pipeline Management & Self-Service Operations"** - Building expertise in pipeline troubleshooting and enabling autonomous problem-solving through AIPIs
 
 #### 2. Fix Education Hiring (Biggest Revenue Impact)
 
@@ -31,16 +31,16 @@ This document shows the most important goals for Q4, organized by priority. For 
 
 **BrainLifts to create**:
 
-- **"How to Fill $400K+ Roles"** - Playbook for senior executive searches, including when to bring in VP-level OrgBuilders
-- **"Outbound Recruiting Engine Setup"** - How to run the $19.5K-48K outbound engine for hard-to-fill roles
-- **"Interviewer Clone Pilot Guide"** - How to use AI to handle offline executive interviews
+- **"Executive Search & High-Value Role Placement"** - Building expertise in senior executive recruitment, candidate sourcing strategies for $400K+ positions, and knowing when to engage VP-level OrgBuilders for complex searches
+- **"Outbound Recruiting Strategies & Engine Operations"** - Developing knowledge of outbound recruiting methodologies, engine configuration for hard-to-fill roles, and optimizing the $19.5K-48K investment model
+- **"AI-Powered Interview Automation & Executive Assessment"** - Mastering AI-based interview automation for executive candidates and offline assessment techniques
 
 **Sub-goals that help**:
 
 - Match candidates better to specific role requirements
-  - BrainLift: **"Persona-Based Screening for Education Roles"** - How to screen for hyper-specific operational needs
+  - BrainLift: **"Persona-Based Candidate Screening for Education Sector"** - Building expertise in persona development for education roles and screening methodologies for hyper-specific operational requirements
 - Align on compensation and scope earlier
-  - BrainLift: **"Organization Discovery Workshop Template"** - How to run client workshops before opening roles
+  - BrainLift: **"Client Workshop Facilitation & Requirement Alignment"** - Developing knowledge of workshop facilitation techniques for client discovery, scope alignment, and compensation planning before role activation
 
 #### 3. Keep Central Support Team Members Longer
 
@@ -48,9 +48,9 @@ This document shows the most important goals for Q4, organized by priority. For 
 
 **BrainLifts to create**:
 
-- **"Central Support Self-Service Guide"** - Top 20 issues and how to solve them without waiting for help
-- **"WorkSmart AI Skill Gap Recommendations"** - How to use WorkSmart to identify what you need to learn
-- **"BrainLift Coach Quick Start for Support Team"** - How to find and use BrainLifts when stuck
+- **"Central Support Self-Service Operations & Problem Resolution"** - Building expertise in the top 20 support issues, autonomous troubleshooting techniques, and self-service problem resolution strategies without escalation dependencies
+- **"WorkSmart AI for Skill Gap Analysis & Learning Pathways"** - Developing knowledge of WorkSmart AI capabilities for identifying skill gaps, analyzing learning needs, and creating personalized development pathways
+- **"BrainLift Coach Platform Navigation & Knowledge Discovery"** - Mastering BrainLift Coach platform features, knowledge discovery techniques, and effective BrainLift utilization strategies for support scenarios
 
 #### 4. Secure LinkedIn Sourcing (Critical Risk)
 
@@ -58,8 +58,8 @@ This document shows the most important goals for Q4, organized by priority. For 
 
 **BrainLifts to create**:
 
-- **"LinkedIn Contract Negotiation Strategy"** - Key points for securing multi-year deal
-- **"Alternative Sourcing Channels Playbook"** - How Google Ads and SEO work as backup, with quality metrics
+- **"LinkedIn Contract Negotiation & Strategic Vendor Management"** - Building expertise in multi-year contract negotiation, vendor relationship management, and securing critical sourcing capacity at scale
+- **"Alternative Sourcing Channels & Quality Assessment"** - Developing knowledge of backup sourcing channels including Google Ads and SEO operations, quality metrics comparison, and channel effectiveness evaluation
 
 #### 5. Fix IgniteTech/Khoros Brand Damage
 
@@ -67,8 +67,8 @@ This document shows the most important goals for Q4, organized by priority. For 
 
 **BrainLifts to create**:
 
-- **"Preventing Client-Side Terminations"** - How to identify misalignment early and fix it
-- **"Candidate Quality Checklist"** - Using AI RWA grading and fraud detection to ensure quality
+- **"Client-Side Termination Prevention & Early Misalignment Detection"** - Building expertise in identifying candidate-client misalignment indicators early, intervention strategies, and retention optimization techniques
+- **"Candidate Quality Assessment & AI-Driven Validation"** - Developing knowledge of AI-based RWA grading frameworks, fraud detection methodologies, and comprehensive quality assurance criteria
 
 #### 6. Get Team Using BrainLift Coach (80% Adoption)
 
@@ -76,9 +76,9 @@ This document shows the most important goals for Q4, organized by priority. For 
 
 **BrainLifts to create**:
 
-- **"BrainLift Coach Weekly Habits"** - How to build BrainLift creation into your weekly routine
-- **"IDE Integration Guide"** - How developers can access BrainLifts right from their code editor
-- **"Chrome Extension Power User Guide"** - Getting the most from the 35 WAU tool
+- **"BrainLift Coach Weekly Habits & Routine Integration"** - Building expertise in establishing consistent BrainLift creation practices, workflow integration patterns, and sustainable knowledge capture routines
+- **"IDE Integration & Developer Workflow Optimization"** - Developing knowledge of BrainLift IDE integration capabilities, in-context knowledge access patterns, and developer-specific usage strategies
+- **"Chrome Extension Advanced Usage & Browser-Based Knowledge Access"** - Mastering Chrome extension capabilities, browser-based workflow optimization, and advanced features for the 35 WAU user base
 
 #### 7. Make WorkSmart Vision AI Useful
 
